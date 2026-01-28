@@ -143,3 +143,6 @@ tmp/
 # Alembic
 alembic/versions/*.py
 alembic/__pycache__/
+
+# Virtual environments
+dars/
