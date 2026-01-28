@@ -19,6 +19,411 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ---
 
+## Current Phase & Status
+
+**Phase:** Infrastructure Setup Complete ✅
+**Next Phase:** Phase 0 - MVP Development (Starting Week 1)
+**Current Work:** Planning & architectural specification (NOT YET IMPLEMENTING)
+
+**What's Been Done:**
+- ✅ OpenSpec proposal & 43 implementation tasks
+- ✅ 40 formal requirements with acceptance criteria
+- ✅ 8-week execution roadmap with 8 phases
+- ✅ Dependency analysis with 5 parallel work streams
+- ✅ Complete API architecture (OpenAPI 3.0 + TypeScript)
+- ✅ Interface contract alignment verification
+- ✅ Testing & validation pipeline infrastructure
+- ✅ Git hooks for pre-commit validation
+- ✅ Python project structure & dependencies
+
+**What's NOT Started:**
+- ❌ No source code yet (src/ directory empty)
+- ❌ No database migrations written
+- ❌ No FastAPI endpoints implemented
+- ❌ No Telegram bot code
+- ❌ No Claude integration
+- ❌ No tests written yet
+
+**Timeline:** Phase 0 Development will run 8 weeks starting when this infrastructure handoff completes.
+
+---
+
+## Tech Stack Selection & Justification
+
+### Complete Technology Choices
+
+| Component | Technology | Why This Choice |
+|-----------|-----------|-----------------|
+| **Language** | Python 3.11+ | Fast prototyping, strong ML/AI ecosystem, excellent async support, type hints for maintainability |
+| **Web Framework** | FastAPI | Modern async-first framework, automatic OpenAPI/Swagger docs, built-in validation (Pydantic), 10x faster than Flask/Django for I/O |
+| **Database** | PostgreSQL | Mature, reliable, works on Railway free tier, excellent JSON support, pgvector for future semantic search |
+| **ORM** | SQLAlchemy 2.0+ | Most flexible Python ORM, excellent type hints support, async support for performance |
+| **Migrations** | Alembic | Industry standard for PostgreSQL migrations, automatic change detection |
+| **Async Runtime** | asyncio + uvicorn | Built into Python 3.7+, perfect for Telegram webhook handling, no external process manager needed |
+| **Messaging** | Telegram Bot API | Free (zero cost), no approval needed, webhook-based (stateless), 2nd most popular in target market, easy testing |
+| **AI Model** | Claude Haiku | 10x cheaper than Sonnet, fast enough for hint generation, supports prompt caching (cost control) |
+| **Admin UI** | HTML/CSS/JS (vanilla) | No build step needed, runs on Railway free tier, works on slow connections, low maintenance |
+| **Hosting** | Railway | $5/month for production, free tiers for dev, auto-deploys from git, built-in PostgreSQL hosting |
+| **Testing** | Pytest | De facto standard in Python, excellent async support, fixtures, parametrize, coverage integration |
+| **Linting** | Ruff | Modern Python linter (Rust-based), 10x faster than older tools, fewer config files |
+| **Formatting** | Black | Deterministic formatting, no arguments about style, reduces diff noise |
+| **Type Checking** | MyPy strict | Catches bugs at development time, catches type errors in async code, strict mode is 10x more effective |
+
+### Justification for Key Decisions
+
+**FastAPI over Django/Flask:**
+- Django: Too heavyweight for simple API (targets full web frameworks)
+- Flask: Requires manual validation, no async, no auto-docs
+- FastAPI: Built for async APIs, auto-validates with Pydantic, auto-generates OpenAPI docs, 10x faster for I/O-bound workloads
+
+**PostgreSQL over Firebase/MongoDB:**
+- Firebase: Expensive ($0.06/100k reads), not compatible with Railway free tier
+- MongoDB: No relational integrity, harder to model student sessions
+- PostgreSQL: Free on Railway, ACID guarantees, excellent for structured education data
+
+**Telegram over WhatsApp Business API:**
+- WhatsApp: Requires approval (2-4 weeks), expensive per-message fees
+- Telegram: Free, instant setup, already popular in India, webhook-based (stateless)
+- Plan: Validate with Telegram first, migrate to WhatsApp in Phase 1 with traction data
+
+**Claude Haiku over GPT-4 mini/Gemini:**
+- GPT-4 mini: $0.00006/token (6x more expensive than Haiku)
+- Gemini: No prompt caching, less reliable for education
+- Haiku: Fastest response time, cheapest, supports prompt caching (70%+ hit rate reduces cost 5x)
+
+**Strict MyPy over type hints only:**
+- No type checking: ~40% of bugs caught only in production
+- Optional types: Requires discipline, developers skip type annotations
+- Strict MyPy: Catches type errors pre-commit, no untyped code, catches async/await bugs
+
+**Pre-commit validation pipeline over CI/CD only:**
+- CI only: Developers waste time on red builds, feedback loop 5-10 minutes
+- Pre-commit: Immediate feedback in editor, blocks commits, developers learn fast
+- Hybrid approach: Pre-commit for fast feedback + CI for final gate
+
+---
+
+## Conventions
+
+### 1. Naming Conventions
+
+**Python Code:**
+- **Modules/Files:** `snake_case` (e.g., `problem_selector.py`, `telegram_handler.py`)
+- **Classes:** `PascalCase` (e.g., `ProblemSelector`, `TelegramHandler`, `StreakTracker`)
+- **Functions/Methods:** `snake_case` (e.g., `select_problems()`, `evaluate_answer()`)
+- **Constants:** `UPPER_SNAKE_CASE` (e.g., `MAX_HINTS_PER_PROBLEM = 3`, `CACHE_TTL_DAYS = 7`)
+- **Private Methods:** Leading underscore (e.g., `_calculate_difficulty()`)
+- **Protected Methods:** Convention only, documented (e.g., `_internal_use_only()`)
+
+**Database:**
+- **Table Names:** `snake_case`, plural (e.g., `students`, `problems`, `sessions`, `responses`)
+- **Column Names:** `snake_case` (e.g., `problem_id`, `student_name`, `created_at`)
+- **Foreign Keys:** `{table_singular}_id` (e.g., `student_id`, `problem_id`)
+- **Indexes:** `idx_{table}_{columns}` (e.g., `idx_sessions_student_created`)
+
+**REST API:**
+- **Endpoints:** `/kebab-case` (e.g., `/practice`, `/student/profile`, `/admin/cost`)
+- **Query Parameters:** `snake_case` (e.g., `?grade=7&period=week`)
+- **JSON Fields:** `snake_case` (e.g., `{"student_id": 1, "current_streak": 5}`)
+- **Error Codes:** `UPPER_SNAKE_CASE` (e.g., `ERR_SESSION_EXPIRED`, `ERR_INVALID_GRADE`)
+
+**Git Branches:**
+- **Feature:** `feature/description` (e.g., `feature/hint-generation`)
+- **Bugfix:** `bugfix/description` (e.g., `bugfix/streak-reset-timezone`)
+- **Docs:** `docs/description` (e.g., `docs/api-endpoints`)
+
+### 2. Code Style
+
+**Line Length:** 100 characters (enforced by Black)
+
+**Imports:**
+```python
+# Standard library
+import asyncio
+from datetime import datetime
+from typing import Optional
+
+# Third-party
+import sqlalchemy as sa
+from fastapi import FastAPI, HTTPException
+from anthropic import Anthropic
+
+# First-party (local)
+from src.models import Student, Session
+from src.services import ProblemSelector
+```
+
+**Type Hints (Strict Mode):**
+```python
+# ✅ CORRECT - All parameters and return types annotated
+async def select_problems(
+    student_id: int,
+    grade: int,
+    performance: PerformanceHistory
+) -> ProblemSelection:
+    """Select 5 problems for daily practice."""
+    ...
+
+# ❌ WRONG - Missing types (will fail MyPy strict)
+async def select_problems(student_id, grade, performance):
+    ...
+
+# ❌ WRONG - Missing return type
+async def select_problems(...) -> None:  # Should specify actual return type
+    ...
+```
+
+**Async/Await:**
+```python
+# ✅ CORRECT - All database calls are awaited
+async def get_student(student_id: int) -> Student:
+    result = await db.execute(...)
+    return result.scalar_one()
+
+# ❌ WRONG - Missing await (will fail MyPy strict)
+async def get_student(student_id: int) -> Student:
+    result = db.execute(...)  # Not awaited!
+    return result.scalar_one()
+```
+
+**Docstrings (Google Style):**
+```python
+def evaluate_answer(
+    problem: Problem,
+    student_answer: str,
+    hints_used: int
+) -> EvaluationResult:
+    """Evaluate if a student's answer is correct.
+
+    Handles numeric (±5% tolerance), multiple choice (exact),
+    and text answers (semantic matching in Phase 1+).
+
+    Args:
+        problem: The problem being answered.
+        student_answer: Student's submitted answer string.
+        hints_used: Number of hints requested (0-3).
+
+    Returns:
+        EvaluationResult with is_correct, feedback, confidence.
+
+    Raises:
+        ValueError: If answer format is invalid.
+    """
+    ...
+```
+
+**Error Handling:**
+```python
+# ✅ CORRECT - Specific error handling
+async def get_student(student_id: int) -> Student:
+    try:
+        result = await db.execute(select(Student).where(...))
+        student = result.scalar_one_or_none()
+        if not student:
+            raise HTTPException(
+                status_code=404,
+                detail=f"Student {student_id} not found"
+            )
+        return student
+    except SQLAlchemyError as e:
+        logger.error(f"Database error: {e}")
+        raise HTTPException(status_code=500, detail="Database error")
+
+# ❌ WRONG - Bare except clause
+async def get_student(student_id: int) -> Student:
+    try:
+        ...
+    except:
+        pass  # Masks all errors!
+```
+
+### 3. Testing Approach
+
+**Test Structure:**
+```
+tests/
+├── conftest.py              # Shared fixtures
+├── unit/                    # No external dependencies
+│   ├── test_streaks.py
+│   ├── test_problems.py
+│   └── test_evaluator.py
+└── integration/             # Requires database/API
+    ├── test_telegram_flow.py
+    ├── test_practice_flow.py
+    └── test_database.py
+```
+
+**Unit Test Pattern:**
+```python
+import pytest
+from src.services import StreakTracker
+
+@pytest.mark.unit
+class TestStreakTracker:
+    """Tests for StreakTracker service."""
+
+    def test_streak_increments_on_practice(self):
+        """Streak should increment by 1 on daily practice."""
+        tracker = StreakTracker()
+        result = tracker.record_practice(student_id=1, session_date=today)
+
+        assert result.previous_streak == 0
+        assert result.current_streak == 1
+        assert result.streak_changed is True
+
+    def test_streak_resets_on_missed_day(self):
+        """Streak should reset to 0 on missed day."""
+        tracker = StreakTracker()
+        tracker.record_practice(student_id=1, session_date=today)
+        tracker.record_practice(student_id=1, session_date=today + 1 day)
+
+        result = tracker.record_practice(
+            student_id=1,
+            session_date=today + 3 days  # Skipped a day
+        )
+
+        assert result.current_streak == 1  # Reset
+        assert result.streak_changed is True
+```
+
+**Integration Test Pattern:**
+```python
+import pytest
+from sqlalchemy import select
+from src.database import async_session
+from src.models import Student, Session
+
+@pytest.mark.integration
+async def test_practice_session_flow(db_session):
+    """Test complete practice session: create → answer → evaluate."""
+    # Setup: Create student
+    student = Student(telegram_id=123, name="Test", grade=7, language="en")
+    db_session.add(student)
+    await db_session.commit()
+
+    # Test: Create session
+    session = Session(student_id=student.id, status="in_progress")
+    db_session.add(session)
+    await db_session.commit()
+
+    # Assert: Session persists
+    result = await db_session.execute(
+        select(Session).where(Session.id == session.id)
+    )
+    assert result.scalar_one().status == "in_progress"
+```
+
+**Fixtures (conftest.py):**
+```python
+import pytest
+from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
+
+@pytest.fixture
+async def db_session():
+    """Provide in-memory SQLite database for tests."""
+    engine = create_async_engine("sqlite+aiosqlite:///:memory:")
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+
+    async with AsyncSession(engine) as session:
+        yield session
+
+    await engine.dispose()
+
+@pytest.fixture
+def sample_student():
+    """Provide a test student object."""
+    return Student(
+        telegram_id=123456,
+        name="Test Student",
+        grade=7,
+        language="en"
+    )
+```
+
+**Coverage Requirements:**
+- Minimum 70% overall (enforced by pre-commit)
+- All business logic must be tested (selection algorithm, evaluation, difficulty)
+- Database operations must have integration tests
+- External API calls (Claude, Telegram) must be mocked in unit tests
+
+### 4. Git Workflow
+
+**Commit Messages (Conventional Commits):**
+```
+<type>(<scope>): <description>
+
+<body>
+
+<footer>
+```
+
+**Types:**
+- `feat:` New feature (e.g., `feat(hints): implement Claude-powered Socratic hints`)
+- `fix:` Bug fix (e.g., `fix(streaks): handle UTC timezone boundary correctly`)
+- `docs:` Documentation (e.g., `docs(api): add endpoint specifications`)
+- `test:` Tests (e.g., `test(streaks): add milestone detection tests`)
+- `refactor:` Code refactoring without behavior change (e.g., `refactor(selection): simplify algorithm logic`)
+- `chore:` Non-code changes (e.g., `chore: update dependencies`)
+- `perf:` Performance improvements (e.g., `perf(hints): cache hint generation`)
+
+**Scope** (optional but recommended):
+- Component name: `hints`, `streaks`, `selection`, `telegram`, `api`, `database`
+- Area: `auth`, `validation`, `localization`, `cost-tracking`
+
+**Examples of Good Commit Messages:**
+```
+feat(hints): implement Claude-powered Socratic hint generation
+
+- Add HintGenerator service with 3 levels of hints
+- Implement prompt caching for cost control (target 70% hit rate)
+- Add fallback to pre-written hints on API failure
+- Integrate with answer evaluation flow
+
+Fixes #123
+```
+
+```
+fix(streaks): handle UTC midnight boundary for IST timezone
+
+The streak system was resetting at UTC midnight instead of when
+students wake up (IST 5:30am). Now correctly handles timezone
+conversion for streak boundary detection.
+
+Includes regression test for timezone edge cases.
+```
+
+**Branch Workflow:**
+1. Create feature branch from `master`: `git checkout -b feature/description`
+2. Make commits with conventional format
+3. Run `bash scripts/validate.sh --fix --skip-slow` before committing
+4. Commit fails pre-hook if validation fails (fixes are auto-applied)
+5. Push to remote when ready for review
+6. Create PR with clear description
+7. Merge to master when approved (all checks passing)
+
+**Pre-commit Validation (Automatic):**
+Before each commit, these run automatically:
+1. Black formatting (fixes automatically with --fix flag)
+2. Ruff linting (fixes automatically with --fix flag)
+3. MyPy type checking (no auto-fix, must fix manually)
+4. Pytest unit tests (must all pass)
+5. Coverage check (≥70% minimum)
+6. Git status (no sensitive files like .env, API keys)
+
+**Push & CI/CD:**
+- GitHub Actions runs full validation on every push to master
+- Includes integration tests (skipped in pre-commit for speed)
+- Must pass before merging to protected branches
+- All history is preserved for audit trail (no force-push to master)
+
+**Rebase vs Merge:**
+- Use `git rebase` for local work to keep history clean
+- Use merge commits for PR merges to preserve branch history
+- No squashing (preserves individual commit messages)
+
+---
+
 ## Architecture & Design
 
 ### 1. High-Level System Architecture
