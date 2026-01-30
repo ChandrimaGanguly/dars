@@ -104,6 +104,17 @@ This checklist is for autonomous agents working on the Dars codebase. Follow it 
   - ✓ Coverage ≥70%
   - ✓ Git status clean
 
+- [ ] **Security Code Quality (For Phase 1 Security Work):**
+  If you're working on security requirements (SEC-001 through SEC-008):
+  - [ ] No hardcoded secrets (API keys, tokens, passwords)
+  - [ ] No sensitive data logged (use `sanitize_log_data()`)
+  - [ ] All inputs validated (max_length on strings, bounds on numbers)
+  - [ ] All security functions have type hints
+  - [ ] CORS, auth, rate limiting not using wildcards/permissive defaults
+  - [ ] Error responses don't expose stack traces
+  - [ ] Database queries use parameterized statements
+  - [ ] See: `/home/gangucham/whatsappAItutor/SECURITY_ROADMAP_INTEGRATION.md` for checklist
+
 - [ ] **If validation fails:**
   ```bash
   # Auto-fix what we can
@@ -160,6 +171,144 @@ This checklist is for autonomous agents working on the Dars codebase. Follow it 
   # Via GitHub UI (recommended)
   # All checks must pass first
   ```
+
+---
+
+## Phase 1 Security Work (Agent C - Noor)
+
+**CRITICAL: These 8 security requirements MUST be completed before Phase 3 begins.**
+
+See: `AGENT_ROADMAP.md` → "PHASE 1: Backend & Integration Foundation" → "Critical Subtasks for Agent C"
+
+### SEC-001: CORS Hardening
+
+- [ ] **Before:** `allow_origins=["*"]` (allows all)
+- [ ] **After:** `allow_origins=["https://dars.railway.app", "http://localhost:3000"]`
+- [ ] **Test:** `curl -H "Origin: https://evil.com" http://localhost:8000/health` → No CORS header
+
+### SEC-002: Telegram Webhook Verification
+
+- [ ] **Add header check:** Verify `X-Telegram-Bot-Api-Secret-Token` matches configured token
+- [ ] **Reject unsigned:** Return 401 Unauthorized if header missing or invalid
+- [ ] **Test:** Send webhook without header → 401 response
+
+### SEC-003: Student Database Verification
+
+- [ ] **Query database:** Check student exists before returning data
+- [ ] **Return 404 if not found:** Don't expose whether ID is valid
+- [ ] **Applied to:** `GET /practice`, `POST /answer`, `POST /hint`, `GET /streak`, `PATCH /profile`
+- [ ] **Test:** `curl http://localhost:8000/practice -H "X-Student-ID: 99999"` → 404
+
+### SEC-004: Admin Authentication Enforcement
+
+- [ ] **Use Depends():** `admin_id: int = Depends(verify_admin)` on all `/admin/*` endpoints
+- [ ] **All admin routes protected:** `/admin/stats`, `/admin/students`, `/admin/cost`
+- [ ] **Return 403 if unauthorized:** Reject invalid admin IDs
+- [ ] **Test:** `curl http://localhost:8000/admin/stats -H "X-Admin-ID: invalid"` → 403
+
+### SEC-005: Rate Limiting
+
+- [ ] **Install slowapi:** `pip install slowapi`
+- [ ] **Global limit:** 100 requests/minute per IP
+- [ ] **Per-endpoint limit:** `/hint` max 10/day per student
+- [ ] **Return 429:** Too Many Requests when limit exceeded
+- [ ] **Test:** Send 15 hint requests rapidly → 15th returns 429
+
+### SEC-006: Sensitive Data Sanitization in Logs
+
+- [ ] **Mask API keys:** Replace with `***MASKED***`
+- [ ] **Mask tokens:** Replace with `***MASKED***`
+- [ ] **Mask admin IDs:** Replace with `***MASKED***`
+- [ ] **Apply to all logs:** Use `sanitize_log_data()` function
+- [ ] **Test:** `grep -i "api_key\|token\|admin_id" logs/` → No plain values found
+
+### SEC-007: Input Length Validation
+
+- [ ] **Add max_length to strings:** `student_answer: str = Field(..., max_length=500)`
+- [ ] **Applied to:** All string inputs (answer, feedback, messages)
+- [ ] **Prevent DOS:** Reject huge payloads
+- [ ] **Test:** Submit 10MB payload → 413 Payload Too Large
+
+### SEC-008: Query Parameter Validation
+
+- [ ] **Add bounds:** `page: int = Query(1, ge=1, le=1000)`
+- [ ] **Validate grade:** `ge=6, le=8`
+- [ ] **Validate limit:** `ge=1, le=100`
+- [ ] **Test:** `curl http://localhost:8000/admin/students?page=999999` → Works but bounded
+
+### Security Code Review Checklist
+
+Before merging your security work, verify:
+
+- [ ] No `allow_origins=["*"]` (must be specific domains)
+- [ ] All student endpoints call database verification
+- [ ] All admin endpoints use `Depends(verify_admin)`
+- [ ] Telegram webhook verifies signature header
+- [ ] Rate limiting middleware installed and tested
+- [ ] No API keys/tokens/IDs in JSON logs
+- [ ] All string inputs have `max_length` (prevent DOS)
+- [ ] Query parameters have reasonable bounds
+- [ ] Error responses never show stack traces
+- [ ] All unit + integration tests pass
+- [ ] Security code review completed by Jodha
+
+---
+
+## Agent Role Checklists
+
+### For Jodha (FastAPI Backend Expert)
+
+**Phase 1 Work:**
+- [ ] Build FastAPI app structure with all endpoints
+- [ ] Implement core error handling framework
+- [ ] Set up CORS middleware (will be hardened by Noor)
+- [ ] Implement core authentication dependencies (will be enhanced by Noor)
+- [ ] Code review all security work from Noor before merge
+
+**Validation:**
+- [ ] All endpoints have type hints
+- [ ] All responses use Pydantic schemas
+- [ ] Error handling doesn't crash app
+- [ ] All tests pass with 70%+ coverage
+
+### For Noor (Security & Logging Expert)
+
+**Phase 1 Work (BLOCKING FOR PHASE 3):**
+- [ ] Implement SEC-001 through SEC-008 security requirements
+- [ ] Add rate limiting middleware
+- [ ] Add log sanitization
+- [ ] Implement security error handling
+- [ ] Write security test plan
+- [ ] Get code review from Jodha
+
+**Phase 7 Work:**
+- [ ] Enhance log sanitization with monitoring
+- [ ] Test with real API keys to verify masking
+- [ ] Document sensitive fields list
+
+**Phase 8 Work:**
+- [ ] Add security response headers (CSP, HSTS, etc.)
+- [ ] Implement error response filtering
+
+### For Maryam (Database & ORM Expert)
+
+**Phase 1 Work:**
+- [ ] Design database schema with indexes
+- [ ] Create Alembic migrations
+- [ ] Implement base models and relationships
+- [ ] Seed initial data
+
+**Security Considerations:**
+- [ ] Verify student existence queries are indexed (`idx_students_telegram_id`)
+- [ ] Verify all queries use SQLAlchemy ORM (no raw SQL)
+- [ ] Connection pooling configured (`pool_pre_ping=True`)
+
+### For any Agent working on Learning Features (Phases 3+)
+
+**Must Wait For:**
+- [ ] Phase 1 security to be 100% complete
+- [ ] SEC-003 (student database verification) verified
+- [ ] Practice endpoints can only be called by verified students
 
 ---
 
@@ -415,5 +564,13 @@ bash scripts/validate.sh --verbose
 
 - Read: `VALIDATION_PIPELINE.md` (detailed documentation)
 - Read: `TESTING.md` (testing guide)
+- Read: `AGENT_ROADMAP.md` (8-week implementation plan)
+- Read: `SECURITY_ROADMAP_INTEGRATION.md` (security audit findings and roadmap)
+- Read: `openspec/agents/noor.md` (Noor's security guidelines)
 - Check: `tasks/` (see what needs to be done)
 - Review: `.github/workflows/validation.yml` (CI/CD pipeline)
+
+**For Security Questions:**
+- See: `SECURITY_ROADMAP_INTEGRATION.md` (complete security roadmap)
+- See: `AGENT_ROADMAP.md` → "PHASE 1" → "Critical Subtasks for Agent C"
+- See: Security Code Review Checklist (this document)
