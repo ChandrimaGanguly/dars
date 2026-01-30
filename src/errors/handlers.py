@@ -38,6 +38,7 @@ def map_status_to_error_type(status_code: int) -> str:
         403: "forbidden",
         404: "not_found",
         409: "conflict",
+        422: "validation_error",
         500: "internal_error",
         503: "service_unavailable",
     }
@@ -134,7 +135,7 @@ def validation_exception_handler(request: Request, exc: RequestValidationError) 
         errors.append({"field": field, "message": error["msg"], "type": error["type"]})
 
     return create_error_response(
-        status_code=status.HTTP_400_BAD_REQUEST,
+        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
         message="Invalid request parameters",
         error_code="ERR_INVALID_PARAM",
         details={"validation_errors": errors},

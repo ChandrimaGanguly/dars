@@ -83,8 +83,9 @@ def create_engine(
     return engine
 
 
-# Global engine instance (created on first import)
-engine: AsyncEngine | None = None
+# Global engine instance (lazy initialization)
+_engine: AsyncEngine | None = None
+_session_factory: async_sessionmaker[AsyncSession] | None = None
 
 
 def get_engine() -> AsyncEngine:
@@ -93,20 +94,28 @@ def get_engine() -> AsyncEngine:
     Returns:
         Global AsyncEngine instance.
     """
-    global engine
-    if engine is None:
-        engine = create_engine()
-    return engine
+    global _engine
+    if _engine is None:
+        _engine = create_engine()
+    return _engine
 
 
-# Session factory
-async_session_factory = async_sessionmaker(
-    bind=get_engine(),
-    class_=AsyncSession,
-    expire_on_commit=False,
-    autocommit=False,
-    autoflush=False,
-)
+def get_session_factory() -> async_sessionmaker[AsyncSession]:
+    """Get or create session factory.
+
+    Returns:
+        Async session factory.
+    """
+    global _session_factory
+    if _session_factory is None:
+        _session_factory = async_sessionmaker(
+            bind=get_engine(),
+            class_=AsyncSession,
+            expire_on_commit=False,
+            autocommit=False,
+            autoflush=False,
+        )
+    return _session_factory
 
 
 async def get_session() -> AsyncGenerator[AsyncSession, None]:
@@ -126,7 +135,8 @@ async def get_session() -> AsyncGenerator[AsyncSession, None]:
             return result.scalars().all()
         ```
     """
-    async with async_session_factory() as session:
+    factory = get_session_factory()
+    async with factory() as session:
         try:
             yield session
             await session.commit()

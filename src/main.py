@@ -4,13 +4,74 @@ This is the main FastAPI application entry point. It configures the app,
 registers all routers, and sets up middleware.
 """
 
-from datetime import datetime
+import uuid
+from collections.abc import AsyncIterator
+from contextlib import asynccontextmanager
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi.errors import RateLimitExceeded
+from slowapi.util import get_remote_address
 
+from src.config import get_settings
+from src.database import check_connection, get_engine
+from src.errors.handlers import register_exception_handlers
+from src.logging import get_logger
 from src.routes import admin, health, practice, streak, student, webhook
+
+logger = get_logger(__name__)
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI) -> AsyncIterator[None]:
+    """Application lifespan context manager.
+
+    Handles startup and shutdown tasks:
+    - Startup: Initialize database connections, validate config
+    - Shutdown: Close database connections gracefully
+
+    Args:
+        app: FastAPI application instance.
+
+    Yields:
+        None during application runtime.
+    """
+    # STARTUP
+    logger.info("Dars API starting up...")
+
+    # Validate environment variables
+    settings = get_settings()
+    logger.info(f"Environment: {settings.environment}")
+    logger.info(f"Log level: {settings.log_level}")
+
+    # Check database connection
+    db_connected = await check_connection()
+    if db_connected:
+        logger.info("Database connection: OK")
+    else:
+        logger.warning("Database connection: FAILED (will retry on first request)")
+
+    # Validate API keys are configured
+    if not settings.telegram_bot_token:
+        logger.warning("Telegram bot token not configured")
+    if not settings.anthropic_api_key:
+        logger.warning("Anthropic API key not configured")
+
+    logger.info("Dars API startup complete")
+
+    yield
+
+    # SHUTDOWN
+    logger.info("Dars API shutting down...")
+
+    # Close database connections
+    engine = get_engine()
+    await engine.dispose()
+    logger.info("Database connections closed")
+
+    logger.info("Dars API shutdown complete")
+
 
 # Create FastAPI application instance
 app = FastAPI(
@@ -32,6 +93,11 @@ app = FastAPI(
     * Telegram webhook: Bearer token authentication
     * Student endpoints: X-Student-ID header (Telegram ID)
     * Admin endpoints: X-Admin-ID header (Telegram ID)
+
+    ## Rate Limiting (SEC-005)
+
+    * Global: 100 requests/minute per IP
+    * Hint endpoint: 10 requests/day per student
     """,
     contact={
         "name": "Dars Team",
@@ -50,16 +116,83 @@ app = FastAPI(
             "description": "Local development server",
         },
     ],
+    lifespan=lifespan,
 )
 
-# Configure CORS middleware
+
+# Configure rate limiter (SEC-005: Prevent DOS attacks)
+limiter = Limiter(key_func=get_remote_address)
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)  # type: ignore[arg-type]
+
+logger.info("Rate limiting enabled: 100 requests/minute per IP")
+
+
+# Request ID middleware - MUST be first
+@app.middleware("http")
+async def add_request_id(request: Request, call_next):  # type: ignore
+    """Add unique request ID to each request.
+
+    The request ID is:
+    - Stored in request.state for access by handlers
+    - Added to response headers for client tracking
+    - Included in all log messages for tracing
+
+    Args:
+        request: FastAPI request object.
+        call_next: Next middleware or route handler.
+
+    Returns:
+        Response with X-Request-ID header.
+    """
+    request_id = str(uuid.uuid4())
+    request.state.request_id = request_id
+
+    response = await call_next(request)
+    response.headers["X-Request-ID"] = request_id
+
+    return response
+
+
+# Configure CORS middleware (SEC-001: Hardened by Noor)
+# Security: Restrict CORS to prevent unauthorized cross-origin requests
+settings = get_settings()
+
+# Allowed origins (only production and development)
+allowed_origins = [
+    "https://dars.railway.app",  # Production Railway deployment
+    "http://localhost:3000",  # Local development (admin dashboard)
+    "http://localhost:8000",  # Local development (API testing)
+]
+
+# If in development mode, also allow 127.0.0.1
+if settings.environment == "development":
+    allowed_origins.extend(
+        [
+            "http://127.0.0.1:3000",
+            "http://127.0.0.1:8000",
+        ]
+    )
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # TODO: Restrict to specific origins in production
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_origins=allowed_origins,  # SEC-001: Restricted to specific domains
+    allow_credentials=True,  # Allow cookies/auth headers for same-origin
+    allow_methods=["GET", "POST", "PATCH"],  # SEC-001: Only required methods
+    allow_headers=[  # SEC-001: Only required headers
+        "Content-Type",
+        "Authorization",
+        "X-Student-ID",
+        "X-Admin-ID",
+        "X-Request-ID",
+        "X-Telegram-Bot-Api-Secret-Token",
+    ],
+    max_age=600,  # Cache preflight requests for 10 minutes
 )
+
+
+# Register error handlers
+register_exception_handlers(app)
 
 
 # Register routers
@@ -71,78 +204,18 @@ app.include_router(student.router)
 app.include_router(admin.router)
 
 
-# Startup event handler
-@app.on_event("startup")
-async def startup_event() -> None:
-    """Execute tasks on application startup.
-
-    - Initialize database connections
-    - Set up logging
-    - Validate environment variables
-    - Initialize caches
-    """
-    # TODO: Implement startup logic
-    # - Connect to PostgreSQL
-    # - Initialize Redis cache
-    # - Validate required environment variables
-    # - Set up structured logging
-    print(f"[{datetime.utcnow().isoformat()}] Dars API starting up...")
-
-
-# Shutdown event handler
-@app.on_event("shutdown")
-async def shutdown_event() -> None:
-    """Execute cleanup tasks on application shutdown.
-
-    - Close database connections
-    - Flush logs
-    - Save cache state
-    """
-    # TODO: Implement shutdown logic
-    # - Close database connections gracefully
-    # - Flush pending logs
-    print(f"[{datetime.utcnow().isoformat()}] Dars API shutting down...")
-
-
 # Root endpoint
 @app.get("/", tags=["System"])
 async def root() -> dict[str, str]:
     """Root endpoint returning API information.
 
     Returns:
-        dict with API name and version.
+        dict with API name, version, and documentation links.
     """
     return {
         "name": "Dars AI Tutoring Platform API",
         "version": "1.0.0",
         "status": "operational",
         "docs": "/docs",
+        "health": "/health",
     }
-
-
-# Custom exception handler
-@app.exception_handler(Exception)
-async def global_exception_handler(request: object, exc: Exception) -> JSONResponse:
-    """Handle uncaught exceptions globally.
-
-    Args:
-        request: The request object that caused the exception.
-        exc: The exception that was raised.
-
-    Returns:
-        JSONResponse with error details.
-    """
-    # TODO: Implement proper error logging
-    # - Log exception with context
-    # - Generate request_id for tracing
-    # - Send alert for critical errors
-
-    return JSONResponse(
-        status_code=500,
-        content={
-            "error": "internal_error",
-            "message": "Something went wrong processing your request",
-            "error_code": "ERR_INTERNAL",
-            "timestamp": datetime.utcnow().isoformat(),
-        },
-    )

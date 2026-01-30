@@ -1,4 +1,10 @@
-"""Practice session schemas."""
+"""Practice session schemas.
+
+Security (SEC-007):
+- All string inputs have max_length constraints to prevent DOS attacks
+- Student answers limited to 500 characters
+- Prevents memory exhaustion from huge payloads
+"""
 
 from datetime import datetime
 
@@ -34,10 +40,17 @@ class PracticeResponse(BaseModel):
 
 
 class AnswerRequest(BaseModel):
-    """Request to submit an answer."""
+    """Request to submit an answer.
+
+    Security (SEC-007): Input length validation prevents DOS attacks.
+    """
 
     session_id: int = Field(..., description="Session ID")
-    student_answer: str = Field(..., description="Student's submitted answer")
+    student_answer: str = Field(
+        ...,
+        description="Student's submitted answer",
+        max_length=500,  # SEC-007: Prevent DOS via huge inputs
+    )
     time_spent_seconds: int | None = Field(None, description="Time spent on problem", ge=0)
 
 
@@ -52,10 +65,17 @@ class AnswerResponse(BaseModel):
 
 
 class HintRequest(BaseModel):
-    """Request for a hint."""
+    """Request for a hint.
+
+    Security (SEC-007): Input length validation prevents DOS attacks.
+    """
 
     session_id: int = Field(..., description="Session ID")
-    student_answer: str | None = Field(None, description="Student's current answer attempt")
+    student_answer: str | None = Field(
+        None,
+        description="Student's current answer attempt",
+        max_length=500,  # SEC-007: Prevent DOS via huge inputs
+    )
     hint_number: int = Field(..., description="Hint number (1, 2, or 3)", ge=1, le=3)
 
 

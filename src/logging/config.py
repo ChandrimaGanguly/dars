@@ -1,6 +1,11 @@
 """Structured logging configuration with JSON output.
 
 All logs are written to stdout in JSON format for easy parsing and aggregation.
+
+Security (SEC-006):
+- Sensitive data (API keys, tokens, passwords, admin IDs) are masked in all logs
+- Prevents credential leakage through log files
+- Applies to all log messages automatically
 """
 
 import json
@@ -15,18 +20,87 @@ from starlette.middleware.base import BaseHTTPMiddleware
 
 from src.config import get_settings
 
+# Sensitive field patterns to mask (SEC-006)
+SENSITIVE_KEYS = {
+    "api_key",
+    "apikey",
+    "api-key",
+    "token",
+    "secret",
+    "password",
+    "passwd",
+    "pwd",
+    "admin_id",
+    "admin-id",
+    "x-admin-id",
+    "authorization",
+    "auth",
+    "bearer",
+    "telegram_bot_token",
+    "telegram_secret_token",
+    "anthropic_api_key",
+    "x-telegram-bot-api-secret-token",
+}
+
+
+def sanitize_log_data(data: Any) -> Any:
+    """Recursively sanitize sensitive data from log data.
+
+    Security (SEC-006): Masks sensitive fields to prevent credential leakage.
+
+    Sensitive fields include:
+    - API keys (api_key, apikey, api-key)
+    - Tokens (token, secret, bearer)
+    - Passwords (password, passwd, pwd)
+    - Admin IDs (admin_id, admin-id, x-admin-id)
+    - Authorization headers (authorization, auth)
+
+    Args:
+        data: Data to sanitize (dict, list, str, or other type).
+
+    Returns:
+        Sanitized data with sensitive values masked as "***MASKED***".
+
+    Example:
+        >>> sanitize_log_data({"api_key": "secret123", "user": "john"})
+        {"api_key": "***MASKED***", "user": "john"}
+    """
+    if isinstance(data, dict):
+        return {
+            key: "***MASKED***" if key.lower() in SENSITIVE_KEYS else sanitize_log_data(value)
+            for key, value in data.items()
+        }
+    elif isinstance(data, list):
+        return [sanitize_log_data(item) for item in data]
+    elif isinstance(data, str):
+        # Check if string contains sensitive patterns
+        lower_str = data.lower()
+        for key in SENSITIVE_KEYS:
+            if key in lower_str and ("=" in data or ":" in data):
+                # Likely a key=value or key: value pattern
+                return "***MASKED***"
+        return data
+    else:
+        return data
+
 
 class JSONFormatter(logging.Formatter):
-    """JSON log formatter for structured logging."""
+    """JSON log formatter for structured logging.
+
+    Security (SEC-006): All log data is sanitized to remove sensitive information.
+    """
 
     def format(self, record: logging.LogRecord) -> str:
-        """Format log record as JSON.
+        """Format log record as JSON with sensitive data masked.
+
+        Security (SEC-006): Automatically masks API keys, tokens, passwords,
+        and admin IDs to prevent credential leakage.
 
         Args:
             record: Log record to format.
 
         Returns:
-            JSON-formatted log string.
+            JSON-formatted log string with sensitive data masked.
         """
         log_data: dict[str, Any] = {
             "timestamp": datetime.utcnow().isoformat(),
@@ -47,7 +121,10 @@ class JSONFormatter(logging.Formatter):
         if record.exc_info:
             log_data["exception"] = self.formatException(record.exc_info)
 
-        return json.dumps(log_data)
+        # SEC-006: Sanitize all log data before outputting
+        sanitized_data = sanitize_log_data(log_data)
+
+        return json.dumps(sanitized_data)
 
 
 class StructuredLogger:

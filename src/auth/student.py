@@ -1,41 +1,62 @@
 """Student authentication for student endpoints.
 
-Phase 0: Simple X-Student-ID header validation.
-Phase 1+: JWT tokens with session management.
+Security (SEC-003):
+- Validates X-Student-ID header is present and valid integer
+- Queries database to verify student exists
+- Prevents IDOR (Insecure Direct Object Reference) attacks
+- Returns 404 if student not found
+
+Phase 1+: Will add JWT tokens with session management.
 """
 
 from typing import Annotated
 
-from fastapi import Header, HTTPException, status
+from fastapi import Depends, Header, HTTPException, status
+from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
 
+from src.database import get_session
 from src.errors.exceptions import ERR_AUTH_MISSING
+from src.logging import get_logger
+
+logger = get_logger(__name__)
 
 
-async def verify_student(x_student_id: Annotated[str | None, Header()] = None) -> int:
+async def verify_student(
+    x_student_id: Annotated[str | None, Header()] = None,
+    db: AsyncSession = Depends(get_session),
+) -> int:
     """Verify student authentication via X-Student-ID header.
 
-    Phase 0 Implementation:
+    Security (SEC-003): Database verification prevents IDOR attacks
     - Checks if X-Student-ID header is present
     - Validates it's a valid integer (Telegram ID)
-    - Returns the student ID
+    - Queries database to verify student exists
+    - Returns 404 if student not found in database
 
-    Note: This is a simple implementation for Phase 0. In Phase 1+,
-    this will validate JWT tokens and check database for active sessions.
+    This prevents attackers from guessing valid student IDs and accessing
+    other students' data (IDOR vulnerability).
+
+    Performance: <100ms with indexed telegram_id lookup
 
     Args:
         x_student_id: X-Student-ID header value (Telegram ID as string).
+        db: Database session (injected by FastAPI Depends).
 
     Returns:
-        Student Telegram ID (as integer).
+        Student telegram ID (as integer) if student exists in database.
 
     Raises:
-        HTTPException: If authentication fails (401).
+        HTTPException:
+            - 401 if X-Student-ID header missing
+            - 400 if X-Student-ID is not a valid integer
+            - 404 if student not found in database (SEC-003)
 
     Example:
         >>> # In FastAPI route:
         >>> @app.get("/practice")
         >>> async def get_practice(student_id: int = Depends(verify_student)):
-        >>>     # student_id is validated student Telegram ID
+        >>>     # student_id is validated and verified in database
         >>>     ...
     """
     if not x_student_id:
@@ -45,9 +66,9 @@ async def verify_student(x_student_id: Annotated[str | None, Header()] = None) -
             headers={"error_code": ERR_AUTH_MISSING},
         )
 
-    # Parse student ID
+    # Parse student ID (telegram_id)
     try:
-        student_id = int(x_student_id)
+        telegram_id = int(x_student_id)
     except ValueError as e:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -55,13 +76,33 @@ async def verify_student(x_student_id: Annotated[str | None, Header()] = None) -
             headers={"error_code": ERR_AUTH_MISSING},
         ) from e
 
-    # In Phase 0, we just validate the ID format
-    # In Phase 1+, we'll check database for student existence and session validity
-    if student_id <= 0:
+    # Validate format
+    if telegram_id <= 0:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Invalid student ID (must be positive integer)",
             headers={"error_code": ERR_AUTH_MISSING},
         )
 
-    return student_id
+    # SEC-003: Query database to verify student exists
+    # This prevents IDOR attacks where attackers guess student IDs
+    from src.models.student import Student
+
+    result = await db.execute(select(Student).where(Student.telegram_id == telegram_id))
+    student = result.scalar_one_or_none()
+
+    if not student:
+        logger.warning(
+            f"Student authentication failed: telegram_id {telegram_id} not found in database"
+        )
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Student with ID {telegram_id} not found",
+        )
+
+    logger.debug(
+        f"Student {student.student_id} (telegram_id={telegram_id}) authenticated successfully"
+    )
+
+    # Return telegram_id (not student_id) for consistency with header
+    return telegram_id

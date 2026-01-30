@@ -1,36 +1,53 @@
-"""Admin dashboard endpoints."""
+"""Admin dashboard endpoints.
+
+Security (SEC-004):
+- All admin endpoints require authentication via verify_admin dependency
+- Returns 401 if X-Admin-ID header missing
+- Returns 403 if admin ID not in authorized list
+- Prevents unauthorized access to sensitive data
+"""
 
 from datetime import datetime
 
-from fastapi import APIRouter, Header, Query
+from fastapi import APIRouter, Depends, Query
 
+from src.auth.admin import verify_admin
+from src.logging import get_logger
 from src.schemas.admin import AdminStats, CostSummary, StudentListResponse
 from src.schemas.student import StudentProfile
 
 router = APIRouter()
+logger = get_logger(__name__)
 
 
 @router.get("/admin/stats", response_model=AdminStats, tags=["Admin"])
 async def get_admin_stats(
-    x_admin_id: str = Header(..., description="Admin telegram ID")
+    admin_id: int = Depends(verify_admin),
 ) -> AdminStats:
     """Get system statistics.
 
     Returns overall platform metrics including students, engagement, and usage.
 
+    Security (SEC-004):
+    - Requires authentication via verify_admin dependency
+    - Only authorized admin IDs can access this endpoint
+    - Returns 403 if admin ID not in authorized list
+
     Args:
-        x_admin_id: Admin telegram ID from header.
+        admin_id: Authenticated admin telegram ID (injected by verify_admin).
 
     Returns:
         AdminStats with system metrics.
 
     Raises:
-        HTTPException: If not authorized or data unavailable.
+        HTTPException: If not authorized (403) or data unavailable (500).
     """
-    # TODO: Implement admin authentication
-    # - Validate admin ID (hardcoded list for Phase 0)
-    # - Query database for statistics
-    # - Calculate aggregations
+    logger.info(f"Admin {admin_id} requested system stats")
+
+    # TODO: Implement statistics calculation
+    # - Query database for student counts
+    # - Calculate engagement metrics
+    # - Calculate averages
 
     # Mock data
     return AdminStats(
@@ -47,28 +64,35 @@ async def get_admin_stats(
 @router.get("/admin/students", response_model=StudentListResponse, tags=["Admin"])
 async def get_admin_students(
     grade: int | None = Query(None, description="Filter by grade", ge=6, le=8),
-    page: int = Query(1, description="Page number", ge=1),
+    page: int = Query(1, description="Page number", ge=1, le=1000),  # SEC-008: Upper bound
     limit: int = Query(20, description="Items per page", ge=1, le=100),
-    x_admin_id: str = Header(..., description="Admin telegram ID"),
+    admin_id: int = Depends(verify_admin),
 ) -> StudentListResponse:
     """List all students with pagination.
 
     Returns paginated list of students with optional grade filtering.
 
+    Security (SEC-004):
+    - Requires authentication via verify_admin dependency
+    - Prevents unauthorized access to student data
+    - Returns 403 if admin ID not authorized
+
     Args:
         grade: Optional grade filter (6, 7, or 8).
         page: Page number for pagination.
         limit: Number of items per page.
-        x_admin_id: Admin telegram ID from header.
+        admin_id: Authenticated admin telegram ID (injected by verify_admin).
 
     Returns:
         StudentListResponse with paginated student list.
 
     Raises:
-        HTTPException: If not authorized.
+        HTTPException: If not authorized (403).
     """
+    logger.info(f"Admin {admin_id} requested student list (grade={grade}, page={page})")
+
     # TODO: Implement student list
-    # - Validate admin authentication
+    # - Query database for students
     # - Apply grade filter if provided
     # - Paginate results
     # - Return student profiles
@@ -98,29 +122,35 @@ async def get_admin_students(
 
 @router.get("/admin/cost", response_model=CostSummary, tags=["Admin"])
 async def get_admin_cost(
-    period: str = Query("week", description="Time period", regex="^(day|week|month)$"),
-    x_admin_id: str = Header(..., description="Admin telegram ID"),
+    period: str = Query("week", description="Time period", pattern="^(day|week|month)$"),
+    admin_id: int = Depends(verify_admin),
 ) -> CostSummary:
     """Get cost summary.
 
     Returns cost metrics for AI API usage and infrastructure.
     Includes budget alerts if projected costs exceed limits.
 
+    Security (SEC-004):
+    - Requires authentication via verify_admin dependency
+    - Prevents unauthorized access to cost data
+    - Returns 403 if admin ID not authorized
+
     Args:
         period: Time period for cost calculation (day, week, month).
-        x_admin_id: Admin telegram ID from header.
+        admin_id: Authenticated admin telegram ID (injected by verify_admin).
 
     Returns:
         CostSummary with cost breakdown and alerts.
 
     Raises:
-        HTTPException: If not authorized.
+        HTTPException: If not authorized (403).
     """
+    logger.info(f"Admin {admin_id} requested cost summary (period={period})")
+
     # TODO: Implement cost tracking
-    # - Validate admin authentication
     # - Query cost records from database
     # - Calculate aggregations by period
-    # - Check against budget thresholds
+    # - Check against budget thresholds ($0.10/student/month)
     # - Generate alerts if over budget
 
     # Mock data showing over-budget scenario

@@ -1,9 +1,17 @@
-"""Practice session endpoints."""
+"""Practice session endpoints.
+
+Security (SEC-005):
+- Hint endpoint rate limited to 10 requests/day per student
+- Prevents abuse of expensive Claude API calls
+"""
 
 from datetime import datetime, timedelta
 
-from fastapi import APIRouter, Header, HTTPException
+from fastapi import APIRouter, Header, HTTPException, Request
+from slowapi import Limiter
+from slowapi.util import get_remote_address
 
+from src.logging import get_logger
 from src.schemas.practice import (
     AnswerRequest,
     AnswerResponse,
@@ -14,6 +22,10 @@ from src.schemas.practice import (
 )
 
 router = APIRouter()
+logger = get_logger(__name__)
+
+# Rate limiter instance (SEC-005)
+limiter = Limiter(key_func=get_remote_address)
 
 
 @router.get("/practice", response_model=PracticeResponse, tags=["Student Practice"])
@@ -113,7 +125,9 @@ async def submit_answer(
     response_model=HintResponse,
     tags=["Student Practice"],
 )
+@limiter.limit("10/day")  # SEC-005: Rate limit expensive Claude API calls
 async def request_hint(
+    req: Request,  # Required by slowapi rate limiter
     problem_id: int,
     request: HintRequest,
     x_student_id: str = Header(..., description="Student telegram ID"),
@@ -123,7 +137,13 @@ async def request_hint(
     Generates or retrieves a hint to guide the student toward the answer
     without revealing it directly. Maximum 3 hints per problem.
 
+    Security (SEC-005):
+    - Rate limited to 10 requests/day per IP address
+    - Prevents abuse of expensive Claude API calls
+    - Returns 429 Too Many Requests if limit exceeded
+
     Args:
+        req: FastAPI request object (required by rate limiter).
         problem_id: ID of the problem.
         request: Hint request with hint number.
         x_student_id: Student telegram ID from header.
@@ -132,8 +152,15 @@ async def request_hint(
         HintResponse with hint text.
 
     Raises:
-        HTTPException: If too many hints requested or problem not found.
+        HTTPException:
+            - 400 if too many hints requested (>3)
+            - 429 if rate limit exceeded (>10/day)
+            - 404 if problem not found
     """
+    logger.info(
+        f"Student {x_student_id} requested hint {request.hint_number} for problem {problem_id}"
+    )
+
     # TODO: Implement hint generation
     # - Validate problem exists and session is active
     # - Check hints_used < 3

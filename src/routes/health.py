@@ -39,21 +39,17 @@ async def check_database() -> str:
         Status string: "ok", "timeout", or "error".
     """
     try:
-        # Import here to avoid circular dependencies
-        # In production, this will check actual database connection
-        # For now, we'll return a placeholder implementation
+        from src.database import check_connection
 
-        # TODO: Replace with actual database check when database module is ready
-        # from src.database import get_db_session
-        # async with get_db_session() as session:
-        #     await asyncio.wait_for(
-        #         session.execute(text("SELECT 1")),
-        #         timeout=DB_CHECK_TIMEOUT
-        #     )
+        # Check database connection with timeout
+        db_ok = await asyncio.wait_for(check_connection(), timeout=DB_CHECK_TIMEOUT)
 
-        # Placeholder: assume database is OK
-        logger.info("Database health check: OK")
-        return "ok"
+        if db_ok:
+            logger.info("Database health check: OK")
+            return "ok"
+        else:
+            logger.warning("Database health check: FAILED")
+            return "error"
 
     except TimeoutError:
         logger.warning("Database health check: TIMEOUT")

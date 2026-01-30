@@ -1,6 +1,6 @@
 """Application configuration management."""
 
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
@@ -11,6 +11,7 @@ class Settings(BaseSettings):
 
     # Telegram
     telegram_bot_token: str = ""
+    telegram_secret_token: str = ""  # Webhook signature verification (SEC-002)
 
     # Anthropic Claude API
     anthropic_api_key: str = ""
@@ -24,11 +25,10 @@ class Settings(BaseSettings):
     # Logging
     log_level: str = "INFO"
 
-    class Config:
-        """Pydantic config."""
-
-        env_file = ".env"
-        case_sensitive = False
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        case_sensitive=False,
+    )
 
     def get_admin_ids(self) -> list[int]:
         """Parse and return admin IDs as a list of integers.
