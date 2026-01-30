@@ -173,13 +173,13 @@ print_step "Running unit tests..."
 
 if command -v pytest &> /dev/null; then
     if [ "$VERBOSE" = true ]; then
-        pytest tests/unit -v --tb=short || EXIT_CODE=$((EXIT_CODE + 8))
+        pytest tests/unit -v --tb=short --cov=src --cov-report=term-missing:skip-covered --cov-report=html --cov-fail-under=70 || EXIT_CODE=$((EXIT_CODE + 8))
     else
-        if pytest tests/unit -q 2>/dev/null; then
+        if pytest tests/unit -q --cov=src --cov-report=term-missing:skip-covered --cov-report=html --cov-fail-under=70 2>/dev/null; then
             print_success "All unit tests passed"
         else
             print_error "Unit tests failed. Run: pytest tests/unit -v"
-            pytest tests/unit -q --tb=line 2>/dev/null || true
+            pytest tests/unit -q --tb=line --cov=src 2>/dev/null || true
             EXIT_CODE=$((EXIT_CODE + 8))
         fi
     fi
@@ -224,14 +224,14 @@ print_header "STAGE 6: Test Coverage"
 print_step "Checking test coverage (minimum 70%)..."
 
 if command -v pytest &> /dev/null; then
-    if pytest --cov=src --cov-fail-under=70 -q &> /tmp/coverage_output.txt; then
+    if pytest tests/unit --cov=src --cov-fail-under=70 -q &> /tmp/coverage_output.txt; then
         # Extract coverage percentage
         COVERAGE=$(grep -oP '(\d+)%' /tmp/coverage_output.txt | head -1)
         print_success "Coverage check passed: $COVERAGE"
     else
         print_error "Coverage below 70% threshold"
         grep "FAILED" /tmp/coverage_output.txt || cat /tmp/coverage_output.txt | tail -5
-        print_error "Run: pytest --cov=src --cov-report=html"
+        print_error "Run: pytest tests/unit --cov=src --cov-report=html"
         EXIT_CODE=$((EXIT_CODE + 8))
     fi
 else
