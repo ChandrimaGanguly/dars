@@ -76,7 +76,7 @@ def create_error_response(
     )
 
 
-async def dars_exception_handler(request: Request, exc: DarsAPIException) -> JSONResponse:
+def dars_exception_handler(request: Request, exc: DarsAPIException) -> JSONResponse:
     """Handle custom DarsAPIException errors.
 
     Args:
@@ -96,7 +96,7 @@ async def dars_exception_handler(request: Request, exc: DarsAPIException) -> JSO
     )
 
 
-async def http_exception_handler(request: Request, exc: StarletteHTTPException) -> JSONResponse:
+def http_exception_handler(request: Request, exc: StarletteHTTPException) -> JSONResponse:
     """Handle Starlette/FastAPI HTTPException errors.
 
     Args:
@@ -115,9 +115,7 @@ async def http_exception_handler(request: Request, exc: StarletteHTTPException) 
     )
 
 
-async def validation_exception_handler(
-    request: Request, exc: RequestValidationError
-) -> JSONResponse:
+def validation_exception_handler(request: Request, exc: RequestValidationError) -> JSONResponse:
     """Handle Pydantic validation errors.
 
     Args:
@@ -144,7 +142,7 @@ async def validation_exception_handler(
     )
 
 
-async def generic_exception_handler(request: Request, exc: Exception) -> JSONResponse:
+def generic_exception_handler(request: Request, exc: Exception) -> JSONResponse:
     """Handle unexpected exceptions.
 
     Args:
@@ -178,7 +176,7 @@ def register_exception_handlers(app: FastAPI) -> None:
     Args:
         app: FastAPI application instance.
     """
-    app.add_exception_handler(DarsAPIException, dars_exception_handler)
-    app.add_exception_handler(StarletteHTTPException, http_exception_handler)
-    app.add_exception_handler(RequestValidationError, validation_exception_handler)
+    app.add_exception_handler(DarsAPIException, dars_exception_handler)  # type: ignore
+    app.add_exception_handler(StarletteHTTPException, http_exception_handler)  # type: ignore
+    app.add_exception_handler(RequestValidationError, validation_exception_handler)  # type: ignore
     app.add_exception_handler(Exception, generic_exception_handler)

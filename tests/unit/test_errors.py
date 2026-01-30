@@ -143,8 +143,7 @@ class TestErrorHandlers:
         assert "ERR_NOT_FOUND" in content
         assert "test-request-id" in content
 
-    @pytest.mark.asyncio
-    async def test_dars_exception_handler(self) -> None:
+    def test_dars_exception_handler(self) -> None:
         """Test DarsAPIException handler."""
         # Create mock request
         from unittest.mock import Mock
@@ -160,7 +159,7 @@ class TestErrorHandlers:
         )
 
         # Handle exception
-        response = await dars_exception_handler(request, exc)
+        response = dars_exception_handler(request, exc)
 
         assert response.status_code == 400
         content = response.body.decode()
@@ -168,8 +167,7 @@ class TestErrorHandlers:
         assert "ERR_TEST" in content
         assert "test-request-id" in content
 
-    @pytest.mark.asyncio
-    async def test_http_exception_handler(self) -> None:
+    def test_http_exception_handler(self) -> None:
         """Test HTTPException handler."""
         from unittest.mock import Mock
 
@@ -180,7 +178,7 @@ class TestErrorHandlers:
         exc = HTTPException(status_code=404, detail="Not found")
 
         # Handle exception
-        response = await http_exception_handler(request, exc)
+        response = http_exception_handler(request, exc)
 
         assert response.status_code == 404
         content = response.body.decode()

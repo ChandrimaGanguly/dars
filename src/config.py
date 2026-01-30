@@ -21,6 +21,9 @@ class Settings(BaseSettings):
     # Environment
     environment: str = "development"
 
+    # Logging
+    log_level: str = "INFO"
+
     class Config:
         """Pydantic config."""
 

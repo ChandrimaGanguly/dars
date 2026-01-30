@@ -9,8 +9,7 @@ This file provides shared fixtures for all tests:
 """
 
 import asyncio
-import os
-from typing import AsyncGenerator, Generator
+from collections.abc import Generator
 
 import pytest
 from sqlalchemy import create_engine
