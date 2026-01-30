@@ -29,21 +29,34 @@
 **Requirements:**
 - REQ-017: Database Schema (PostgreSQL + SQLAlchemy)
 - REQ-018: Backend API (FastAPI with endpoints)
-- REQ-019: Authentication & Security
-- REQ-014: Telegram Bot Integration
-- REQ-020: Error Handling & Logging
+- REQ-019: Authentication & Security (includes webhook verification, CORS, rate limiting)
+- REQ-014: Telegram Bot Integration (with signature verification)
+- REQ-020: Error Handling & Logging (with sensitive data sanitization)
 - REQ-031: Health Check Endpoint
+- **SEC-001:** CORS Configuration Hardening
+- **SEC-002:** Telegram Webhook Signature Verification
+- **SEC-003:** Student Database Existence Verification
+- **SEC-004:** Admin Authentication Enforcement
+- **SEC-005:** Rate Limiting on All Endpoints
+- **SEC-006:** Sensitive Data Sanitization in Logs
+- **SEC-007:** Input Length Validation
+- **SEC-008:** Query Parameter Validation
 
 **Success Criteria:**
 - ✅ PostgreSQL database running locally/Railway with schema created
 - ✅ FastAPI app starts without errors
-- ✅ POST /webhook receives Telegram updates
+- ✅ POST /webhook receives Telegram updates AND verifies webhook signature
 - ✅ GET /health returns `{"status": "ok", "db": "ok"}` in <500ms
-- ✅ Admin ID auth works (hardcoded list)
-- ✅ All requests logged with JSON structure
-- ✅ Errors don't crash app (graceful handling)
+- ✅ Admin ID auth works (hardcoded list) AND verified on all admin endpoints
+- ✅ Student endpoints verify student exists in database before returning data
+- ✅ All requests logged with JSON structure AND no sensitive data (tokens, keys, IDs)
+- ✅ Errors don't crash app (graceful handling) AND don't expose stack traces
+- ✅ CORS restricted to specific origins (not `*`)
+- ✅ Rate limiting returns 429 if exceeded (max 100 requests/minute per IP)
+- ✅ All string inputs have max_length validation (prevent DOS)
+- ✅ Query parameters (page, limit, grade) properly validated with bounds
 
-**Complexity:** M (2-3 days backend + API + security)
+**Complexity:** M (2-3 days backend + API) + M (2-3 days security hardening) = **4-6 days total**
 
 **Blockers:** None
 
@@ -58,14 +71,31 @@
    - Create app.py with FastAPI instance
    - Implement POST /webhook for Telegram
    - Implement GET /health
+   - Implement core endpoints (practice, student, admin, streak routes)
    - Complexity: M, ~2 days
 
-3. **Agent C:** Implement security & logging
+3. **Agent C:** Implement security & logging (CRITICAL - must complete before Phase 3)
+   - **CORS Hardening (SEC-001):** Restrict allow_origins to specific domains (not `*`)
+   - **Telegram Webhook Verification (SEC-002):** Verify X-Telegram-Bot-Api-Secret-Token header
+   - **Student Database Verification (SEC-003):** Query DB to verify student exists, return 404 if not
+   - **Admin Authentication Enforcement (SEC-004):** Use verify_admin() Depends() on all /admin/* endpoints
+   - **Rate Limiting (SEC-005):** Implement slowapi rate limiting (100 req/min per IP, 10 hints/day per student)
+   - **Sensitive Data Sanitization (SEC-006):** Mask API keys, tokens, admin IDs in logs
+   - **Input Validation (SEC-007, SEC-008):** Add max_length to string fields, validate query param bounds
    - Add authentication middleware
-   - Implement error handling
-   - Structured JSON logging
+   - Implement error handling (no stack trace exposure)
+   - Structured JSON logging (no secrets)
    - Setup environment variables
-   - Complexity: S, ~1 day
+   - Complexity: M, ~2-3 days
+
+**Critical Subtasks for Agent C (Order matters):**
+1. SEC-002 (Telegram verification) - Must work before webhook is live
+2. SEC-001 (CORS) - Must be restricted before any external testing
+3. SEC-003 (Student verification) - Required before Phase 3 practice endpoints
+4. SEC-004 (Admin auth) - Required before admin endpoints are accessible
+5. SEC-005 (Rate limiting) - Protects against DOS during testing
+6. SEC-006 (Log sanitization) - Prevents accidental secret exposure
+7. SEC-007/008 (Input validation) - Prevents DOS and injection attacks
 
 **Deliverables:**
 - Working FastAPI app
@@ -80,6 +110,10 @@
 - Use Railway PostgreSQL for simplicity (manages backups)
 - Telegram bot already created via BotFather, just need webhook URL
 - Store bot token in environment variable, never in code
+- **SECURITY CRITICAL:** Phase 1 must include all 8 security requirements (SEC-001 through SEC-008) before Phase 3 (Practice endpoints) begins. These are blocking issues that affect user data security.
+- **Testing:** Before Phase 3, test with internal team only. Do NOT onboard external users until security hardening is complete.
+- **Code Review:** All security implementations in Agent C's work MUST be reviewed by security expert (Noor) before merge
+- **Deployment:** Do NOT deploy to production until all SEC-* requirements pass. Interim deployments (staging) are OK with all security in place.
 
 ---
 
@@ -756,9 +790,229 @@ Before Phase 2 starts, Phase 1 must be 100% complete and tested:
 
 ---
 
+# SECURITY AUDIT MAPPING TO ROADMAP
+
+**Security Assessment Date:** 2026-01-30
+**Audit Conducted By:** Claude Security Auditor
+**Total Vulnerabilities Found:** 15 (3 CRITICAL, 5 HIGH, 4 MEDIUM, 3 LOW)
+
+## Vulnerability Resolution Roadmap
+
+### PHASE 1 (WEEK 1) - CRITICAL SECURITY FIXES
+**Must be completed before Phase 3 begins. Code review required before merge.**
+
+| ID | Vulnerability | Severity | Status | Phase Integration | Owner |
+|-----|--------------|----------|--------|------------------|-------|
+| SEC-001 | CORS configuration allows all origins | CRITICAL | TODO | Phase 1, Agent C | Noor |
+| SEC-002 | Telegram webhook lacks signature verification | CRITICAL | TODO | Phase 1, Agent C | Noor |
+| SEC-003 | Student auth has no database verification (IDOR) | CRITICAL | TODO | Phase 1, Agent C | Noor |
+| SEC-004 | Admin endpoints not enforcing authentication | HIGH | TODO | Phase 1, Agent C | Noor |
+| SEC-005 | Missing rate limiting (DOS vulnerability) | HIGH | TODO | Phase 1, Agent C | Noor |
+| SEC-006 | Sensitive data in logs (API keys exposure) | HIGH | TODO | Phase 1, Agent C | Noor |
+| SEC-007 | No input length validation | MEDIUM | TODO | Phase 1, Agent C | Noor |
+| SEC-008 | Insufficient query parameter validation | MEDIUM | TODO | Phase 1, Agent C | Noor |
+
+**Agent C Deliverables (Security Hardening):**
+```python
+# SEC-001: CORS - Restrict to Railway domain
+CORSMiddleware(
+    allow_origins=["https://dars.railway.app", "http://localhost:3000"],  # Not "*"
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "PATCH"],
+    allow_headers=["Content-Type", "Authorization", "X-Student-ID", "X-Admin-ID"],
+)
+
+# SEC-002: Telegram webhook - Verify signature
+@router.post("/webhook")
+async def telegram_webhook(
+    request: Request,
+    update: TelegramUpdate
+):
+    # Verify X-Telegram-Bot-Api-Secret-Token header
+    secret_token = request.headers.get("X-Telegram-Bot-Api-Secret-Token")
+    if not secret_token or secret_token != TELEGRAM_SECRET_TOKEN:
+        raise HTTPException(status_code=401, detail="Invalid webhook token")
+    # ... process update
+
+# SEC-003: Student verification - Query database
+async def verify_student(x_student_id: int = Header(...)) -> int:
+    # NEW: Verify student exists in database
+    student = await db.execute(
+        select(Student).where(Student.telegram_id == x_student_id)
+    )
+    if not student.scalar_one_or_none():
+        raise HTTPException(status_code=404, detail="Student not found")
+    return x_student_id
+
+# SEC-004: Admin auth - Use Depends() on all /admin/* routes
+@router.get("/admin/stats")
+async def get_admin_stats(
+    admin_id: int = Depends(verify_admin),  # NEW: enforce auth
+    db: AsyncSession = Depends(get_session),
+) -> AdminStats:
+    ...
+
+# SEC-005: Rate limiting - Use slowapi
+from slowapi import Limiter
+limiter = Limiter(key_func=get_remote_address)
+app.state.limiter = limiter
+
+@router.post("/practice/{problem_id}/hint")
+@limiter.limit("10/day")  # Max 10 hints per day per IP
+async def request_hint(...):
+    ...
+
+# SEC-006: Log sanitization - Mask sensitive data
+def sanitize_log_data(data: dict) -> dict:
+    # Mask API keys, tokens, admin IDs
+    sensitive_keys = ["api_key", "token", "secret", "admin_id", "x-admin-id"]
+    for key in sensitive_keys:
+        if key in data:
+            data[key] = "***MASKED***"
+    return data
+
+logger.info("Request", extra=sanitize_log_data(request_dict))
+
+# SEC-007: Input validation - Add max_length
+class AnswerRequest(BaseModel):
+    student_answer: str = Field(..., max_length=500)  # NEW: prevent DOS
+
+# SEC-008: Query parameter validation - Add bounds
+@router.get("/admin/students")
+async def get_admin_students(
+    page: int = Query(1, ge=1, le=1000),  # NEW: upper bound
+    limit: int = Query(20, ge=1, le=100),  # Already has bound
+    grade: int | None = Query(None, ge=6, le=8),  # Already has bounds
+):
+    ...
+```
+
+### PHASE 3 (WEEK 2-3) - VERIFICATION REQUIREMENT
+**SEC-003 (Student database verification) must be completed in Phase 1 BEFORE Practice endpoints go live in Phase 3.**
+
+**Success Criteria for Phase 3:**
+- ✅ All student endpoints verify student exists in database
+- ✅ Attempting to access non-existent student returns 404, not data
+- ✅ Attempting to access other student's data fails (access control)
+
+### PHASE 7 (WEEK 5-6) - LOGGING ENHANCEMENT
+**SEC-006 (Sensitive data sanitization) is enhanced in Phase 7 logging work.**
+
+| ID | Enhancement | Phase 7 Task |
+|-----|-------------|-------------|
+| SEC-006 | Comprehensive log sanitization | Add centralized log filtering, test with real API keys |
+| SEC-009 | Missing security headers | Add CSP, HSTS, X-Content-Type-Options headers |
+| SEC-010 | Error response filtering | Never expose stack traces in production |
+
+### PHASE 8 (WEEK 6-7) - SECURITY HEADERS & FINAL HARDENING
+**Before production deployment, add security response headers.**
+
+| ID | Vulnerability | Severity | Phase 8 Task | Owner |
+|-----|--------------|----------|-------------|-------|
+| SEC-009 | Missing security headers | MEDIUM | Add middleware for CSP, HSTS, X-Content headers | Jodha |
+| SEC-010 | Stack trace exposure | MEDIUM | Implement environment-based error handling | Jodha |
+| SEC-011 | Database connection risks | LOW | Verify echo=False in production config | Jodha |
+
+**Phase 8 Deliverable (Security Headers):**
+```python
+# Add security headers middleware (BEFORE CORSMiddleware)
+@app.middleware("http")
+async def add_security_headers(request: Request, call_next):
+    response = await call_next(request)
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["X-XSS-Protection"] = "1; mode=block"
+    response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
+    response.headers["Content-Security-Policy"] = "default-src 'self'"
+    return response
+```
+
+### POST-PHASE 8 (PHASE 1+ WORK) - BACKLOG ITEMS
+**Lower priority items that don't block MVP but should be addressed in Phase 1+:**
+
+| ID | Vulnerability | Severity | Recommended Phase | Notes |
+|-----|--------------|----------|------------------|-------|
+| SEC-012 | CSRF protection | MEDIUM | Phase 1+ | Not critical for Telegram-only MVP, add before web UI |
+| SEC-013 | IDOR access control | LOW | Phase 1+ | Depends on SEC-003 fix, then add per-student access checks |
+| SEC-014 | Database echo logging | LOW | Phase 1+ | Verify echo=False in all environments |
+| SEC-015 | Exception handling | LOW | Phase 1+ | Replace broad catches with specific exceptions |
+
+## Security Code Review Checklist (For Agent C)
+
+**Before merging Phase 1 security work, verify:**
+
+- [ ] CORS `allow_origins` does NOT contain `"*"` (must be specific domains)
+- [ ] All student endpoints call `verify_student()` and check database
+- [ ] All admin endpoints use `Depends(verify_admin)` (not just header acceptance)
+- [ ] Telegram webhook verifies `X-Telegram-Bot-Api-Secret-Token` header
+- [ ] Rate limiting middleware is installed and limits `/hint` to 10/day
+- [ ] No API keys, tokens, or admin IDs logged in JSON logs
+- [ ] String inputs have `max_length` constraints (prevent DOS)
+- [ ] Query parameters have reasonable bounds (page ≤ 1000, etc.)
+- [ ] Error responses never contain stack traces (test with invalid input)
+- [ ] All tests pass with security changes (unit + integration)
+- [ ] Documentation updated with security assumptions
+
+## Security Testing Plan (Phase 1)
+
+**After security hardening is complete, run these tests:**
+
+```bash
+# Test CORS restrictions
+curl -H "Origin: https://evil.com" http://localhost:8000/health
+# Expected: No Access-Control-Allow-Origin header
+
+# Test student verification
+curl http://localhost:8000/practice -H "X-Student-ID: 99999"
+# Expected: 404 Student not found
+
+# Test admin auth enforcement
+curl http://localhost:8000/admin/stats -H "X-Admin-ID: invalid"
+# Expected: 403 Forbidden
+
+# Test rate limiting
+for i in {1..15}; do
+    curl http://localhost:8000/practice/1/hint -H "X-Student-ID: 1"
+    sleep 0.1
+done
+# Expected: 15th request returns 429 Too Many Requests
+
+# Test log sanitization
+# Check logs for any API keys, tokens, admin IDs
+grep -i "api_key\|token\|admin_id" logs/
+# Expected: No matches (all should be ***MASKED***)
+```
+
+## Risk Assessment if Security Work is Skipped
+
+**DO NOT skip Phase 1 security work. Impact of delaying SEC-001 through SEC-008:**
+
+| Risk | Impact | Likelihood | Consequence |
+|------|--------|-----------|-------------|
+| CORS bypass | Attackers make authenticated requests from malicious sites | HIGH | Data breach, reputation damage |
+| Spoofed webhook | Fake Telegram updates processed as real | MEDIUM | Unauthorized state changes, bogus practice sessions |
+| IDOR attacks | Attackers access/modify other student data | HIGH | Student data breach, regulatory violation (GDPR) |
+| DOS via rate limiting | Service crashes from request flood | MEDIUM | Platform unavailability, lost user trust |
+| Log secrets exposure | API keys/admin IDs visible in logs | MEDIUM | Credential compromise, unauthorized access |
+| **Overall Risk** | **Would require complete security rebuild post-launch** | **HIGH** | **BLOCKER: Do not launch without these fixes** |
+
+---
+
 # GO/NO-GO FOR PHASE 0 COMPLETION
 
 **Before pilot onboarding (Week 7-8), all 8 phases must meet success criteria:**
+
+**Security (BLOCKING - must all pass):**
+- ✅ CORS restricted to specific origins (not `*`)
+- ✅ Telegram webhook verifies signature
+- ✅ Student endpoints verify student exists in database
+- ✅ Admin endpoints enforce authentication with verify_admin()
+- ✅ Rate limiting returns 429 when exceeded
+- ✅ Logs contain no sensitive data (API keys, tokens, admin IDs masked)
+- ✅ String inputs have max_length validation
+- ✅ Query parameters have reasonable bounds
+- ✅ No stack traces in error responses
+- ✅ Security code review completed and approved
 
 Learning:
 - ✅ Students can complete 5-problem sessions
@@ -781,6 +1035,7 @@ Operations:
 - ✅ Admin dashboard displays all metrics
 - ✅ Health check passes
 - ✅ Deployment to Railway successful
+- ✅ Security headers present (CSP, HSTS, X-Content-Type-Options)
 
 **Pilot Success Criteria (Week 7-8):**
 - ✅ 50 students onboarded
