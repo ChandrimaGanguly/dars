@@ -20,6 +20,7 @@
 
 ## Agent A: Database Schema & Models (Maryam)
 
+**Task ID:** PHASE1-A-1
 **Owner:** Maryam (Database & ORM Expert)
 **Duration:** ~2 days
 **Blocker:** None
@@ -27,15 +28,15 @@
 
 ### Deliverables
 
-- [ ] Create SQLAlchemy models for all entities
-- [ ] Create Alembic migrations
-- [ ] Seed initial admin users
-- [ ] Document indexes and relationships
-- [ ] All tests passing (70%+ coverage)
+- [ ] **PHASE1-A-1.1** - Create 6 models (Student, Problem, Session, Response, Streak, CostRecord)
+- [ ] **PHASE1-A-1.2** - Design relationships (1-to-Many, Foreign Keys)
+- [ ] **PHASE1-A-1.3** - Create Alembic migrations
+- [ ] **PHASE1-A-1.4** - Unit tests for models (≥80% coverage)
+- [ ] **PHASE1-A-1.5** - Verify with Jodha (imports work for API)
 
 ### Detailed Work
 
-#### 1. SQLAlchemy Models (src/models/)
+#### 1. SQLAlchemy Models (src/models/) [PHASE1-A-1.1]
 
 - [ ] **Base class** (`base.py`)
   - `Base` declarative base with naming conventions
@@ -84,7 +85,7 @@
   - Fields: `operation`, `api_provider`, `input_tokens`, `output_tokens`, `cost_usd`
   - Timestamp: `recorded_at` (UTC)
 
-#### 2. Alembic Migrations
+#### 2. Alembic Migrations [PHASE1-A-1.3]
 
 - [ ] Create migration file
   - Auto-detect schema from models
@@ -123,7 +124,7 @@
   - Auto-run on app startup (development)
   - Manual for production
 
-#### 5. Testing
+#### 5. Testing [PHASE1-A-1.4]
 
 - [ ] Unit tests for all models
   - Test creation, relationships, methods
@@ -159,6 +160,7 @@
 
 ## Agent B: FastAPI App Structure (Jodha)
 
+**Task ID:** PHASE1-B-1
 **Owner:** Jodha (FastAPI Backend Expert)
 **Duration:** ~2 days
 **Blocker:** None
@@ -166,16 +168,16 @@
 
 ### Deliverables
 
-- [ ] FastAPI application with all route stubs
-- [ ] Core error handling framework
-- [ ] Middleware setup (CORS, logging, request ID)
-- [ ] Health check endpoint
-- [ ] Telegram webhook endpoint
-- [ ] All tests passing (70%+ coverage)
+- [ ] **PHASE1-B-1.1** - Create FastAPI instance + config
+- [ ] **PHASE1-B-1.2** - Create 6 route modules (health, webhook, practice, student, streak, admin)
+- [ ] **PHASE1-B-1.3** - Implement middleware (CORS, request ID, error handlers)
+- [ ] **PHASE1-B-1.4** - Database integration (session dependency)
+- [ ] **PHASE1-B-1.5** - Unit tests (≥70% coverage)
+- [ ] **PHASE1-B-1.6** - Code review security work from Noor
 
 ### Detailed Work
 
-#### 1. Application Setup (src/main.py)
+#### 1. Application Setup (src/main.py) [PHASE1-B-1.1]
 
 - [ ] **FastAPI instance**
   ```python
@@ -196,7 +198,7 @@
   - Startup: Initialize database connection pool
   - Shutdown: Close connections gracefully
 
-#### 2. Route Modules (src/routes/)
+#### 2. Route Modules (src/routes/) [PHASE1-B-1.2]
 
 - [ ] **health.py** - Health check endpoint
   - `GET /health` - Database + Claude status
@@ -225,7 +227,7 @@
   - `GET /` - API info
   - `GET /docs` - OpenAPI docs (auto-generated)
 
-#### 3. Middleware Setup
+#### 3. Middleware Setup [PHASE1-B-1.3]
 
 - [ ] **CORS Middleware** (src/main.py)
   - Will be hardened by Noor in SEC-001
@@ -242,7 +244,7 @@
   - Validation error handler
   - Generic exception handler
 
-#### 4. Database Integration
+#### 4. Database Integration [PHASE1-B-1.4]
 
 - [ ] **Session dependency** (src/database.py)
   - `get_session()` - AsyncGenerator for FastAPI Depends()
@@ -267,7 +269,7 @@
   - Extract X-Student-ID header
   - Will be enhanced with database verification
 
-#### 6. Testing
+#### 6. Testing [PHASE1-B-1.5]
 
 - [ ] Unit tests for all endpoints
   - Test 200 responses for health/root
@@ -306,6 +308,7 @@
 
 ## Agent C: Security Hardening (Noor)
 
+**Task ID:** PHASE1-C-1
 **Owner:** Noor (Security & Logging Expert)
 **Duration:** 2-3 days
 **Blocker:** None
@@ -314,15 +317,19 @@
 
 ### Deliverables
 
-- [ ] All 8 security requirements (SEC-001 through SEC-008) implemented
-- [ ] Security test plan with specific test cases
-- [ ] Code review completed and approved
-- [ ] Documentation updated with security patterns
-- [ ] All tests passing (70%+ coverage)
+- [ ] **PHASE1-C-1.1** - SEC-002: Telegram webhook signature verification
+- [ ] **PHASE1-C-1.2** - SEC-001: CORS hardening
+- [ ] **PHASE1-C-1.3** - SEC-003: Student database verification (CRITICAL - blocks phase 3)
+- [ ] **PHASE1-C-1.4** - SEC-004: Admin authentication enforcement
+- [ ] **PHASE1-C-1.5** - SEC-005: Rate limiting (slowapi)
+- [ ] **PHASE1-C-1.6** - SEC-006: Sensitive data sanitization in logs
+- [ ] **PHASE1-C-1.7** - SEC-007: Input length validation
+- [ ] **PHASE1-C-1.8** - SEC-008: Query parameter validation
+- [ ] **PHASE1-C-1.9** - Security testing and code review
 
 ### Detailed Work - Implementation Order
 
-#### SEC-002: Telegram Webhook Signature Verification (FIRST)
+#### SEC-002: Telegram Webhook Signature Verification [PHASE1-C-1.1]
 
 **Why First:** Webhook must be secure before it's live
 
@@ -345,7 +352,7 @@
   - Test with wrong token → 401
   - Test with correct token → 200
 
-#### SEC-001: CORS Configuration Hardening (SECOND)
+#### SEC-001: CORS Configuration Hardening [PHASE1-C-1.2]
 
 **Why Second:** Restrict before external testing
 
@@ -368,7 +375,7 @@
   - Test from allowed origin → CORS headers present
   - Test from forbidden origin → No CORS headers
 
-#### SEC-003: Student Database Existence Verification (THIRD)
+#### SEC-003: Student Database Existence Verification [PHASE1-C-1.3]
 
 **Why Third:** Required for practice endpoints (Phase 3)
 
@@ -406,7 +413,7 @@
   - Missing header → 401
   - Non-integer → 400
 
-#### SEC-004: Admin Authentication Enforcement (FOURTH)
+#### SEC-004: Admin Authentication Enforcement [PHASE1-C-1.4]
 
 **Why Fourth:** Protect admin endpoints
 
@@ -442,7 +449,7 @@
   - Missing header → 401
   - Non-authorized ID → 403
 
-#### SEC-005: Rate Limiting (FIFTH)
+#### SEC-005: Rate Limiting [PHASE1-C-1.5]
 
 **Why Fifth:** Prevent DOS attacks
 
@@ -478,7 +485,7 @@
   - Send 11 hint requests in 1 day → 11th returns 429
   - Different IPs have separate limits
 
-#### SEC-006: Sensitive Data Sanitization in Logs (SIXTH)
+#### SEC-006: Sensitive Data Sanitization in Logs [PHASE1-C-1.6]
 
 **Why Sixth:** Prevent credential leakage
 
@@ -512,7 +519,7 @@
   - Log with admin_id=456 → Appears as ***MASKED***
   - Verify no false positives (allow legitimate field names)
 
-#### SEC-007: Input Length Validation (SEVENTH)
+#### SEC-007: Input Length Validation [PHASE1-C-1.7]
 
 **Why Seventh:** Prevent DOS via huge payloads
 
@@ -534,7 +541,7 @@
   - Submit string over limit → 422 Validation Error
   - Test all string fields
 
-#### SEC-008: Query Parameter Validation (EIGHTH)
+#### SEC-008: Query Parameter Validation [PHASE1-C-1.8]
 
 **Why Eighth:** Prevent injection and optimization bypass
 
@@ -599,6 +606,14 @@ curl -X POST http://localhost:8000/practice/1/answer \
 curl http://localhost:8000/admin/students?page=999999
 # Should accept but cap at 1000
 ```
+
+### Testing & Code Review [PHASE1-C-1.9]
+
+- [ ] Run complete security test plan (see curl commands above)
+- [ ] Verify all 8 security requirements implemented
+- [ ] Code review with Jodha (FastAPI expert)
+- [ ] Verify no performance regressions
+- [ ] Document any deviations from SECURITY_ROADMAP_INTEGRATION.md
 
 ### Code Review Checklist (Jodha will verify)
 
