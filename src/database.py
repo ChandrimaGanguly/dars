@@ -15,7 +15,7 @@ from sqlalchemy.ext.asyncio import (
     async_sessionmaker,
     create_async_engine,
 )
-from sqlalchemy.pool import NullPool, QueuePool
+from sqlalchemy.pool import AsyncAdaptedQueuePool, NullPool
 
 from src.models.base import Base
 
@@ -67,10 +67,10 @@ def create_engine(
         database_url = get_database_url()
 
     # Configure connection pool
-    # For Railway/production: Use QueuePool
+    # For Railway/production: Use AsyncAdaptedQueuePool (for async engines)
     # For SQLite/testing: Use NullPool to avoid connection issues
     is_sqlite = "sqlite" in database_url
-    poolclass = NullPool if is_sqlite else QueuePool
+    poolclass = NullPool if is_sqlite else AsyncAdaptedQueuePool
 
     # Build engine kwargs - don't pass pool parameters for NullPool
     engine_kwargs: dict[str, Any] = {
@@ -128,6 +128,12 @@ def get_session_factory() -> async_sessionmaker[AsyncSession]:
 async def get_session() -> AsyncGenerator[AsyncSession, None]:
     """Get async database session (dependency for FastAPI).
 
+    Uses SQLAlchemy's recommended transaction pattern with automatic
+    commit/rollback handling. The session.begin() context manager ensures:
+    - Automatic commit on success
+    - Automatic rollback on exception
+    - No connection leaks even if commit hangs or times out
+
     Yields:
         AsyncSession instance for database operations.
 
@@ -143,15 +149,13 @@ async def get_session() -> AsyncGenerator[AsyncSession, None]:
         ```
     """
     factory = get_session_factory()
-    async with factory() as session:
-        try:
-            yield session
-            await session.commit()
-        except Exception:
-            await session.rollback()
-            raise
-        finally:
-            await session.close()
+    async with factory() as session, session.begin():
+        # session.begin() handles commit/rollback automatically:
+        # - Commits on normal exit from the with block
+        # - Rolls back on exception
+        # - Prevents connection leaks even on timeout
+        yield session
+        # session.close() called automatically by factory() context manager
 
 
 async def init_db() -> None:

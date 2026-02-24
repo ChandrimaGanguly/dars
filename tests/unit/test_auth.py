@@ -101,28 +101,12 @@ class TestTelegramAuth:
         assert exc_info.value.status_code == 500
         assert "not configured" in exc_info.value.detail
 
-    @pytest.mark.asyncio
-    async def test_secure_compare_timing_safe(self) -> None:
-        """Test constant-time comparison prevents timing attacks.
-
-        Security (SEC-002): Ensures string comparison takes same time
-        regardless of where strings differ.
-        """
-        from src.auth.telegram import _secure_compare
-
-        # Same strings
-        assert _secure_compare("secret123", "secret123") is True
-
-        # Different strings (same length)
-        assert _secure_compare("secret123", "secret124") is False
-        assert _secure_compare("aaaaaaaaa", "bbbbbbbbb") is False
-
-        # Different lengths
-        assert _secure_compare("short", "longer_string") is False
-        assert _secure_compare("longer_string", "short") is False
-
-        # Empty strings
-        assert _secure_compare("", "") is True
+    # Note: Removed test_secure_compare_timing_safe() test
+    # We now use Python's built-in secrets.compare_digest() which:
+    # - Is cryptographically secure (timing-safe)
+    # - Is tested and maintained by CPython security team
+    # - Is implemented in C for performance
+    # No need to test standard library functions
 
 
 @pytest.mark.unit
@@ -202,9 +186,16 @@ class TestStudentAuth:
 
         Security (SEC-003): Must reject missing credentials.
         """
+        # Create mock Request object
+        from unittest.mock import Mock
+
+        mock_request = Mock()
+        mock_request.client = Mock()
+        mock_request.client.host = "127.0.0.1"
+
         with pytest.raises(HTTPException) as exc_info:
             # Pass None for db to avoid database dependency in unit test
-            await verify_student(x_student_id=None, db=None)  # type: ignore
+            await verify_student(request=mock_request, x_student_id=None, db=None)  # type: ignore
 
         assert exc_info.value.status_code == 401
         assert "Missing student credentials" in exc_info.value.detail
@@ -215,8 +206,14 @@ class TestStudentAuth:
 
         Security (SEC-003): Must validate input format before database query.
         """
+        from unittest.mock import Mock
+
+        mock_request = Mock()
+        mock_request.client = Mock()
+        mock_request.client.host = "127.0.0.1"
+
         with pytest.raises(HTTPException) as exc_info:
-            await verify_student(x_student_id="not_a_number", db=None)  # type: ignore
+            await verify_student(request=mock_request, x_student_id="not_a_number", db=None)  # type: ignore
 
         assert exc_info.value.status_code == 400
         assert "must be a valid integer" in exc_info.value.detail
@@ -227,8 +224,14 @@ class TestStudentAuth:
 
         Security (SEC-003): Must validate ID is positive before database query.
         """
+        from unittest.mock import Mock
+
+        mock_request = Mock()
+        mock_request.client = Mock()
+        mock_request.client.host = "127.0.0.1"
+
         with pytest.raises(HTTPException) as exc_info:
-            await verify_student(x_student_id="-123", db=None)  # type: ignore
+            await verify_student(request=mock_request, x_student_id="-123", db=None)  # type: ignore
 
         assert exc_info.value.status_code == 400
         assert "Invalid student ID" in exc_info.value.detail
@@ -239,8 +242,14 @@ class TestStudentAuth:
 
         Security (SEC-003): Zero is not a valid Telegram ID.
         """
+        from unittest.mock import Mock
+
+        mock_request = Mock()
+        mock_request.client = Mock()
+        mock_request.client.host = "127.0.0.1"
+
         with pytest.raises(HTTPException) as exc_info:
-            await verify_student(x_student_id="0", db=None)  # type: ignore
+            await verify_student(request=mock_request, x_student_id="0", db=None)  # type: ignore
 
         assert exc_info.value.status_code == 400
         assert "Invalid student ID" in exc_info.value.detail

@@ -1,16 +1,20 @@
 """Practice session endpoints.
 
-Security (SEC-005):
-- Hint endpoint rate limited to 10 requests/day per student
+Security (SEC-003, SEC-005):
+- All endpoints require student authentication (SEC-003)
+- Hint endpoint rate limited to 10 requests/day per student (SEC-005)
 - Prevents abuse of expensive Claude API calls
+- Prevents IDOR attacks
 """
 
-from datetime import datetime, timedelta
+from datetime import UTC, datetime, timedelta
 
-from fastapi import APIRouter, Header, HTTPException, Request
+from fastapi import APIRouter, Depends, HTTPException, Request
 from slowapi import Limiter
-from slowapi.util import get_remote_address
+from sqlalchemy.ext.asyncio import AsyncSession
 
+from src.auth.student import verify_student
+from src.database import get_session
 from src.logging import get_logger
 from src.schemas.practice import (
     AnswerRequest,
@@ -24,13 +28,26 @@ from src.schemas.practice import (
 router = APIRouter()
 logger = get_logger(__name__)
 
-# Rate limiter instance (SEC-005)
-limiter = Limiter(key_func=get_remote_address)
+
+# Rate limiter key function for student-specific limiting (SEC-005)
+def get_student_rate_limit_key(request: Request) -> str:
+    """Rate limit key based on student ID (not IP).
+
+    Returns:
+        Rate limit key in format: "student:{telegram_id}"
+    """
+    student_id = request.headers.get("X-Student-ID", "unknown")
+    return f"student:{student_id}"
+
+
+# Rate limiter instance (SEC-005) - uses student ID, not IP
+limiter = Limiter(key_func=get_student_rate_limit_key)
 
 
 @router.get("/practice", response_model=PracticeResponse, tags=["Student Practice"])
 async def get_practice_problems(
-    x_student_id: str = Header(..., description="Student telegram ID")
+    student_id: int = Depends(verify_student),  # SEC-003: Database verification
+    db: AsyncSession = Depends(get_session),
 ) -> PracticeResponse:
     """Get daily practice problems.
 
@@ -38,8 +55,13 @@ async def get_practice_problems(
     Problems are selected based on grade level, performance history,
     and adaptive difficulty algorithm.
 
+    Security (SEC-003):
+    - Student must be authenticated via X-Student-ID header
+    - Student existence verified in database (prevents IDOR)
+
     Args:
-        x_student_id: Student telegram ID from header.
+        student_id: Verified student telegram ID (from dependency).
+        db: Database session (from dependency).
 
     Returns:
         PracticeResponse with 5 selected problems.
@@ -48,10 +70,10 @@ async def get_practice_problems(
         HTTPException: If student not found or problem selection fails.
     """
     # TODO: Implement problem selection
-    # - Validate student exists
     # - Run problem selection algorithm (REQ-008)
     # - Create new session in database
     # - Return problems without answers
+    # Note: Student validation now handled by Depends(verify_student)
 
     # Mock data for now
     mock_problems = [
@@ -71,7 +93,7 @@ async def get_practice_problems(
         session_id=1,
         problems=mock_problems,
         problem_count=len(mock_problems),
-        expires_at=datetime.utcnow() + timedelta(minutes=30),
+        expires_at=datetime.now(UTC) + timedelta(minutes=30),
     )
 
 
@@ -83,7 +105,8 @@ async def get_practice_problems(
 async def submit_answer(
     problem_id: int,
     request: AnswerRequest,
-    x_student_id: str = Header(..., description="Student telegram ID"),
+    student_id: int = Depends(verify_student),  # SEC-003: Database verification
+    db: AsyncSession = Depends(get_session),
 ) -> AnswerResponse:
     """Submit answer to a problem.
 
@@ -130,7 +153,8 @@ async def request_hint(
     req: Request,  # Required by slowapi rate limiter
     problem_id: int,
     request: HintRequest,
-    x_student_id: str = Header(..., description="Student telegram ID"),
+    student_id: int = Depends(verify_student),  # SEC-003: Database verification
+    db: AsyncSession = Depends(get_session),
 ) -> HintResponse:
     """Request a Socratic hint for a problem.
 
@@ -158,7 +182,7 @@ async def request_hint(
             - 404 if problem not found
     """
     logger.info(
-        f"Student {x_student_id} requested hint {request.hint_number} for problem {problem_id}"
+        f"Student {student_id} requested hint {request.hint_number} for problem {problem_id}"
     )
 
     # TODO: Implement hint generation

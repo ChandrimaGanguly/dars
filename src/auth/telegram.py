@@ -7,8 +7,10 @@ Security (SEC-002):
 - Verifies X-Telegram-Bot-Api-Secret-Token header
 - Prevents unauthorized webhook calls
 - More secure than Bearer token (doesn't expose bot token)
+- Uses secrets.compare_digest() to prevent timing attacks
 """
 
+import secrets
 from typing import Annotated
 
 from fastapi import Header, HTTPException, status
@@ -79,8 +81,13 @@ async def verify_telegram_webhook(
             detail="Webhook secret token not configured",
         )
 
-    # Constant-time comparison to prevent timing attacks
-    if not _secure_compare(x_telegram_bot_api_secret_token, expected_token):
+    # Constant-time comparison to prevent timing attacks (SEC-002)
+    # Use Python's built-in secrets.compare_digest() which is:
+    # - Cryptographically secure against timing attacks
+    # - Implemented in C for performance
+    # - Handles length comparison securely
+    # - Audited and maintained by CPython security team
+    if not secrets.compare_digest(x_telegram_bot_api_secret_token, expected_token):
         logger.warning("Telegram webhook called with invalid secret token")
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -89,27 +96,3 @@ async def verify_telegram_webhook(
         )
 
     return True
-
-
-def _secure_compare(a: str, b: str) -> bool:
-    """Constant-time string comparison to prevent timing attacks.
-
-    Standard string comparison (==) can leak information about string
-    similarity through timing differences. This implementation always
-    compares all characters.
-
-    Args:
-        a: First string.
-        b: Second string.
-
-    Returns:
-        True if strings are equal, False otherwise.
-    """
-    if len(a) != len(b):
-        return False
-
-    result = 0
-    for char_a, char_b in zip(a, b, strict=True):
-        result |= ord(char_a) ^ ord(char_b)
-
-    return result == 0

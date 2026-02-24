@@ -15,7 +15,7 @@ Response format follows API_ARCHITECTURE.md:
 """
 
 import asyncio
-from datetime import datetime
+from datetime import UTC, datetime
 from typing import Any
 
 from fastapi import APIRouter, status
@@ -131,7 +131,7 @@ async def health_check() -> JSONResponse:
         "status": overall_status,
         "db": db_status,
         "claude": claude_status,
-        "timestamp": datetime.utcnow().isoformat(),
+        "timestamp": datetime.now(UTC).isoformat(),
     }
 
     # Return appropriate status code

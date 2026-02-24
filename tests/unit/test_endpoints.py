@@ -6,6 +6,7 @@ from unittest.mock import AsyncMock, patch
 import pytest
 from fastapi.testclient import TestClient
 
+from src.auth.student import verify_student
 from src.database import get_session
 from src.main import app
 
@@ -35,6 +36,15 @@ def get_mock_db(mock_db_instance):
         yield mock_db_instance
 
     return _get_mock_db
+
+
+def get_mock_verify_student(student_id: int = 123):
+    """Return a function that mocks student verification."""
+
+    async def _verify_student():
+        return student_id
+
+    return _verify_student
 
 
 # Create test client with database dependency overridden
@@ -230,40 +240,74 @@ class TestPracticeEndpoints:
     def test_get_practice_requires_student_id(self) -> None:
         """Practice endpoint should require X-Student-ID header."""
         response = client.get("/practice")
-        assert response.status_code == 422  # Missing required header
+        # verify_student raises 401 for missing X-Student-ID (not 422)
+        assert response.status_code == 401
 
-    def test_get_practice_returns_problems(self) -> None:
+    def test_get_practice_returns_problems(self, mock_db) -> None:
         """Practice endpoint should return problem list."""
-        response = client.get("/practice", headers={"X-Student-ID": "123"})
-        assert response.status_code == 200
-        data = response.json()
-        assert "problems" in data
-        assert "session_id" in data
-        assert "problem_count" in data
+        # Override dependencies to avoid database connection
+        app.dependency_overrides[get_session] = get_mock_db(mock_db)
+        app.dependency_overrides[verify_student] = get_mock_verify_student(123)
 
-    def test_submit_answer_requires_body(self) -> None:
+        try:
+            response = client.get("/practice", headers={"X-Student-ID": "123"})
+            assert response.status_code == 200
+            data = response.json()
+            assert "problems" in data
+            assert "session_id" in data
+            assert "problem_count" in data
+        finally:
+            # Clean up dependency overrides
+            if get_session in app.dependency_overrides:
+                del app.dependency_overrides[get_session]
+            if verify_student in app.dependency_overrides:
+                del app.dependency_overrides[verify_student]
+
+    def test_submit_answer_requires_body(self, mock_db) -> None:
         """Submit answer should require request body."""
-        response = client.post(
-            "/practice/1/answer",
-            headers={"X-Student-ID": "123"},
-        )
-        assert response.status_code == 422  # Missing body
+        # Override dependencies to avoid database connection
+        app.dependency_overrides[get_session] = get_mock_db(mock_db)
+        app.dependency_overrides[verify_student] = get_mock_verify_student(123)
 
-    def test_submit_answer_returns_feedback(self) -> None:
+        try:
+            response = client.post(
+                "/practice/1/answer",
+                headers={"X-Student-ID": "123"},
+            )
+            assert response.status_code == 422  # Missing body
+        finally:
+            # Clean up dependency overrides
+            if get_session in app.dependency_overrides:
+                del app.dependency_overrides[get_session]
+            if verify_student in app.dependency_overrides:
+                del app.dependency_overrides[verify_student]
+
+    def test_submit_answer_returns_feedback(self, mock_db) -> None:
         """Submit answer should return evaluation feedback."""
-        response = client.post(
-            "/practice/1/answer",
-            headers={"X-Student-ID": "123"},
-            json={
-                "session_id": 1,
-                "student_answer": "75",
-                "time_spent_seconds": 45,
-            },
-        )
-        assert response.status_code == 200
-        data = response.json()
-        assert "is_correct" in data
-        assert "feedback_text" in data
+        # Override dependencies to avoid database connection
+        app.dependency_overrides[get_session] = get_mock_db(mock_db)
+        app.dependency_overrides[verify_student] = get_mock_verify_student(123)
+
+        try:
+            response = client.post(
+                "/practice/1/answer",
+                headers={"X-Student-ID": "123"},
+                json={
+                    "session_id": 1,
+                    "student_answer": "75",
+                    "time_spent_seconds": 45,
+                },
+            )
+            assert response.status_code == 200
+            data = response.json()
+            assert "is_correct" in data
+            assert "feedback_text" in data
+        finally:
+            # Clean up dependency overrides
+            if get_session in app.dependency_overrides:
+                del app.dependency_overrides[get_session]
+            if verify_student in app.dependency_overrides:
+                del app.dependency_overrides[verify_student]
 
     @pytest.mark.skip(reason="Rate limiter requires integration test with real Request object")
     def test_request_hint_returns_hint_text(self) -> None:
@@ -286,18 +330,29 @@ class TestPracticeEndpoints:
         assert "hint_number" in data
         assert "hints_remaining" in data
 
-    def test_request_hint_validates_hint_number(self) -> None:
+    def test_request_hint_validates_hint_number(self, mock_db) -> None:
         """Request hint should reject invalid hint numbers."""
-        response = client.post(
-            "/practice/1/hint",
-            headers={"X-Student-ID": "123"},
-            json={
-                "session_id": 1,
-                "hint_number": 5,  # Max is 3
-            },
-        )
-        # Pydantic validation returns 422 for constraint violations
-        assert response.status_code == 422
+        # Override dependencies to avoid database connection
+        app.dependency_overrides[get_session] = get_mock_db(mock_db)
+        app.dependency_overrides[verify_student] = get_mock_verify_student(123)
+
+        try:
+            response = client.post(
+                "/practice/1/hint",
+                headers={"X-Student-ID": "123"},
+                json={
+                    "session_id": 1,
+                    "hint_number": 5,  # Max is 3
+                },
+            )
+            # Pydantic validation returns 422 for constraint violations
+            assert response.status_code == 422
+        finally:
+            # Clean up dependency overrides
+            if get_session in app.dependency_overrides:
+                del app.dependency_overrides[get_session]
+            if verify_student in app.dependency_overrides:
+                del app.dependency_overrides[verify_student]
 
 
 @pytest.mark.unit

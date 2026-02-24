@@ -12,7 +12,7 @@ All error responses follow the format from API_ARCHITECTURE.md Part 4:
 """
 
 import uuid
-from datetime import datetime
+from datetime import UTC, datetime
 from typing import Any
 
 from fastapi import FastAPI, Request, status
@@ -71,7 +71,7 @@ def create_error_response(
             "message": message,
             "error_code": error_code,
             "details": details,
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(UTC).isoformat(),
             "request_id": request_id or str(uuid.uuid4()),
         },
     )

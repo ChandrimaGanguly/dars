@@ -12,7 +12,7 @@ import json
 import logging
 import sys
 import uuid
-from datetime import datetime
+from datetime import UTC, datetime
 from typing import Any
 
 from fastapi import Request
@@ -103,7 +103,7 @@ class JSONFormatter(logging.Formatter):
             JSON-formatted log string with sensitive data masked.
         """
         log_data: dict[str, Any] = {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(UTC).isoformat(),
             "level": record.levelname,
             "logger": record.name,
             "message": record.getMessage(),

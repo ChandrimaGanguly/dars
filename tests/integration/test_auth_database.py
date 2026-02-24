@@ -4,6 +4,8 @@ Tests verify that student authentication properly queries the database
 to prevent IDOR (Insecure Direct Object Reference) vulnerabilities.
 """
 
+from unittest.mock import Mock
+
 import pytest
 from fastapi import HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
@@ -68,8 +70,15 @@ class TestStudentDatabaseVerification:
         async_db_session.add(student)
         await async_db_session.commit()
 
+        # Create mock Request
+        mock_request = Mock()
+        mock_request.client = Mock()
+        mock_request.client.host = "127.0.0.1"
+
         # Verify authentication succeeds
-        result = await verify_student(x_student_id="123456789", db=async_db_session)
+        result = await verify_student(
+            request=mock_request, x_student_id="123456789", db=async_db_session
+        )
         assert result == 123456789
 
     async def test_verify_student_not_in_database_returns_404(
@@ -79,9 +88,16 @@ class TestStudentDatabaseVerification:
 
         Security (SEC-003): Prevents IDOR attacks by rejecting unknown student IDs.
         """
+        # Create mock Request
+        mock_request = Mock()
+        mock_request.client = Mock()
+        mock_request.client.host = "127.0.0.1"
+
         # Try to authenticate with non-existent student ID
         with pytest.raises(HTTPException) as exc_info:
-            await verify_student(x_student_id="999999999", db=async_db_session)
+            await verify_student(
+                request=mock_request, x_student_id="999999999", db=async_db_session
+            )
 
         # Should return 404 Not Found (not 401 Unauthorized)
         assert exc_info.value.status_code == 404
@@ -108,17 +124,28 @@ class TestStudentDatabaseVerification:
         async_db_session.add_all([student1, student2])
         await async_db_session.commit()
 
+        # Create mock Request
+        mock_request = Mock()
+        mock_request.client = Mock()
+        mock_request.client.host = "127.0.0.1"
+
         # Verify first student
-        result1 = await verify_student(x_student_id="111111111", db=async_db_session)
+        result1 = await verify_student(
+            request=mock_request, x_student_id="111111111", db=async_db_session
+        )
         assert result1 == 111111111
 
         # Verify second student
-        result2 = await verify_student(x_student_id="222222222", db=async_db_session)
+        result2 = await verify_student(
+            request=mock_request, x_student_id="222222222", db=async_db_session
+        )
         assert result2 == 222222222
 
         # Verify third (non-existent) fails
         with pytest.raises(HTTPException) as exc_info:
-            await verify_student(x_student_id="333333333", db=async_db_session)
+            await verify_student(
+                request=mock_request, x_student_id="333333333", db=async_db_session
+            )
         assert exc_info.value.status_code == 404
 
     async def test_verify_student_database_query_performance(
@@ -141,9 +168,14 @@ class TestStudentDatabaseVerification:
         async_db_session.add(student)
         await async_db_session.commit()
 
+        # Create mock Request
+        mock_request = Mock()
+        mock_request.client = Mock()
+        mock_request.client.host = "127.0.0.1"
+
         # Measure query time
         start = time.time()
-        await verify_student(x_student_id="555555555", db=async_db_session)
+        await verify_student(request=mock_request, x_student_id="555555555", db=async_db_session)
         duration_ms = (time.time() - start) * 1000
 
         # Should complete in <100ms (generous for in-memory SQLite)
@@ -168,8 +200,16 @@ class TestStudentDatabaseVerification:
         async_db_session.add(student)
         await async_db_session.commit()
 
+        # Create mock Request
+        mock_request = Mock()
+        mock_request.client = Mock()
+        mock_request.client.host = "127.0.0.1"
+
         # Run 10 concurrent authentication requests
-        tasks = [verify_student(x_student_id="777777777", db=async_db_session) for _ in range(10)]
+        tasks = [
+            verify_student(request=mock_request, x_student_id="777777777", db=async_db_session)
+            for _ in range(10)
+        ]
         results = await asyncio.gather(*tasks)
 
         # All should succeed with same result
@@ -198,14 +238,21 @@ class TestStudentDatabaseVerification:
         async_db_session.add(student)
         await async_db_session.commit()
 
+        # Create mock Request
+        mock_request = Mock()
+        mock_request.client = Mock()
+        mock_request.client.host = "127.0.0.1"
+
         # Attacker tries sequential IDs
         for attack_id in [1, 2, 3, 99, 101, 102, 999]:
             with pytest.raises(HTTPException) as exc_info:
-                await verify_student(x_student_id=str(attack_id), db=async_db_session)
+                await verify_student(
+                    request=mock_request, x_student_id=str(attack_id), db=async_db_session
+                )
             # All should return 404 (not 401 which reveals "this might be valid")
             assert exc_info.value.status_code == 404
             assert "not found" in exc_info.value.detail.lower()
 
         # Only valid ID should work
-        result = await verify_student(x_student_id="100", db=async_db_session)
+        result = await verify_student(request=mock_request, x_student_id="100", db=async_db_session)
         assert result == 100

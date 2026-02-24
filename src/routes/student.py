@@ -1,6 +1,6 @@
 """Student profile endpoints."""
 
-from datetime import datetime
+from datetime import UTC, datetime
 
 from fastapi import APIRouter, Header
 
@@ -41,9 +41,9 @@ async def get_student_profile(
         current_streak=12,
         longest_streak=28,
         avg_accuracy=72.5,
-        last_practice=datetime.utcnow(),
-        created_at=datetime.utcnow(),
-        updated_at=datetime.utcnow(),
+        last_practice=datetime.now(UTC),
+        created_at=datetime.now(UTC),
+        updated_at=datetime.now(UTC),
     )
 
 
@@ -82,7 +82,7 @@ async def update_student_profile(
         current_streak=12,
         longest_streak=28,
         avg_accuracy=72.5,
-        last_practice=datetime.utcnow(),
-        created_at=datetime.utcnow(),
-        updated_at=datetime.utcnow(),
+        last_practice=datetime.now(UTC),
+        created_at=datetime.now(UTC),
+        updated_at=datetime.now(UTC),
     )

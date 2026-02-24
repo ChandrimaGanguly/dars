@@ -1,6 +1,6 @@
 """Streak tracking endpoint."""
 
-from datetime import datetime
+from datetime import UTC, datetime
 
 from fastapi import APIRouter, Header
 
@@ -37,7 +37,7 @@ async def get_streak(
         student_id=1,
         current_streak=12,
         longest_streak=28,
-        last_practice_date=datetime.utcnow(),
+        last_practice_date=datetime.now(UTC),
         milestones_achieved=[7, 14],
-        updated_at=datetime.utcnow(),
+        updated_at=datetime.now(UTC),
     )

@@ -7,7 +7,7 @@ Security (SEC-004):
 - Prevents unauthorized access to sensitive data
 """
 
-from datetime import datetime
+from datetime import UTC, datetime
 
 from fastapi import APIRouter, Depends, Query
 
@@ -57,7 +57,7 @@ async def get_admin_stats(
         avg_streak=7.2,
         avg_problems_per_session=4.8,
         total_sessions=342,
-        timestamp=datetime.utcnow(),
+        timestamp=datetime.now(UTC),
     )
 
 
@@ -107,9 +107,9 @@ async def get_admin_students(
         current_streak=12,
         longest_streak=28,
         avg_accuracy=72.5,
-        last_practice=datetime.utcnow(),
-        created_at=datetime.utcnow(),
-        updated_at=datetime.utcnow(),
+        last_practice=datetime.now(UTC),
+        created_at=datetime.now(UTC),
+        updated_at=datetime.now(UTC),
     )
 
     return StudentListResponse(
@@ -167,5 +167,5 @@ async def get_admin_cost(
         infrastructure_cost=0.13,
         alert=alert,
         alert_message="Over budget - exceeds $0.15/student/month" if alert else None,
-        timestamp=datetime.utcnow(),
+        timestamp=datetime.now(UTC),
     )
