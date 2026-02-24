@@ -48,6 +48,39 @@
   - **Status:** ready
   - **Notes:** JSON/YAML format with question, answer, hints, difficulty, translations
 
+- [ ] TASK-DB-001: Update hints_json column to support bilingual hint objects
+  - **Status:** ready
+  - **Assignee:** Maryam
+  - **Flagged by:** Jahanara (content session 2026-02-24)
+  - **Notes:** hints_json must store a list of objects with `{en, bn}` keys — not a flat string array. Current schema assumes `list[str]`. Content YAML already uses the new format. Update Problem model and Alembic migration before seeding. Example structure:
+    ```json
+    [
+      {"en": "What does profit mean?", "bn": "লাভ মানে কী?"},
+      {"en": "Profit = SP − CP. What are SP and CP here?", "bn": "লাভ = বিক্রয়মূল্য − ক্রয়মূল্য। এখানে কত?"},
+      {"en": "SP = ₹540, CP = ₹450. Profit = ₹540 − ₹450. What is that?", "bn": "বিক্রয়মূল্য = ৫৪০, ক্রয়মূল্য = ৪৫০। লাভ = কত?"}
+    ]
+    ```
+
+- [ ] TASK-DB-002: Add bn_reviewed boolean field to Problem model
+  - **Status:** ready
+  - **Assignee:** Maryam
+  - **Flagged by:** Jahanara (content session 2026-02-24)
+  - **Notes:** All Bengali translations produced by Jahanara are flagged `bn_reviewed: false` until reviewed by a native speaker. The Problem model needs a `bn_reviewed` boolean column (default False) so the admin dashboard and content pipeline can filter unreviewed translations. Add to Problem table + Alembic migration.
+
+- [x] TASK-DB-003: Create MessageTemplate model for bilingual user-facing messages
+  - **Status:** completed
+  - **Assignee:** Maryam
+  - **Flagged by:** User (2026-02-24)
+  - **Completed:** 2026-02-24
+  - **Notes:** Created `message_templates` table to store all user-facing messages (feedback, milestones, notifications, UI text, errors) in Bengali and English. Supports variable interpolation (e.g., `{student_name}`, `{days}`). Migration `4822235d35e4` includes 11 seed messages. See `BILINGUAL_CONTENT_COVERAGE.md` for full documentation.
+  - **Migration:** `alembic/versions/4822235d35e4_add_message_templates_for_bilingual_.py`
+  - **Files Added:**
+    - `src/models/message_template.py` (MessageTemplate model + MessageCategory enum)
+    - `BILINGUAL_CONTENT_COVERAGE.md` (comprehensive documentation)
+  - **Files Modified:**
+    - `src/models/__init__.py` (export MessageTemplate and MessageCategory)
+    - `alembic/env.py` (import all models for autogenerate)
+
 - [ ] TASK-012: Implement problem loader and selector
   - **Status:** ready
   - **Blocked by:** TASK-010, TASK-011

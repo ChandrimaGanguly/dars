@@ -8,9 +8,11 @@ This module contains all SQLAlchemy models representing the core entities:
 - Response: Student answers to problems
 - Streak: Daily habit tracking
 - CostRecord: API cost tracking for business model validation
+- MessageTemplate: Bilingual messages (Bengali + English) for all user-facing content
 """
 
 from src.models.cost_record import CostRecord
+from src.models.message_template import MessageCategory, MessageTemplate
 from src.models.problem import Hint, Problem
 from src.models.response import Response
 from src.models.session import Session
@@ -20,6 +22,8 @@ from src.models.student import Student
 __all__ = [
     "CostRecord",
     "Hint",
+    "MessageCategory",
+    "MessageTemplate",
     "Problem",
     "Response",
     "Session",

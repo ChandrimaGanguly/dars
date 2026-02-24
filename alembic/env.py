@@ -11,6 +11,17 @@ from alembic import context
 # Import models for autogenerate support
 from src.models.base import Base
 
+# Import all models to register them with Base.metadata
+from src.models import (  # noqa: F401
+    CostRecord,
+    MessageTemplate,
+    Problem,
+    Response,
+    Session,
+    Streak,
+    Student,
+)
+
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
