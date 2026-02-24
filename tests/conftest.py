@@ -2,22 +2,20 @@
 Pytest fixtures and configuration for Dars tests.
 
 This file provides shared fixtures for all tests:
-- Database fixtures
+- Database fixtures (async)
 - API client fixtures
 - Mock Telegram updates
 - Mock Claude API responses
 """
 
 import asyncio
-from collections.abc import Generator
+from collections.abc import AsyncGenerator, Generator
 
 import pytest
-from sqlalchemy import create_engine
-from sqlalchemy.orm import Session, sessionmaker
+from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
+from sqlalchemy.pool import StaticPool
 
-# Note: Import actual models once src/ is created
-# from src.database import Base
-# from src.models import Student, Problem, Session, Response, Streak
+from src.models.base import Base
 
 
 @pytest.fixture(scope="session")
@@ -31,33 +29,44 @@ def event_loop() -> Generator:  # type: ignore
 @pytest.fixture(scope="session")
 def test_database_url() -> str:
     """Return in-memory SQLite database URL for tests."""
-    return "sqlite:///:memory:"
+    return "sqlite+aiosqlite:///:memory:"
 
 
 @pytest.fixture
-def test_db_engine(test_database_url: str):
-    """Create test database engine."""
-    engine = create_engine(test_database_url, connect_args={"check_same_thread": False})
+async def test_db_engine(test_database_url: str):
+    """Create test async database engine."""
+    engine = create_async_engine(
+        test_database_url,
+        connect_args={"check_same_thread": False},
+        poolclass=StaticPool,
+    )
 
     # Create tables
-    # Base.metadata.create_all(bind=engine)
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
 
     yield engine
 
     # Cleanup
-    # Base.metadata.drop_all(bind=engine)
-    engine.dispose()
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.drop_all)
+    await engine.dispose()
 
 
 @pytest.fixture
-def test_db_session(test_db_engine) -> Generator[Session, None, None]:
-    """Create test database session."""
-    TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=test_db_engine)
-    session = TestingSessionLocal()
+async def db_session(test_db_engine) -> AsyncGenerator[AsyncSession, None]:  # type: ignore
+    """Create test database async session."""
+    async with AsyncSession(test_db_engine) as session:
+        yield session
+        await session.close()
 
-    yield session
 
-    session.close()
+@pytest.fixture
+async def test_db_session(test_db_engine) -> AsyncGenerator[AsyncSession, None]:  # type: ignore
+    """Alias for db_session fixture for backward compatibility."""
+    async with AsyncSession(test_db_engine) as session:
+        yield session
+        await session.close()
 
 
 @pytest.fixture

@@ -1,15 +1,49 @@
 """Unit tests for API endpoints."""
 
 import os
+from unittest.mock import AsyncMock, patch
 
 import pytest
 from fastapi.testclient import TestClient
 
+from src.database import get_session
 from src.main import app
 
 # Set up environment variables for testing
 os.environ["ANTHROPIC_API_KEY"] = "test_key"
 os.environ["DATABASE_URL"] = "postgresql://localhost/test"
+
+
+@pytest.fixture
+def mock_db():
+    """Provide mock database session for tests."""
+
+    mock = AsyncMock()
+    # Mock the execute method to return student lookup results
+    mock.execute = AsyncMock()
+    mock.add = AsyncMock()
+    mock.commit = AsyncMock()
+    mock.refresh = AsyncMock()
+
+    return mock
+
+
+def get_mock_db(mock_db_instance):
+    """Return a function that yields mock database session."""
+
+    async def _get_mock_db():
+        yield mock_db_instance
+
+    return _get_mock_db
+
+
+# Create test client with database dependency overridden
+def create_test_app_with_mock_db(mock_db_instance):
+    """Create test app with mocked database dependency."""
+    test_app = app
+    test_app.dependency_overrides[get_session] = get_mock_db(mock_db_instance)
+    return test_app
+
 
 client = TestClient(app)
 
@@ -84,7 +118,9 @@ class TestWebhookEndpoint:
         )
         assert response.status_code == 401  # SEC-002: Missing secret token
 
-    def test_webhook_accepts_post_with_valid_token(self, monkeypatch: pytest.MonkeyPatch) -> None:
+    def test_webhook_accepts_post_with_valid_token(
+        self, monkeypatch: pytest.MonkeyPatch, mock_db
+    ) -> None:
         """Webhook should accept POST requests with valid secret token."""
         # Set telegram secret token
         monkeypatch.setenv("TELEGRAM_SECRET_TOKEN", "test_secret_123")
@@ -92,27 +128,37 @@ class TestWebhookEndpoint:
 
         src.config._settings = None
 
-        response = client.post(
-            "/webhook",
-            headers={"X-Telegram-Bot-Api-Secret-Token": "test_secret_123"},
-            json={
-                "update_id": 123456789,
-                "message": {
-                    "message_id": 1,
-                    "date": 1643129200,
-                    "chat": {"id": 987654321, "type": "private"},
-                    "from": {
-                        "id": 987654321,
-                        "is_bot": False,
-                        "first_name": "Test",
-                    },
-                    "text": "/start",
-                },
-            },
-        )
-        assert response.status_code == 200
+        # Override database dependency
+        app.dependency_overrides[get_session] = get_mock_db(mock_db)
 
-    def test_webhook_returns_status_ok(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        # Mock TelegramClient and StudentService to avoid actual API calls
+        with patch("src.routes.webhook.TelegramClient"), patch("src.routes.webhook.StudentService"):
+            try:
+                response = client.post(
+                    "/webhook",
+                    headers={"X-Telegram-Bot-Api-Secret-Token": "test_secret_123"},
+                    json={
+                        "update_id": 123456789,
+                        "message": {
+                            "message_id": 1,
+                            "date": 1643129200,
+                            "chat": {"id": 987654321, "type": "private"},
+                            "from": {
+                                "id": 987654321,
+                                "is_bot": False,
+                                "first_name": "Test",
+                            },
+                            "text": "/start",
+                        },
+                    },
+                )
+                assert response.status_code == 200
+            finally:
+                # Clean up dependency overrides
+                if get_session in app.dependency_overrides:
+                    del app.dependency_overrides[get_session]
+
+    def test_webhook_returns_status_ok(self, monkeypatch: pytest.MonkeyPatch, mock_db) -> None:
         """Webhook should return status ok with valid token."""
         # Set telegram secret token
         monkeypatch.setenv("TELEGRAM_SECRET_TOKEN", "test_secret_123")
@@ -120,28 +166,38 @@ class TestWebhookEndpoint:
 
         src.config._settings = None
 
-        response = client.post(
-            "/webhook",
-            headers={"X-Telegram-Bot-Api-Secret-Token": "test_secret_123"},
-            json={
-                "update_id": 123456789,
-                "message": {
-                    "message_id": 1,
-                    "date": 1643129200,
-                    "chat": {"id": 987654321, "type": "private"},
-                    "from": {
-                        "id": 987654321,
-                        "is_bot": False,
-                        "first_name": "Test",
-                    },
-                    "text": "/start",
-                },
-            },
-        )
-        data = response.json()
-        assert data["status"] == "ok"
+        # Override database dependency
+        app.dependency_overrides[get_session] = get_mock_db(mock_db)
 
-    def test_webhook_requires_update_id(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        # Mock TelegramClient and StudentService to avoid actual API calls
+        with patch("src.routes.webhook.TelegramClient"), patch("src.routes.webhook.StudentService"):
+            try:
+                response = client.post(
+                    "/webhook",
+                    headers={"X-Telegram-Bot-Api-Secret-Token": "test_secret_123"},
+                    json={
+                        "update_id": 123456789,
+                        "message": {
+                            "message_id": 1,
+                            "date": 1643129200,
+                            "chat": {"id": 987654321, "type": "private"},
+                            "from": {
+                                "id": 987654321,
+                                "is_bot": False,
+                                "first_name": "Test",
+                            },
+                            "text": "/start",
+                        },
+                    },
+                )
+                data = response.json()
+                assert data["status"] == "ok"
+            finally:
+                # Clean up dependency overrides
+                if get_session in app.dependency_overrides:
+                    del app.dependency_overrides[get_session]
+
+    def test_webhook_requires_update_id(self, monkeypatch: pytest.MonkeyPatch, mock_db) -> None:
         """Webhook should require update_id field even with valid token."""
         # Set telegram secret token
         monkeypatch.setenv("TELEGRAM_SECRET_TOKEN", "test_secret_123")
@@ -149,12 +205,22 @@ class TestWebhookEndpoint:
 
         src.config._settings = None
 
-        response = client.post(
-            "/webhook",
-            headers={"X-Telegram-Bot-Api-Secret-Token": "test_secret_123"},
-            json={},
-        )
-        assert response.status_code == 422  # Validation error
+        # Override database dependency
+        app.dependency_overrides[get_session] = get_mock_db(mock_db)
+
+        # Mock TelegramClient and StudentService to avoid actual API calls
+        with patch("src.routes.webhook.TelegramClient"), patch("src.routes.webhook.StudentService"):
+            try:
+                response = client.post(
+                    "/webhook",
+                    headers={"X-Telegram-Bot-Api-Secret-Token": "test_secret_123"},
+                    json={},
+                )
+                assert response.status_code == 422  # Validation error
+            finally:
+                # Clean up dependency overrides
+                if get_session in app.dependency_overrides:
+                    del app.dependency_overrides[get_session]
 
 
 @pytest.mark.unit

@@ -7,6 +7,7 @@ Handles connection pooling, session management, and environment configuration.
 
 import os
 from collections.abc import AsyncGenerator
+from typing import Any
 
 from sqlalchemy.ext.asyncio import (
     AsyncEngine,
@@ -67,18 +68,24 @@ def create_engine(
 
     # Configure connection pool
     # For Railway/production: Use QueuePool
-    # For testing: Use NullPool to avoid connection issues
-    poolclass = QueuePool if "test" not in database_url else NullPool
+    # For SQLite/testing: Use NullPool to avoid connection issues
+    is_sqlite = "sqlite" in database_url
+    poolclass = NullPool if is_sqlite else QueuePool
 
-    engine = create_async_engine(
-        database_url,
-        echo=echo,
-        future=True,
-        poolclass=poolclass,
-        pool_size=pool_size if poolclass == QueuePool else 0,
-        max_overflow=max_overflow if poolclass == QueuePool else 0,
-        pool_pre_ping=True,  # Verify connections before using
-    )
+    # Build engine kwargs - don't pass pool parameters for NullPool
+    engine_kwargs: dict[str, Any] = {
+        "echo": echo,
+        "future": True,
+        "poolclass": poolclass,
+    }
+
+    if not is_sqlite:
+        # Only pass pool parameters for QueuePool
+        engine_kwargs["pool_size"] = pool_size
+        engine_kwargs["max_overflow"] = max_overflow
+        engine_kwargs["pool_pre_ping"] = True
+
+    engine = create_async_engine(database_url, **engine_kwargs)
 
     return engine
 

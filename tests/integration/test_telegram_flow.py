@@ -5,19 +5,45 @@ including database persistence and API interactions.
 """
 
 import pytest
+from sqlalchemy import select
+
+from src.models.student import Student
+from src.routes.webhook import _handle_message
+from src.schemas.telegram import TelegramMessage
 
 
 @pytest.mark.integration
 class TestStudentOnboardingFlow:
     """Integration tests for student onboarding via /start command."""
 
-    def test_new_student_registration(self) -> None:
+    async def test_new_student_registration(self, db_session) -> None:
         """Test that /start command correctly registers a new student."""
-        # TODO: Implement when Telegram handler exists
-        # - Send /start message
-        # - Verify student created in DB
-        # - Verify welcome message returned
-        assert True
+        # Create test message (using model_validate for proper alias handling)
+        message = TelegramMessage.model_validate(
+            {
+                "message_id": 1,
+                "date": 1643129200,
+                "chat": {"id": 123456, "type": "private"},
+                "from": {
+                    "id": 987654321,
+                    "is_bot": False,
+                    "first_name": "TestUser",
+                },
+                "text": "/start",
+            }
+        )
+
+        # Handle message
+        await _handle_message(message, db_session)
+
+        # Verify student created in database
+        result = await db_session.execute(select(Student).where(Student.telegram_id == 987654321))
+        student = result.scalar_one_or_none()
+
+        assert student is not None
+        assert student.name == "TestUser"
+        assert student.grade == 7
+        assert student.language == "en"
 
     def test_existing_student_welcome(self) -> None:
         """Test that returning student gets appropriate message."""

@@ -7,10 +7,13 @@ Security (SEC-002):
 """
 
 from fastapi import APIRouter, Depends
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.auth.telegram import verify_telegram_webhook
+from src.database import get_session
 from src.logging import get_logger
-from src.schemas.telegram import TelegramUpdate, WebhookResponse
+from src.schemas.telegram import TelegramMessage, TelegramUpdate, WebhookResponse
+from src.services import StudentService, TelegramClient
 
 router = APIRouter()
 logger = get_logger(__name__)
@@ -20,6 +23,7 @@ logger = get_logger(__name__)
 async def telegram_webhook(
     update: TelegramUpdate,
     _authenticated: bool = Depends(verify_telegram_webhook),
+    db: AsyncSession = Depends(get_session),
 ) -> WebhookResponse:
     """Receive and process Telegram bot updates.
 
@@ -60,18 +64,58 @@ async def telegram_webhook(
     """
     logger.info(f"Received Telegram update: {update.update_id}")
 
-    # TODO: Implement webhook processing
-    # - Route to appropriate message handler
-    # - Handle /start, /practice, /streak, /help commands
-    # - Process callback queries from inline buttons
-    # - Send responses via Telegram API
-
-    message_id = None
-    if update.message:
-        message_id = update.message.message_id
-        logger.debug(f"Message from user {update.message.from_.id}: {update.message.text}")
-    elif update.callback_query:
-        # Callback queries don't have message_id directly
-        logger.debug(f"Callback query from user {update.callback_query.from_.id}")
+    # Process message if present
+    message_id: int | None = None
+    try:
+        if update.message and update.message.text:
+            await _handle_message(update.message, db)
+            message_id = update.message.message_id
+    except Exception as e:
+        logger.error(f"Error processing message: {e}")
+        # Still return 200 to avoid Telegram retrying
 
     return WebhookResponse(status="ok", message_id=message_id)
+
+
+async def _handle_message(message: TelegramMessage, db: AsyncSession) -> None:
+    """Handle text message - MINIMAL IMPLEMENTATION.
+
+    Args:
+        message: Telegram message object
+        db: Database session
+    """
+    text = message.text or ""
+    chat_id = message.chat.id
+    telegram_id = message.from_.id
+    first_name = message.from_.first_name
+
+    # Initialize services
+    telegram = TelegramClient()
+    student_service = StudentService()
+
+    # Simple command routing
+    if text.startswith("/start"):
+        # Register student
+        student = await student_service.get_or_create(db, telegram_id, first_name)
+        welcome_msg = (
+            f"Welcome to Dars, {student.name}! 🎓\n\n"
+            f"I'm your AI tutor. Send /practice to start learning!"
+        )
+        await telegram.send_message(chat_id, welcome_msg)
+        logger.info(f"Handled /start for user {telegram_id}")
+
+    elif text.startswith("/practice"):
+        # Stub response for Phase 3
+        await telegram.send_message(
+            chat_id,
+            "Practice sessions are coming in Phase 3! Stay tuned. 📚",
+        )
+        logger.info(f"Handled /practice stub for user {telegram_id}")
+
+    else:
+        # Unknown command
+        await telegram.send_message(
+            chat_id,
+            "I don't understand that command yet. Try /start to begin!",
+        )
+        logger.info(f"Unknown command from user {telegram_id}: {text}")
