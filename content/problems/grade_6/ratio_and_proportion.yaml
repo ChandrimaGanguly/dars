@@ -1,0 +1,252 @@
+# Ratio and Proportion — Grade 6
+# WBBSE Chapter: Ratio, Proportion, Unitary Method
+# 15 / 15 problems complete ✅
+# Difficulty: 6 easy (1), 6 medium (2), 3 hard (3)
+# bn_reviewed: false — Bengali drafts pending native speaker review
+
+problems:
+  # --- EASY (difficulty 1) ---
+
+  - grade: 6
+    topic: ratio_and_proportion
+    difficulty: 1
+    question_en: "Simplify the ratio 24:36."
+    question_bn: "অনুপাত 24:36 সরল করো।"
+    bn_reviewed: false
+    answer: "2:3"
+    answer_type: text
+    hints:
+      - en: "To simplify a ratio, divide both numbers by their highest common factor (HCF)."
+        bn: "অনুপাত সরল করতে, উভয় সংখ্যাকে তাদের সর্বোচ্চ সাধারণ গুণনীয়ক (HCF) দিয়ে ভাগ করো।"
+      - en: "The HCF of 24 and 36 is 12. Divide both: 24 ÷ 12 = 2, 36 ÷ 12 = 3."
+        bn: "২৪ এবং ৩৬ এর HCF = ১২। উভয়কে ভাগ করো: 24 ÷ 12 = 2, 36 ÷ 12 = 3।"
+      - en: "24:36 = 2:3."
+        bn: "24:36 = 2:3।"
+
+  - grade: 6
+    topic: ratio_and_proportion
+    difficulty: 1
+    question_en: "A bag has 15 red marbles and 10 blue marbles. Write the ratio of red to blue marbles in its simplest form."
+    question_bn: "একটি থলেতে ১৫টি লাল এবং ১০টি নীল মার্বেল আছে। লাল থেকে নীলের অনুপাত সরল আকারে লেখো।"
+    bn_reviewed: false
+    answer: "3:2"
+    answer_type: text
+    hints:
+      - en: "Write the ratio as red:blue = 15:10. Now simplify by finding the HCF."
+        bn: "অনুপাত লেখো লাল:নীল = 15:10। এখন HCF দিয়ে সরল করো।"
+      - en: "HCF of 15 and 10 is 5. Divide both: 15 ÷ 5 = 3, 10 ÷ 5 = 2."
+        bn: "১৫ এবং ১০ এর HCF = ৫। উভয়কে ভাগ করো: 15 ÷ 5 = 3, 10 ÷ 5 = 2।"
+      - en: "Red:Blue = 3:2."
+        bn: "লাল:নীল = 3:2।"
+
+  - grade: 6
+    topic: ratio_and_proportion
+    difficulty: 1
+    question_en: "If 4:6 = x:18, find x."
+    question_bn: "যদি 4:6 = x:18 হয়, তাহলে x এর মান কত?"
+    bn_reviewed: false
+    answer: "12"
+    answer_type: numeric
+    hints:
+      - en: "In a proportion, the product of the means equals the product of the extremes (cross multiplication)."
+        bn: "অনুপাতে, মধ্যপদ দুটির গুণফল = অন্ত্যপদ দুটির গুণফল (ক্রস গুণন)।"
+      - en: "Cross multiply: 4 × 18 = 6 × x → 72 = 6x."
+        bn: "ক্রস গুণ করো: 4 × 18 = 6 × x → 72 = 6x।"
+      - en: "x = 72 ÷ 6 = 12."
+        bn: "x = 72 ÷ 6 = 12।"
+
+  - grade: 6
+    topic: ratio_and_proportion
+    difficulty: 1
+    question_en: "₹200 is divided in the ratio 3:7. What is the larger share in rupees?"
+    question_bn: "₹২০০ কে 3:7 অনুপাতে ভাগ করা হলো। বড় অংশটি কত টাকা?"
+    bn_reviewed: false
+    answer: "140"
+    answer_type: numeric
+    hints:
+      - en: "The total number of parts = 3 + 7 = 10. The larger share is 7 parts out of 10."
+        bn: "মোট ভাগ = 3 + 7 = 10। বড় অংশ হলো ১০টির মধ্যে ৭ ভাগ।"
+      - en: "Value of 1 part = ₹200 ÷ 10 = ₹20. Larger share = 7 × ₹20."
+        bn: "১ ভাগের মান = ₹200 ÷ 10 = ₹20। বড় অংশ = 7 × ₹20।"
+      - en: "Larger share = 7 × 20 = ₹140."
+        bn: "বড় অংশ = 7 × 20 = ₹140।"
+
+  - grade: 6
+    topic: ratio_and_proportion
+    difficulty: 1
+    question_en: "Simplify the ratio 36:48:60."
+    question_bn: "অনুপাত 36:48:60 সরল করো।"
+    bn_reviewed: false
+    answer: "3:4:5"
+    answer_type: text
+    hints:
+      - en: "Find the HCF of all three numbers: 36, 48, and 60."
+        bn: "তিনটি সংখ্যার HCF খোঁজো: ৩৬, ৪৮ এবং ৬০।"
+      - en: "HCF of 36, 48, 60 = 12. Divide each by 12."
+        bn: "৩৬, ৪৮, ৬০ এর HCF = ১২। প্রতিটিকে ১২ দিয়ে ভাগ করো।"
+      - en: "36÷12 : 48÷12 : 60÷12 = 3:4:5."
+        bn: "36÷12 : 48÷12 : 60÷12 = 3:4:5।"
+
+  - grade: 6
+    topic: ratio_and_proportion
+    difficulty: 1
+    question_en: "If 3:5 = 12:x, find x."
+    question_bn: "যদি 3:5 = 12:x হয়, তাহলে x এর মান কত?"
+    bn_reviewed: false
+    answer: "20"
+    answer_type: numeric
+    hints:
+      - en: "Use cross multiplication in a proportion: product of extremes = product of means."
+        bn: "অনুপাতে ক্রস গুণ ব্যবহার করো: অন্ত্যপদের গুণফল = মধ্যপদের গুণফল।"
+      - en: "3 × x = 5 × 12 → 3x = 60."
+        bn: "3 × x = 5 × 12 → 3x = 60।"
+      - en: "x = 60 ÷ 3 = 20."
+        bn: "x = 60 ÷ 3 = 20।"
+
+  # --- MEDIUM (difficulty 2) ---
+
+  - grade: 6
+    topic: ratio_and_proportion
+    difficulty: 2
+    question_en: "In a recipe, the ratio of sugar to flour is 2:5. If 80 g of sugar is used, how many grams of flour are needed?"
+    question_bn: "একটি রেসিপিতে চিনি এবং ময়দার অনুপাত 2:5। যদি ৮০ গ্রাম চিনি ব্যবহার করা হয়, কত গ্রাম ময়দা লাগবে?"
+    bn_reviewed: false
+    answer: "200"
+    answer_type: numeric
+    hints:
+      - en: "The ratio 2:5 means for every 2 parts sugar, there are 5 parts flour. Use this ratio to find the flour."
+        bn: "2:5 অনুপাত মানে প্রতি ২ ভাগ চিনির জন্য ৫ ভাগ ময়দা। ময়দা বের করতে এই অনুপাত ব্যবহার করো।"
+      - en: "Set up a proportion: 2/5 = 80/flour → flour = 80 × 5/2."
+        bn: "অনুপাত তৈরি করো: 2/5 = 80/ময়দা → ময়দা = 80 × 5/2।"
+      - en: "Flour = 80 × 5 ÷ 2 = 400 ÷ 2 = 200 g."
+        bn: "ময়দা = 80 × 5 ÷ 2 = 400 ÷ 2 = 200 গ্রাম।"
+
+  - grade: 6
+    topic: ratio_and_proportion
+    difficulty: 2
+    question_en: "Priya and Riya share ₹280 in the ratio 3:4. How much does Riya receive?"
+    question_bn: "প্রিয়া ও রিয়া ₹২৮০ কে 3:4 অনুপাতে ভাগ করে নেয়। রিয়া কত পায়?"
+    bn_reviewed: false
+    answer: "160"
+    answer_type: numeric
+    hints:
+      - en: "Total parts = 3 + 4 = 7. Riya's share is 4 parts."
+        bn: "মোট ভাগ = 3 + 4 = 7। রিয়ার অংশ ৪ ভাগ।"
+      - en: "Value of 1 part = ₹280 ÷ 7 = ₹40. Riya gets 4 parts = 4 × ₹40."
+        bn: "১ ভাগের মান = ₹280 ÷ 7 = ₹40। রিয়া পায় ৪ ভাগ = 4 × ₹40।"
+      - en: "Riya's share = 4 × 40 = ₹160."
+        bn: "রিয়ার অংশ = 4 × 40 = ₹160।"
+
+  - grade: 6
+    topic: ratio_and_proportion
+    difficulty: 2
+    question_en: "Find the mean proportional between 9 and 16."
+    question_bn: "৯ এবং ১৬ এর মধ্যসমানুপাতী নির্ণয় করো।"
+    bn_reviewed: false
+    answer: "12"
+    answer_type: numeric
+    hints:
+      - en: "The mean proportional between a and b is the number m such that a:m = m:b. This means m² = a × b."
+        bn: "a এবং b এর মধ্যসমানুপাতী হলো সেই সংখ্যা m যাতে a:m = m:b। অর্থাৎ m² = a × b।"
+      - en: "m² = 9 × 16 = 144. Find the square root."
+        bn: "m² = 9 × 16 = 144। বর্গমূল বের করো।"
+      - en: "m = √144 = 12."
+        bn: "m = √144 = 12।"
+
+  - grade: 6
+    topic: ratio_and_proportion
+    difficulty: 2
+    question_en: "The sides of a triangle are in the ratio 3:4:5. Its perimeter is 48 cm. What is the length of the longest side in cm?"
+    question_bn: "একটি ত্রিভুজের বাহুগুলো 3:4:5 অনুপাতে আছে। পরিসীমা ৪৮ সেমি। দীর্ঘতম বাহুর দৈর্ঘ্য কত সেমি?"
+    bn_reviewed: false
+    answer: "20"
+    answer_type: numeric
+    hints:
+      - en: "Total ratio parts = 3 + 4 + 5 = 12. The perimeter (48 cm) represents 12 parts."
+        bn: "মোট অনুপাতের ভাগ = 3 + 4 + 5 = 12। পরিসীমা (৪৮ সেমি) ১২ ভাগকে প্রতিনিধিত্ব করে।"
+      - en: "Length of 1 part = 48 ÷ 12 = 4 cm. The longest side is 5 parts."
+        bn: "১ ভাগের দৈর্ঘ্য = 48 ÷ 12 = 4 সেমি। দীর্ঘতম বাহু হলো ৫ ভাগ।"
+      - en: "Longest side = 5 × 4 = 20 cm."
+        bn: "দীর্ঘতম বাহু = 5 × 4 = 20 সেমি।"
+
+  - grade: 6
+    topic: ratio_and_proportion
+    difficulty: 2
+    question_en: "Three workers earn wages in the ratio 3:4:5. The worker with the lowest wage earns ₹1800. How much does the highest-paid worker earn?"
+    question_bn: "তিনজন শ্রমিকের মজুরির অনুপাত 3:4:5। সবচেয়ে কম মজুরির শ্রমিক ₹১৮০০ পায়। সবচেয়ে বেশি মজুরির শ্রমিক কত পায়?"
+    bn_reviewed: false
+    answer: "3000"
+    answer_type: numeric
+    hints:
+      - en: "The lowest wage corresponds to 3 parts and equals ₹1800. Find the value of 1 part."
+        bn: "সবচেয়ে কম মজুরি ৩ ভাগের সমান এবং ₹১৮০০। ১ ভাগের মান বের করো।"
+      - en: "1 part = ₹1800 ÷ 3 = ₹600. The highest wage = 5 parts."
+        bn: "১ ভাগ = ₹1800 ÷ 3 = ₹600। সর্বোচ্চ মজুরি = ৫ ভাগ।"
+      - en: "Highest wage = 5 × ₹600 = ₹3000."
+        bn: "সর্বোচ্চ মজুরি = 5 × ₹600 = ₹3000।"
+
+  - grade: 6
+    topic: ratio_and_proportion
+    difficulty: 2
+    question_en: "Find the fourth proportional to 4, 7, and 12."
+    question_bn: "4, 7 এবং 12 এর চতুর্থ সমানুপাতী নির্ণয় করো।"
+    bn_reviewed: false
+    answer: "21"
+    answer_type: numeric
+    hints:
+      - en: "The fourth proportional to a, b, c is d, where a:b = c:d. Cross multiply to find d."
+        bn: "a, b, c এর চতুর্থ সমানুপাতী d, যেখানে a:b = c:d। d বের করতে ক্রস গুণ করো।"
+      - en: "4:7 = 12:d → 4 × d = 7 × 12 → 4d = 84."
+        bn: "4:7 = 12:d → 4 × d = 7 × 12 → 4d = 84।"
+      - en: "d = 84 ÷ 4 = 21."
+        bn: "d = 84 ÷ 4 = 21।"
+
+  # --- HARD (difficulty 3) ---
+
+  - grade: 6
+    topic: ratio_and_proportion
+    difficulty: 3
+    question_en: "The ages of A and B are in the ratio 5:3. After 6 years, the ratio of their ages will be 7:5. What is A's current age in years?"
+    question_bn: "A এবং B এর বয়সের অনুপাত 5:3। ৬ বছর পরে তাদের বয়সের অনুপাত 7:5 হবে। A এর বর্তমান বয়স কত বছর?"
+    bn_reviewed: false
+    answer: "15"
+    answer_type: numeric
+    hints:
+      - en: "Let A's current age = 5k and B's current age = 3k. After 6 years: A = 5k + 6, B = 3k + 6."
+        bn: "A এর বর্তমান বয়স = 5k এবং B এর = 3k ধরো। ৬ বছর পরে: A = 5k + 6, B = 3k + 6।"
+      - en: "Set up the equation: (5k + 6)/(3k + 6) = 7/5. Cross multiply: 5(5k + 6) = 7(3k + 6)."
+        bn: "সমীকরণ তৈরি করো: (5k + 6)/(3k + 6) = 7/5। ক্রস গুণ করো: 5(5k + 6) = 7(3k + 6)।"
+      - en: "25k + 30 = 21k + 42 → 4k = 12 → k = 3. A's age = 5k = 5 × 3 = 15 years."
+        bn: "25k + 30 = 21k + 42 → 4k = 12 → k = 3। A এর বয়স = 5k = 5 × 3 = 15 বছর।"
+
+  - grade: 6
+    topic: ratio_and_proportion
+    difficulty: 3
+    question_en: "A shopkeeper mixes two types of rice: ₹40/kg and ₹60/kg in the ratio 3:2. He sells the mixture at a 25% profit on cost. What is his selling price per kg?"
+    question_bn: "একজন দোকানদার দুই ধরনের চাল মেশায়: ₹৪০/কেজি এবং ₹৬০/কেজি, ৩:২ অনুপাতে। সে ক্রয়মূল্যের উপর ২৫% লাভে বিক্রি করে। প্রতি কেজির বিক্রয়মূল্য কত?"
+    bn_reviewed: false
+    answer: "60"
+    answer_type: numeric
+    hints:
+      - en: "First find the cost price of the mixture per kg. Use weighted average: CP = (3 × 40 + 2 × 60) ÷ (3 + 2)."
+        bn: "প্রথমে মিশ্রণের প্রতি কেজি ক্রয়মূল্য বের করো। ভারযুক্ত গড় ব্যবহার করো: ক্রয়মূল্য = (3 × 40 + 2 × 60) ÷ (3 + 2)।"
+      - en: "CP = (120 + 120) ÷ 5 = 240 ÷ 5 = ₹48/kg. Selling price = CP × 125/100."
+        bn: "ক্রয়মূল্য = (120 + 120) ÷ 5 = 240 ÷ 5 = ₹48/কেজি। বিক্রয়মূল্য = ক্রয়মূল্য × 125/100।"
+      - en: "SP = 48 × 125/100 = 48 × 1.25 = ₹60/kg."
+        bn: "বিক্রয়মূল্য = 48 × 125/100 = 48 × 1.25 = ₹60/কেজি।"
+
+  - grade: 6
+    topic: ratio_and_proportion
+    difficulty: 3
+    question_en: "Three numbers are in the ratio 2:3:5. Their sum is 200. What is the largest number?"
+    question_bn: "তিনটি সংখ্যা 2:3:5 অনুপাতে আছে। তাদের যোগফল ২০০। সবচেয়ে বড় সংখ্যাটি কত?"
+    bn_reviewed: false
+    answer: "100"
+    answer_type: numeric
+    hints:
+      - en: "Let the three numbers be 2k, 3k, and 5k. Write an equation using their sum."
+        bn: "তিনটি সংখ্যা 2k, 3k এবং 5k ধরো। তাদের যোগফল ব্যবহার করে সমীকরণ লেখো।"
+      - en: "2k + 3k + 5k = 200 → 10k = 200 → k = 20."
+        bn: "2k + 3k + 5k = 200 → 10k = 200 → k = 20।"
+      - en: "Largest number = 5k = 5 × 20 = 100."
+        bn: "বৃহত্তম সংখ্যা = 5k = 5 × 20 = 100।"

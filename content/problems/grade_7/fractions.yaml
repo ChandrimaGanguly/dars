@@ -1,0 +1,327 @@
+# Grade 7 — Fractions
+# WBBSE Chapter 2
+# Status: 20 / 20 problems complete ✅
+# Bengali translations: all flagged for native speaker review (bn_reviewed: false)
+# Hints schema: bilingual objects {en, bn}
+# Subtopics: fraction of quantity (4), multiplying fractions (3), dividing fractions (2),
+#             adding/subtracting mixed numbers (3), word problems (5), multi-step (3)
+
+- grade: 7
+  topic: fractions
+  difficulty: 1
+  question_en: "Find 2/5 of 35."
+  question_bn: "৩৫-এর ২/৫ নির্ণয় করো।"
+  bn_reviewed: false
+  answer: "14"
+  answer_type: numeric
+  hints:
+    - en: "'2/5 of 35' means divide 35 into 5 equal parts, then take 2 of those parts. Find 1/5 first."
+      bn: "'৩৫-এর ২/৫' মানে ৩৫-কে ৫টি সমান ভাগে ভাগ করো, তারপর ২টি ভাগ নাও। প্রথমে ১/৫ বের করো।"
+    - en: "1/5 of 35 = 35 ÷ 5 = 7. Then 2/5 = 2 × (1/5 of 35)."
+      bn: "৩৫-এর ১/৫ = ৩৫ ÷ ৫ = ৭। তারপর ২/৫ = ২ × (৩৫-এর ১/৫)।"
+    - en: "1/5 of 35 = 7. So 2/5 of 35 = 2 × 7. What does that come to?"
+      bn: "৩৫-এর ১/৫ = ৭। তাই ৩৫-এর ২/৫ = ২ × ৭। উত্তরটা কত হয়?"
+
+- grade: 7
+  topic: fractions
+  difficulty: 1
+  question_en: "What is 3/4 of 40?"
+  question_bn: "৪০-এর ৩/৪ কত?"
+  bn_reviewed: false
+  answer: "30"
+  answer_type: numeric
+  hints:
+    - en: "Divide 40 into 4 equal parts first, then take 3 of those parts."
+      bn: "প্রথমে ৪০-কে ৪টি সমান ভাগে ভাগ করো, তারপর ৩টি ভাগ নাও।"
+    - en: "1/4 of 40 = 40 ÷ 4 = 10. Then 3/4 = 3 × (1/4 of 40)."
+      bn: "৪০-এর ১/৪ = ৪০ ÷ ৪ = ১০। তারপর ৩/৪ = ৩ × (৪০-এর ১/৪)।"
+    - en: "1/4 of 40 = 10. So 3/4 of 40 = 3 × 10. What does that come to?"
+      bn: "৪০-এর ১/৪ = ১০। তাই ৪০-এর ৩/৪ = ৩ × ১০। উত্তরটা কত হয়?"
+
+- grade: 7
+  topic: fractions
+  difficulty: 1
+  question_en: "Multiply: 2/3 × 3/4"
+  question_bn: "গুণ করো: ২/৩ × ৩/৪"
+  bn_reviewed: false
+  answer: "1/2"
+  answer_type: text
+  hints:
+    - en: "To multiply fractions, multiply the numerators together and the denominators together. You can simplify before multiplying by cancelling common factors."
+      bn: "ভগ্নাংশ গুণ করতে লবগুলো একসাথে এবং হরগুলো একসাথে গুণ করো। গুণ করার আগে সাধারণ উৎপাদক কেটে সরল করতে পারো।"
+    - en: "Look at 2/3 × 3/4. The 3 in the numerator of the second fraction and the 3 in the denominator of the first can cancel. What are you left with?"
+      bn: "২/৩ × ৩/৪ দেখো। দ্বিতীয় ভগ্নাংশের লবের ৩ এবং প্রথম ভগ্নাংশের হরের ৩ কেটে যায়। কী অবশিষ্ট থাকে?"
+    - en: "After cancelling the 3s: 2/1 × 1/4 = 2/4. Simplify 2/4 — HCF of 2 and 4 is 2. So 2/4 = 1/2."
+      bn: "৩গুলো কেটে দেওয়ার পর: ২/১ × ১/৪ = ২/৪। ২/৪ সরল করো — ২ এবং ৪-এর গসাগু ২। তাই ২/৪ = ১/২।"
+
+- grade: 7
+  topic: fractions
+  difficulty: 1
+  question_en: "Multiply: 5 × 3/5"
+  question_bn: "গুণ করো: ৫ × ৩/৫"
+  bn_reviewed: false
+  answer: "3"
+  answer_type: numeric
+  hints:
+    - en: "Write 5 as 5/1, then multiply numerators together and denominators together: (5 × 3) / (1 × 5)."
+      bn: "৫-কে ৫/১ হিসেবে লেখো, তারপর লবগুলো ও হরগুলো একসাথে গুণ করো: (৫ × ৩) / (১ × ৫)।"
+    - en: "Do you see a shortcut? The 5 in the whole number and the 5 in the denominator can cancel each other out."
+      bn: "কি একটি সহজ উপায় দেখতে পাচ্ছো? পূর্ণ সংখ্যার ৫ এবং হরের ৫ পরস্পর কেটে যায়।"
+    - en: "After cancelling: 1 × 3 = 3. So 5 × 3/5 = 3."
+      bn: "কেটে দেওয়ার পর: ১ × ৩ = ৩। তাই ৫ × ৩/৫ = ৩।"
+
+- grade: 7
+  topic: fractions
+  difficulty: 1
+  question_en: "Divide: 3/4 ÷ 3"
+  question_bn: "ভাগ করো: ৩/৪ ÷ ৩"
+  bn_reviewed: false
+  answer: "1/4"
+  answer_type: text
+  hints:
+    - en: "Dividing a fraction by a whole number is the same as multiplying by its reciprocal. What is the reciprocal of 3?"
+      bn: "একটি ভগ্নাংশকে পূর্ণ সংখ্যা দিয়ে ভাগ করা মানে তার ব্যস্ত ভগ্নাংশ দিয়ে গুণ করা। ৩-এর ব্যস্ত ভগ্নাংশ কী?"
+    - en: "Reciprocal of 3 is 1/3. So 3/4 ÷ 3 = 3/4 × 1/3 = (3 × 1)/(4 × 3)."
+      bn: "৩-এর ব্যস্ত ভগ্নাংশ হলো ১/৩। তাই ৩/৪ ÷ ৩ = ৩/৪ × ১/৩ = (৩ × ১)/(৪ × ৩)।"
+    - en: "(3 × 1)/(4 × 3) = 3/12. The 3s cancel: 1/4. So 3/4 ÷ 3 = 1/4."
+      bn: "(৩ × ১)/(৪ × ৩) = ৩/১২। ৩গুলো কেটে যায়: ১/৪। তাই ৩/৪ ÷ ৩ = ১/৪।"
+
+- grade: 7
+  topic: fractions
+  difficulty: 1
+  question_en: "Add: 3/5 + 7/10"
+  question_bn: "যোগ করো: ৩/৫ + ৭/১০"
+  bn_reviewed: false
+  answer: "1 3/10"
+  answer_type: text
+  hints:
+    - en: "The denominators are different. Find the LCM of 5 and 10 to get a common denominator."
+      bn: "হর আলাদা। সাধারণ হর পেতে ৫ এবং ১০-এর লসাগু খোঁজো।"
+    - en: "LCM of 5 and 10 is 10. Convert 3/5 to tenths: 3/5 = 6/10. Now add: 6/10 + 7/10."
+      bn: "৫ এবং ১০-এর লসাগু হলো ১০। ৩/৫-কে দশমাংশে রূপান্তর করো: ৩/৫ = ৬/১০। এখন যোগ করো: ৬/১০ + ৭/১০।"
+    - en: "6/10 + 7/10 = 13/10. Now write this as a mixed number: 13/10 = 1 and 3/10 = 1 3/10."
+      bn: "৬/১০ + ৭/১০ = ১৩/১০। এখন এটিকে মিশ্র সংখ্যায় লেখো: ১৩/১০ = ১ এবং ৩/১০ = ১ ৩/১০।"
+
+- grade: 7
+  topic: fractions
+  difficulty: 1
+  question_en: "Subtract: 3 1/2 − 1 3/4"
+  question_bn: "বিয়োগ করো: ৩ ১/২ − ১ ৩/৪"
+  bn_reviewed: false
+  answer: "1 3/4"
+  answer_type: text
+  hints:
+    - en: "To subtract mixed numbers, first make the denominators the same. What is the LCM of 2 and 4?"
+      bn: "মিশ্র সংখ্যা বিয়োগ করতে আগে হর সমান করো। ২ এবং ৪-এর লসাগু কত?"
+    - en: "LCM of 2 and 4 is 4. Convert: 3 1/2 = 3 2/4. Now 3 2/4 − 1 3/4. Since 2 < 3 in the fraction part, you need to borrow 1 from the whole number."
+      bn: "২ এবং ৪-এর লসাগু হলো ৪। রূপান্তর করো: ৩ ১/২ = ৩ ২/৪। এখন ৩ ২/৪ − ১ ৩/৪। ভগ্নাংশ অংশে ২ < ৩ হওয়ায়, পূর্ণ সংখ্যা থেকে ১ ধার নিতে হবে।"
+    - en: "Borrow 1 from 3: 3 2/4 becomes 2 6/4. Now: 2 6/4 − 1 3/4 = 1 3/4."
+      bn: "৩ থেকে ১ ধার নাও: ৩ ২/৪ হয়ে যায় ২ ৬/৪। এখন: ২ ৬/৪ − ১ ৩/৪ = ১ ৩/৪।"
+
+- grade: 7
+  topic: fractions
+  difficulty: 1
+  question_en: "Priya read 2/5 of a 120-page book. How many pages did she read?"
+  question_bn: "প্রিয়া ১২০ পাতার একটি বইয়ের ২/৫ অংশ পড়ল। সে কত পাতা পড়ল?"
+  bn_reviewed: false
+  answer: "48"
+  answer_type: numeric
+  hints:
+    - en: "'2/5 of 120' — find 1/5 first, then multiply by 2."
+      bn: "'১২০-এর ২/৫' — আগে ১/৫ বের করো, তারপর ২ দিয়ে গুণ করো।"
+    - en: "1/5 of 120 = 120 ÷ 5 = 24. Then 2/5 = 2 × 24."
+      bn: "১২০-এর ১/৫ = ১২০ ÷ ৫ = ২৪। তারপর ২/৫ = ২ × ২৪।"
+    - en: "1/5 of 120 = 24. So 2/5 of 120 = 2 × 24. What does that come to?"
+      bn: "১২০-এর ১/৫ = ২৪। তাই ১২০-এর ২/৫ = ২ × ২৪। উত্তরটা কত হয়?"
+
+- grade: 7
+  topic: fractions
+  difficulty: 2
+  question_en: "Add: 2 1/3 + 1 3/4"
+  question_bn: "যোগ করো: ২ ১/৩ + ১ ৩/৪"
+  bn_reviewed: false
+  answer: "4 1/12"
+  answer_type: text
+  hints:
+    - en: "Add the whole parts and fraction parts separately. First find a common denominator for 1/3 and 3/4."
+      bn: "পূর্ণ অংশ এবং ভগ্নাংশ অংশ আলাদাভাবে যোগ করো। প্রথমে ১/৩ এবং ৩/৪-এর সাধারণ হর খোঁজো।"
+    - en: "LCM(3, 4) = 12. Convert: 1/3 = 4/12 and 3/4 = 9/12. Whole parts: 2 + 1 = 3. Fraction parts: 4/12 + 9/12."
+      bn: "লসাগু(৩, ৪) = ১২। রূপান্তর করো: ১/৩ = ৪/১২ এবং ৩/৪ = ৯/১২। পূর্ণ অংশ: ২ + ১ = ৩। ভগ্নাংশ অংশ: ৪/১২ + ৯/১২।"
+    - en: "Fraction parts: 4/12 + 9/12 = 13/12 = 1 1/12. Total = 3 + 1 1/12 = 4 1/12."
+      bn: "ভগ্নাংশ অংশ: ৪/১২ + ৯/১২ = ১৩/১২ = ১ ১/১২। মোট = ৩ + ১ ১/১২ = ৪ ১/১২।"
+
+- grade: 7
+  topic: fractions
+  difficulty: 2
+  question_en: "Divide: 5/6 ÷ 5/3"
+  question_bn: "ভাগ করো: ৫/৬ ÷ ৫/৩"
+  bn_reviewed: false
+  answer: "1/2"
+  answer_type: text
+  hints:
+    - en: "To divide by a fraction, multiply by its reciprocal. What is the reciprocal of 5/3?"
+      bn: "ভগ্নাংশ দিয়ে ভাগ করতে তার ব্যস্ত ভগ্নাংশ দিয়ে গুণ করো। ৫/৩-এর ব্যস্ত ভগ্নাংশ কী?"
+    - en: "Reciprocal of 5/3 is 3/5. So 5/6 ÷ 5/3 = 5/6 × 3/5. Look for common factors to cancel before multiplying."
+      bn: "৫/৩-এর ব্যস্ত ভগ্নাংশ হলো ৩/৫। তাই ৫/৬ ÷ ৫/৩ = ৫/৬ × ৩/৫। গুণ করার আগে সাধারণ উৎপাদক খুঁজে কাটো।"
+    - en: "Cancel the 5s and simplify the 3 and 6: (5 × 3)/(6 × 5) → 3/6 = 1/2."
+      bn: "৫গুলো কেটে দাও এবং ৩ ও ৬ সরল করো: (৫ × ৩)/(৬ × ৫) → ৩/৬ = ১/২।"
+
+- grade: 7
+  topic: fractions
+  difficulty: 2
+  question_en: "How many pieces of rope, each 2/3 m long, can be cut from a 6 m rope?"
+  question_bn: "৬ মিটার দড়ি থেকে প্রতিটি ২/৩ মিটার দৈর্ঘ্যের কতটি টুকরো কাটা যাবে?"
+  bn_reviewed: false
+  answer: "9"
+  answer_type: numeric
+  hints:
+    - en: "To find how many pieces of 2/3 m fit in 6 m, divide the total length by the piece length: 6 ÷ 2/3."
+      bn: "৬ মিটারে কতটি ২/৩ মিটারের টুকরো আঁটে বের করতে মোট দৈর্ঘ্যকে টুকরোর দৈর্ঘ্য দিয়ে ভাগ করো: ৬ ÷ ২/৩।"
+    - en: "Dividing by a fraction — multiply by its reciprocal. Reciprocal of 2/3 is 3/2. So: 6 × 3/2."
+      bn: "ভগ্নাংশ দিয়ে ভাগ করা — ব্যস্ত ভগ্নাংশ দিয়ে গুণ করো। ২/৩-এর ব্যস্ত ভগ্নাংশ হলো ৩/২। তাই: ৬ × ৩/২।"
+    - en: "6 × 3/2 = 18/2 = 9. So 9 pieces can be cut."
+      bn: "৬ × ৩/২ = ১৮/২ = ৯। তাই ৯টি টুকরো কাটা যাবে।"
+
+- grade: 7
+  topic: fractions
+  difficulty: 2
+  question_en: "Riya had 3/4 kg of sugar. She used 1/3 kg for a recipe. How much sugar remains?"
+  question_bn: "রিয়ার কাছে ৩/৪ কেজি চিনি ছিল। সে একটি রেসিপিতে ১/৩ কেজি ব্যবহার করল। কত চিনি বাকি থাকল?"
+  bn_reviewed: false
+  answer: "5/12"
+  answer_type: text
+  hints:
+    - en: "The denominators are different. Find the LCM of 4 and 3 to get a common denominator."
+      bn: "হর আলাদা। সাধারণ হর পেতে ৪ এবং ৩-এর লসাগু খোঁজো।"
+    - en: "LCM(3, 4) = 12. Convert: 3/4 = 9/12 and 1/3 = 4/12. Now subtract."
+      bn: "লসাগু(৩, ৪) = ১২। রূপান্তর করো: ৩/৪ = ৯/১২ এবং ১/৩ = ৪/১২। এখন বিয়োগ করো।"
+    - en: "9/12 − 4/12 = 5/12. Is this in simplest form? (HCF of 5 and 12 is 1, so yes.)"
+      bn: "৯/১২ − ৪/১২ = ৫/১২। এটা কি সরলতম আকারে? (৫ এবং ১২-এর গসাগু ১, তাই হ্যাঁ।)"
+
+- grade: 7
+  topic: fractions
+  difficulty: 2
+  question_en: "A recipe needs 3/4 cup of flour. Meena wants to make 2/3 of the recipe. How much flour does she need?"
+  question_bn: "একটি রেসিপিতে ৩/৪ কাপ ময়দা লাগে। মীনা রেসিপির ২/৩ অংশ বানাতে চায়। তার কত ময়দা লাগবে?"
+  bn_reviewed: false
+  answer: "1/2"
+  answer_type: text
+  hints:
+    - en: "Meena is making 2/3 of the recipe, so she needs 2/3 of 3/4 cup. 'Of' means multiply."
+      bn: "মীনা রেসিপির ২/৩ অংশ বানাচ্ছে, তাই তার ৩/৪ কাপের ২/৩ দরকার। 'এর' মানে গুণ।"
+    - en: "Set up: 2/3 × 3/4. Look for common factors to cancel before multiplying."
+      bn: "রাশি লেখো: ২/৩ × ৩/৪। গুণ করার আগে সাধারণ উৎপাদক কাটো।"
+    - en: "The 3s cancel: (2 × 3)/(3 × 4) → 2/4 = 1/2. Meena needs 1/2 cup of flour."
+      bn: "৩গুলো কেটে যায়: (২ × ৩)/(৩ × ৪) → ২/৪ = ১/২। মীনার ১/২ কাপ ময়দা লাগবে।"
+
+- grade: 7
+  topic: fractions
+  difficulty: 2
+  question_en: "A plot of land is 2/3 of a hectare. Rohan bought 3/4 of this plot. How much land did he buy?"
+  question_bn: "একটি জমির পরিমাণ ২/৩ হেক্টর। রোহান এই জমির ৩/৪ অংশ কিনল। সে কত জমি কিনল?"
+  bn_reviewed: false
+  answer: "1/2"
+  answer_type: text
+  hints:
+    - en: "Rohan bought 3/4 of 2/3 hectares. 'Of' means multiply. Set up the multiplication."
+      bn: "রোহান ২/৩ হেক্টরের ৩/৪ অংশ কিনল। 'এর' মানে গুণ। গুণটি সেট করো।"
+    - en: "3/4 × 2/3. Multiply numerators and denominators. Can you cancel anything before multiplying?"
+      bn: "৩/৪ × ২/৩। লব ও হর গুণ করো। গুণ করার আগে কিছু কাটা যায়?"
+    - en: "The 3s cancel: (3 × 2)/(4 × 3) → 2/4 = 1/2. Rohan bought 1/2 hectare."
+      bn: "৩গুলো কেটে যায়: (৩ × ২)/(৪ × ৩) → ২/৪ = ১/২। রোহান ১/২ হেক্টর জমি কিনল।"
+
+- grade: 7
+  topic: fractions
+  difficulty: 2
+  question_en: "Arjun had 5/6 m of ribbon. He used 1/4 m for a gift. How much ribbon is left?"
+  question_bn: "অর্জুনের কাছে ৫/৬ মিটার ফিতা ছিল। সে একটি উপহারে ১/৪ মিটার ব্যবহার করল। কত ফিতা বাকি থাকল?"
+  bn_reviewed: false
+  answer: "7/12"
+  answer_type: text
+  hints:
+    - en: "The denominators are different. Find the LCM of 6 and 4 to get a common denominator."
+      bn: "হর আলাদা। সাধারণ হর পেতে ৬ এবং ৪-এর লসাগু খোঁজো।"
+    - en: "LCM(4, 6) = 12. Convert: 5/6 = 10/12 and 1/4 = 3/12. Now subtract."
+      bn: "লসাগু(৪, ৬) = ১২। রূপান্তর করো: ৫/৬ = ১০/১২ এবং ১/৪ = ৩/১২। এখন বিয়োগ করো।"
+    - en: "10/12 − 3/12 = 7/12. Is 7/12 in simplest form? (HCF of 7 and 12 is 1, so yes.)"
+      bn: "১০/১২ − ৩/১২ = ৭/১২। ৭/১২ কি সরলতম আকারে? (৭ এবং ১২-এর গসাগু ১, তাই হ্যাঁ।)"
+
+- grade: 7
+  topic: fractions
+  difficulty: 2
+  question_en: "Subtract: 5 1/4 − 2 3/8"
+  question_bn: "বিয়োগ করো: ৫ ১/৪ − ২ ৩/৮"
+  bn_reviewed: false
+  answer: "2 7/8"
+  answer_type: text
+  hints:
+    - en: "Find a common denominator for 1/4 and 3/8. What is the LCM of 4 and 8?"
+      bn: "১/৪ এবং ৩/৮-এর সাধারণ হর খোঁজো। ৪ এবং ৮-এর লসাগু কত?"
+    - en: "LCM(4, 8) = 8. Convert: 5 1/4 = 5 2/8. Now 5 2/8 − 2 3/8. Since 2 < 3 in the fraction part, borrow 1 from the whole number."
+      bn: "লসাগু(৪, ৮) = ৮। রূপান্তর করো: ৫ ১/৪ = ৫ ২/৮। এখন ৫ ২/৮ − ২ ৩/৮। ভগ্নাংশ অংশে ২ < ৩ হওয়ায় পূর্ণ সংখ্যা থেকে ১ ধার নাও।"
+    - en: "Borrow 1 from 5: 5 2/8 = 4 10/8. Now: 4 10/8 − 2 3/8 = 2 7/8."
+      bn: "৫ থেকে ১ ধার নাও: ৫ ২/৮ = ৪ ১০/৮। এখন: ৪ ১০/৮ − ২ ৩/৮ = ২ ৭/৮।"
+
+- grade: 7
+  topic: fractions
+  difficulty: 3
+  question_en: "A tank is 3/5 full. After 40 litres are added, it becomes 4/5 full. What is the capacity of the tank in litres?"
+  question_bn: "একটি ট্যাংক ৩/৫ ভর্তি আছে। ৪০ লিটার যোগ করার পরে এটি ৪/৫ ভর্তি হয়ে যায়। ট্যাংকের ধারণক্ষমতা কত লিটার?"
+  bn_reviewed: false
+  answer: "200"
+  answer_type: numeric
+  hints:
+    - en: "The 40 litres added represents the difference between 4/5 and 3/5 of the tank. What fraction of the tank is 40 litres?"
+      bn: "যোগ করা ৪০ লিটার ট্যাংকের ৪/৫ এবং ৩/৫-এর পার্থক্য দেখায়। ৪০ লিটার ট্যাংকের কত অংশ?"
+    - en: "4/5 − 3/5 = 1/5 of the tank = 40 litres. If 1/5 of the capacity = 40 litres, what is the full capacity?"
+      bn: "৪/৫ − ৩/৫ = ট্যাংকের ১/৫ = ৪০ লিটার। যদি ধারণক্ষমতার ১/৫ = ৪০ লিটার হয়, তাহলে পূর্ণ ধারণক্ষমতা কত?"
+    - en: "1/5 × capacity = 40 litres. So capacity = 40 × 5. What does that come to?"
+      bn: "১/৫ × ধারণক্ষমতা = ৪০ লিটার। তাই ধারণক্ষমতা = ৪০ × ৫। উত্তরটা কত হয়?"
+
+- grade: 7
+  topic: fractions
+  difficulty: 3
+  question_en: "Ramesh spends 1/3 of his salary on rent and 2/5 on food. What fraction of his salary is left?"
+  question_bn: "রমেশ তার বেতনের ১/৩ অংশ ভাড়ায় এবং ২/৫ অংশ খাবারে খরচ করে। তার বেতনের কত অংশ বাকি থাকে?"
+  bn_reviewed: false
+  answer: "4/15"
+  answer_type: text
+  hints:
+    - en: "First find the total fraction Ramesh spends. Add 1/3 and 2/5 — they have different denominators."
+      bn: "প্রথমে রমেশ মোট কত অংশ খরচ করে বের করো। ১/৩ এবং ২/৫ যোগ করো — হর আলাদা।"
+    - en: "LCM(3, 5) = 15. Convert: 1/3 = 5/15 and 2/5 = 6/15. Total spent = 5/15 + 6/15 = 11/15."
+      bn: "লসাগু(৩, ৫) = ১৫। রূপান্তর করো: ১/৩ = ৫/১৫ এবং ২/৫ = ৬/১৫। মোট খরচ = ৫/১৫ + ৬/১৫ = ১১/১৫।"
+    - en: "Fraction remaining = 1 − 11/15 = 15/15 − 11/15 = 4/15."
+      bn: "বাকি অংশ = ১ − ১১/১৫ = ১৫/১৫ − ১১/১৫ = ৪/১৫।"
+
+- grade: 7
+  topic: fractions
+  difficulty: 3
+  question_en: "A train covers 2/3 of a journey, then stops. It then covers 3/4 of the remaining distance. What fraction of the total journey has been covered?"
+  question_bn: "একটি ট্রেন যাত্রার ২/৩ অংশ অতিক্রম করে থামে। তারপর বাকি দূরত্বের ৩/৪ অংশ অতিক্রম করে। মোট যাত্রার কত অংশ সম্পন্ন হয়েছে?"
+  bn_reviewed: false
+  answer: "11/12"
+  answer_type: text
+  hints:
+    - en: "After covering 2/3, what fraction of the journey remains? Then the train covers 3/4 of that remaining fraction."
+      bn: "২/৩ অতিক্রম করার পরে যাত্রার কত অংশ বাকি থাকে? তারপর ট্রেন সেই বাকি অংশের ৩/৪ অতিক্রম করে।"
+    - en: "Remaining after first part: 1 − 2/3 = 1/3. Additional distance: 3/4 × 1/3. Then add to 2/3."
+      bn: "প্রথম অংশের পরে বাকি: ১ − ২/৩ = ১/৩। অতিরিক্ত দূরত্ব: ৩/৪ × ১/৩। তারপর ২/৩-এর সাথে যোগ করো।"
+    - en: "3/4 × 1/3 = 1/4. Total covered = 2/3 + 1/4. LCM(3,4) = 12: 8/12 + 3/12 = 11/12."
+      bn: "৩/৪ × ১/৩ = ১/৪। মোট অতিক্রান্ত = ২/৩ + ১/৪। লসাগু(৩,৪) = ১২: ৮/১২ + ৩/১২ = ১১/১২।"
+
+- grade: 7
+  topic: fractions
+  difficulty: 3
+  question_en: "Rohan spends 1/4 of his money on books and 1/3 on stationery. He saves the rest. If he saves ₹35, how much money did he start with?"
+  question_bn: "রোহান তার টাকার ১/৪ বইয়ে এবং ১/৩ স্টেশনারিতে খরচ করে। বাকিটা সে সঞ্চয় করে। যদি সে ₹৩৫ সঞ্চয় করে, তাহলে সে কত টাকা নিয়ে শুরু করেছিল?"
+  bn_reviewed: false
+  answer: "84"
+  answer_type: numeric
+  hints:
+    - en: "Find the fraction Rohan saves. Total spent = 1/4 + 1/3. Use LCM(3,4) = 12 to add, then subtract from 1."
+      bn: "রোহান কত অংশ সঞ্চয় করে বের করো। মোট খরচ = ১/৪ + ১/৩। লসাগু(৩,৪) = ১২ ব্যবহার করে যোগ করো, তারপর ১ থেকে বিয়োগ করো।"
+    - en: "1/4 = 3/12 and 1/3 = 4/12. Total spent = 7/12. Fraction saved = 1 − 7/12 = 5/12."
+      bn: "১/৪ = ৩/১২ এবং ১/৩ = ৪/১২। মোট খরচ = ৭/১২। সঞ্চিত অংশ = ১ − ৭/১২ = ৫/১২।"
+    - en: "5/12 of his money = ₹35. So total = ₹35 ÷ (5/12) = ₹35 × 12/5 = ₹420/5. What does that come to?"
+      bn: "তার টাকার ৫/১২ = ₹৩৫। তাই মোট = ₹৩৫ ÷ (৫/১২) = ₹৩৫ × ১২/৫ = ₹৪২০/৫। উত্তরটা কত হয়?"

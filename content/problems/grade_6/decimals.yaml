@@ -1,0 +1,198 @@
+# Grade 6 — Decimals
+# WBBSE Chapter 3
+# Status: 12 / 12 problems complete ✅
+# Bengali translations: all flagged for native speaker review (bn_reviewed: false)
+# Hints schema: bilingual objects {en, bn}
+# Subtopics: comparing (1), add/subtract (3), converting (3), rounding (1), word problems (2), area (1), fraction form (1)
+
+- grade: 6
+  topic: decimals
+  difficulty: 1
+  question_en: "Which is greater: 0.7 or 0.07?"
+  question_bn: "কোনটি বড়: ০.৭ না ০.০৭?"
+  bn_reviewed: false
+  answer: "0.7"
+  answer_type: text
+  hints:
+    - en: "Compare the tenths place first. What digit is in the tenths place of each number?"
+      bn: "প্রথমে দশমাংশের ঘর তুলনা করো। প্রতিটি সংখ্যার দশমাংশের ঘরে কোন অঙ্ক আছে?"
+    - en: "0.7 has 7 in the tenths place. 0.07 has 0 in the tenths place and 7 in the hundredths place. Which has more tenths?"
+      bn: "০.৭-এর দশমাংশের ঘরে ৭ আছে। ০.০৭-এর দশমাংশের ঘরে ০ এবং শতমাংশের ঘরে ৭ আছে। কোনটিতে বেশি দশমাংশ আছে?"
+    - en: "7 tenths is more than 0 tenths. So 0.7 > 0.07, even though both contain the digit 7."
+      bn: "৭ দশমাংশ, ০ দশমাংশের চেয়ে বেশি। তাই ০.৭ > ০.০৭, যদিও দুটোতেই ৭ অঙ্কটি আছে।"
+
+- grade: 6
+  topic: decimals
+  difficulty: 1
+  question_en: "Add: 2.3 + 1.4"
+  question_bn: "যোগ করো: ২.৩ + ১.৪"
+  bn_reviewed: false
+  answer: "3.7"
+  answer_type: numeric
+  hints:
+    - en: "When adding decimals, line up the decimal points first. Then add column by column from right to left."
+      bn: "দশমিক সংখ্যা যোগ করার সময় প্রথমে দশমিক বিন্দু সারিবদ্ধ করো। তারপর ডান থেকে বাম দিকে কলাম অনুযায়ী যোগ করো।"
+    - en: "Tenths: 3 + 4 = 7. Ones: 2 + 1 = 3. Place the decimal point between them."
+      bn: "দশমাংশ: ৩ + ৪ = ৭। এককের ঘর: ২ + ১ = ৩। এদের মাঝে দশমিক বিন্দু রাখো।"
+    - en: "2.3 + 1.4 = 3.7. Check: the decimal point stays in the same position."
+      bn: "২.৩ + ১.৪ = ৩.৭। যাচাই করো: দশমিক বিন্দু একই অবস্থানে থাকে।"
+
+- grade: 6
+  topic: decimals
+  difficulty: 1
+  question_en: "Subtract: 5.8 − 2.3"
+  question_bn: "বিয়োগ করো: ৫.৮ − ২.৩"
+  bn_reviewed: false
+  answer: "3.5"
+  answer_type: numeric
+  hints:
+    - en: "Line up the decimal points and subtract column by column from right to left."
+      bn: "দশমিক বিন্দু সারিবদ্ধ করো এবং ডান থেকে বাম দিকে কলাম অনুযায়ী বিয়োগ করো।"
+    - en: "Tenths: 8 − 3 = 5. Ones: 5 − 2 = 3. Bring the decimal point straight down."
+      bn: "দশমাংশ: ৮ − ৩ = ৫। এককের ঘর: ৫ − ২ = ৩। দশমিক বিন্দু সরাসরি নিচে আনো।"
+    - en: "5.8 − 2.3 = 3.5. Check: 3.5 + 2.3 = 5.8 ✓"
+      bn: "৫.৮ − ২.৩ = ৩.৫। যাচাই করো: ৩.৫ + ২.৩ = ৫.৮ ✓"
+
+- grade: 6
+  topic: decimals
+  difficulty: 1
+  question_en: "Convert 3/4 to a decimal."
+  question_bn: "৩/৪ কে দশমিকে রূপান্তর করো।"
+  bn_reviewed: false
+  answer: "0.75"
+  answer_type: text
+  hints:
+    - en: "To convert a fraction to a decimal, divide the numerator by the denominator: 3 ÷ 4."
+      bn: "ভগ্নাংশকে দশমিকে রূপান্তর করতে লবকে হর দিয়ে ভাগ করো: ৩ ÷ ৪।"
+    - en: "4 does not go into 3, so write 0. and continue: 30 ÷ 4 = 7 remainder 2. Then 20 ÷ 4 = 5."
+      bn: "৪, ৩-এ যায় না, তাই ০. লিখে চালিয়ে যাও: ৩০ ÷ ৪ = ৭ ভাগশেষ ২। তারপর ২০ ÷ ৪ = ৫।"
+    - en: "30 ÷ 4 gives 7 (remainder 2), and 20 ÷ 4 gives 5. So 3/4 = 0.75."
+      bn: "৩০ ÷ ৪ = ৭ (ভাগশেষ ২) এবং ২০ ÷ ৪ = ৫। তাই ৩/৪ = ০.৭৫।"
+
+- grade: 6
+  topic: decimals
+  difficulty: 1
+  question_en: "Write 0.25 as a fraction in its simplest form."
+  question_bn: "০.২৫ কে সরলতম আকারে ভগ্নাংশে প্রকাশ করো।"
+  bn_reviewed: false
+  answer: "1/4"
+  answer_type: text
+  hints:
+    - en: "0.25 means 25 hundredths. Write it as a fraction: 25/100."
+      bn: "০.২৫ মানে ২৫ শতমাংশ। এটিকে ভগ্নাংশ হিসেবে লেখো: ২৫/১০০।"
+    - en: "Now simplify 25/100. What is the HCF of 25 and 100?"
+      bn: "এখন ২৫/১০০ সরল করো। ২৫ এবং ১০০-এর গসাগু কত?"
+    - en: "HCF(25, 100) = 25. Divide both: 25÷25 = 1 and 100÷25 = 4. So 0.25 = 1/4."
+      bn: "গসাগু(২৫, ১০০) = ২৫। উভয়কে ভাগ করো: ২৫÷২৫ = ১ এবং ১০০÷২৫ = ৪। তাই ০.২৫ = ১/৪।"
+
+- grade: 6
+  topic: decimals
+  difficulty: 2
+  question_en: "Add: 12.45 + 7.8"
+  question_bn: "যোগ করো: ১২.৪৫ + ৭.৮"
+  bn_reviewed: false
+  answer: "20.25"
+  answer_type: numeric
+  hints:
+    - en: "Line up the decimal points. Write 7.8 as 7.80 so both numbers have the same number of decimal places."
+      bn: "দশমিক বিন্দু সারিবদ্ধ করো। ৭.৮-কে ৭.৮০ হিসেবে লেখো যাতে উভয় সংখ্যায় সমান দশমিক স্থান থাকে।"
+    - en: "Hundredths: 5 + 0 = 5. Tenths: 4 + 8 = 12 — write 2, carry 1. Ones: 2 + 7 + 1 = 10 — write 0, carry 1. Tens: 1 + 0 + 1 = 2."
+      bn: "শতমাংশ: ৫ + ০ = ৫। দশমাংশ: ৪ + ৮ = ১২ — ২ লিখে ১ হাতে রাখো। একক: ২ + ৭ + ১ = ১০ — ০ লিখে ১ হাতে রাখো। দশক: ১ + ০ + ১ = ২।"
+    - en: "12.45 + 7.80 = 20.25."
+      bn: "১২.৪৫ + ৭.৮০ = ২০.২৫।"
+
+- grade: 6
+  topic: decimals
+  difficulty: 2
+  question_en: "Subtract: 8.05 − 3.7"
+  question_bn: "বিয়োগ করো: ৮.০৫ − ৩.৭"
+  bn_reviewed: false
+  answer: "4.35"
+  answer_type: numeric
+  hints:
+    - en: "Line up the decimal points. Write 3.7 as 3.70 so both numbers have the same decimal places."
+      bn: "দশমিক বিন্দু সারিবদ্ধ করো। ৩.৭-কে ৩.৭০ হিসেবে লেখো যাতে উভয় সংখ্যায় সমান দশমিক স্থান থাকে।"
+    - en: "Hundredths: 5 − 0 = 5. Tenths: 0 − 7 — need to borrow from ones. Borrow 1 from 8: tenths becomes 10, ones becomes 7."
+      bn: "শতমাংশ: ৫ − ০ = ৫। দশমাংশ: ০ − ৭ — একক থেকে ধার নিতে হবে। ৮ থেকে ১ ধার নাও: দশমাংশ হয় ১০, একক হয় ৭।"
+    - en: "Tenths: 10 − 7 = 3. Ones: 7 − 3 = 4. Answer: 4.35."
+      bn: "দশমাংশ: ১০ − ৭ = ৩। একক: ৭ − ৩ = ৪। উত্তর: ৪.৩৫।"
+
+- grade: 6
+  topic: decimals
+  difficulty: 2
+  question_en: "Round 3.746 to the nearest hundredth."
+  question_bn: "৩.৭৪৬ কে নিকটতম শতমাংশে পূর্ণ করো।"
+  bn_reviewed: false
+  answer: "3.75"
+  answer_type: text
+  hints:
+    - en: "The hundredths place is the second digit after the decimal point. Find it in 3.746."
+      bn: "শতমাংশের ঘর হলো দশমিক বিন্দুর পরের দ্বিতীয় অঙ্ক। ৩.৭৪৬-এ এটি খোঁজো।"
+    - en: "The hundredths digit is 4. Look at the next digit (thousandths): 6. If the next digit is 5 or more, round up; if less than 5, keep the same."
+      bn: "শতমাংশের অঙ্কটি ৪। পরের অঙ্কটি (সহস্রাংশ) দেখো: ৬। পরের অঙ্ক ৫ বা বেশি হলে উপরে পূর্ণ করো; ৫-এর কম হলে একই রাখো।"
+    - en: "The thousandths digit is 6 (≥5), so round up the 4 to 5. 3.746 rounded to the nearest hundredth = 3.75."
+      bn: "সহস্রাংশের অঙ্ক ৬ (≥৫), তাই ৪ থেকে ৫-এ উপরে পূর্ণ করো। ৩.৭৪৬-কে নিকটতম শতমাংশে পূর্ণ করলে = ৩.৭৫।"
+
+- grade: 6
+  topic: decimals
+  difficulty: 2
+  question_en: "Convert 7/8 to a decimal."
+  question_bn: "৭/৮ কে দশমিকে রূপান্তর করো।"
+  bn_reviewed: false
+  answer: "0.875"
+  answer_type: text
+  hints:
+    - en: "Divide the numerator by the denominator: 7 ÷ 8. Set up the long division with 7.000."
+      bn: "লবকে হর দিয়ে ভাগ করো: ৭ ÷ ৮। ৭.০০০ দিয়ে দীর্ঘ ভাগ শুরু করো।"
+    - en: "8 doesn't go into 7, so write 0. Then: 70 ÷ 8 = 8 remainder 6. Then 60 ÷ 8 = 7 remainder 4."
+      bn: "৮, ৭-এ যায় না, তাই ০ লেখো। তারপর: ৭০ ÷ ৮ = ৮ ভাগশেষ ৬। তারপর ৬০ ÷ ৮ = ৭ ভাগশেষ ৪।"
+    - en: "70÷8 = 8 (rem 6), 60÷8 = 7 (rem 4), 40÷8 = 5. So 7/8 = 0.875."
+      bn: "৭০÷৮ = ৮ (ভাগশেষ ৬), ৬০÷৮ = ৭ (ভাগশেষ ৪), ৪০÷৮ = ৫। তাই ৭/৮ = ০.৮৭৫।"
+
+- grade: 6
+  topic: decimals
+  difficulty: 2
+  question_en: "A shopkeeper sold 3 kg of tomatoes at ₹12.50 per kg. How much did he earn?"
+  question_bn: "একজন দোকানদার ৩ কেজি টমেটো ₹১২.৫০ প্রতি কেজি দরে বিক্রি করল। সে কত টাকা আয় করল?"
+  bn_reviewed: false
+  answer: "37.5"
+  answer_type: numeric
+  hints:
+    - en: "Total earnings = number of kg × price per kg. Set up the multiplication: 3 × ₹12.50."
+      bn: "মোট আয় = কেজির সংখ্যা × প্রতি কেজির দাম। গুণটি সেট করো: ৩ × ₹১২.৫০।"
+    - en: "Split 12.50 into 12 and 0.50: (3 × 12) + (3 × 0.50)."
+      bn: "১২.৫০ কে ১২ এবং ০.৫০ তে ভাগ করো: (৩ × ১২) + (৩ × ০.৫০)।"
+    - en: "3 × 12 = 36 and 3 × 0.50 = 1.50. Total = 36 + 1.50 = ₹37.50."
+      bn: "৩ × ১২ = ৩৬ এবং ৩ × ০.৫০ = ১.৫০। মোট = ৩৬ + ১.৫০ = ₹৩৭.৫০।"
+
+- grade: 6
+  topic: decimals
+  difficulty: 3
+  question_en: "Write 0.625 as a fraction in its simplest form."
+  question_bn: "০.৬২৫ কে সরলতম আকারে ভগ্নাংশে প্রকাশ করো।"
+  bn_reviewed: false
+  answer: "5/8"
+  answer_type: text
+  hints:
+    - en: "0.625 means 625 thousandths. Write it as a fraction: 625/1000."
+      bn: "০.৬২৫ মানে ৬২৫ সহস্রাংশ। এটিকে ভগ্নাংশ হিসেবে লেখো: ৬২৫/১০০০।"
+    - en: "Simplify step by step. Both 625 and 1000 are divisible by 5: 625÷5 = 125, 1000÷5 = 200. Simplify again."
+      bn: "ধাপে ধাপে সরল করো। ৬২৫ এবং ১০০০ উভয়ই ৫ দিয়ে ভাগযোগ্য: ৬২৫÷৫ = ১২৫, ১০০০÷৫ = ২০০। আবার সরল করো।"
+    - en: "125/200 → divide by 5: 25/40 → divide by 5: 5/8. So 0.625 = 5/8."
+      bn: "১২৫/২০০ → ৫ দিয়ে ভাগ: ২৫/৪০ → ৫ দিয়ে ভাগ: ৫/৮। তাই ০.৬২৫ = ৫/৮।"
+
+- grade: 6
+  topic: decimals
+  difficulty: 3
+  question_en: "A rectangle is 4.8 m long and 2.5 m wide. What is its area in m²?"
+  question_bn: "একটি আয়তক্ষেত্রের দৈর্ঘ্য ৪.৮ মিটার এবং প্রস্থ ২.৫ মিটার। এর ক্ষেত্রফল কত বর্গ মিটার?"
+  bn_reviewed: false
+  answer: "12"
+  answer_type: numeric
+  hints:
+    - en: "Area = length × width = 4.8 × 2.5. Think of a way to make this easier by splitting one of the numbers."
+      bn: "ক্ষেত্রফল = দৈর্ঘ্য × প্রস্থ = ৪.৮ × ২.৫। সংখ্যাগুলোর একটি ভেঙে সহজ করার উপায় ভাবো।"
+    - en: "Split 4.8 into 4 + 0.8: (4 × 2.5) + (0.8 × 2.5)."
+      bn: "৪.৮ কে ৪ + ০.৮-এ ভাগ করো: (৪ × ২.৫) + (০.৮ × ২.৫)।"
+    - en: "4 × 2.5 = 10 and 0.8 × 2.5 = 2. Total area = 10 + 2 = 12 m²."
+      bn: "৪ × ২.৫ = ১০ এবং ০.৮ × ২.৫ = ২। মোট ক্ষেত্রফল = ১০ + ২ = ১২ বর্গ মিটার।"

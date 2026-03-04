@@ -1,0 +1,214 @@
+# Grade 7 — Decimals
+# WBBSE Chapter 2 (Fractions & Decimals)
+# Status: 13 / 13 problems complete ✅
+# Bengali translations: all flagged for native speaker review (bn_reviewed: false)
+# Hints schema: bilingual objects {en, bn}
+# Subtopics: comparing/rounding (2), add/subtract (3), multiply/divide (4), word problems (4)
+
+- grade: 7
+  topic: decimals
+  difficulty: 1
+  question_en: "Which is greater: 0.3 or 0.25?"
+  question_bn: "কোনটি বড়: ০.৩ না ০.২৫?"
+  bn_reviewed: false
+  answer: "0.3"
+  answer_type: text
+  hints:
+    - en: "Write both numbers with the same number of decimal places to make comparison easier: 0.30 and 0.25."
+      bn: "তুলনা সহজ করতে উভয় সংখ্যায় সমান দশমিক স্থান রেখে লেখো: ০.৩০ এবং ০.২৫।"
+    - en: "Compare the tenths digits: 0.30 has 3 in the tenths place, 0.25 has 2 in the tenths place. Which is larger?"
+      bn: "দশমাংশের অঙ্ক তুলনা করো: ০.৩০-এর দশমাংশের ঘরে ৩, ০.২৫-এর দশমাংশের ঘরে ২। কোনটি বড়?"
+    - en: "3 tenths > 2 tenths. So 0.30 > 0.25, meaning 0.3 > 0.25."
+      bn: "৩ দশমাংশ > ২ দশমাংশ। তাই ০.৩০ > ০.২৫, অর্থাৎ ০.৩ > ০.২৫।"
+
+- grade: 7
+  topic: decimals
+  difficulty: 1
+  question_en: "Round 4.67 to the nearest tenth."
+  question_bn: "৪.৬৭ কে নিকটতম দশমাংশে পূর্ণ করো।"
+  bn_reviewed: false
+  answer: "4.7"
+  answer_type: text
+  hints:
+    - en: "The tenths place is the first digit after the decimal point. What is the tenths digit in 4.67?"
+      bn: "দশমাংশের ঘর হলো দশমিক বিন্দুর পরের প্রথম অঙ্ক। ৪.৬৭-এ দশমাংশের অঙ্কটি কী?"
+    - en: "The tenths digit is 6. Look at the next digit (hundredths): 7. If it is 5 or more, round up the tenths digit."
+      bn: "দশমাংশের অঙ্ক হলো ৬। পরের অঙ্কটি (শতমাংশ) দেখো: ৭। এটি ৫ বা বেশি হলে দশমাংশের অঙ্কটি উপরে পূর্ণ করো।"
+    - en: "7 ≥ 5, so round up: 6 becomes 7. Drop everything after the tenths place. 4.67 ≈ 4.7."
+      bn: "৭ ≥ ৫, তাই উপরে পূর্ণ করো: ৬ হয়ে যায় ৭। দশমাংশের পরের সব কিছু বাদ দাও। ৪.৬৭ ≈ ৪.৭।"
+
+- grade: 7
+  topic: decimals
+  difficulty: 1
+  question_en: "Convert 1/5 to a decimal."
+  question_bn: "১/৫ কে দশমিকে রূপান্তর করো।"
+  bn_reviewed: false
+  answer: "0.2"
+  answer_type: text
+  hints:
+    - en: "To convert a fraction to a decimal, divide the numerator by the denominator: 1 ÷ 5."
+      bn: "ভগ্নাংশকে দশমিকে রূপান্তর করতে লবকে হর দিয়ে ভাগ করো: ১ ÷ ৫।"
+    - en: "Think: what fraction with denominator 10 is equivalent to 1/5? Multiply numerator and denominator by 2."
+      bn: "ভাবো: হর ১০ আছে এমন কোন ভগ্নাংশটি ১/৫-এর সমান? লব ও হর উভয়কে ২ দিয়ে গুণ করো।"
+    - en: "1/5 = 2/10 = 0.2. Or: 1 ÷ 5 = 0.2."
+      bn: "১/৫ = ২/১০ = ০.২। অথবা: ১ ÷ ৫ = ০.২।"
+
+- grade: 7
+  topic: decimals
+  difficulty: 1
+  question_en: "Multiply: 0.4 × 3"
+  question_bn: "গুণ করো: ০.৪ × ৩"
+  bn_reviewed: false
+  answer: "1.2"
+  answer_type: numeric
+  hints:
+    - en: "Think of 0.4 as 4 tenths. What is 3 groups of 4 tenths?"
+      bn: "০.৪ কে ৪ দশমাংশ হিসেবে ভাবো। ৪ দশমাংশের ৩টি গ্রুপ কত?"
+    - en: "0.4 × 3 = (4 × 3) tenths = 12 tenths. Now convert 12 tenths to a decimal."
+      bn: "০.৪ × ৩ = (৪ × ৩) দশমাংশ = ১২ দশমাংশ। এখন ১২ দশমাংশকে দশমিকে রূপান্তর করো।"
+    - en: "12 tenths = 12/10 = 1.2. So 0.4 × 3 = 1.2."
+      bn: "১২ দশমাংশ = ১২/১০ = ১.২। তাই ০.৪ × ৩ = ১.২।"
+
+- grade: 7
+  topic: decimals
+  difficulty: 1
+  question_en: "Add: 3.45 + 2.6"
+  question_bn: "যোগ করো: ৩.৪৫ + ২.৬"
+  bn_reviewed: false
+  answer: "6.05"
+  answer_type: numeric
+  hints:
+    - en: "Line up the decimal points. Write 2.6 as 2.60 so both numbers have the same decimal places."
+      bn: "দশমিক বিন্দু সারিবদ্ধ করো। ২.৬-কে ২.৬০ হিসেবে লেখো যাতে উভয় সংখ্যায় সমান দশমিক স্থান থাকে।"
+    - en: "Hundredths: 5 + 0 = 5. Tenths: 4 + 6 = 10 — write 0, carry 1. Ones: 3 + 2 + 1 = 6."
+      bn: "শতমাংশ: ৫ + ০ = ৫। দশমাংশ: ৪ + ৬ = ১০ — ০ লিখে ১ হাতে রাখো। একক: ৩ + ২ + ১ = ৬।"
+    - en: "3.45 + 2.60 = 6.05. Don't forget the decimal point."
+      bn: "৩.৪৫ + ২.৬০ = ৬.০৫। দশমিক বিন্দু ভুলো না।"
+
+- grade: 7
+  topic: decimals
+  difficulty: 2
+  question_en: "Subtract: 10 − 4.375"
+  question_bn: "বিয়োগ করো: ১০ − ৪.৩৭৫"
+  bn_reviewed: false
+  answer: "5.625"
+  answer_type: numeric
+  hints:
+    - en: "Write 10 as 10.000 so the decimal points line up. Then subtract column by column."
+      bn: "১০ কে ১০.০০০ হিসেবে লেখো যাতে দশমিক বিন্দু সারিবদ্ধ হয়। তারপর কলাম অনুযায়ী বিয়োগ করো।"
+    - en: "Work from right: thousandths 0−5 needs borrowing, which cascades through hundredths and tenths. Work carefully column by column."
+      bn: "ডান থেকে করো: সহস্রাংশ ০−৫ এর জন্য ধার লাগবে, যা শতমাংশ ও দশমাংশের মধ্য দিয়ে ছড়িয়ে পড়ে। সাবধানে কলাম অনুযায়ী করো।"
+    - en: "After borrowing through: thousandths 10−5=5, hundredths 9−7=2, tenths 9−3=6, ones 9−4=5. Answer: 5.625. Check: 5.625 + 4.375 = 10 ✓"
+      bn: "ধার নেওয়ার পর: সহস্রাংশ ১০−৫=৫, শতমাংশ ৯−৭=২, দশমাংশ ৯−৩=৬, একক ৯−৪=৫। উত্তর: ৫.৬২৫। যাচাই: ৫.৬২৫ + ৪.৩৭৫ = ১০ ✓"
+
+- grade: 7
+  topic: decimals
+  difficulty: 2
+  question_en: "Multiply: 2.5 × 4.2"
+  question_bn: "গুণ করো: ২.৫ × ৪.২"
+  bn_reviewed: false
+  answer: "10.5"
+  answer_type: numeric
+  hints:
+    - en: "Ignore the decimal points temporarily and multiply 25 × 42. Then count the total decimal places in both numbers and place the decimal point."
+      bn: "সাময়িকভাবে দশমিক বিন্দু উপেক্ষা করো এবং ২৫ × ৪২ গুণ করো। তারপর উভয় সংখ্যার মোট দশমিক স্থান গণনা করে দশমিক বিন্দু স্থাপন করো।"
+    - en: "25 × 42 = (25 × 40) + (25 × 2) = 1000 + 50 = 1050. Count decimal places: 2.5 has 1, 4.2 has 1. Total = 2 decimal places."
+      bn: "২৫ × ৪২ = (২৫ × ৪০) + (২৫ × ২) = ১০০০ + ৫০ = ১০৫০। দশমিক স্থান গণনা করো: ২.৫-এ ১, ৪.২-এ ১। মোট = ২ দশমিক স্থান।"
+    - en: "1050 with 2 decimal places → 10.50 = 10.5."
+      bn: "১০৫০-এ ২ দশমিক স্থান → ১০.৫০ = ১০.৫।"
+
+- grade: 7
+  topic: decimals
+  difficulty: 2
+  question_en: "Divide: 8.4 ÷ 0.7"
+  question_bn: "ভাগ করো: ৮.৪ ÷ ০.৭"
+  bn_reviewed: false
+  answer: "12"
+  answer_type: numeric
+  hints:
+    - en: "When dividing by a decimal, multiply both numbers by the same power of 10 to make the divisor a whole number."
+      bn: "দশমিক সংখ্যা দিয়ে ভাগ করার সময়, ভাজককে পূর্ণ সংখ্যা করতে উভয় সংখ্যাকে ১০-এর একই ঘাত দিয়ে গুণ করো।"
+    - en: "Multiply both by 10: 8.4 ÷ 0.7 = 84 ÷ 7. Now divide as normal."
+      bn: "উভয়কে ১০ দিয়ে গুণ করো: ৮.৪ ÷ ০.৭ = ৮৪ ÷ ৭। এখন স্বাভাবিকভাবে ভাগ করো।"
+    - en: "84 ÷ 7 = 12. So 8.4 ÷ 0.7 = 12."
+      bn: "৮৪ ÷ ৭ = ১২। তাই ৮.৪ ÷ ০.৭ = ১২।"
+
+- grade: 7
+  topic: decimals
+  difficulty: 2
+  question_en: "Priya ran 2.75 km on Monday and 3.4 km on Tuesday. How far did she run in total?"
+  question_bn: "প্রিয়া সোমবার ২.৭৫ কিমি এবং মঙ্গলবার ৩.৪ কিমি দৌড়াল। সে মোট কত কিমি দৌড়াল?"
+  bn_reviewed: false
+  answer: "6.15"
+  answer_type: numeric
+  hints:
+    - en: "Add the two distances. Line up the decimal points and write 3.4 as 3.40."
+      bn: "দুটি দূরত্ব যোগ করো। দশমিক বিন্দু সারিবদ্ধ করো এবং ৩.৪ কে ৩.৪০ হিসেবে লেখো।"
+    - en: "Hundredths: 5 + 0 = 5. Tenths: 7 + 4 = 11 — write 1, carry 1. Ones: 2 + 3 + 1 = 6."
+      bn: "শতমাংশ: ৫ + ০ = ৫। দশমাংশ: ৭ + ৪ = ১১ — ১ লিখে ১ হাতে রাখো। একক: ২ + ৩ + ১ = ৬।"
+    - en: "2.75 + 3.40 = 6.15 km."
+      bn: "২.৭৫ + ৩.৪০ = ৬.১৫ কিমি।"
+
+- grade: 7
+  topic: decimals
+  difficulty: 2
+  question_en: "Multiply: 0.35 × 20"
+  question_bn: "গুণ করো: ০.৩৫ × ২০"
+  bn_reviewed: false
+  answer: "7"
+  answer_type: numeric
+  hints:
+    - en: "Break this into two steps: 0.35 × 2 first, then × 10."
+      bn: "এটিকে দুটি ধাপে ভাগ করো: প্রথমে ০.৩৫ × ২, তারপর × ১০।"
+    - en: "0.35 × 2 = 0.70. Now multiply 0.70 by 10 — move the decimal point one place to the right."
+      bn: "০.৩৫ × ২ = ০.৭০। এখন ০.৭০ কে ১০ দিয়ে গুণ করো — দশমিক বিন্দু এক ঘর ডানে সরাও।"
+    - en: "0.70 × 10 = 7.0 = 7. So 0.35 × 20 = 7."
+      bn: "০.৭০ × ১০ = ৭.০ = ৭। তাই ০.৩৫ × ২০ = ৭।"
+
+- grade: 7
+  topic: decimals
+  difficulty: 3
+  question_en: "Ananya bought 2.4 kg of rice at ₹52.50 per kg. How much did she pay in total?"
+  question_bn: "অনন্যা ₹৫২.৫০ প্রতি কেজি দরে ২.৪ কেজি চাল কিনল। সে মোট কত টাকা দিল?"
+  bn_reviewed: false
+  answer: "126"
+  answer_type: numeric
+  hints:
+    - en: "Total cost = quantity × price per kg = 2.4 × ₹52.50. Split 2.4 into 2 and 0.4 to make it easier."
+      bn: "মোট খরচ = পরিমাণ × প্রতি কেজির দাম = ২.৪ × ₹৫২.৫০। সহজ করতে ২.৪ কে ২ এবং ০.৪-এ ভাগ করো।"
+    - en: "2 × ₹52.50 = ₹105. And 0.4 × ₹52.50 = (4 × ₹52.50) ÷ 10 = ₹210 ÷ 10 = ₹21."
+      bn: "২ × ₹৫২.৫০ = ₹১০৫। এবং ০.৪ × ₹৫২.৫০ = (৪ × ₹৫২.৫০) ÷ ১০ = ₹২১০ ÷ ১০ = ₹২১।"
+    - en: "Total = ₹105 + ₹21 = ₹126."
+      bn: "মোট = ₹১০৫ + ₹২১ = ₹১২৬।"
+
+- grade: 7
+  topic: decimals
+  difficulty: 3
+  question_en: "A piece of cloth 15.6 m long is cut into equal pieces, each 1.3 m long. How many pieces are there?"
+  question_bn: "১৫.৬ মিটার দৈর্ঘ্যের একটি কাপড় প্রতিটি ১.৩ মিটারের সমান টুকরোয় কাটা হলো। কতটি টুকরো পাওয়া গেল?"
+  bn_reviewed: false
+  answer: "12"
+  answer_type: numeric
+  hints:
+    - en: "To find the number of pieces, divide the total length by the length of each piece: 15.6 ÷ 1.3."
+      bn: "টুকরোর সংখ্যা বের করতে মোট দৈর্ঘ্যকে প্রতিটি টুকরোর দৈর্ঘ্য দিয়ে ভাগ করো: ১৫.৬ ÷ ১.৩।"
+    - en: "Multiply both by 10 to remove the decimal from the divisor: 15.6 ÷ 1.3 = 156 ÷ 13."
+      bn: "ভাজক থেকে দশমিক সরাতে উভয়কে ১০ দিয়ে গুণ করো: ১৫.৬ ÷ ১.৩ = ১৫৬ ÷ ১৩।"
+    - en: "156 ÷ 13 = 12. Check: 12 × 1.3 = 15.6 ✓"
+      bn: "১৫৬ ÷ ১৩ = ১২। যাচাই করো: ১২ × ১.৩ = ১৫.৬ ✓"
+
+- grade: 7
+  topic: decimals
+  difficulty: 3
+  question_en: "The average of three numbers is 4.25. Two of the numbers are 3.8 and 5.1. What is the third number?"
+  question_bn: "তিনটি সংখ্যার গড় ৪.২৫। দুটি সংখ্যা হলো ৩.৮ এবং ৫.১। তৃতীয় সংখ্যাটি কত?"
+  bn_reviewed: false
+  answer: "3.85"
+  answer_type: numeric
+  hints:
+    - en: "Average = sum of all numbers ÷ count. If you know the average and count, you can find the sum. What is the sum of all three numbers?"
+      bn: "গড় = সব সংখ্যার যোগফল ÷ সংখ্যার পরিমাণ। যদি গড় ও পরিমাণ জানো, তাহলে যোগফল বের করতে পারো। তিনটি সংখ্যার যোগফল কত?"
+    - en: "Sum = average × count = 4.25 × 3. Calculate this, then subtract the two known numbers."
+      bn: "যোগফল = গড় × পরিমাণ = ৪.২৫ × ৩। এটি হিসাব করো, তারপর দুটি পরিচিত সংখ্যা বিয়োগ করো।"
+    - en: "Sum = 4.25 × 3 = 12.75. Third number = 12.75 − 3.8 − 5.1 = 12.75 − 8.9. What does that come to?"
+      bn: "যোগফল = ৪.২৫ × ৩ = ১২.৭৫। তৃতীয় সংখ্যা = ১২.৭৫ − ৩.৮ − ৫.১ = ১২.৭৫ − ৮.৯। উত্তরটা কত হয়?"

@@ -1,0 +1,246 @@
+# Grade 7 — Number System
+# WBBSE Chapter 1
+# Status: 15 / 15 problems complete ✅
+# Bengali translations: all flagged for native speaker review (bn_reviewed: false)
+# Hints schema: bilingual objects {en, bn}
+# Subtopics: place value & BODMAS (5), factors/LCM/HCF (5), integers (5)
+
+- grade: 7
+  topic: number_system
+  difficulty: 1
+  question_en: "What is the place value of the digit 7 in the number 47,852?"
+  question_bn: "৪৭,৮৫২ সংখ্যায় ৭ অঙ্কটির স্থানীয় মান কত?"
+  bn_reviewed: false
+  answer: "7000"
+  answer_type: numeric
+  hints:
+    - en: "Each digit in a number has a value based on its position. Starting from the right, positions are: ones, tens, hundreds, thousands, ten-thousands. Which position is 7 in?"
+      bn: "একটি সংখ্যায় প্রতিটি অঙ্কের মান তার অবস্থানের উপর নির্ভর করে। ডান থেকে গণনা করলে: এককের ঘর, দশকের ঘর, শতকের ঘর, হাজারের ঘর, দশ হাজারের ঘর। ৭ কোন ঘরে আছে?"
+    - en: "Count from the right: 2 is in ones, 5 is in tens, 8 is in hundreds, 7 is in thousands. What is the place value of a digit in the thousands position?"
+      bn: "ডান থেকে গণনা করো: ২ এককের ঘরে, ৫ দশকের ঘরে, ৮ শতকের ঘরে, ৭ হাজারের ঘরে। হাজারের ঘরের একটি অঙ্কের স্থানীয় মান কত?"
+    - en: "7 is in the thousands place. Place value = digit × position value = 7 × 1,000. What does that come to?"
+      bn: "৭ হাজারের ঘরে আছে। স্থানীয় মান = অঙ্ক × ঘরের মান = ৭ × ১,০০০। উত্তরটা কত হয়?"
+
+- grade: 7
+  topic: number_system
+  difficulty: 1
+  question_en: "Simplify: 48 ÷ 6 + 5 × 3"
+  question_bn: "সরল করো: ৪৮ ÷ ৬ + ৫ × ৩"
+  bn_reviewed: false
+  answer: "23"
+  answer_type: numeric
+  hints:
+    - en: "When a problem has both multiplication/division and addition/subtraction, there is a rule about which operation to do first. Do you remember BODMAS?"
+      bn: "যখন কোনো সমস্যায় গুণ/ভাগ এবং যোগ/বিয়োগ দুটোই থাকে, তখন কোনটি আগে করতে হবে তার একটি নিয়ম আছে। BODMAS মনে আছে?"
+    - en: "BODMAS says: Division and Multiplication come before Addition and Subtraction. So calculate 48 ÷ 6 and 5 × 3 first, separately."
+      bn: "BODMAS বলে: ভাগ ও গুণ, যোগ ও বিয়োগের আগে করতে হয়। তাই প্রথমে আলাদাভাবে ৪৮ ÷ ৬ এবং ৫ × ৩ হিসাব করো।"
+    - en: "48 ÷ 6 = 8, and 5 × 3 = 15. Now add: 8 + 15. What does that come to?"
+      bn: "৪৮ ÷ ৬ = ৮, এবং ৫ × ৩ = ১৫। এখন যোগ করো: ৮ + ১৫। উত্তরটা কত হয়?"
+
+- grade: 7
+  topic: number_system
+  difficulty: 1
+  question_en: "How many factors does 36 have?"
+  question_bn: "৩৬ সংখ্যাটির কতটি উৎপাদক (factor) আছে?"
+  bn_reviewed: false
+  answer: "9"
+  answer_type: numeric
+  hints:
+    - en: "A factor of a number divides it exactly with no remainder. Start listing numbers from 1 that divide 36 evenly."
+      bn: "কোনো সংখ্যার উৎপাদক হলো সেই সংখ্যাগুলো যা ভাগ করলে কোনো ভাগশেষ থাকে না। ১ থেকে শুরু করে এমন সংখ্যাগুলো লেখো যা ৩৬-কে নিঃশেষে ভাগ করে।"
+    - en: "Check each number: does 2 divide 36? Does 3? Does 5? Does 7? Be systematic — stop when the factor pairs start repeating."
+      bn: "প্রতিটি সংখ্যা পরীক্ষা করো: ২ কি ৩৬-কে ভাগ করে? ৩ কি করে? ৫ কি করে? ৭ কি করে? পদ্ধতিগতভাবে করো — উৎপাদকজোড়া পুনরাবৃত্তি শুরু হলে থামো।"
+    - en: "The factors of 36 are: 1, 2, 3, 4, 6, 9, 12, 18, 36. Count them carefully. How many are there?"
+      bn: "৩৬-এর উৎপাদকগুলো হলো: ১, ২, ৩, ৪, ৬, ৯, ১২, ১৮, ৩৬। সাবধানে গণনা করো। মোট কতটি?"
+
+- grade: 7
+  topic: number_system
+  difficulty: 1
+  question_en: "Find the LCM of 6 and 9."
+  question_bn: "৬ এবং ৯-এর লসাগু (LCM) নির্ণয় করো।"
+  bn_reviewed: false
+  answer: "18"
+  answer_type: numeric
+  hints:
+    - en: "The LCM is the smallest number that both 6 and 9 divide into exactly. Start by listing multiples of the larger number."
+      bn: "লসাগু হলো সেই ক্ষুদ্রতম সংখ্যা যাকে ৬ এবং ৯ উভয়ই নিঃশেষে ভাগ করে। বড় সংখ্যাটির গুণিতকগুলো তালিকা করো।"
+    - en: "Multiples of 9: 9, 18, 27, 36... Check each: which is the first multiple of 9 that is also a multiple of 6?"
+      bn: "৯-এর গুণিতকগুলো: ৯, ১৮, ২৭, ৩৬... প্রতিটি পরীক্ষা করো: ৯-এর কোন প্রথম গুণিতকটি ৬-এরও গুণিতক?"
+    - en: "9 ÷ 6 has a remainder, so 9 is not the LCM. 18 ÷ 6 = 3 (no remainder) and 18 ÷ 9 = 2 (no remainder). So the LCM is 18."
+      bn: "৯ ÷ ৬-এ ভাগশেষ আছে, তাই ৯ লসাগু নয়। ১৮ ÷ ৬ = ৩ (কোনো ভাগশেষ নেই) এবং ১৮ ÷ ৯ = ২ (কোনো ভাগশেষ নেই)। তাই লসাগু হলো ১৮।"
+
+- grade: 7
+  topic: number_system
+  difficulty: 1
+  question_en: "Calculate: (−8) + 15"
+  question_bn: "হিসাব করো: (−৮) + ১৫"
+  bn_reviewed: false
+  answer: "7"
+  answer_type: numeric
+  hints:
+    - en: "When adding a negative number and a positive number, think about a number line — you start at −8 and move 15 steps to the right."
+      bn: "একটি ঋণাত্মক এবং একটি ধনাত্মক সংখ্যা যোগ করার সময়, সংখ্যারেখার কথা ভাবো — −৮ থেকে শুরু করে ডানদিকে ১৫ ধাপ যাও।"
+    - en: "When signs are different, subtract the smaller absolute value from the larger, and keep the sign of the number with the larger absolute value. Which is larger — 8 or 15?"
+      bn: "যখন চিহ্ন ভিন্ন, তখন ছোট পরম মানটি বড় পরম মান থেকে বিয়োগ করো এবং বড় পরম মানের সংখ্যার চিহ্ন রাখো। কোনটি বড় — ৮ না ১৫?"
+    - en: "15 has the larger absolute value (and it is positive). Subtract: 15 − 8 = 7. Keep the positive sign. The answer is +7."
+      bn: "১৫-এর পরম মান বড় (এবং এটি ধনাত্মক)। বিয়োগ করো: ১৫ − ৮ = ৭। ধনাত্মক চিহ্ন রাখো। উত্তর হলো +৭।"
+
+- grade: 7
+  topic: number_system
+  difficulty: 2
+  question_en: "Simplify: (36 + 24) ÷ 5 − 3 × 2"
+  question_bn: "সরল করো: (৩৬ + ২৪) ÷ ৫ − ৩ × ২"
+  bn_reviewed: false
+  answer: "6"
+  answer_type: numeric
+  hints:
+    - en: "BODMAS gives the order: Brackets first, then Division/Multiplication, then Addition/Subtraction. What do you solve first here?"
+      bn: "BODMAS-এর ক্রম: প্রথমে বন্ধনী, তারপর ভাগ/গুণ, তারপর যোগ/বিয়োগ। এখানে প্রথমে কী সমাধান করবে?"
+    - en: "Step 1 — solve the bracket: (36 + 24) = 60. Now the expression is 60 ÷ 5 − 3 × 2. What comes next?"
+      bn: "ধাপ ১ — বন্ধনী সমাধান করো: (৩৬ + ২৪) = ৬০। এখন রাশিটি হলো ৬০ ÷ ৫ − ৩ × ২। পরবর্তী ধাপ কী?"
+    - en: "60 ÷ 5 = 12 and 3 × 2 = 6. Now the expression is 12 − 6. What does that come to?"
+      bn: "৬০ ÷ ৫ = ১২ এবং ৩ × ২ = ৬। এখন রাশিটি হলো ১২ − ৬। উত্তরটা কত হয়?"
+
+- grade: 7
+  topic: number_system
+  difficulty: 2
+  question_en: "A school has 845 students. During the year, 78 new students joined and 35 left. How many students are there now?"
+  question_bn: "একটি স্কুলে ৮৪৫ জন ছাত্রছাত্রী আছে। বছরের মধ্যে ৭৮ জন নতুন ভর্তি হলো এবং ৩৫ জন চলে গেল। এখন স্কুলে কতজন ছাত্রছাত্রী আছে?"
+  bn_reviewed: false
+  answer: "888"
+  answer_type: numeric
+  hints:
+    - en: "When students join, does the total go up or down? When students leave, does it go up or down?"
+      bn: "যখন নতুন ছাত্রছাত্রী ভর্তি হয়, মোট সংখ্যা বাড়ে না কমে? যখন চলে যায়, বাড়ে না কমে?"
+    - en: "New total = Starting number + Students joined − Students left. Fill in the numbers from the problem."
+      bn: "নতুন মোট = শুরুর সংখ্যা + ভর্তি হওয়া − চলে যাওয়া। সমস্যা থেকে সংখ্যাগুলো বসাও।"
+    - en: "845 + 78 = 923. Then 923 − 35. What does that come to?"
+      bn: "৮৪৫ + ৭৮ = ৯২৩। তারপর ৯২৩ − ৩৫। উত্তরটা কত হয়?"
+
+- grade: 7
+  topic: number_system
+  difficulty: 2
+  question_en: "Find the HCF of 48 and 72."
+  question_bn: "৪৮ এবং ৭২-এর গসাগু (HCF) নির্ণয় করো।"
+  bn_reviewed: false
+  answer: "24"
+  answer_type: numeric
+  hints:
+    - en: "The HCF is the largest number that divides both 48 and 72 exactly. List all the factors of each number, then find the largest one they share."
+      bn: "গসাগু হলো সেই বৃহত্তম সংখ্যা যা ৪৮ এবং ৭২ উভয়কেই নিঃশেষে ভাগ করে। প্রতিটি সংখ্যার উৎপাদকগুলো তালিকা করে সবচেয়ে বড় সাধারণ উৎপাদকটি খোঁজো।"
+    - en: "Factors of 48: 1, 2, 3, 4, 6, 8, 12, 16, 24, 48. Factors of 72: 1, 2, 3, 4, 6, 8, 9, 12, 18, 24, 36, 72. Which factors appear in both lists?"
+      bn: "৪৮-এর উৎপাদক: ১, ২, ৩, ৪, ৬, ৮, ১২, ১৬, ২৪, ৪৮। ৭২-এর উৎপাদক: ১, ২, ৩, ৪, ৬, ৮, ৯, ১২, ১৮, ২৪, ৩৬, ৭২। কোন উৎপাদকগুলো উভয় তালিকায় আছে?"
+    - en: "Common factors of 48 and 72: 1, 2, 3, 4, 6, 8, 12, 24. The largest of these is the HCF. What is it?"
+      bn: "৪৮ এবং ৭২-এর সাধারণ উৎপাদক: ১, ২, ৩, ৪, ৬, ৮, ১২, ২৪। এর মধ্যে সবচেয়ে বড়টিই গসাগু। সেটা কত?"
+
+- grade: 7
+  topic: number_system
+  difficulty: 2
+  question_en: "Riya has 24 red beads and 36 blue beads. She wants to make identical necklaces using all the beads, with each necklace having the same number of red and blue beads. What is the maximum number of necklaces she can make?"
+  question_bn: "রিয়ার কাছে ২৪টি লাল মনি আর ৩৬টি নীল মনি আছে। সে সব মনি ব্যবহার করে একই রকম হার তৈরি করতে চায়, যেখানে প্রতিটি হারে লাল ও নীল মনির সংখ্যা সমান থাকবে। সে সর্বাধিক কতটি হার তৈরি করতে পারবে?"
+  bn_reviewed: false
+  answer: "12"
+  answer_type: numeric
+  hints:
+    - en: "Riya wants to split all beads equally across identical necklaces with no beads left over. Think about what kind of problem this is — are you looking for LCM or HCF?"
+      bn: "রিয়া সব মনি কোনো মনি বাদ না রেখে সমানভাবে একই রকম হারে ভাগ করতে চায়। ভাবো এটা কোন ধরনের সমস্যা — লসাগু না গসাগু?"
+    - en: "To split 24 and 36 into equal groups with nothing left over, you need a number that divides both exactly. For the maximum number of necklaces, you want the largest such number — that is the HCF."
+      bn: "২৪ এবং ৩৬-কে কিছু বাদ না রেখে সমান দলে ভাগ করতে, এমন একটি সংখ্যা লাগবে যা উভয়কেই নিঃশেষে ভাগ করে। সর্বাধিক হারের জন্য এটি সবচেয়ে বড় — সেটা হলো গসাগু।"
+    - en: "Factors of 24: 1, 2, 3, 4, 6, 8, 12, 24. Factors of 36: 1, 2, 3, 4, 6, 9, 12, 18, 36. The HCF is the largest common factor. What is it?"
+      bn: "২৪-এর উৎপাদক: ১, ২, ৩, ৪, ৬, ৮, ১২, ২৪। ৩৬-এর উৎপাদক: ১, ২, ৩, ৪, ৬, ৯, ১২, ১৮, ৩৬। গসাগু হলো সবচেয়ে বড় সাধারণ উৎপাদক। সেটা কত?"
+
+- grade: 7
+  topic: number_system
+  difficulty: 2
+  question_en: "Calculate: (−4) × (−6) + 3 × (−5)"
+  question_bn: "হিসাব করো: (−৪) × (−৬) + ৩ × (−৫)"
+  bn_reviewed: false
+  answer: "9"
+  answer_type: numeric
+  hints:
+    - en: "Remember the sign rules for multiplication: negative × negative = positive, positive × negative = negative. Apply BODMAS — multiply first, then add."
+      bn: "গুণের চিহ্নের নিয়ম মনে রাখো: ঋণাত্মক × ঋণাত্মক = ধনাত্মক, ধনাত্মক × ঋণাত্মক = ঋণাত্মক। BODMAS অনুযায়ী — আগে গুণ করো, তারপর যোগ করো।"
+    - en: "(−4) × (−6) = +24 (negative × negative = positive). 3 × (−5) = −15 (positive × negative = negative). Now add: 24 + (−15)."
+      bn: "(−৪) × (−৬) = +২৪ (ঋণাত্মক × ঋণাত্মক = ধনাত্মক)। ৩ × (−৫) = −১৫ (ধনাত্মক × ঋণাত্মক = ঋণাত্মক)। এখন যোগ করো: ২৪ + (−১৫)।"
+    - en: "24 + (−15) means 24 − 15. What does that come to?"
+      bn: "২৪ + (−১৫) মানে ২৪ − ১৫। উত্তরটা কত হয়?"
+
+- grade: 7
+  topic: number_system
+  difficulty: 2
+  question_en: "The temperature in Shimla was −3°C at midnight. By noon it had risen by 11°C. What was the noon temperature in °C?"
+  question_bn: "শিমলায় মধ্যরাতে তাপমাত্রা ছিল −৩°C। দুপুরের মধ্যে তা ১১°C বেড়ে গেল। দুপুরের তাপমাত্রা কত°C ছিল?"
+  bn_reviewed: false
+  answer: "8"
+  answer_type: numeric
+  hints:
+    - en: "The temperature starts at a negative value and rises. On a number line, which direction does an increase take you?"
+      bn: "তাপমাত্রা একটি ঋণাত্মক মান থেকে শুরু করে বাড়ে। সংখ্যারেখায়, বৃদ্ধি কোন দিকে নিয়ে যায়?"
+    - en: "Rising temperature means adding a positive number to the starting temperature. Write it as: (−3) + 11."
+      bn: "তাপমাত্রা বাড়া মানে শুরুর তাপমাত্রায় একটি ধনাত্মক সংখ্যা যোগ করা। এটিকে লেখো: (−৩) + ১১।"
+    - en: "Start at −3 on the number line and count 11 steps to the right. You pass through 0 and continue. Where do you end up?"
+      bn: "সংখ্যারেখায় −৩ থেকে শুরু করে ডানদিকে ১১ ধাপ গণনা করো। ০ পার করে এগিয়ে যাও। কোথায় পৌঁছাও?"
+
+- grade: 7
+  topic: number_system
+  difficulty: 3
+  question_en: "Simplify: 5 × [24 − {8 + (4 × 3 − 6)}]"
+  question_bn: "সরল করো: ৫ × [২৪ − {৮ + (৪ × ৩ − ৬)}]"
+  bn_reviewed: false
+  answer: "50"
+  answer_type: numeric
+  hints:
+    - en: "When multiple types of brackets are used — ( ), { }, [ ] — solve the innermost bracket first, then work outward. Which bracket do you start with?"
+      bn: "যখন একাধিক ধরনের বন্ধনী থাকে — ( ), { }, [ ] — সবচেয়ে ভেতরের বন্ধনী আগে সমাধান করো, তারপর বাইরের দিকে যাও। কোনটি দিয়ে শুরু করবে?"
+    - en: "Start with ( ): 4 × 3 − 6 = 12 − 6 = 6. The expression becomes 5 × [24 − {8 + 6}]. Now solve { }."
+      bn: "প্রথমে ( ) দিয়ে শুরু করো: ৪ × ৩ − ৬ = ১২ − ৬ = ৬। রাশিটি হয়: ৫ × [২৪ − {৮ + ৬}]। এখন { } সমাধান করো।"
+    - en: "{8 + 6} = 14. The expression becomes 5 × [24 − 14] = 5 × 10. What does that come to?"
+      bn: "{৮ + ৬} = ১৪। রাশিটি হয়: ৫ × [২৪ − ১৪] = ৫ × ১০। উত্তরটা কত হয়?"
+
+- grade: 7
+  topic: number_system
+  difficulty: 3
+  question_en: "Two bells in a temple ring at intervals of 8 minutes and 12 minutes. If both ring together at 7:00 am, after how many minutes will they next ring together?"
+  question_bn: "একটি মন্দিরে দুটি ঘণ্টা যথাক্রমে ৮ মিনিট এবং ১২ মিনিট পর পর বাজে। যদি সকাল ৭টায় দুটি একসাথে বাজে, তাহলে কত মিনিট পরে আবার একসাথে বাজবে?"
+  bn_reviewed: false
+  answer: "24"
+  answer_type: numeric
+  hints:
+    - en: "The bells will ring together again at the smallest time that is a multiple of both 8 and 12. Is this an HCF or an LCM problem?"
+      bn: "দুটি ঘণ্টা আবার একসাথে বাজবে সেই ক্ষুদ্রতম সময়ে যা ৮ এবং ১২ উভয়ের গুণিতক। এটা গসাগু না লসাগু-র সমস্যা?"
+    - en: "You need the LCM of 8 and 12. List multiples of 12: 12, 24, 36... Which is the first that is also a multiple of 8?"
+      bn: "তোমার ৮ এবং ১২-এর লসাগু দরকার। ১২-এর গুণিতক তালিকা করো: ১২, ২৪, ৩৬... প্রথম কোনটি ৮-এরও গুণিতক?"
+    - en: "12 ÷ 8 has a remainder, so 12 is not the answer. 24 ÷ 8 = 3 and 24 ÷ 12 = 2 — both exact. LCM = 24. After how many minutes do the bells ring together?"
+      bn: "১২ ÷ ৮-এ ভাগশেষ আছে, তাই ১২ উত্তর নয়। ২৪ ÷ ৮ = ৩ এবং ২৪ ÷ ১২ = ২ — উভয়ই নিঃশেষ। লসাগু = ২৪। কত মিনিট পরে ঘণ্টা দুটি একসাথে বাজবে?"
+
+- grade: 7
+  topic: number_system
+  difficulty: 3
+  question_en: "Calculate: (−12) + 5"
+  question_bn: "হিসাব করো: (−১২) + ৫"
+  bn_reviewed: false
+  answer: "-7"
+  answer_type: numeric
+  hints:
+    - en: "When adding a negative and a positive number, think about direction on a number line. Starting at −12 and moving 5 steps to the right, do you cross zero?"
+      bn: "ঋণাত্মক ও ধনাত্মক সংখ্যা যোগ করার সময়, সংখ্যারেখায় দিক সম্পর্কে ভাবো। −১২ থেকে শুরু করে ডানদিকে ৫ ধাপ গেলে কি শূন্য পার করবে?"
+    - en: "The absolute values are 12 and 5. 12 is larger, so the answer keeps the negative sign. Subtract the smaller from the larger: 12 − 5."
+      bn: "পরম মান দুটি হলো ১২ এবং ৫। ১২ বড়, তাই উত্তর ঋণাত্মক চিহ্ন রাখবে। ছোটটি বড়টি থেকে বিয়োগ করো: ১২ − ৫।"
+    - en: "12 − 5 = 7, and we keep the negative sign (since 12 > 5). The answer is −7."
+      bn: "১২ − ৫ = ৭, এবং ঋণাত্মক চিহ্ন রাখি (কারণ ১২ > ৫)। উত্তর হলো −৭।"
+
+- grade: 7
+  topic: number_system
+  difficulty: 3
+  question_en: "A submarine is at a depth of −240 m below sea level. It rises 75 m, then descends 30 m. What is its final depth in metres?"
+  question_bn: "একটি সাবমেরিন সমুদ্রপৃষ্ঠের ২৪০ মিটার নিচে (−২৪০ মি) আছে। এটি ৭৫ মিটার ওপরে ওঠে, তারপর ৩০ মিটার নামে। সাবমেরিনের চূড়ান্ত গভীরতা কত মিটার?"
+  bn_reviewed: false
+  answer: "-195"
+  answer_type: numeric
+  hints:
+    - en: "Depth below sea level is a negative number. Rising means adding a positive value; descending means subtracting. Write this as a single integer expression."
+      bn: "সমুদ্রপৃষ্ঠের নিচের গভীরতা ঋণাত্মক সংখ্যা। ওপরে ওঠা মানে ধনাত্মক মান যোগ করা; নামা মানে বিয়োগ করা। এটিকে একটি পূর্ণসংখ্যার রাশি হিসেবে লেখো।"
+    - en: "The expression is: −240 + 75 − 30. Solve step by step — first add 75 to −240."
+      bn: "রাশিটি হলো: −২৪০ + ৭৫ − ৩০। ধাপে ধাপে সমাধান করো — প্রথমে −২৪০-এ ৭৫ যোগ করো।"
+    - en: "−240 + 75 = −165. Now subtract 30: −165 − 30. The submarine is still below sea level, so the answer is negative."
+      bn: "−২৪০ + ৭৫ = −১৬৫। এখন ৩০ বিয়োগ করো: −১৬৫ − ৩০। সাবমেরিন এখনও সমুদ্রপৃষ্ঠের নিচে আছে, তাই উত্তর ঋণাত্মক।"

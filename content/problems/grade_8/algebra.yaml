@@ -1,0 +1,284 @@
+# Algebra — Grade 8
+# WBBSE Chapter: Linear Equations (both sides), Word Problems, Factorisation, Algebraic Identities
+# 17 / 17 problems complete ✅
+# Difficulty: 7 easy (1), 7 medium (2), 3 hard (3)
+# bn_reviewed: false — Bengali drafts pending native speaker review
+
+problems:
+  # --- EASY (difficulty 1) ---
+
+  - grade: 8
+    topic: algebra
+    difficulty: 1
+    question_en: "Solve for x: 5x − 3 = 2x + 9"
+    question_bn: "x এর জন্য সমাধান করো: 5x − 3 = 2x + 9"
+    bn_reviewed: false
+    answer: "4"
+    answer_type: numeric
+    hints:
+      - en: "There are x terms on both sides. Move all x terms to one side and all numbers to the other."
+        bn: "উভয়পক্ষে x পদ আছে। সব x পদ একদিকে এবং সব সংখ্যা অন্যদিকে নিয়ে যাও।"
+      - en: "Subtract 2x from both sides: 3x − 3 = 9. Then add 3 to both sides: 3x = 12."
+        bn: "উভয়পক্ষ থেকে 2x বিয়োগ করো: 3x − 3 = 9। তারপর উভয়পক্ষে ৩ যোগ করো: 3x = 12।"
+      - en: "x = 12 ÷ 3 = 4."
+        bn: "x = 12 ÷ 3 = 4।"
+
+  - grade: 8
+    topic: algebra
+    difficulty: 1
+    question_en: "Expand using the identity: (x + 5)²"
+    question_bn: "সূত্র ব্যবহার করে বিস্তার করো: (x + 5)²"
+    bn_reviewed: false
+    answer: "x² + 10x + 25"
+    answer_type: text
+    hints:
+      - en: "Use the identity (a + b)² = a² + 2ab + b². Here a = x and b = 5."
+        bn: "সূত্র ব্যবহার করো: (a + b)² = a² + 2ab + b²। এখানে a = x এবং b = 5।"
+      - en: "a² = x², 2ab = 2 × x × 5 = 10x, b² = 5² = 25."
+        bn: "a² = x², 2ab = 2 × x × 5 = 10x, b² = 5² = 25।"
+      - en: "(x + 5)² = x² + 10x + 25."
+        bn: "(x + 5)² = x² + 10x + 25।"
+
+  - grade: 8
+    topic: algebra
+    difficulty: 1
+    question_en: "Factorise: 6x² + 9x"
+    question_bn: "উৎপাদকে বিশ্লেষণ করো: 6x² + 9x"
+    bn_reviewed: false
+    answer: "3x(2x + 3)"
+    answer_type: text
+    hints:
+      - en: "Look for the highest common factor (HCF) of all terms. Both 6x² and 9x are divisible by what?"
+        bn: "সকল পদের সর্বোচ্চ সাধারণ গুণনীয়ক (HCF) খোঁজো। 6x² এবং 9x উভয়ই কী দিয়ে ভাগ যায়?"
+      - en: "HCF of 6x² and 9x = 3x. Take 3x outside the bracket: 3x(? + ?)."
+        bn: "6x² এবং 9x এর HCF = 3x। বন্ধনীর বাইরে 3x নিয়ে যাও: 3x(? + ?)।"
+      - en: "6x² ÷ 3x = 2x. 9x ÷ 3x = 3. So 6x² + 9x = 3x(2x + 3)."
+        bn: "6x² ÷ 3x = 2x। 9x ÷ 3x = 3। তাই 6x² + 9x = 3x(2x + 3)।"
+
+  - grade: 8
+    topic: algebra
+    difficulty: 1
+    question_en: "Expand using the identity: (a − 4)²"
+    question_bn: "সূত্র ব্যবহার করে বিস্তার করো: (a − 4)²"
+    bn_reviewed: false
+    answer: "a² − 8a + 16"
+    answer_type: text
+    hints:
+      - en: "Use the identity (a − b)² = a² − 2ab + b². Here the first term is a and b = 4."
+        bn: "সূত্র ব্যবহার করো: (a − b)² = a² − 2ab + b²। এখানে প্রথম পদ a এবং b = 4।"
+      - en: "a² = a², 2ab = 2 × a × 4 = 8a, b² = 4² = 16."
+        bn: "a² = a², 2ab = 2 × a × 4 = 8a, b² = 4² = 16।"
+      - en: "(a − 4)² = a² − 8a + 16."
+        bn: "(a − 4)² = a² − 8a + 16।"
+
+  - grade: 8
+    topic: algebra
+    difficulty: 1
+    question_en: "Solve for y: 4y + 7 = y + 22"
+    question_bn: "y এর জন্য সমাধান করো: 4y + 7 = y + 22"
+    bn_reviewed: false
+    answer: "5"
+    answer_type: numeric
+    hints:
+      - en: "Collect all y terms on one side and constants on the other."
+        bn: "সব y পদ একদিকে এবং ধ্রুবক অন্যদিকে নাও।"
+      - en: "Subtract y from both sides: 3y + 7 = 22. Subtract 7 from both sides: 3y = 15."
+        bn: "উভয়পক্ষ থেকে y বিয়োগ করো: 3y + 7 = 22। উভয়পক্ষ থেকে ৭ বিয়োগ করো: 3y = 15।"
+      - en: "y = 15 ÷ 3 = 5."
+        bn: "y = 15 ÷ 3 = 5।"
+
+  - grade: 8
+    topic: algebra
+    difficulty: 1
+    question_en: "Use the identity (a + b)(a − b) = a² − b² to find the value of 52 × 48."
+    question_bn: "সূত্র (a + b)(a − b) = a² − b² ব্যবহার করে 52 × 48 এর মান নির্ণয় করো।"
+    bn_reviewed: false
+    answer: "2496"
+    answer_type: numeric
+    hints:
+      - en: "Notice that 52 = 50 + 2 and 48 = 50 − 2. So 52 × 48 = (50 + 2)(50 − 2)."
+        bn: "লক্ষ করো: 52 = 50 + 2 এবং 48 = 50 − 2। তাই 52 × 48 = (50 + 2)(50 − 2)।"
+      - en: "Apply the identity with a = 50 and b = 2: (50 + 2)(50 − 2) = 50² − 2²."
+        bn: "a = 50 এবং b = 2 দিয়ে সূত্র প্রয়োগ করো: (50 + 2)(50 − 2) = 50² − 2²।"
+      - en: "50² − 2² = 2500 − 4 = 2496."
+        bn: "50² − 2² = 2500 − 4 = 2496।"
+
+  - grade: 8
+    topic: algebra
+    difficulty: 1
+    question_en: "Factorise: x² − 49"
+    question_bn: "উৎপাদকে বিশ্লেষণ করো: x² − 49"
+    bn_reviewed: false
+    answer: "(x + 7)(x − 7)"
+    answer_type: text
+    hints:
+      - en: "x² − 49 is a difference of two squares. Recognise the pattern: a² − b² = (a + b)(a − b)."
+        bn: "x² − 49 দুটি বর্গের বিয়োগফল। প্যাটার্নটি চিনতে পারো: a² − b² = (a + b)(a − b)।"
+      - en: "Here a = x (since x² = (x)²) and b = 7 (since 49 = 7²)."
+        bn: "এখানে a = x (কারণ x² = (x)²) এবং b = 7 (কারণ 49 = 7²)।"
+      - en: "x² − 49 = (x + 7)(x − 7)."
+        bn: "x² − 49 = (x + 7)(x − 7)।"
+
+  # --- MEDIUM (difficulty 2) ---
+
+  - grade: 8
+    topic: algebra
+    difficulty: 2
+    question_en: "Solve: (x + 4)/3 = (x − 2)/2 + 1"
+    question_bn: "সমাধান করো: (x + 4)/3 = (x − 2)/2 + 1"
+    bn_reviewed: false
+    answer: "8"
+    answer_type: numeric
+    hints:
+      - en: "Eliminate fractions by multiplying every term by the LCM of the denominators (LCM of 2 and 3 = 6)."
+        bn: "হরের LCM (২ এবং ৩ এর LCM = ৬) দিয়ে প্রতিটি পদ গুণ করে ভগ্নাংশ দূর করো।"
+      - en: "Multiply through by 6: 2(x + 4) = 3(x − 2) + 6. Expand: 2x + 8 = 3x − 6 + 6 → 2x + 8 = 3x."
+        bn: "৬ দিয়ে গুণ করো: 2(x + 4) = 3(x − 2) + 6। বিস্তার করো: 2x + 8 = 3x − 6 + 6 → 2x + 8 = 3x।"
+      - en: "8 = 3x − 2x → x = 8."
+        bn: "8 = 3x − 2x → x = 8।"
+
+  - grade: 8
+    topic: algebra
+    difficulty: 2
+    question_en: "Sumon is twice Mim's age. Five years ago, he was three times her age. What is Mim's current age?"
+    question_bn: "সুমন মিমের বয়সের দ্বিগুণ। পাঁচ বছর আগে সুমনের বয়স মিমের তিনগুণ ছিল। মিমের বর্তমান বয়স কত?"
+    bn_reviewed: false
+    answer: "10"
+    answer_type: numeric
+    hints:
+      - en: "Let Mim's current age = x. Then Sumon's current age = 2x. Five years ago: Mim = x − 5, Sumon = 2x − 5."
+        bn: "মিমের বর্তমান বয়স = x ধরো। তাহলে সুমনের বয়স = 2x। পাঁচ বছর আগে: মিম = x − 5, সুমন = 2x − 5।"
+      - en: "Five years ago, Sumon was 3 times Mim's age: 2x − 5 = 3(x − 5). Expand: 2x − 5 = 3x − 15."
+        bn: "পাঁচ বছর আগে সুমনের বয়স মিমের তিনগুণ ছিল: 2x − 5 = 3(x − 5)। বিস্তার করো: 2x − 5 = 3x − 15।"
+      - en: "15 − 5 = 3x − 2x → x = 10. Mim is 10, Sumon is 20. Check: 5 years ago, Mim = 5, Sumon = 15 = 3 × 5. ✓"
+        bn: "15 − 5 = 3x − 2x → x = 10। মিমের বয়স ১০, সুমনের ২০। যাচাই: ৫ বছর আগে মিম = ৫, সুমন = ১৫ = ৩ × ৫। ✓"
+
+  - grade: 8
+    topic: algebra
+    difficulty: 2
+    question_en: "Factorise: 4x² − 36"
+    question_bn: "উৎপাদকে বিশ্লেষণ করো: 4x² − 36"
+    bn_reviewed: false
+    answer: "4(x + 3)(x − 3)"
+    answer_type: text
+    hints:
+      - en: "First, take out the common numerical factor. Both 4x² and 36 are divisible by 4."
+        bn: "প্রথমে সাধারণ সংখ্যাসূচক গুণনীয়ক বের করো। 4x² এবং 36 উভয়ই ৪ দিয়ে বিভাজ্য।"
+      - en: "4x² − 36 = 4(x² − 9). Now x² − 9 is a difference of two squares."
+        bn: "4x² − 36 = 4(x² − 9)। এখন x² − 9 হলো দুটি বর্গের বিয়োগফল।"
+      - en: "x² − 9 = (x + 3)(x − 3). So 4x² − 36 = 4(x + 3)(x − 3)."
+        bn: "x² − 9 = (x + 3)(x − 3)। তাই 4x² − 36 = 4(x + 3)(x − 3)।"
+
+  - grade: 8
+    topic: algebra
+    difficulty: 2
+    question_en: "If (x + y)² = 100 and xy = 16, find x² + y²."
+    question_bn: "যদি (x + y)² = 100 এবং xy = 16 হয়, তাহলে x² + y² এর মান কত?"
+    bn_reviewed: false
+    answer: "68"
+    answer_type: numeric
+    hints:
+      - en: "Use the identity (x + y)² = x² + 2xy + y². This connects (x + y)², xy, and x² + y²."
+        bn: "সূত্র ব্যবহার করো: (x + y)² = x² + 2xy + y²। এটি (x + y)², xy এবং x² + y² কে সংযুক্ত করে।"
+      - en: "Substitute: 100 = x² + y² + 2(16) = x² + y² + 32."
+        bn: "প্রতিস্থাপন করো: 100 = x² + y² + 2(16) = x² + y² + 32।"
+      - en: "x² + y² = 100 − 32 = 68."
+        bn: "x² + y² = 100 − 32 = 68।"
+
+  - grade: 8
+    topic: algebra
+    difficulty: 2
+    question_en: "Factorise: x² + 7x + 12"
+    question_bn: "উৎপাদকে বিশ্লেষণ করো: x² + 7x + 12"
+    bn_reviewed: false
+    answer: "(x + 3)(x + 4)"
+    answer_type: text
+    hints:
+      - en: "To factorise x² + bx + c, find two numbers that multiply to give c (12) and add to give b (7)."
+        bn: "x² + bx + c উৎপাদকে বিশ্লেষণ করতে, দুটি সংখ্যা খোঁজো যাদের গুণফল c (12) এবং যোগফল b (7)।"
+      - en: "Factors of 12: (1,12), (2,6), (3,4). Which pair adds to 7? Answer: 3 and 4."
+        bn: "১২ এর গুণনীয়ক: (1,12), (2,6), (3,4)। কোন জোড়ার যোগফল ৭? উত্তর: ৩ এবং ৪।"
+      - en: "x² + 7x + 12 = (x + 3)(x + 4)."
+        bn: "x² + 7x + 12 = (x + 3)(x + 4)।"
+
+  - grade: 8
+    topic: algebra
+    difficulty: 2
+    question_en: "Solve: 3(x + 2) + 2(x − 1) = 4(x + 3) − 5"
+    question_bn: "সমাধান করো: 3(x + 2) + 2(x − 1) = 4(x + 3) − 5"
+    bn_reviewed: false
+    answer: "3"
+    answer_type: numeric
+    hints:
+      - en: "Expand all brackets on both sides first."
+        bn: "প্রথমে উভয়পক্ষের সব বন্ধনী বিস্তার করো।"
+      - en: "LHS: 3x + 6 + 2x − 2 = 5x + 4. RHS: 4x + 12 − 5 = 4x + 7. Equation: 5x + 4 = 4x + 7."
+        bn: "বামপক্ষ: 3x + 6 + 2x − 2 = 5x + 4। ডানপক্ষ: 4x + 12 − 5 = 4x + 7। সমীকরণ: 5x + 4 = 4x + 7।"
+      - en: "5x − 4x = 7 − 4 → x = 3."
+        bn: "5x − 4x = 7 − 4 → x = 3।"
+
+  - grade: 8
+    topic: algebra
+    difficulty: 2
+    question_en: "A shopkeeper sells x items at ₹45 each. His total revenue is ₹630. Find x."
+    question_bn: "একজন দোকানদার প্রতিটি ₹৪৫ দামে x টি জিনিস বিক্রি করে। মোট আয় ₹৬৩০। x এর মান কত?"
+    bn_reviewed: false
+    answer: "14"
+    answer_type: numeric
+    hints:
+      - en: "Total revenue = price per item × number of items. Write this as an equation."
+        bn: "মোট আয় = প্রতিটির দাম × জিনিসের সংখ্যা। এটি সমীকরণ হিসেবে লেখো।"
+      - en: "45 × x = 630 → 45x = 630."
+        bn: "45 × x = 630 → 45x = 630।"
+      - en: "x = 630 ÷ 45 = 14."
+        bn: "x = 630 ÷ 45 = 14।"
+
+  # --- HARD (difficulty 3) ---
+
+  - grade: 8
+    topic: algebra
+    difficulty: 3
+    question_en: "Solve: (2x − 3)/5 − (x − 4)/3 = 1"
+    question_bn: "সমাধান করো: (2x − 3)/5 − (x − 4)/3 = 1"
+    bn_reviewed: false
+    answer: "4"
+    answer_type: numeric
+    hints:
+      - en: "Multiply every term by the LCM of 5 and 3, which is 15."
+        bn: "৫ এবং ৩ এর LCM = ১৫। প্রতিটি পদকে ১৫ দিয়ে গুণ করো।"
+      - en: "15 × (2x − 3)/5 − 15 × (x − 4)/3 = 15 × 1 → 3(2x − 3) − 5(x − 4) = 15. Expand: 6x − 9 − 5x + 20 = 15."
+        bn: "15 × (2x − 3)/5 − 15 × (x − 4)/3 = 15 → 3(2x − 3) − 5(x − 4) = 15। বিস্তার করো: 6x − 9 − 5x + 20 = 15।"
+      - en: "x + 11 = 15 → x = 4."
+        bn: "x + 11 = 15 → x = 4।"
+
+  - grade: 8
+    topic: algebra
+    difficulty: 3
+    question_en: "The sum of digits of a two-digit number is 9. If the digits are reversed, the new number is 9 less than the original. Find the original number."
+    question_bn: "একটি দুই অঙ্কের সংখ্যার অঙ্কগুলোর যোগফল ৯। অঙ্কদুটি উল্টালে নতুন সংখ্যাটি মূলটির চেয়ে ৯ কম হয়। মূল সংখ্যাটি কত?"
+    bn_reviewed: false
+    answer: "54"
+    answer_type: numeric
+    hints:
+      - en: "Let the tens digit = t and units digit = u. The number = 10t + u. The reversed number = 10u + t. Set up two equations: (1) t + u = 9, (2) 10t + u − (10u + t) = 9."
+        bn: "দশকের অঙ্ক = t এবং এককের অঙ্ক = u ধরো। সংখ্যা = 10t + u। উল্টানো সংখ্যা = 10u + t। দুটি সমীকরণ: (1) t + u = 9, (2) 10t + u − (10u + t) = 9।"
+      - en: "Simplify equation (2): 9t − 9u = 9 → t − u = 1. Now solve: t + u = 9 and t − u = 1."
+        bn: "সমীকরণ (2) সরল করো: 9t − 9u = 9 → t − u = 1। এখন সমাধান করো: t + u = 9 এবং t − u = 1।"
+      - en: "Add the two equations: 2t = 10 → t = 5. Then u = 9 − 5 = 4. Original number = 54."
+        bn: "দুটি সমীকরণ যোগ করো: 2t = 10 → t = 5। তারপর u = 9 − 5 = 4। মূল সংখ্যা = 54।"
+
+  - grade: 8
+    topic: algebra
+    difficulty: 3
+    question_en: "If x + 1/x = 5, find the value of x² + 1/x²."
+    question_bn: "যদি x + 1/x = 5 হয়, তাহলে x² + 1/x² এর মান কত?"
+    bn_reviewed: false
+    answer: "23"
+    answer_type: numeric
+    hints:
+      - en: "Square both sides of x + 1/x = 5. Use the identity (a + b)² = a² + 2ab + b²."
+        bn: "x + 1/x = 5 এর উভয়পক্ষ বর্গ করো। সূত্র ব্যবহার করো: (a + b)² = a² + 2ab + b²।"
+      - en: "(x + 1/x)² = x² + 2(x)(1/x) + (1/x)² = x² + 2 + 1/x². So 5² = x² + 2 + 1/x²."
+        bn: "(x + 1/x)² = x² + 2(x)(1/x) + (1/x)² = x² + 2 + 1/x²। তাই 5² = x² + 2 + 1/x²।"
+      - en: "25 = x² + 1/x² + 2 → x² + 1/x² = 25 − 2 = 23."
+        bn: "25 = x² + 1/x² + 2 → x² + 1/x² = 25 − 2 = 23।"

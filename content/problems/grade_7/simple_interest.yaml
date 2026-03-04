@@ -1,0 +1,172 @@
+# Simple Interest — Grade 7
+# WBBSE Chapter: Simple Interest — finding SI, Principal, Rate, Time
+# 10 / 10 problems complete ✅
+# Difficulty: 4 easy (1), 4 medium (2), 2 hard (3)
+# bn_reviewed: false — Bengali drafts pending native speaker review
+
+problems:
+  # --- EASY (difficulty 1) ---
+
+  - grade: 7
+    topic: simple_interest
+    difficulty: 1
+    question_en: "Find the Simple Interest on ₹1000 at 5% per annum for 2 years."
+    question_bn: "₹১০০০ এর উপর বার্ষিক ৫% হারে ২ বছরের সুদ নির্ণয় করো।"
+    bn_reviewed: false
+    answer: "100"
+    answer_type: numeric
+    hints:
+      - en: "The formula for Simple Interest is: SI = (P × R × T) / 100, where P = Principal, R = Rate%, T = Time in years."
+        bn: "সরল সুদের সূত্র: SI = (P × R × T) / 100, যেখানে P = মূলধন, R = সুদের হার%, T = সময় (বছরে)।"
+      - en: "Here P = ₹1000, R = 5, T = 2. Substitute: SI = (1000 × 5 × 2) / 100."
+        bn: "এখানে P = ₹1000, R = 5, T = 2। প্রতিস্থাপন করো: SI = (1000 × 5 × 2) / 100।"
+      - en: "SI = 10000 / 100 = ₹100."
+        bn: "SI = 10000 / 100 = ₹100।"
+
+  - grade: 7
+    topic: simple_interest
+    difficulty: 1
+    question_en: "Find the Simple Interest on ₹2500 at 8% per annum for 3 years."
+    question_bn: "₹২৫০০ এর উপর বার্ষিক ৮% হারে ৩ বছরের সরল সুদ নির্ণয় করো।"
+    bn_reviewed: false
+    answer: "600"
+    answer_type: numeric
+    hints:
+      - en: "Use SI = (P × R × T) / 100 with P = 2500, R = 8, T = 3."
+        bn: "SI = (P × R × T) / 100 সূত্র ব্যবহার করো: P = 2500, R = 8, T = 3।"
+      - en: "SI = (2500 × 8 × 3) / 100 = 60000 / 100."
+        bn: "SI = (2500 × 8 × 3) / 100 = 60000 / 100।"
+      - en: "SI = ₹600."
+        bn: "SI = ₹600।"
+
+  - grade: 7
+    topic: simple_interest
+    difficulty: 1
+    question_en: "Mohan deposits ₹5000 in a bank at 6% per annum. What is the total amount he receives after 2 years?"
+    question_bn: "মোহন ₹৫০০০ ব্যাংকে বার্ষিক ৬% সুদে রাখে। ২ বছর পরে সে মোট কত পাবে?"
+    bn_reviewed: false
+    answer: "5600"
+    answer_type: numeric
+    hints:
+      - en: "First find the Simple Interest, then add it to the Principal to get the total Amount."
+        bn: "প্রথমে সরল সুদ বের করো, তারপর মূলধনের সাথে যোগ করে মোট পরিমাণ পাও।"
+      - en: "SI = (5000 × 6 × 2) / 100 = 60000 / 100 = ₹600. Amount = Principal + SI."
+        bn: "SI = (5000 × 6 × 2) / 100 = 60000 / 100 = ₹600। পরিমাণ = মূলধন + সুদ।"
+      - en: "Amount = ₹5000 + ₹600 = ₹5600."
+        bn: "পরিমাণ = ₹5000 + ₹600 = ₹5600।"
+
+  - grade: 7
+    topic: simple_interest
+    difficulty: 1
+    question_en: "Find the Simple Interest on ₹800 at 10% per annum for 1 year and 6 months."
+    question_bn: "₹৮০০ এর উপর বার্ষিক ১০% হারে ১ বছর ৬ মাসের সরল সুদ নির্ণয় করো।"
+    bn_reviewed: false
+    answer: "120"
+    answer_type: numeric
+    hints:
+      - en: "Convert the time to years first. 1 year 6 months = 1 + 6/12 = 1.5 years."
+        bn: "প্রথমে সময়কে বছরে রূপান্তর করো। ১ বছর ৬ মাস = 1 + 6/12 = 1.5 বছর।"
+      - en: "SI = (P × R × T) / 100 = (800 × 10 × 1.5) / 100 = 12000 / 100."
+        bn: "SI = (P × R × T) / 100 = (800 × 10 × 1.5) / 100 = 12000 / 100।"
+      - en: "SI = ₹120."
+        bn: "SI = ₹120।"
+
+  # --- MEDIUM (difficulty 2) ---
+
+  - grade: 7
+    topic: simple_interest
+    difficulty: 2
+    question_en: "The Simple Interest on a sum for 4 years at 6% per annum is ₹360. Find the Principal."
+    question_bn: "একটি মূলধনের উপর ৪ বছরে বার্ষিক ৬% হারে সরল সুদ ₹৩৬০। মূলধন কত?"
+    bn_reviewed: false
+    answer: "1500"
+    answer_type: numeric
+    hints:
+      - en: "Rearrange the SI formula to find P: P = (SI × 100) / (R × T)."
+        bn: "P বের করতে SI সূত্র পুনর্বিন্যাস করো: P = (SI × 100) / (R × T)।"
+      - en: "P = (360 × 100) / (6 × 4) = 36000 / 24."
+        bn: "P = (360 × 100) / (6 × 4) = 36000 / 24।"
+      - en: "P = ₹1500."
+        bn: "P = ₹1500।"
+
+  - grade: 7
+    topic: simple_interest
+    difficulty: 2
+    question_en: "A principal of ₹2000 earns a Simple Interest of ₹400 in 5 years. What is the rate of interest per annum?"
+    question_bn: "₹২০০০ মূলধনে ৫ বছরে ₹৪০০ সরল সুদ হয়। বার্ষিক সুদের হার কত?"
+    bn_reviewed: false
+    answer: "4"
+    answer_type: numeric
+    hints:
+      - en: "Rearrange the SI formula to find R: R = (SI × 100) / (P × T)."
+        bn: "R বের করতে SI সূত্র পুনর্বিন্যাস করো: R = (SI × 100) / (P × T)।"
+      - en: "R = (400 × 100) / (2000 × 5) = 40000 / 10000."
+        bn: "R = (400 × 100) / (2000 × 5) = 40000 / 10000।"
+      - en: "R = 4% per annum."
+        bn: "R = বার্ষিক ৪%।"
+
+  - grade: 7
+    topic: simple_interest
+    difficulty: 2
+    question_en: "Find the time in years for ₹3000 to earn a Simple Interest of ₹720 at 8% per annum."
+    question_bn: "বার্ষিক ৮% হারে ₹৩০০০ এর উপর ₹৭২০ সরল সুদ পেতে কত বছর লাগবে?"
+    bn_reviewed: false
+    answer: "3"
+    answer_type: numeric
+    hints:
+      - en: "Rearrange the SI formula to find T: T = (SI × 100) / (P × R)."
+        bn: "T বের করতে SI সূত্র পুনর্বিন্যাস করো: T = (SI × 100) / (P × R)।"
+      - en: "T = (720 × 100) / (3000 × 8) = 72000 / 24000."
+        bn: "T = (720 × 100) / (3000 × 8) = 72000 / 24000।"
+      - en: "T = 3 years."
+        bn: "T = 3 বছর।"
+
+  - grade: 7
+    topic: simple_interest
+    difficulty: 2
+    question_en: "Neha deposits ₹4500 in a savings account at 7% per annum Simple Interest. What is the total amount after 3 years?"
+    question_bn: "নেহা ₹৪৫০০ সঞ্চয় হিসাবে বার্ষিক ৭% সরল সুদে রাখে। ৩ বছর পরে মোট পরিমাণ কত?"
+    bn_reviewed: false
+    answer: "5445"
+    answer_type: numeric
+    hints:
+      - en: "SI = (P × R × T) / 100 = (4500 × 7 × 3) / 100. Then Amount = P + SI."
+        bn: "SI = (P × R × T) / 100 = (4500 × 7 × 3) / 100। তারপর পরিমাণ = P + SI।"
+      - en: "SI = 94500 / 100 = ₹945. Amount = ₹4500 + ₹945."
+        bn: "SI = 94500 / 100 = ₹945। পরিমাণ = ₹4500 + ₹945।"
+      - en: "Amount = ₹5445."
+        bn: "পরিমাণ = ₹5445।"
+
+  # --- HARD (difficulty 3) ---
+
+  - grade: 7
+    topic: simple_interest
+    difficulty: 3
+    question_en: "A sum of money doubles itself in 10 years at Simple Interest. What is the annual rate of interest?"
+    question_bn: "একটি মূলধন সরল সুদে ১০ বছরে দ্বিগুণ হয়ে যায়। বার্ষিক সুদের হার কত?"
+    bn_reviewed: false
+    answer: "10"
+    answer_type: numeric
+    hints:
+      - en: "If a sum P doubles, the amount becomes 2P. This means SI = Amount − Principal = 2P − P = P."
+        bn: "মূলধন P দ্বিগুণ হলে পরিমাণ হয় 2P। অর্থাৎ SI = পরিমাণ − মূলধন = 2P − P = P।"
+      - en: "Since SI = P, use the formula: P = (P × R × 10) / 100. The P cancels out: 1 = 10R/100."
+        bn: "যেহেতু SI = P, সূত্র ব্যবহার করো: P = (P × R × 10) / 100। P বাতিল হয়: 1 = 10R/100।"
+      - en: "10R = 100 → R = 10% per annum."
+        bn: "10R = 100 → R = বার্ষিক ১০%।"
+
+  - grade: 7
+    topic: simple_interest
+    difficulty: 3
+    question_en: "Ravi borrowed ₹6000, partly at 5% and the rest at 7% per annum. After 2 years, the total interest paid was ₹820. How much was borrowed at 5%?"
+    question_bn: "রবি ₹৬০০০ ধার নিয়েছে, কিছু অংশ বার্ষিক ৫% এবং বাকি ৭% সুদে। ২ বছর পরে মোট সুদ ₹৮২০ দিয়েছে। ৫% সুদে কত ধার নিয়েছিল?"
+    bn_reviewed: false
+    answer: "500"
+    answer_type: numeric
+    hints:
+      - en: "Let amount at 5% = x. Then amount at 7% = 6000 − x. Write the total interest equation."
+        bn: "৫% সুদে পরিমাণ = x ধরো। তাহলে ৭% সুদে পরিমাণ = 6000 − x। মোট সুদের সমীকরণ লেখো।"
+      - en: "Total SI: (x × 5 × 2)/100 + ((6000 − x) × 7 × 2)/100 = 820. Multiply through by 100: 10x + 14(6000 − x) = 82000."
+        bn: "মোট SI: (x × 5 × 2)/100 + ((6000 − x) × 7 × 2)/100 = 820। ১০০ দিয়ে গুণ করো: 10x + 14(6000 − x) = 82000।"
+      - en: "10x + 84000 − 14x = 82000 → −4x = −2000 → x = ₹500."
+        bn: "10x + 84000 − 14x = 82000 → −4x = −2000 → x = ₹500।"

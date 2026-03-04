@@ -1,0 +1,172 @@
+# Grade 8 — Geometry
+# WBBSE Chapter 6
+# Status: 10 / 10 problems complete ✅
+# Bengali translations: all flagged for native speaker review (bn_reviewed: false)
+# Hints schema: bilingual objects {en, bn}
+
+problems:
+  # --- EASY (difficulty 1) ---
+
+  - grade: 8
+    topic: geometry
+    difficulty: 1
+    question_en: "A right-angled triangle has legs of length 3 cm and 4 cm. Find the length of the hypotenuse."
+    question_bn: "একটি সমকোণী ত্রিভুজের দুটি সমকোণ-সংলগ্ন বাহু ৩ সেমি এবং ৪ সেমি। অতিভুজের দৈর্ঘ্য নির্ণয় করো।"
+    bn_reviewed: false
+    answer: "5"
+    answer_type: numeric
+    hints:
+      - en: "In a right-angled triangle, the longest side is called the hypotenuse. There is a famous theorem that connects the three sides."
+        bn: "সমকোণী ত্রিভুজে সবচেয়ে বড় বাহুকে অতিভুজ বলে। তিনটি বাহুকে সংযুক্ত করার একটি বিখ্যাত উপপাদ্য আছে।"
+      - en: "Pythagoras theorem: hypotenuse² = leg₁² + leg₂². Here hypotenuse² = 3² + 4²."
+        bn: "পিথাগোরাসের উপপাদ্য: অতিভুজ² = বাহু₁² + বাহু₂²। এখানে অতিভুজ² = 3² + 4²।"
+      - en: "hypotenuse² = 9 + 16 = 25. So hypotenuse = √25 = 5 cm."
+        bn: "অতিভুজ² = 9 + 16 = 25। তাই অতিভুজ = √25 = ৫ সেমি।"
+
+  - grade: 8
+    topic: geometry
+    difficulty: 1
+    question_en: "A right-angled triangle has legs of length 5 cm and 12 cm. Find the length of the hypotenuse."
+    question_bn: "একটি সমকোণী ত্রিভুজের দুটি সমকোণ-সংলগ্ন বাহু ৫ সেমি এবং ১২ সেমি। অতিভুজের দৈর্ঘ্য নির্ণয় করো।"
+    bn_reviewed: false
+    answer: "13"
+    answer_type: numeric
+    hints:
+      - en: "Recall Pythagoras theorem — the square of the hypotenuse equals the sum of the squares of the other two sides."
+        bn: "পিথাগোরাসের উপপাদ্য মনে করো — অতিভুজের বর্গ অপর দুটি বাহুর বর্গের সমষ্টির সমান।"
+      - en: "hypotenuse² = 5² + 12². Calculate each square: 5² = 25, 12² = 144."
+        bn: "অতিভুজ² = 5² + 12²। প্রতিটি বর্গ হিসাব করো: 5² = 25, 12² = 144।"
+      - en: "hypotenuse² = 25 + 144 = 169. So hypotenuse = √169 = 13 cm."
+        bn: "অতিভুজ² = 25 + 144 = 169। তাই অতিভুজ = √169 = ১৩ সেমি।"
+
+  - grade: 8
+    topic: geometry
+    difficulty: 1
+    question_en: "Check whether the triangle with sides 6 cm, 8 cm, and 10 cm is right-angled."
+    question_bn: "৬ সেমি, ৮ সেমি এবং ১০ সেমি বাহুবিশিষ্ট ত্রিভুজটি সমকোণী কিনা যাচাই করো।"
+    bn_reviewed: false
+    answer: "Yes"
+    answer_type: text
+    hints:
+      - en: "To check if a triangle is right-angled, test whether the square of the longest side equals the sum of the squares of the other two sides."
+        bn: "একটি ত্রিভুজ সমকোণী কিনা পরীক্ষা করতে, দেখো সবচেয়ে বড় বাহুর বর্গ অপর দুটি বাহুর বর্গের সমষ্টির সমান কিনা।"
+      - en: "Longest side = 10 cm. Check: 10² = 6² + 8²? That is 100 = 36 + 64?"
+        bn: "সবচেয়ে বড় বাহু = ১০ সেমি। যাচাই: 10² = 6² + 8²? অর্থাৎ 100 = 36 + 64?"
+      - en: "36 + 64 = 100. Yes, 10² = 6² + 8², so the triangle IS right-angled."
+        bn: "36 + 64 = 100। হ্যাঁ, 10² = 6² + 8², তাই ত্রিভুজটি সমকোণী।"
+
+  - grade: 8
+    topic: geometry
+    difficulty: 1
+    question_en: "In a right-angled triangle, the hypotenuse is 17 cm and one leg is 8 cm. Find the length of the other leg."
+    question_bn: "একটি সমকোণী ত্রিভুজের অতিভুজ ১৭ সেমি এবং একটি বাহু ৮ সেমি। অপর বাহুর দৈর্ঘ্য নির্ণয় করো।"
+    bn_reviewed: false
+    answer: "15"
+    answer_type: numeric
+    hints:
+      - en: "You know the hypotenuse and one leg. Use Pythagoras theorem to find the missing leg."
+        bn: "তুমি অতিভুজ এবং একটি বাহু জানো। অজানা বাহু খুঁজে বের করতে পিথাগোরাসের উপপাদ্য ব্যবহার করো।"
+      - en: "leg₂² = hypotenuse² − leg₁² = 17² − 8². Calculate: 17² = 289, 8² = 64."
+        bn: "বাহু₂² = অতিভুজ² − বাহু₁² = 17² − 8²। হিসাব করো: 17² = 289, 8² = 64।"
+      - en: "leg₂² = 289 − 64 = 225. So leg₂ = √225 = 15 cm."
+        bn: "বাহু₂² = 289 − 64 = 225। তাই বাহু₂ = √225 = ১৫ সেমি।"
+
+  # --- MEDIUM (difficulty 2) ---
+
+  - grade: 8
+    topic: geometry
+    difficulty: 2
+    question_en: "A ladder 10 m long leans against a wall. Its foot is 6 m away from the base of the wall. How high up the wall does the ladder reach?"
+    question_bn: "১০ মিটার লম্বা একটি মই দেয়ালে হেলান দেওয়া আছে। মইটির পা দেয়ালের গোড়া থেকে ৬ মিটার দূরে। মইটি দেয়ালে কতটা উচ্চতায় পৌঁছায়?"
+    bn_reviewed: false
+    answer: "8"
+    answer_type: numeric
+    hints:
+      - en: "Draw a picture — the wall is vertical, the ground is horizontal, and the ladder is the slanted side. This forms a right-angled triangle. Identify which side is the hypotenuse."
+        bn: "একটি ছবি আঁকো — দেয়াল উল্লম্ব, মাটি অনুভূমিক এবং মই তির্যক বাহু। এটি একটি সমকোণী ত্রিভুজ তৈরি করে। অতিভুজটি চিনতে পারো।"
+      - en: "The ladder is the hypotenuse (10 m). The base distance is one leg (6 m). height² = 10² − 6²."
+        bn: "মইটি অতিভুজ (১০ মি)। ভূমির দূরত্ব একটি বাহু (৬ মি)। উচ্চতা² = 10² − 6²।"
+      - en: "height² = 100 − 36 = 64. So height = √64 = 8 m."
+        bn: "উচ্চতা² = 100 − 36 = 64। তাই উচ্চতা = √64 = ৮ মিটার।"
+
+  - grade: 8
+    topic: geometry
+    difficulty: 2
+    question_en: "Find the length of the diagonal of a rectangle with length 12 cm and breadth 5 cm."
+    question_bn: "১২ সেমি দৈর্ঘ্য এবং ৫ সেমি প্রস্থবিশিষ্ট একটি আয়তক্ষেত্রের কর্ণের দৈর্ঘ্য নির্ণয় করো।"
+    bn_reviewed: false
+    answer: "13"
+    answer_type: numeric
+    hints:
+      - en: "A diagonal of a rectangle divides it into two right-angled triangles. The diagonal becomes the hypotenuse, and the length and breadth are the two legs."
+        bn: "একটি আয়তক্ষেত্রের কর্ণ এটিকে দুটি সমকোণী ত্রিভুজে ভাগ করে। কর্ণটি অতিভুজ হয় এবং দৈর্ঘ্য ও প্রস্থ দুটি বাহু হয়।"
+      - en: "diagonal² = length² + breadth² = 12² + 5². Calculate: 12² = 144, 5² = 25."
+        bn: "কর্ণ² = দৈর্ঘ্য² + প্রস্থ² = 12² + 5²। হিসাব করো: 12² = 144, 5² = 25।"
+      - en: "diagonal² = 144 + 25 = 169. So diagonal = √169 = 13 cm."
+        bn: "কর্ণ² = 144 + 25 = 169। তাই কর্ণ = √169 = ১৩ সেমি।"
+
+  - grade: 8
+    topic: geometry
+    difficulty: 2
+    question_en: "Rohan stands 40 m away from the base of a tower. The distance from his feet to the top of the tower is 50 m. Find the height of the tower."
+    question_bn: "রোহান একটি মিনারের গোড়া থেকে ৪০ মিটার দূরে দাঁড়িয়ে আছে। তার পা থেকে মিনারের চূড়া পর্যন্ত দূরত্ব ৫০ মিটার। মিনারের উচ্চতা নির্ণয় করো।"
+    bn_reviewed: false
+    answer: "30"
+    answer_type: numeric
+    hints:
+      - en: "The tower is vertical, the ground is horizontal, and the slant distance from Rohan to the top is the hypotenuse. Identify the right-angled triangle."
+        bn: "মিনার উল্লম্ব, মাটি অনুভূমিক এবং রোহান থেকে চূড়া পর্যন্ত তির্যক দূরত্ব অতিভুজ। সমকোণী ত্রিভুজটি চিনতে পারো।"
+      - en: "height² = hypotenuse² − base² = 50² − 40². Calculate: 50² = 2500, 40² = 1600."
+        bn: "উচ্চতা² = অতিভুজ² − ভূমি² = 50² − 40²। হিসাব করো: 50² = 2500, 40² = 1600।"
+      - en: "height² = 2500 − 1600 = 900. So height = √900 = 30 m."
+        bn: "উচ্চতা² = 2500 − 1600 = 900। তাই উচ্চতা = √900 = ৩০ মিটার।"
+
+  - grade: 8
+    topic: geometry
+    difficulty: 2
+    question_en: "Check whether the triangle with sides 7 cm, 24 cm, and 25 cm is right-angled."
+    question_bn: "৭ সেমি, ২৪ সেমি এবং ২৫ সেমি বাহুবিশিষ্ট ত্রিভুজটি সমকোণী কিনা যাচাই করো।"
+    bn_reviewed: false
+    answer: "Yes"
+    answer_type: text
+    hints:
+      - en: "To verify a right-angled triangle using Pythagoras, check if the square of the longest side equals the sum of the squares of the shorter two sides."
+        bn: "পিথাগোরাস ব্যবহার করে সমকোণী ত্রিভুজ যাচাই করতে, দেখো সবচেয়ে বড় বাহুর বর্গ ছোট দুটি বাহুর বর্গের সমষ্টির সমান কিনা।"
+      - en: "Longest side = 25 cm. Check: 25² = 7² + 24²? That is 625 = 49 + 576?"
+        bn: "সবচেয়ে বড় বাহু = ২৫ সেমি। যাচাই: 25² = 7² + 24²? অর্থাৎ 625 = 49 + 576?"
+      - en: "49 + 576 = 625. Yes, 25² = 7² + 24², so the triangle IS right-angled."
+        bn: "49 + 576 = 625। হ্যাঁ, 25² = 7² + 24², তাই ত্রিভুজটি সমকোণী।"
+
+  # --- HARD (difficulty 3) ---
+
+  - grade: 8
+    topic: geometry
+    difficulty: 3
+    question_en: "Find the area of a triangle with sides 13 cm, 13 cm, and 10 cm. (Hint: draw the altitude from the apex to the base to create two right-angled triangles.)"
+    question_bn: "১৩ সেমি, ১৩ সেমি এবং ১০ সেমি বাহুবিশিষ্ট একটি ত্রিভুজের ক্ষেত্রফল নির্ণয় করো। (ইঙ্গিত: শীর্ষ থেকে ভূমিতে লম্ব আঁকো।)"
+    bn_reviewed: false
+    answer: "60"
+    answer_type: numeric
+    hints:
+      - en: "For an isosceles triangle, the altitude from the apex bisects the base. This creates two right-angled triangles — use Pythagoras to find the height."
+        bn: "সমদ্বিবাহু ত্রিভুজের শীর্ষ থেকে লম্ব ভূমিকে সমদ্বিখণ্ডিত করে। এটি দুটি সমকোণী ত্রিভুজ তৈরি করে — উচ্চতা খুঁজতে পিথাগোরাস ব্যবহার করো।"
+      - en: "The altitude splits the base (10 cm) into two equal parts of 5 cm. In the right triangle: height² = 13² − 5² = 169 − 25 = 144. So height = 12 cm."
+        bn: "লম্ব ভূমি (১০ সেমি) কে দুটি সমান ৫ সেমি অংশে ভাগ করে। সমকোণী ত্রিভুজে: উচ্চতা² = 13² − 5² = 169 − 25 = 144। তাই উচ্চতা = ১২ সেমি।"
+      - en: "Area = (1/2) × base × height = (1/2) × 10 × 12 = 60 cm²."
+        bn: "ক্ষেত্রফল = (1/2) × ভূমি × উচ্চতা = (1/2) × 10 × 12 = 60 বর্গ সেমি।"
+
+  - grade: 8
+    topic: geometry
+    difficulty: 3
+    question_en: "Meena walks 24 m due north, then turns and walks 7 m due east. How far is she from her starting point?"
+    question_bn: "মীনা উত্তর দিকে ২৪ মিটার হাঁটে, তারপর মোড় নিয়ে পূর্ব দিকে ৭ মিটার হাঁটে। সে তার শুরুর বিন্দু থেকে কতটা দূরে আছে?"
+    bn_reviewed: false
+    answer: "25"
+    answer_type: numeric
+    hints:
+      - en: "North and east are perpendicular directions. The path forms a right-angled triangle. The straight-line distance back to the start is the hypotenuse."
+        bn: "উত্তর এবং পূর্ব পরস্পর লম্ব দিক। পথটি একটি সমকোণী ত্রিভুজ তৈরি করে। শুরুর বিন্দু পর্যন্ত সরলরেখার দূরত্ব অতিভুজ।"
+      - en: "distance² = north² + east² = 24² + 7². Calculate: 24² = 576, 7² = 49."
+        bn: "দূরত্ব² = উত্তর² + পূর্ব² = 24² + 7²। হিসাব করো: 24² = 576, 7² = 49।"
+      - en: "distance² = 576 + 49 = 625. So distance = √625 = 25 m."
+        bn: "দূরত্ব² = 576 + 49 = 625। তাই দূরত্ব = √625 = ২৫ মিটার।"

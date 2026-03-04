@@ -1,0 +1,487 @@
+# Grade 7 — Percentages
+# WBBSE Chapter 3
+# Status: 30 / 30 problems complete ✅
+# Bengali translations: all flagged for native speaker review (bn_reviewed: false)
+# Hints schema: bilingual objects {en, bn}
+# Subtopics: conversions (6), % of a quantity (5), what % is X of Y (3),
+#             % increase/decrease (6), word problems (6), reverse % / multi-step (4)
+
+- grade: 7
+  topic: percentages
+  difficulty: 1
+  question_en: "Convert 25% to a fraction in its simplest form."
+  question_bn: "২৫% কে সরলতম আকারে ভগ্নাংশে প্রকাশ করো।"
+  bn_reviewed: false
+  answer: "1/4"
+  answer_type: text
+  hints:
+    - en: "Percent means 'per hundred'. So 25% means 25 out of every 100. Write it as a fraction."
+      bn: "Percent মানে 'প্রতি শত'। তাই ২৫% মানে প্রতি ১০০-এ ২৫। এটিকে ভগ্নাংশ হিসেবে লেখো।"
+    - en: "25% = 25/100. Now simplify. What is the HCF of 25 and 100?"
+      bn: "২৫% = ২৫/১০০। এখন সরল করো। ২৫ এবং ১০০-এর গসাগু কত?"
+    - en: "HCF(25, 100) = 25. Divide: 25÷25 = 1, 100÷25 = 4. So 25% = 1/4."
+      bn: "গসাগু(২৫, ১০০) = ২৫। ভাগ করো: ২৫÷২৫ = ১, ১০০÷২৫ = ৪। তাই ২৫% = ১/৪।"
+
+- grade: 7
+  topic: percentages
+  difficulty: 1
+  question_en: "Convert 3/5 to a percentage."
+  question_bn: "৩/৫ কে শতকরায় প্রকাশ করো।"
+  bn_reviewed: false
+  answer: "60"
+  answer_type: numeric
+  hints:
+    - en: "To convert a fraction to a percentage, multiply by 100."
+      bn: "ভগ্নাংশকে শতকরায় রূপান্তর করতে ১০০ দিয়ে গুণ করো।"
+    - en: "3/5 × 100 = 300/5. Now divide 300 by 5."
+      bn: "৩/৫ × ১০০ = ৩০০/৫। এখন ৩০০ কে ৫ দিয়ে ভাগ করো।"
+    - en: "300 ÷ 5 = 60. So 3/5 = 60%."
+      bn: "৩০০ ÷ ৫ = ৬০। তাই ৩/৫ = ৬০%।"
+
+- grade: 7
+  topic: percentages
+  difficulty: 1
+  question_en: "Convert 40% to a decimal."
+  question_bn: "৪০% কে দশমিকে রূপান্তর করো।"
+  bn_reviewed: false
+  answer: "0.4"
+  answer_type: text
+  hints:
+    - en: "Percent means per hundred. So 40% = 40/100. Convert this fraction to a decimal."
+      bn: "Percent মানে প্রতি শত। তাই ৪০% = ৪০/১০০। এই ভগ্নাংশটি দশমিকে রূপান্তর করো।"
+    - en: "Dividing by 100 moves the decimal point two places to the left."
+      bn: "১০০ দিয়ে ভাগ করলে দশমিক বিন্দু দুই ঘর বাম দিকে সরে যায়।"
+    - en: "40 ÷ 100 = 0.40 = 0.4. So 40% = 0.4."
+      bn: "৪০ ÷ ১০০ = ০.৪০ = ০.৪। তাই ৪০% = ০.৪।"
+
+- grade: 7
+  topic: percentages
+  difficulty: 1
+  question_en: "Convert 0.35 to a percentage."
+  question_bn: "০.৩৫ কে শতকরায় প্রকাশ করো।"
+  bn_reviewed: false
+  answer: "35"
+  answer_type: numeric
+  hints:
+    - en: "To convert a decimal to a percentage, multiply by 100."
+      bn: "দশমিককে শতকরায় রূপান্তর করতে ১০০ দিয়ে গুণ করো।"
+    - en: "Multiplying by 100 moves the decimal point two places to the right."
+      bn: "১০০ দিয়ে গুণ করলে দশমিক বিন্দু দুই ঘর ডান দিকে সরে যায়।"
+    - en: "0.35 × 100 = 35. So 0.35 = 35%."
+      bn: "০.৩৫ × ১০০ = ৩৫। তাই ০.৩৫ = ৩৫%।"
+
+- grade: 7
+  topic: percentages
+  difficulty: 1
+  question_en: "Convert 7/20 to a percentage."
+  question_bn: "৭/২০ কে শতকরায় প্রকাশ করো।"
+  bn_reviewed: false
+  answer: "35"
+  answer_type: numeric
+  hints:
+    - en: "Multiply the fraction by 100: 7/20 × 100."
+      bn: "ভগ্নাংশটিকে ১০০ দিয়ে গুণ করো: ৭/২০ × ১০০।"
+    - en: "7/20 × 100 = 700/20. Divide 700 by 20."
+      bn: "৭/২০ × ১০০ = ৭০০/২০। ৭০০ কে ২০ দিয়ে ভাগ করো।"
+    - en: "700 ÷ 20 = 35. So 7/20 = 35%."
+      bn: "৭০০ ÷ ২০ = ৩৫। তাই ৭/২০ = ৩৫%।"
+
+- grade: 7
+  topic: percentages
+  difficulty: 1
+  question_en: "Convert 12% to a decimal."
+  question_bn: "১২% কে দশমিকে রূপান্তর করো।"
+  bn_reviewed: false
+  answer: "0.12"
+  answer_type: text
+  hints:
+    - en: "12% means 12 per hundred. Write it as 12/100 and convert to a decimal."
+      bn: "১২% মানে প্রতি শত-এ ১২। এটিকে ১২/১০০ হিসেবে লেখো এবং দশমিকে রূপান্তর করো।"
+    - en: "Dividing by 100 moves the decimal point two places to the left: 12 becomes 0.12."
+      bn: "১০০ দিয়ে ভাগ করলে দশমিক বিন্দু দুই ঘর বাম দিকে সরে যায়: ১২ হয়ে যায় ০.১২।"
+    - en: "12 ÷ 100 = 0.12. So 12% = 0.12."
+      bn: "১২ ÷ ১০০ = ০.১২। তাই ১২% = ০.১২।"
+
+- grade: 7
+  topic: percentages
+  difficulty: 1
+  question_en: "What is 10% of 250?"
+  question_bn: "২৫০-এর ১০% কত?"
+  bn_reviewed: false
+  answer: "25"
+  answer_type: numeric
+  hints:
+    - en: "10% means 10 per hundred. To find 10% of any number, divide it by 10."
+      bn: "১০% মানে প্রতি শত-এ ১০। যেকোনো সংখ্যার ১০% বের করতে সেটিকে ১০ দিয়ে ভাগ করো।"
+    - en: "10% of 250 = 250 ÷ 10. What does that come to?"
+      bn: "২৫০-এর ১০% = ২৫০ ÷ ১০। উত্তরটা কত হয়?"
+    - en: "250 ÷ 10 = 25. So 10% of 250 = 25."
+      bn: "২৫০ ÷ ১০ = ২৫। তাই ২৫০-এর ১০% = ২৫।"
+
+- grade: 7
+  topic: percentages
+  difficulty: 1
+  question_en: "What is 50% of 84?"
+  question_bn: "৮৪-এর ৫০% কত?"
+  bn_reviewed: false
+  answer: "42"
+  answer_type: numeric
+  hints:
+    - en: "50% means half. To find 50% of a number, divide it by 2."
+      bn: "৫০% মানে অর্ধেক। কোনো সংখ্যার ৫০% বের করতে সেটিকে ২ দিয়ে ভাগ করো।"
+    - en: "50% of 84 = 84 ÷ 2. What does that come to?"
+      bn: "৮৪-এর ৫০% = ৮৪ ÷ ২। উত্তরটা কত হয়?"
+    - en: "84 ÷ 2 = 42. So 50% of 84 = 42."
+      bn: "৮৪ ÷ ২ = ৪২। তাই ৮৪-এর ৫০% = ৪২।"
+
+- grade: 7
+  topic: percentages
+  difficulty: 1
+  question_en: "What is 20% of 150?"
+  question_bn: "১৫০-এর ২০% কত?"
+  bn_reviewed: false
+  answer: "30"
+  answer_type: numeric
+  hints:
+    - en: "20% is double 10%. Find 10% of 150 first, then double it."
+      bn: "২০% হলো ১০%-এর দ্বিগুণ। প্রথমে ১৫০-এর ১০% বের করো, তারপর দ্বিগুণ করো।"
+    - en: "10% of 150 = 150 ÷ 10 = 15. Now double it for 20%."
+      bn: "১৫০-এর ১০% = ১৫০ ÷ ১০ = ১৫। এখন ২০%-এর জন্য দ্বিগুণ করো।"
+    - en: "20% of 150 = 2 × 15 = 30."
+      bn: "১৫০-এর ২০% = ২ × ১৫ = ৩০।"
+
+- grade: 7
+  topic: percentages
+  difficulty: 1
+  question_en: "What is 5% of 200?"
+  question_bn: "২০০-এর ৫% কত?"
+  bn_reviewed: false
+  answer: "10"
+  answer_type: numeric
+  hints:
+    - en: "5% is half of 10%. Find 10% of 200 first, then halve it."
+      bn: "৫% হলো ১০%-এর অর্ধেক। প্রথমে ২০০-এর ১০% বের করো, তারপর অর্ধেক করো।"
+    - en: "10% of 200 = 200 ÷ 10 = 20. Now halve it for 5%."
+      bn: "২০০-এর ১০% = ২০০ ÷ ১০ = ২০। এখন ৫%-এর জন্য অর্ধেক করো।"
+    - en: "5% of 200 = 20 ÷ 2 = 10."
+      bn: "২০০-এর ৫% = ২০ ÷ ২ = ১০।"
+
+- grade: 7
+  topic: percentages
+  difficulty: 1
+  question_en: "What percentage is 15 of 60?"
+  question_bn: "১৫, ৬০-এর কত শতাংশ?"
+  bn_reviewed: false
+  answer: "25"
+  answer_type: numeric
+  hints:
+    - en: "To find what percentage one number is of another: (part ÷ whole) × 100."
+      bn: "একটি সংখ্যা অন্যটির কত শতাংশ বের করতে: (অংশ ÷ সম্পূর্ণ) × ১০০।"
+    - en: "(15 ÷ 60) × 100. First simplify 15/60 — what is the HCF of 15 and 60?"
+      bn: "(১৫ ÷ ৬০) × ১০০। প্রথমে ১৫/৬০ সরল করো — ১৫ এবং ৬০-এর গসাগু কত?"
+    - en: "15/60 = 1/4. Then (1/4) × 100 = 25. So 15 is 25% of 60."
+      bn: "১৫/৬০ = ১/৪। তারপর (১/৪) × ১০০ = ২৫। তাই ১৫ হলো ৬০-এর ২৫%।"
+
+- grade: 7
+  topic: percentages
+  difficulty: 1
+  question_en: "What percentage is 8 of 32?"
+  question_bn: "৮, ৩২-এর কত শতাংশ?"
+  bn_reviewed: false
+  answer: "25"
+  answer_type: numeric
+  hints:
+    - en: "Set up: (part ÷ whole) × 100 = (8 ÷ 32) × 100."
+      bn: "রাশি লেখো: (অংশ ÷ সম্পূর্ণ) × ১০০ = (৮ ÷ ৩২) × ১০০।"
+    - en: "Simplify 8/32 first. Both are divisible by 8: 8÷8=1, 32÷8=4. So 8/32 = 1/4."
+      bn: "প্রথমে ৮/৩২ সরল করো। উভয়ই ৮ দিয়ে ভাগযোগ্য: ৮÷৮=১, ৩২÷৮=৪। তাই ৮/৩২ = ১/৪।"
+    - en: "(1/4) × 100 = 25. So 8 is 25% of 32."
+      bn: "(১/৪) × ১০০ = ২৫। তাই ৮ হলো ৩২-এর ২৫%।"
+
+- grade: 7
+  topic: percentages
+  difficulty: 2
+  question_en: "A shopkeeper increased the price of sugar from ₹40 to ₹50 per kg. What is the percentage increase?"
+  question_bn: "একজন দোকানদার চিনির দাম প্রতি কেজি ₹৪০ থেকে বাড়িয়ে ₹৫০ করল। শতকরা বৃদ্ধির হার কত?"
+  bn_reviewed: false
+  answer: "25"
+  answer_type: numeric
+  hints:
+    - en: "Percentage increase = (increase ÷ original value) × 100. Find the increase in price first."
+      bn: "শতকরা বৃদ্ধি = (বৃদ্ধির পরিমাণ ÷ আসল মান) × ১০০। আগে দামের বৃদ্ধির পরিমাণ বের করো।"
+    - en: "Increase = ₹50 − ₹40 = ₹10. Now: (10 ÷ 40) × 100."
+      bn: "বৃদ্ধি = ₹৫০ − ₹৪০ = ₹১০। এখন: (১০ ÷ ৪০) × ১০০।"
+    - en: "(10/40) × 100 = (1/4) × 100 = 25. The price increased by 25%."
+      bn: "(১০/৪০) × ১০০ = (১/৪) × ১০০ = ২৫। দাম ২৫% বৃদ্ধি পেয়েছে।"
+
+- grade: 7
+  topic: percentages
+  difficulty: 2
+  question_en: "In a class of 40 students, 60% are girls. How many girls are there?"
+  question_bn: "৪০ জন ছাত্রছাত্রীর একটি শ্রেণিতে ৬০% মেয়ে। কতজন মেয়ে আছে?"
+  bn_reviewed: false
+  answer: "24"
+  answer_type: numeric
+  hints:
+    - en: "60% of the 40 students are girls. Calculate 60% of 40."
+      bn: "৪০ জন ছাত্রছাত্রীর ৬০% মেয়ে। ৪০-এর ৬০% হিসাব করো।"
+    - en: "60% of 40 = (60/100) × 40 = (60 × 40) ÷ 100."
+      bn: "৪০-এর ৬০% = (৬০/১০০) × ৪০ = (৬০ × ৪০) ÷ ১০০।"
+    - en: "60 × 40 = 2400. 2400 ÷ 100 = 24. There are 24 girls."
+      bn: "৬০ × ৪০ = ২৪০০। ২৪০০ ÷ ১০০ = ২৪। ২৪ জন মেয়ে আছে।"
+
+- grade: 7
+  topic: percentages
+  difficulty: 2
+  question_en: "Rohan scored 72 out of 80 in a test. What was his percentage score?"
+  question_bn: "রোহান একটি পরীক্ষায় ৮০-এর মধ্যে ৭২ নম্বর পেল। তার শতকরা নম্বর কত?"
+  bn_reviewed: false
+  answer: "90"
+  answer_type: numeric
+  hints:
+    - en: "Percentage score = (marks obtained ÷ total marks) × 100."
+      bn: "শতকরা নম্বর = (প্রাপ্ত নম্বর ÷ মোট নম্বর) × ১০০।"
+    - en: "(72 ÷ 80) × 100. First simplify 72/80 — both are divisible by 8."
+      bn: "(৭২ ÷ ৮০) × ১০০। প্রথমে ৭২/৮০ সরল করো — উভয়ই ৮ দিয়ে ভাগযোগ্য।"
+    - en: "72/80 = 9/10. Then (9/10) × 100 = 90. Rohan scored 90%."
+      bn: "৭২/৮০ = ৯/১০। তারপর (৯/১০) × ১০০ = ৯০। রোহান ৯০% পেয়েছে।"
+
+- grade: 7
+  topic: percentages
+  difficulty: 2
+  question_en: "A shirt costs ₹600. It is on sale at a 15% discount. What is the sale price?"
+  question_bn: "একটি জামার দাম ₹৬০০। এটি ১৫% ছাড়ে বিক্রি হচ্ছে। বিক্রয়মূল্য কত?"
+  bn_reviewed: false
+  answer: "510"
+  answer_type: numeric
+  hints:
+    - en: "A discount reduces the price. Find 15% of ₹600, then subtract from the original price."
+      bn: "ছাড় মানে দাম কমে যায়। ₹৬০০-এর ১৫% বের করো, তারপর আসল দাম থেকে বিয়োগ করো।"
+    - en: "15% of ₹600 = (15/100) × 600. Split: (10% + 5%) of 600."
+      bn: "₹৬০০-এর ১৫% = (১৫/১০০) × ৬০০। ভেঙে করো: ৬০০-এর (১০% + ৫%)।"
+    - en: "10% of 600 = 60. 5% of 600 = 30. Discount = 90. Sale price = ₹600 − ₹90 = ₹510."
+      bn: "৬০০-এর ১০% = ৬০। ৬০০-এর ৫% = ৩০। ছাড় = ৯০। বিক্রয়মূল্য = ₹৬০০ − ₹৯০ = ₹৫১০।"
+
+- grade: 7
+  topic: percentages
+  difficulty: 2
+  question_en: "What percentage of 120 is 45?"
+  question_bn: "১২০-এর কত শতাংশ ৪৫?"
+  bn_reviewed: false
+  answer: "37.5"
+  answer_type: numeric
+  hints:
+    - en: "Set up: (45 ÷ 120) × 100. Simplify the fraction 45/120 first."
+      bn: "রাশি লেখো: (৪৫ ÷ ১২০) × ১০০। প্রথমে ৪৫/১২০ ভগ্নাংশটি সরল করো।"
+    - en: "HCF(45, 120) = 15. Simplify: 45÷15 = 3, 120÷15 = 8. So 45/120 = 3/8."
+      bn: "গসাগু(৪৫, ১২০) = ১৫। সরল করো: ৪৫÷১৫ = ৩, ১২০÷১৫ = ৮। তাই ৪৫/১২০ = ৩/৮।"
+    - en: "(3/8) × 100 = 300/8 = 37.5. So 45 is 37.5% of 120."
+      bn: "(৩/৮) × ১০০ = ৩০০/৮ = ৩৭.৫। তাই ৪৫ হলো ১২০-এর ৩৭.৫%।"
+
+- grade: 7
+  topic: percentages
+  difficulty: 2
+  question_en: "Priya's marks in a test increased from 60 to 75. What is the percentage increase?"
+  question_bn: "একটি পরীক্ষায় প্রিয়ার নম্বর ৬০ থেকে বেড়ে ৭৫ হলো। শতকরা বৃদ্ধির হার কত?"
+  bn_reviewed: false
+  answer: "25"
+  answer_type: numeric
+  hints:
+    - en: "Percentage increase = (increase ÷ original) × 100. Find the increase first."
+      bn: "শতকরা বৃদ্ধি = (বৃদ্ধির পরিমাণ ÷ আসল মান) × ১০০। আগে বৃদ্ধির পরিমাণ বের করো।"
+    - en: "Increase = 75 − 60 = 15. Now: (15 ÷ 60) × 100."
+      bn: "বৃদ্ধি = ৭৫ − ৬০ = ১৫। এখন: (১৫ ÷ ৬০) × ১০০।"
+    - en: "15/60 = 1/4. (1/4) × 100 = 25. The marks increased by 25%."
+      bn: "১৫/৬০ = ১/৪। (১/৪) × ১০০ = ২৫। নম্বর ২৫% বৃদ্ধি পেয়েছে।"
+
+- grade: 7
+  topic: percentages
+  difficulty: 2
+  question_en: "A school has 500 students. 48% of them travel by bus. How many students travel by bus?"
+  question_bn: "একটি স্কুলে ৫০০ জন ছাত্রছাত্রী আছে। তাদের ৪৮% বাসে যায়। কতজন বাসে যায়?"
+  bn_reviewed: false
+  answer: "240"
+  answer_type: numeric
+  hints:
+    - en: "Calculate 48% of 500. You can split 48% into 40% + 8% to make it easier."
+      bn: "৫০০-এর ৪৮% হিসাব করো। সহজ করতে ৪৮% কে ৪০% + ৮%-এ ভাগ করতে পারো।"
+    - en: "40% of 500 = 200. 8% of 500 = 40. Total = 200 + 40."
+      bn: "৫০০-এর ৪০% = ২০০। ৫০০-এর ৮% = ৪০। মোট = ২০০ + ৪০।"
+    - en: "48% of 500 = 200 + 40 = 240 students."
+      bn: "৫০০-এর ৪৮% = ২০০ + ৪০ = ২৪০ জন ছাত্রছাত্রী।"
+
+- grade: 7
+  topic: percentages
+  difficulty: 2
+  question_en: "The price of a book decreased from ₹80 to ₹60. What is the percentage decrease?"
+  question_bn: "একটি বইয়ের দাম ₹৮০ থেকে কমে ₹৬০ হলো। শতকরা হ্রাসের হার কত?"
+  bn_reviewed: false
+  answer: "25"
+  answer_type: numeric
+  hints:
+    - en: "Percentage decrease = (decrease ÷ original value) × 100. Find the decrease first."
+      bn: "শতকরা হ্রাস = (হ্রাসের পরিমাণ ÷ আসল মান) × ১০০। আগে হ্রাসের পরিমাণ বের করো।"
+    - en: "Decrease = ₹80 − ₹60 = ₹20. Now: (20 ÷ 80) × 100."
+      bn: "হ্রাস = ₹৮০ − ₹৬০ = ₹২০। এখন: (২০ ÷ ৮০) × ১০০।"
+    - en: "20/80 = 1/4. (1/4) × 100 = 25. The price decreased by 25%."
+      bn: "২০/৮০ = ১/৪। (১/৪) × ১০০ = ২৫। দাম ২৫% কমেছে।"
+
+- grade: 7
+  topic: percentages
+  difficulty: 2
+  question_en: "35% of a number is 84. What is the number?"
+  question_bn: "কোনো সংখ্যার ৩৫% হলো ৮৪। সংখ্যাটি কত?"
+  bn_reviewed: false
+  answer: "240"
+  answer_type: numeric
+  hints:
+    - en: "If 35% of a number = 84, set up: (35/100) × number = 84. Solve for the number."
+      bn: "যদি কোনো সংখ্যার ৩৫% = ৮৪ হয়, তাহলে রাশি লেখো: (৩৫/১০০) × সংখ্যা = ৮৪। সংখ্যার মান বের করো।"
+    - en: "Rearrange: number = 84 ÷ (35/100) = 84 × (100/35). Simplify before multiplying."
+      bn: "পুনর্বিন্যাস করো: সংখ্যা = ৮৪ ÷ (৩৫/১০০) = ৮৪ × (১০০/৩৫)। গুণ করার আগে সরল করো।"
+    - en: "84 × 100/35 = (84÷35) × 100. 84/35 = 12/5. So (12/5) × 100 = 1200/5 = 240."
+      bn: "৮৪ × ১০০/৩৫ = (৮৪÷৩৫) × ১০০। ৮৪/৩৫ = ১২/৫। তাই (১২/৫) × ১০০ = ১২০০/৫ = ২৪০।"
+
+- grade: 7
+  topic: percentages
+  difficulty: 2
+  question_en: "A shopkeeper bought a pen for ₹60 and sold it at a 20% profit. What was the selling price?"
+  question_bn: "একজন দোকানদার ₹৬০ দিয়ে একটি কলম কিনে ২০% লাভে বিক্রি করল। বিক্রয়মূল্য কত?"
+  bn_reviewed: false
+  answer: "72"
+  answer_type: numeric
+  hints:
+    - en: "A 20% profit means the selling price is higher than the cost price. Find 20% of ₹60, then add to the cost price."
+      bn: "২০% লাভ মানে বিক্রয়মূল্য ক্রয়মূল্যের চেয়ে বেশি। ₹৬০-এর ২০% বের করো, তারপর ক্রয়মূল্যে যোগ করো।"
+    - en: "20% of ₹60 = (20/100) × 60 = ₹12. SP = Cost Price + Profit = ₹60 + ₹12."
+      bn: "₹৬০-এর ২০% = (২০/১০০) × ৬০ = ₹১২। বিক্রয়মূল্য = ক্রয়মূল্য + লাভ = ₹৬০ + ₹১২।"
+    - en: "SP = ₹60 + ₹12 = ₹72."
+      bn: "বিক্রয়মূল্য = ₹৬০ + ₹১২ = ₹৭২।"
+
+- grade: 7
+  topic: percentages
+  difficulty: 2
+  question_en: "In an election, Candidate A received 55% of 2,000 votes. How many votes did Candidate A get?"
+  question_bn: "একটি নির্বাচনে প্রার্থী A মোট ২,০০০ ভোটের ৫৫% পেলেন। তিনি কতটি ভোট পেলেন?"
+  bn_reviewed: false
+  answer: "1100"
+  answer_type: numeric
+  hints:
+    - en: "Calculate 55% of 2000. Split 55% into 50% + 5% to make it easier."
+      bn: "২০০০-এর ৫৫% হিসাব করো। সহজ করতে ৫৫% কে ৫০% + ৫%-এ ভাগ করো।"
+    - en: "50% of 2000 = 1000. 5% of 2000 = 100."
+      bn: "২০০০-এর ৫০% = ১০০০। ২০০০-এর ৫% = ১০০।"
+    - en: "55% of 2000 = 1000 + 100 = 1100 votes."
+      bn: "২০০০-এর ৫৫% = ১০০০ + ১০০ = ১১০০ ভোট।"
+
+- grade: 7
+  topic: percentages
+  difficulty: 2
+  question_en: "After a 20% increase, the price of a vegetable becomes ₹480. What was the original price?"
+  question_bn: "২০% বৃদ্ধির পরে একটি সবজির দাম ₹৪৮০ হয়ে গেল। আসল দাম কত ছিল?"
+  bn_reviewed: false
+  answer: "400"
+  answer_type: numeric
+  hints:
+    - en: "After a 20% increase, the new price = 120% of the original. If new price = ₹480, find 100% of the original."
+      bn: "২০% বৃদ্ধির পরে নতুন দাম = আসল দামের ১২০%। যদি নতুন দাম = ₹৪৮০ হয়, তাহলে আসলের ১০০% বের করো।"
+    - en: "120% of original = ₹480. So 1% of original = ₹480 ÷ 120."
+      bn: "আসলের ১২০% = ₹৪৮০। তাই আসলের ১% = ₹৪৮০ ÷ ১২০।"
+    - en: "1% = ₹480 ÷ 120 = ₹4. So 100% = 100 × ₹4 = ₹400. The original price was ₹400."
+      bn: "১% = ₹৪৮০ ÷ ১২০ = ₹৪। তাই ১০০% = ১০০ × ₹৪ = ₹৪০০। আসল দাম ছিল ₹৪০০।"
+
+- grade: 7
+  topic: percentages
+  difficulty: 3
+  question_en: "In a class of 60 students, 40% are boys. 25% of the boys play cricket. How many boys play cricket?"
+  question_bn: "৬০ জন ছাত্রছাত্রীর একটি শ্রেণিতে ৪০% ছেলে। ছেলেদের ২৫% ক্রিকেট খেলে। কতজন ছেলে ক্রিকেট খেলে?"
+  bn_reviewed: false
+  answer: "6"
+  answer_type: numeric
+  hints:
+    - en: "Solve in two steps: first find the number of boys, then find 25% of that number."
+      bn: "দুটি ধাপে সমাধান করো: প্রথমে ছেলেদের সংখ্যা বের করো, তারপর সেই সংখ্যার ২৫% বের করো।"
+    - en: "Step 1: Boys = 40% of 60 = (40/100) × 60 = 24. Step 2: 25% of 24."
+      bn: "ধাপ ১: ছেলে = ৬০-এর ৪০% = (৪০/১০০) × ৬০ = ২৪। ধাপ ২: ২৪-এর ২৫%।"
+    - en: "25% of 24 = (25/100) × 24 = (1/4) × 24 = 6. So 6 boys play cricket."
+      bn: "২৪-এর ২৫% = (২৫/১০০) × ২৪ = (১/৪) × ২৪ = ৬। তাই ৬ জন ছেলে ক্রিকেট খেলে।"
+
+- grade: 7
+  topic: percentages
+  difficulty: 3
+  question_en: "After a 10% salary increase, Abdul earns ₹6,600 per month. What was his original salary?"
+  question_bn: "১০% বেতন বৃদ্ধির পরে আবদুল প্রতি মাসে ₹৬,৬০০ উপার্জন করে। তার আসল বেতন কত ছিল?"
+  bn_reviewed: false
+  answer: "6000"
+  answer_type: numeric
+  hints:
+    - en: "After a 10% increase, the new salary = 110% of the original. If new = ₹6,600, find 100%."
+      bn: "১০% বৃদ্ধির পরে নতুন বেতন = আসল বেতনের ১১০%। যদি নতুন = ₹৬,৬০০ হয়, তাহলে ১০০% বের করো।"
+    - en: "110% of original = ₹6,600. So 1% of original = ₹6,600 ÷ 110."
+      bn: "আসলের ১১০% = ₹৬,৬০০। তাই আসলের ১% = ₹৬,৬০০ ÷ ১১০।"
+    - en: "1% = ₹60. So 100% = 100 × ₹60 = ₹6,000. His original salary was ₹6,000."
+      bn: "১% = ₹৬০। তাই ১০০% = ১০০ × ₹৬০ = ₹৬,০০০। তার আসল বেতন ছিল ₹৬,০০০।"
+
+- grade: 7
+  topic: percentages
+  difficulty: 3
+  question_en: "Priya scored 75% in a test and received 135 marks. What were the total marks for the test?"
+  question_bn: "প্রিয়া একটি পরীক্ষায় ৭৫% পেয়ে ১৩৫ নম্বর পেল। পরীক্ষার মোট নম্বর কত ছিল?"
+  bn_reviewed: false
+  answer: "180"
+  answer_type: numeric
+  hints:
+    - en: "75% of total marks = 135. Set up: (75/100) × total = 135. Solve for total."
+      bn: "মোট নম্বরের ৭৫% = ১৩৫। রাশি লেখো: (৭৫/১০০) × মোট = ১৩৫। মোটের মান বের করো।"
+    - en: "Total = 135 ÷ (75/100) = 135 × (100/75). Simplify 135/75 first."
+      bn: "মোট = ১৩৫ ÷ (৭৫/১০০) = ১৩৫ × (১০০/৭৫)। প্রথমে ১৩৫/৭৫ সরল করো।"
+    - en: "135/75 = 9/5. So total = (9/5) × 100 = 900/5 = 180. The total marks were 180."
+      bn: "১৩৫/৭৫ = ৯/৫। তাই মোট = (৯/৫) × ১০০ = ৯০০/৫ = ১৮০। মোট নম্বর ছিল ১৮০।"
+
+- grade: 7
+  topic: percentages
+  difficulty: 3
+  question_en: "A shopkeeper marks up goods by 40% and then gives a 20% discount. What is the net profit percentage?"
+  question_bn: "একজন দোকানদার পণ্যের দাম ৪০% বাড়িয়ে চিহ্নিত করে, তারপর ২০% ছাড় দেয়। নিট লাভের শতকরা হার কত?"
+  bn_reviewed: false
+  answer: "12"
+  answer_type: numeric
+  hints:
+    - en: "Let cost price = ₹100. First apply the 40% markup to find the marked price."
+      bn: "ধরো ক্রয়মূল্য = ₹১০০। প্রথমে ৪০% বৃদ্ধি প্রয়োগ করে চিহ্নিত মূল্য বের করো।"
+    - en: "Marked price = ₹100 + 40% of ₹100 = ₹140. Now apply 20% discount on ₹140."
+      bn: "চিহ্নিত মূল্য = ₹১০০ + ₹১০০-এর ৪০% = ₹১৪০। এখন ₹১৪০-এ ২০% ছাড় প্রয়োগ করো।"
+    - en: "Discount = 20% of ₹140 = ₹28. SP = ₹140 − ₹28 = ₹112. Profit = ₹112 − ₹100 = ₹12, so profit % = 12%."
+      bn: "ছাড় = ₹১৪০-এর ২০% = ₹২৮। বিক্রয়মূল্য = ₹১৪০ − ₹২৮ = ₹১১২। লাভ = ₹১১২ − ₹১০০ = ₹১২, তাই লাভ % = ১২%।"
+
+- grade: 7
+  topic: percentages
+  difficulty: 3
+  question_en: "The price of petrol increased by 25% in January and then decreased by 20% in February. What is the net percentage change from the original price?"
+  question_bn: "জানুয়ারিতে পেট্রলের দাম ২৫% বাড়ল এবং ফেব্রুয়ারিতে ২০% কমল। আসল দামের তুলনায় মোট শতকরা পরিবর্তন কত?"
+  bn_reviewed: false
+  answer: "0"
+  answer_type: numeric
+  hints:
+    - en: "Apply the changes step by step. Start with ₹100 as the original price and apply the 25% increase first."
+      bn: "ধাপে ধাপে পরিবর্তন প্রয়োগ করো। ₹১০০ কে আসল দাম ধরে প্রথমে ২৫% বৃদ্ধি প্রয়োগ করো।"
+    - en: "After 25% increase: ₹100 × 1.25 = ₹125. Now apply 20% decrease on ₹125 (not on ₹100!)."
+      bn: "২৫% বৃদ্ধির পরে: ₹১০০ × ১.২৫ = ₹১২৫। এখন ₹১২৫-এ ২০% হ্রাস প্রয়োগ করো (₹১০০-এ নয়!)।"
+    - en: "20% of ₹125 = ₹25. After decrease: ₹125 − ₹25 = ₹100. The price returns to ₹100 — the net change is 0%."
+      bn: "₹১২৫-এর ২০% = ₹২৫। হ্রাসের পরে: ₹১২৫ − ₹২৫ = ₹১০০। দাম আবার ₹১০০-এ ফিরে এসেছে — মোট পরিবর্তন ০%।"
+
+- grade: 7
+  topic: percentages
+  difficulty: 3
+  question_en: "A mixture contains 40 litres of milk and 10 litres of water. What percentage of the mixture is milk?"
+  question_bn: "একটি মিশ্রণে ৪০ লিটার দুধ এবং ১০ লিটার জল আছে। মিশ্রণের কত শতাংশ দুধ?"
+  bn_reviewed: false
+  answer: "80"
+  answer_type: numeric
+  hints:
+    - en: "First find the total volume of the mixture, then calculate milk as a percentage of the total."
+      bn: "প্রথমে মিশ্রণের মোট পরিমাণ বের করো, তারপর মোটের শতাংশ হিসেবে দুধ হিসাব করো।"
+    - en: "Total = 40 + 10 = 50 litres. Percentage of milk = (40 ÷ 50) × 100."
+      bn: "মোট = ৪০ + ১০ = ৫০ লিটার। দুধের শতাংশ = (৪০ ÷ ৫০) × ১০০।"
+    - en: "40/50 = 4/5. (4/5) × 100 = 80. Milk is 80% of the mixture."
+      bn: "৪০/৫০ = ৪/৫। (৪/৫) × ১০০ = ৮০। মিশ্রণের ৮০% দুধ।"

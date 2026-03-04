@@ -1,0 +1,252 @@
+# Ratio and Proportion — Grade 8
+# WBBSE Chapter: Direct & Inverse Proportion, Work Problems, Compound Proportion
+# 15 / 15 problems complete ✅
+# Difficulty: 6 easy (1), 6 medium (2), 3 hard (3)
+# bn_reviewed: false — Bengali drafts pending native speaker review
+
+problems:
+  # --- EASY (difficulty 1) ---
+
+  - grade: 8
+    topic: ratio_and_proportion
+    difficulty: 1
+    question_en: "y is directly proportional to x. When x = 4, y = 20. Find y when x = 9."
+    question_bn: "y সরাসরি x এর সমানুপাতিক। যখন x = 4, y = 20। x = 9 হলে y এর মান কত?"
+    bn_reviewed: false
+    answer: "45"
+    answer_type: numeric
+    hints:
+      - en: "In direct proportion, y = kx where k is the constant of proportionality. First find k."
+        bn: "সরাসরি সমানুপাতে, y = kx যেখানে k হলো সমানুপাতের ধ্রুবক। প্রথমে k বের করো।"
+      - en: "k = y/x = 20/4 = 5. Now use y = kx with x = 9."
+        bn: "k = y/x = 20/4 = 5। এখন x = 9 দিয়ে y = kx ব্যবহার করো।"
+      - en: "y = 5 × 9 = 45."
+        bn: "y = 5 × 9 = 45।"
+
+  - grade: 8
+    topic: ratio_and_proportion
+    difficulty: 1
+    question_en: "y is inversely proportional to x. When x = 3, y = 24. Find y when x = 6."
+    question_bn: "y বিপরীতভাবে x এর সমানুপাতিক। যখন x = 3, y = 24। x = 6 হলে y এর মান কত?"
+    bn_reviewed: false
+    answer: "12"
+    answer_type: numeric
+    hints:
+      - en: "In inverse proportion, y = k/x, so xy = k (constant). Find k first."
+        bn: "বিপরীত সমানুপাতে, y = k/x, তাই xy = k (ধ্রুবক)। প্রথমে k বের করো।"
+      - en: "k = x × y = 3 × 24 = 72. Now y = 72/x with x = 6."
+        bn: "k = x × y = 3 × 24 = 72। এখন x = 6 দিয়ে y = 72/x ব্যবহার করো।"
+      - en: "y = 72 ÷ 6 = 12."
+        bn: "y = 72 ÷ 6 = 12।"
+
+  - grade: 8
+    topic: ratio_and_proportion
+    difficulty: 1
+    question_en: "6 workers complete a job in 10 days. Working at the same rate, how many days will 4 workers take?"
+    question_bn: "৬ জন শ্রমিক একটি কাজ ১০ দিনে শেষ করে। একই হারে কাজ করলে ৪ জন শ্রমিকের কত দিন লাগবে?"
+    bn_reviewed: false
+    answer: "15"
+    answer_type: numeric
+    hints:
+      - en: "More workers means fewer days — this is inverse proportion. The total work stays constant."
+        bn: "বেশি শ্রমিক মানে কম দিন — এটি বিপরীত সমানুপাত। মোট কাজের পরিমাণ স্থির থাকে।"
+      - en: "Workers × Days = constant. So 6 × 10 = 4 × d → 60 = 4d."
+        bn: "শ্রমিক × দিন = ধ্রুবক। তাই 6 × 10 = 4 × d → 60 = 4d।"
+      - en: "d = 60 ÷ 4 = 15 days."
+        bn: "d = 60 ÷ 4 = 15 দিন।"
+
+  - grade: 8
+    topic: ratio_and_proportion
+    difficulty: 1
+    question_en: "If 7 notebooks cost ₹84, how much do 12 notebooks cost?"
+    question_bn: "যদি ৭টি নোটবুকের দাম ₹৮৪ হয়, তাহলে ১২টির দাম কত?"
+    bn_reviewed: false
+    answer: "144"
+    answer_type: numeric
+    hints:
+      - en: "More notebooks means more cost — this is direct proportion."
+        bn: "বেশি নোটবুক মানে বেশি খরচ — এটি সরাসরি সমানুপাত।"
+      - en: "Price of 1 notebook = ₹84 ÷ 7 = ₹12. Price of 12 notebooks = 12 × ₹12."
+        bn: "১টি নোটবুকের দাম = ₹84 ÷ 7 = ₹12। ১২টির দাম = 12 × ₹12।"
+      - en: "12 × 12 = ₹144."
+        bn: "12 × 12 = ₹144।"
+
+  - grade: 8
+    topic: ratio_and_proportion
+    difficulty: 1
+    question_en: "A car travelling at constant speed covers 300 km in 5 hours. How many hours will it take to cover 420 km?"
+    question_bn: "একটি গাড়ি স্থির গতিতে ৫ ঘণ্টায় ৩০০ কিমি যায়। ৪২০ কিমি যেতে কত ঘণ্টা লাগবে?"
+    bn_reviewed: false
+    answer: "7"
+    answer_type: numeric
+    hints:
+      - en: "Distance and time are in direct proportion at constant speed. First find the speed."
+        bn: "স্থির গতিতে দূরত্ব ও সময় সরাসরি সমানুপাতিক। প্রথমে গতি বের করো।"
+      - en: "Speed = 300 ÷ 5 = 60 km/h. Time = Distance ÷ Speed = 420 ÷ 60."
+        bn: "গতি = 300 ÷ 5 = 60 কিমি/ঘণ্টা। সময় = দূরত্ব ÷ গতি = 420 ÷ 60।"
+      - en: "Time = 420 ÷ 60 = 7 hours."
+        bn: "সময় = 420 ÷ 60 = 7 ঘণ্টা।"
+
+  - grade: 8
+    topic: ratio_and_proportion
+    difficulty: 1
+    question_en: "8 men can build a wall in 15 days. How many days will 12 men take to build the same wall?"
+    question_bn: "৮ জন পুরুষ একটি দেয়াল ১৫ দিনে তৈরি করতে পারে। ১২ জন পুরুষ একই দেয়াল কত দিনে তৈরি করবে?"
+    bn_reviewed: false
+    answer: "10"
+    answer_type: numeric
+    hints:
+      - en: "More men means fewer days — inverse proportion. Total work (man-days) stays constant."
+        bn: "বেশি পুরুষ মানে কম দিন — বিপরীত সমানুপাত। মোট কাজ (জনবল-দিন) স্থির থাকে।"
+      - en: "Total work = 8 × 15 = 120 man-days. With 12 men: days = 120 ÷ 12."
+        bn: "মোট কাজ = 8 × 15 = 120 জনবল-দিন। ১২ জন দিয়ে: দিন = 120 ÷ 12।"
+      - en: "Days = 120 ÷ 12 = 10 days."
+        bn: "দিন = 120 ÷ 12 = 10 দিন।"
+
+  # --- MEDIUM (difficulty 2) ---
+
+  - grade: 8
+    topic: ratio_and_proportion
+    difficulty: 2
+    question_en: "Pipe A fills a tank in 10 hours and Pipe B fills it in 15 hours. How many hours will both pipes together take to fill the tank?"
+    question_bn: "পাইপ A একটি ট্যাংক ১০ ঘণ্টায় ভর্তি করে এবং পাইপ B ১৫ ঘণ্টায় ভর্তি করে। দুটি পাইপ একসাথে ট্যাংকটি কত ঘণ্টায় ভর্তি করবে?"
+    bn_reviewed: false
+    answer: "6"
+    answer_type: numeric
+    hints:
+      - en: "In 1 hour, Pipe A fills 1/10 of the tank and Pipe B fills 1/15. Together they fill 1/10 + 1/15 of the tank per hour."
+        bn: "১ ঘণ্টায় পাইপ A ট্যাংকের 1/10 এবং পাইপ B 1/15 ভর্তি করে। একসাথে প্রতি ঘণ্টায় 1/10 + 1/15 ভর্তি হয়।"
+      - en: "1/10 + 1/15 = 3/30 + 2/30 = 5/30 = 1/6 of the tank per hour."
+        bn: "1/10 + 1/15 = 3/30 + 2/30 = 5/30 = 1/6 ট্যাংক প্রতি ঘণ্টায়।"
+      - en: "Time to fill = 1 ÷ (1/6) = 6 hours."
+        bn: "ভর্তি হতে সময় = 1 ÷ (1/6) = 6 ঘণ্টা।"
+
+  - grade: 8
+    topic: ratio_and_proportion
+    difficulty: 2
+    question_en: "15 men can complete a project in 12 days. How many men are needed to finish the same project in 9 days?"
+    question_bn: "১৫ জন পুরুষ একটি প্রকল্প ১২ দিনে সম্পন্ন করতে পারে। একই প্রকল্প ৯ দিনে শেষ করতে কতজন পুরুষ প্রয়োজন?"
+    bn_reviewed: false
+    answer: "20"
+    answer_type: numeric
+    hints:
+      - en: "Fewer days needed means more men required — inverse proportion. Total work = men × days."
+        bn: "কম দিনে কাজ শেষ করতে বেশি পুরুষ দরকার — বিপরীত সমানুপাত। মোট কাজ = পুরুষ × দিন।"
+      - en: "Total work = 15 × 12 = 180 man-days. Men needed = Total work ÷ days available = 180 ÷ 9."
+        bn: "মোট কাজ = 15 × 12 = 180 জনবল-দিন। প্রয়োজনীয় পুরুষ = মোট কাজ ÷ উপলব্ধ দিন = 180 ÷ 9।"
+      - en: "Men needed = 180 ÷ 9 = 20."
+        bn: "প্রয়োজনীয় পুরুষ = 180 ÷ 9 = 20 জন।"
+
+  - grade: 8
+    topic: ratio_and_proportion
+    difficulty: 2
+    question_en: "The ratio of zinc to copper in an alloy is 5:8. If there are 400 g of copper in the alloy, how much zinc is there in grams?"
+    question_bn: "একটি সংকর ধাতুতে জিংক এবং তামার অনুপাত 5:8। সংকরটিতে ৪০০ গ্রাম তামা থাকলে কত গ্রাম জিংক আছে?"
+    bn_reviewed: false
+    answer: "250"
+    answer_type: numeric
+    hints:
+      - en: "The ratio zinc:copper = 5:8 means for every 8 g of copper, there are 5 g of zinc."
+        bn: "জিংক:তামার অনুপাত 5:8 মানে প্রতি ৮ গ্রাম তামার জন্য ৫ গ্রাম জিংক।"
+      - en: "Set up a proportion: zinc/400 = 5/8 → zinc = 400 × 5/8."
+        bn: "অনুপাত তৈরি করো: জিংক/400 = 5/8 → জিংক = 400 × 5/8।"
+      - en: "zinc = 400 × 5 ÷ 8 = 2000 ÷ 8 = 250 g."
+        bn: "জিংক = 400 × 5 ÷ 8 = 2000 ÷ 8 = 250 গ্রাম।"
+
+  - grade: 8
+    topic: ratio_and_proportion
+    difficulty: 2
+    question_en: "A boat travels 48 km upstream in 4 hours and the same distance downstream in 3 hours. Find the speed of the current in km/h."
+    question_bn: "একটি নৌকা স্রোতের বিপরীতে ৪ ঘণ্টায় ৪৮ কিমি এবং স্রোতের অনুকূলে ৩ ঘণ্টায় একই দূরত্ব অতিক্রম করে। স্রোতের গতি কত কিমি/ঘণ্টা?"
+    bn_reviewed: false
+    answer: "2"
+    answer_type: numeric
+    hints:
+      - en: "Speed upstream = distance ÷ time = 48 ÷ 4 = 12 km/h. Speed downstream = 48 ÷ 3 = 16 km/h."
+        bn: "স্রোতের বিপরীতে গতি = 48 ÷ 4 = 12 কিমি/ঘণ্টা। স্রোতের অনুকূলে গতি = 48 ÷ 3 = 16 কিমি/ঘণ্টা।"
+      - en: "Speed of current = (downstream speed − upstream speed) ÷ 2."
+        bn: "স্রোতের গতি = (স্রোতের অনুকূলে গতি − স্রোতের বিপরীতে গতি) ÷ 2।"
+      - en: "Speed of current = (16 − 12) ÷ 2 = 4 ÷ 2 = 2 km/h."
+        bn: "স্রোতের গতি = (16 − 12) ÷ 2 = 4 ÷ 2 = 2 কিমি/ঘণ্টা।"
+
+  - grade: 8
+    topic: ratio_and_proportion
+    difficulty: 2
+    question_en: "A sum of money is divided among A, B, and C in the ratio 2:3:5. C gets ₹600 more than A. Find the total sum."
+    question_bn: "একটি অর্থ A, B এবং C এর মধ্যে 2:3:5 অনুপাতে ভাগ করা হয়। C পায় A এর চেয়ে ₹৬০০ বেশি। মোট অর্থ কত?"
+    bn_reviewed: false
+    answer: "2000"
+    answer_type: numeric
+    hints:
+      - en: "Let shares be 2k, 3k, and 5k. C gets ₹600 more than A means 5k − 2k = 600."
+        bn: "অংশগুলো 2k, 3k এবং 5k ধরো। C পায় A এর চেয়ে ₹600 বেশি মানে 5k − 2k = 600।"
+      - en: "3k = 600 → k = 200. Total sum = (2 + 3 + 5) × k."
+        bn: "3k = 600 → k = 200। মোট অর্থ = (2 + 3 + 5) × k।"
+      - en: "Total = 10 × 200 = ₹2000."
+        bn: "মোট = 10 × 200 = ₹2000।"
+
+  - grade: 8
+    topic: ratio_and_proportion
+    difficulty: 2
+    question_en: "Amir can complete a task in 10 days and Bilal in 15 days. How many days will they take working together?"
+    question_bn: "আমির একটি কাজ ১০ দিনে এবং বিলাল ১৫ দিনে করতে পারে। একসাথে কাজ করলে কত দিনে শেষ হবে?"
+    bn_reviewed: false
+    answer: "6"
+    answer_type: numeric
+    hints:
+      - en: "In 1 day, Amir completes 1/10 of the task and Bilal completes 1/15. Together per day = 1/10 + 1/15."
+        bn: "১ দিনে আমির কাজের 1/10 এবং বিলাল 1/15 সম্পন্ন করে। একসাথে প্রতিদিন = 1/10 + 1/15।"
+      - en: "1/10 + 1/15 = 3/30 + 2/30 = 5/30 = 1/6 of the task per day."
+        bn: "1/10 + 1/15 = 3/30 + 2/30 = 5/30 = 1/6 কাজ প্রতিদিন।"
+      - en: "Time to complete = 1 ÷ (1/6) = 6 days."
+        bn: "সম্পন্ন হতে সময় = 1 ÷ (1/6) = 6 দিন।"
+
+  # --- HARD (difficulty 3) ---
+
+  - grade: 8
+    topic: ratio_and_proportion
+    difficulty: 3
+    question_en: "Amir and Bilal together complete a task in 8 days. Amir alone would take 12 days. How many days would Bilal alone take?"
+    question_bn: "আমির ও বিলাল একসাথে একটি কাজ ৮ দিনে সম্পন্ন করে। আমির একা ১২ দিন নেবে। বিলাল একা কত দিনে করবে?"
+    bn_reviewed: false
+    answer: "24"
+    answer_type: numeric
+    hints:
+      - en: "Combined work rate = 1/8 per day. Amir's rate = 1/12 per day. Bilal's rate = Combined − Amir's rate."
+        bn: "একসাথে কাজের হার = প্রতিদিন 1/8। আমিরের হার = প্রতিদিন 1/12। বিলালের হার = একসাথে − আমিরের হার।"
+      - en: "Bilal's rate = 1/8 − 1/12 = 3/24 − 2/24 = 1/24 of the task per day."
+        bn: "বিলালের হার = 1/8 − 1/12 = 3/24 − 2/24 = 1/24 কাজ প্রতিদিন।"
+      - en: "Bilal alone takes 1 ÷ (1/24) = 24 days."
+        bn: "বিলাল একা = 1 ÷ (1/24) = 24 দিন।"
+
+  - grade: 8
+    topic: ratio_and_proportion
+    difficulty: 3
+    question_en: "A solution has milk and water in the ratio 4:1. If 10 litres of water is added, the ratio becomes 2:1. Find the original quantity of milk in litres."
+    question_bn: "একটি দ্রবণে দুধ ও পানির অনুপাত 4:1। ১০ লিটার পানি যোগ করলে অনুপাত 2:1 হয়। দুধের প্রাথমিক পরিমাণ কত লিটার?"
+    bn_reviewed: false
+    answer: "40"
+    answer_type: numeric
+    hints:
+      - en: "Let the original quantity be: milk = 4k litres, water = k litres. After adding 10 litres of water, water becomes k + 10."
+        bn: "প্রাথমিক পরিমাণ ধরো: দুধ = 4k লিটার, পানি = k লিটার। ১০ লিটার পানি যোগের পরে পানি হয় k + 10।"
+      - en: "New ratio: milk/water = 4k/(k + 10) = 2/1. Cross multiply: 4k = 2(k + 10) → 4k = 2k + 20."
+        bn: "নতুন অনুপাত: দুধ/পানি = 4k/(k + 10) = 2/1। ক্রস গুণ: 4k = 2(k + 10) → 4k = 2k + 20।"
+      - en: "2k = 20 → k = 10. Original milk = 4k = 4 × 10 = 40 litres."
+        bn: "2k = 20 → k = 10। প্রাথমিক দুধ = 4k = 4 × 10 = 40 লিটার।"
+
+  - grade: 8
+    topic: ratio_and_proportion
+    difficulty: 3
+    question_en: "8 workers, each working 6 hours per day, complete a job in 10 days. How many days will 6 workers, each working 8 hours per day, take to complete the same job?"
+    question_bn: "৮ জন শ্রমিক প্রতিদিন ৬ ঘণ্টা করে কাজ করে একটি কাজ ১০ দিনে শেষ করে। ৬ জন শ্রমিক প্রতিদিন ৮ ঘণ্টা কাজ করলে একই কাজ কত দিনে শেষ হবে?"
+    bn_reviewed: false
+    answer: "10"
+    answer_type: numeric
+    hints:
+      - en: "Total work = workers × hours per day × days. Calculate total work-hours for the first scenario."
+        bn: "মোট কাজ = শ্রমিক × প্রতিদিনের ঘণ্টা × দিন। প্রথম পরিস্থিতির মোট কাজ-ঘণ্টা হিসাব করো।"
+      - en: "Total work = 8 × 6 × 10 = 480 worker-hours. For 6 workers at 8 hours/day: days = 480 ÷ (6 × 8)."
+        bn: "মোট কাজ = 8 × 6 × 10 = 480 শ্রমিক-ঘণ্টা। ৬ জন শ্রমিক ৮ ঘণ্টা/দিনে: দিন = 480 ÷ (6 × 8)।"
+      - en: "Days = 480 ÷ 48 = 10 days."
+        bn: "দিন = 480 ÷ 48 = 10 দিন।"

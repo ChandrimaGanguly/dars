@@ -6,7 +6,7 @@ Problems have bilingual questions (Bengali + English), answers, hints, and diffi
 
 from typing import Any
 
-from sqlalchemy import JSON, CheckConstraint, Index, Integer, String, Text
+from sqlalchemy import JSON, CheckConstraint, Float, Index, Integer, String, Text
 from sqlalchemy.orm import Mapped, mapped_column
 
 from src.models.base import Base, TimestampMixin
@@ -84,6 +84,9 @@ class Problem(Base, TimestampMixin):
         hints: List of 3 Hint objects stored as JSON.
         difficulty: Difficulty level (1=easy, 2=medium, 3=hard).
         estimated_time_minutes: Expected time to solve.
+        answer_type: How to evaluate the answer (numeric, multiple_choice, text).
+        acceptable_tolerance_percent: Tolerance for numeric answers (default 5%).
+        multiple_choice_options: List of options for multiple_choice problems.
         created_at: Timestamp when problem added.
         updated_at: Timestamp when problem last modified.
     """
@@ -157,6 +160,26 @@ class Problem(Base, TimestampMixin):
         comment="Estimated time to solve in minutes",
     )
 
+    # Answer evaluation metadata
+    answer_type: Mapped[str] = mapped_column(
+        String(20),
+        nullable=False,
+        server_default="numeric",
+        comment="Answer type: numeric, multiple_choice, or text",
+    )
+
+    acceptable_tolerance_percent: Mapped[float | None] = mapped_column(
+        Float,
+        nullable=True,
+        comment="Tolerance for numeric answers as percentage (e.g. 5.0 = ±5%)",
+    )
+
+    multiple_choice_options: Mapped[list[str] | None] = mapped_column(
+        JSON,
+        nullable=True,
+        comment="List of answer options for multiple_choice problems",
+    )
+
     # Constraints
     __table_args__ = (
         CheckConstraint(
@@ -170,6 +193,10 @@ class Problem(Base, TimestampMixin):
         CheckConstraint(
             "estimated_time_minutes > 0",
             name="ck_problems_time_positive",
+        ),
+        CheckConstraint(
+            "answer_type IN ('numeric', 'multiple_choice', 'text')",
+            name="ck_problems_answer_type_valid",
         ),
         Index("idx_problems_grade_topic", "grade", "topic"),
         Index("idx_problems_difficulty", "difficulty"),

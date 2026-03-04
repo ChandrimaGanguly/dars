@@ -1,0 +1,332 @@
+# Mensuration — Grade 6
+# WBBSE Chapter 5: Perimeter and Area — Rectangles, Squares, Triangles, Composite Shapes
+# 20 / 20 problems complete ✅
+# Difficulty: 8 easy (1), 8 medium (2), 4 hard (3)
+# bn_reviewed: false — Bengali drafts pending native speaker review
+
+problems:
+  # --- EASY (difficulty 1) ---
+
+  - grade: 6
+    topic: mensuration
+    difficulty: 1
+    question_en: "A square has a side of 9 cm. What is its perimeter in cm?"
+    question_bn: "একটি বর্গক্ষেত্রের বাহু ৯ সেমি। এর পরিসীমা কত সেমি?"
+    bn_reviewed: false
+    answer: "36"
+    answer_type: numeric
+    hints:
+      - en: "A square has 4 equal sides. Perimeter means the total length around the outside of a shape."
+        bn: "বর্গক্ষেত্রের ৪টি সমান বাহু আছে। পরিসীমা মানে আকৃতির চারদিকের মোট দৈর্ঘ্য।"
+      - en: "Perimeter of a square = 4 × side. Here, side = 9 cm."
+        bn: "বর্গক্ষেত্রের পরিসীমা = ৪ × বাহু। এখানে, বাহু = ৯ সেমি।"
+      - en: "Perimeter = 4 × 9 = 36 cm."
+        bn: "পরিসীমা = ৪ × ৯ = ৩৬ সেমি।"
+
+  - grade: 6
+    topic: mensuration
+    difficulty: 1
+    question_en: "A rectangle is 15 cm long and 8 cm wide. What is its perimeter in cm?"
+    question_bn: "একটি আয়তক্ষেত্রের দৈর্ঘ্য ১৫ সেমি এবং প্রস্থ ৮ সেমি। এর পরিসীমা কত সেমি?"
+    bn_reviewed: false
+    answer: "46"
+    answer_type: numeric
+    hints:
+      - en: "A rectangle has two pairs of equal sides — two lengths and two widths. Add all four sides for the perimeter."
+        bn: "আয়তক্ষেত্রে দুই জোড়া সমান বাহু আছে — দুটি দৈর্ঘ্য ও দুটি প্রস্থ। পরিসীমার জন্য চারটি বাহু যোগ করো।"
+      - en: "Perimeter = 2 × (length + width) = 2 × (15 + 8)."
+        bn: "পরিসীমা = ২ × (দৈর্ঘ্য + প্রস্থ) = ২ × (১৫ + ৮)।"
+      - en: "Perimeter = 2 × 23 = 46 cm."
+        bn: "পরিসীমা = ২ × ২৩ = ৪৬ সেমি।"
+
+  - grade: 6
+    topic: mensuration
+    difficulty: 1
+    question_en: "A square has a side of 7 cm. What is its area in cm²?"
+    question_bn: "একটি বর্গক্ষেত্রের বাহু ৭ সেমি। এর ক্ষেত্রফল কত বর্গ সেমি?"
+    bn_reviewed: false
+    answer: "49"
+    answer_type: numeric
+    hints:
+      - en: "Area tells us how much space a flat shape covers. For a square, area = side × side."
+        bn: "ক্ষেত্রফল বলে একটি সমতল আকৃতি কতটুকু জায়গা ঢাকে। বর্গক্ষেত্রের ক্ষেত্রফল = বাহু × বাহু।"
+      - en: "Area = side² = 7²."
+        bn: "ক্ষেত্রফল = বাহু² = ৭²।"
+      - en: "Area = 7 × 7 = 49 cm²."
+        bn: "ক্ষেত্রফল = ৭ × ৭ = ৪৯ বর্গ সেমি।"
+
+  - grade: 6
+    topic: mensuration
+    difficulty: 1
+    question_en: "A rectangle is 12 cm long and 5 cm wide. What is its area in cm²?"
+    question_bn: "একটি আয়তক্ষেত্রের দৈর্ঘ্য ১২ সেমি এবং প্রস্থ ৫ সেমি। এর ক্ষেত্রফল কত বর্গ সেমি?"
+    bn_reviewed: false
+    answer: "60"
+    answer_type: numeric
+    hints:
+      - en: "Area of a rectangle = length × width. Multiply the two given measurements."
+        bn: "আয়তক্ষেত্রের ক্ষেত্রফল = দৈর্ঘ্য × প্রস্থ। দেওয়া দুটি পরিমাপ গুণ করো।"
+      - en: "Area = 12 × 5."
+        bn: "ক্ষেত্রফল = ১২ × ৫।"
+      - en: "Area = 60 cm²."
+        bn: "ক্ষেত্রফল = ৬০ বর্গ সেমি।"
+
+  - grade: 6
+    topic: mensuration
+    difficulty: 1
+    question_en: "A triangle has a base of 10 cm and a height of 6 cm. What is its area in cm²?"
+    question_bn: "একটি ত্রিভুজের ভূমি ১০ সেমি এবং উচ্চতা ৬ সেমি। এর ক্ষেত্রফল কত বর্গ সেমি?"
+    bn_reviewed: false
+    answer: "30"
+    answer_type: numeric
+    hints:
+      - en: "The area of a triangle is half the area of a rectangle with the same base and height. This gives us the formula: Area = ½ × base × height."
+        bn: "ত্রিভুজের ক্ষেত্রফল একই ভূমি ও উচ্চতার আয়তক্ষেত্রের অর্ধেক। সূত্র: ক্ষেত্রফল = ½ × ভূমি × উচ্চতা।"
+      - en: "Area = ½ × 10 × 6."
+        bn: "ক্ষেত্রফল = ½ × ১০ × ৬।"
+      - en: "Area = ½ × 60 = 30 cm²."
+        bn: "ক্ষেত্রফল = ½ × ৬০ = ৩০ বর্গ সেমি।"
+
+  - grade: 6
+    topic: mensuration
+    difficulty: 1
+    question_en: "Riya wants to fence her rectangular garden which is 20 m long and 12 m wide. How many metres of fencing does she need?"
+    question_bn: "রিয়া তার আয়তাকার বাগানে বেড়া দিতে চায়। বাগানটি ২০ মিটার লম্বা এবং ১২ মিটার চওড়া। তার কত মিটার বেড়া লাগবে?"
+    bn_reviewed: false
+    answer: "64"
+    answer_type: numeric
+    hints:
+      - en: "Fencing goes all the way around the garden, so this is a perimeter problem."
+        bn: "বেড়া বাগানের চারদিকে যায়, তাই এটি পরিসীমার সমস্যা।"
+      - en: "Perimeter = 2 × (length + width) = 2 × (20 + 12)."
+        bn: "পরিসীমা = ২ × (দৈর্ঘ্য + প্রস্থ) = ২ × (২০ + ১২)।"
+      - en: "Perimeter = 2 × 32 = 64 m."
+        bn: "পরিসীমা = ২ × ৩২ = ৬৪ মিটার।"
+
+  - grade: 6
+    topic: mensuration
+    difficulty: 1
+    question_en: "A rectangular field is 25 m long and 18 m wide. What is its area in m²?"
+    question_bn: "একটি আয়তাকার মাঠের দৈর্ঘ্য ২৫ মিটার এবং প্রস্থ ১৮ মিটার। এর ক্ষেত্রফল কত বর্গ মিটার?"
+    bn_reviewed: false
+    answer: "450"
+    answer_type: numeric
+    hints:
+      - en: "Area of a rectangle = length × width."
+        bn: "আয়তক্ষেত্রের ক্ষেত্রফল = দৈর্ঘ্য × প্রস্থ।"
+      - en: "Area = 25 × 18. Break it down: 25 × 18 = 25 × 20 − 25 × 2."
+        bn: "ক্ষেত্রফল = ২৫ × ১৮। ভেঙে নাও: ২৫ × ১৮ = ২৫ × ২০ − ২৫ × ২।"
+      - en: "Area = 500 − 50 = 450 m²."
+        bn: "ক্ষেত্রফল = ৫০০ − ৫০ = ৪৫০ বর্গ মিটার।"
+
+  - grade: 6
+    topic: mensuration
+    difficulty: 1
+    question_en: "A square tile has a side of 30 cm. What is its area in cm²?"
+    question_bn: "একটি বর্গাকার টাইলের বাহু ৩০ সেমি। এর ক্ষেত্রফল কত বর্গ সেমি?"
+    bn_reviewed: false
+    answer: "900"
+    answer_type: numeric
+    hints:
+      - en: "Area of a square = side × side = side²."
+        bn: "বর্গক্ষেত্রের ক্ষেত্রফল = বাহু × বাহু = বাহু²।"
+      - en: "Area = 30²."
+        bn: "ক্ষেত্রফল = ৩০²।"
+      - en: "Area = 30 × 30 = 900 cm²."
+        bn: "ক্ষেত্রফল = ৩০ × ৩০ = ৯০০ বর্গ সেমি।"
+
+  # --- MEDIUM (difficulty 2) ---
+
+  - grade: 6
+    topic: mensuration
+    difficulty: 2
+    question_en: "A rectangle has an area of 84 cm² and a length of 12 cm. What is its width in cm?"
+    question_bn: "একটি আয়তক্ষেত্রের ক্ষেত্রফল ৮৪ বর্গ সেমি এবং দৈর্ঘ্য ১২ সেমি। এর প্রস্থ কত সেমি?"
+    bn_reviewed: false
+    answer: "7"
+    answer_type: numeric
+    hints:
+      - en: "You know the area and length, but need the width. Use the relationship: Area = length × width."
+        bn: "তুমি ক্ষেত্রফল ও দৈর্ঘ্য জানো, প্রস্থ খুঁজতে হবে। সম্পর্ক ব্যবহার করো: ক্ষেত্রফল = দৈর্ঘ্য × প্রস্থ।"
+      - en: "Rearrange: width = Area ÷ length = 84 ÷ 12."
+        bn: "সাজাও: প্রস্থ = ক্ষেত্রফল ÷ দৈর্ঘ্য = ৮৪ ÷ ১২।"
+      - en: "Width = 84 ÷ 12 = 7 cm."
+        bn: "প্রস্থ = ৮৪ ÷ ১২ = ৭ সেমি।"
+
+  - grade: 6
+    topic: mensuration
+    difficulty: 2
+    question_en: "A square has a perimeter of 52 cm. What is its area in cm²?"
+    question_bn: "একটি বর্গক্ষেত্রের পরিসীমা ৫২ সেমি। এর ক্ষেত্রফল কত বর্গ সেমি?"
+    bn_reviewed: false
+    answer: "169"
+    answer_type: numeric
+    hints:
+      - en: "First find the side length from the perimeter. Perimeter of a square = 4 × side."
+        bn: "প্রথমে পরিসীমা থেকে বাহুর দৈর্ঘ্য বের করো। বর্গক্ষেত্রের পরিসীমা = ৪ × বাহু।"
+      - en: "Side = 52 ÷ 4 = 13 cm. Now calculate the area using Area = side²."
+        bn: "বাহু = ৫২ ÷ ৪ = ১৩ সেমি। এখন ক্ষেত্রফল বের করো: ক্ষেত্রফল = বাহু²।"
+      - en: "Area = 13² = 13 × 13 = 169 cm²."
+        bn: "ক্ষেত্রফল = ১৩² = ১৩ × ১৩ = ১৬৯ বর্গ সেমি।"
+
+  - grade: 6
+    topic: mensuration
+    difficulty: 2
+    question_en: "Karim's classroom is 10 m long and 8 m wide. Square tiles of side 1 m are used to cover the floor. How many tiles are needed?"
+    question_bn: "করিমের শ্রেণিকক্ষ ১০ মিটার লম্বা এবং ৮ মিটার চওড়া। ১ মিটার বাহুর বর্গাকার টাইল দিয়ে মেঝে ঢাকা হবে। কয়টি টাইল লাগবে?"
+    bn_reviewed: false
+    answer: "80"
+    answer_type: numeric
+    hints:
+      - en: "Each tile covers an area of 1 m × 1 m = 1 m². To find the number of tiles, first find the total floor area."
+        bn: "প্রতিটি টাইল ১ মি × ১ মি = ১ বর্গ মিটার জায়গা ঢাকে। টাইলের সংখ্যা পেতে প্রথমে মোট মেঝের ক্ষেত্রফল বের করো।"
+      - en: "Floor area = 10 × 8 = 80 m². Since each tile = 1 m², number of tiles = floor area ÷ tile area."
+        bn: "মেঝের ক্ষেত্রফল = ১০ × ৮ = ৮০ বর্গ মিটার। প্রতিটি টাইল = ১ বর্গ মিটার, তাই টাইলের সংখ্যা = মেঝের ক্ষেত্রফল ÷ টাইলের ক্ষেত্রফল।"
+      - en: "Number of tiles = 80 ÷ 1 = 80 tiles."
+        bn: "টাইলের সংখ্যা = ৮০ ÷ ১ = ৮০টি।"
+
+  - grade: 6
+    topic: mensuration
+    difficulty: 2
+    question_en: "A right-angled triangle has legs of 9 cm and 12 cm. What is its area in cm²?"
+    question_bn: "একটি সমকোণী ত্রিভুজের দুটি সমকোণ-সংলগ্ন বাহু ৯ সেমি এবং ১২ সেমি। এর ক্ষেত্রফল কত বর্গ সেমি?"
+    bn_reviewed: false
+    answer: "54"
+    answer_type: numeric
+    hints:
+      - en: "In a right-angled triangle, the two legs are the base and the height. Apply the formula: Area = ½ × base × height."
+        bn: "সমকোণী ত্রিভুজে দুটি সমকোণ-সংলগ্ন বাহু হলো ভূমি ও উচ্চতা। সূত্র প্রয়োগ করো: ক্ষেত্রফল = ½ × ভূমি × উচ্চতা।"
+      - en: "Area = ½ × 9 × 12."
+        bn: "ক্ষেত্রফল = ½ × ৯ × ১২।"
+      - en: "Area = ½ × 108 = 54 cm²."
+        bn: "ক্ষেত্রফল = ½ × ১০৮ = ৫৪ বর্গ সেমি।"
+
+  - grade: 6
+    topic: mensuration
+    difficulty: 2
+    question_en: "A farmer has a rectangular plot 40 m × 30 m. He wants to grow vegetables in a square section of side 15 m inside the plot. What is the remaining area in m²?"
+    question_bn: "একজন কৃষকের একটি ৪০ মি × ৩০ মি আয়তাকার জমি আছে। তিনি জমির ভেতরে ১৫ মিটার বাহুর একটি বর্গাকার অংশে সবজি চাষ করতে চান। বাকি ক্ষেত্রফল কত বর্গ মিটার?"
+    bn_reviewed: false
+    answer: "975"
+    answer_type: numeric
+    hints:
+      - en: "Find the area of the whole plot first, then subtract the square section's area."
+        bn: "প্রথমে পুরো জমির ক্ষেত্রফল বের করো, তারপর বর্গাকার অংশের ক্ষেত্রফল বিয়োগ করো।"
+      - en: "Whole plot area = 40 × 30 = 1200 m². Square section area = 15² = 225 m²."
+        bn: "পুরো জমির ক্ষেত্রফল = ৪০ × ৩০ = ১২০০ বর্গ মিটার। বর্গাকার অংশের ক্ষেত্রফল = ১৫² = ২২৫ বর্গ মিটার।"
+      - en: "Remaining area = 1200 − 225 = 975 m²."
+        bn: "বাকি ক্ষেত্রফল = ১২০০ − ২২৫ = ৯৭৫ বর্গ মিটার।"
+
+  - grade: 6
+    topic: mensuration
+    difficulty: 2
+    question_en: "A rectangular room is 6 m long and 4 m wide. The cost of painting its floor is ₹50 per m². What is the total cost of painting the floor?"
+    question_bn: "একটি আয়তাকার ঘর ৬ মিটার লম্বা এবং ৪ মিটার চওড়া। মেঝে রঙ করার খরচ প্রতি বর্গ মিটারে ₹৫০। মেঝে রঙ করার মোট খরচ কত?"
+    bn_reviewed: false
+    answer: "1200"
+    answer_type: numeric
+    hints:
+      - en: "First find the area of the floor, then multiply by the cost per m²."
+        bn: "প্রথমে মেঝের ক্ষেত্রফল বের করো, তারপর প্রতি বর্গ মিটারের খরচ দিয়ে গুণ করো।"
+      - en: "Floor area = 6 × 4 = 24 m². Total cost = area × rate."
+        bn: "মেঝের ক্ষেত্রফল = ৬ × ৪ = ২৪ বর্গ মিটার। মোট খরচ = ক্ষেত্রফল × হার।"
+      - en: "Total cost = 24 × ₹50 = ₹1200."
+        bn: "মোট খরচ = ২৪ × ₹৫০ = ₹১২০০।"
+
+  - grade: 6
+    topic: mensuration
+    difficulty: 2
+    question_en: "A rectangle has a perimeter of 54 cm and a length of 16 cm. What is its area in cm²?"
+    question_bn: "একটি আয়তক্ষেত্রের পরিসীমা ৫৪ সেমি এবং দৈর্ঘ্য ১৬ সেমি। এর ক্ষেত্রফল কত বর্গ সেমি?"
+    bn_reviewed: false
+    answer: "176"
+    answer_type: numeric
+    hints:
+      - en: "Use the perimeter formula to find the width first. Perimeter = 2 × (length + width)."
+        bn: "প্রথমে পরিসীমার সূত্র থেকে প্রস্থ বের করো। পরিসীমা = ২ × (দৈর্ঘ্য + প্রস্থ)।"
+      - en: "54 = 2 × (16 + width) → 27 = 16 + width → width = 11 cm. Now find the area."
+        bn: "৫৪ = ২ × (১৬ + প্রস্থ) → ২৭ = ১৬ + প্রস্থ → প্রস্থ = ১১ সেমি। এখন ক্ষেত্রফল বের করো।"
+      - en: "Area = 16 × 11 = 176 cm²."
+        bn: "ক্ষেত্রফল = ১৬ × ১১ = ১৭৬ বর্গ সেমি।"
+
+  - grade: 6
+    topic: mensuration
+    difficulty: 2
+    question_en: "A triangular piece of land has a base of 24 m and a height of 15 m. The cost of the land is ₹200 per m². What is the total cost?"
+    question_bn: "একটি ত্রিভুজাকার জমির ভূমি ২৪ মিটার এবং উচ্চতা ১৫ মিটার। জমির দাম প্রতি বর্গ মিটারে ₹২০০। মোট দাম কত?"
+    bn_reviewed: false
+    answer: "36000"
+    answer_type: numeric
+    hints:
+      - en: "First calculate the area of the triangular land using the triangle area formula."
+        bn: "প্রথমে ত্রিভুজাকার জমির ক্ষেত্রফল বের করো।"
+      - en: "Area = ½ × base × height = ½ × 24 × 15 = 180 m². Total cost = area × rate per m²."
+        bn: "ক্ষেত্রফল = ½ × ২৪ × ১৫ = ১৮০ বর্গ মিটার। মোট দাম = ক্ষেত্রফল × প্রতি বর্গ মিটারের দাম।"
+      - en: "Total cost = 180 × ₹200 = ₹36,000."
+        bn: "মোট দাম = ১৮০ × ₹২০০ = ₹৩৬,০০০।"
+
+  # --- HARD (difficulty 3) ---
+
+  - grade: 6
+    topic: mensuration
+    difficulty: 3
+    question_en: "A path of width 2 m runs all the way around the outside of a rectangular garden that is 18 m long and 12 m wide. What is the area of the path alone in m²?"
+    question_bn: "একটি আয়তাকার বাগানের (দৈর্ঘ্য ১৮ মি, প্রস্থ ১২ মি) বাইরে চারদিকে ২ মিটার চওড়া একটি পথ আছে। শুধু পথটির ক্ষেত্রফল কত বর্গ মিটার?"
+    bn_reviewed: false
+    answer: "136"
+    answer_type: numeric
+    hints:
+      - en: "The path runs outside the garden. The total shape (garden + path) is a larger rectangle. Find the dimensions of the larger rectangle."
+        bn: "পথটি বাগানের বাইরে আছে। মোট আকৃতি (বাগান + পথ) একটি বড় আয়তক্ষেত্র। বড় আয়তক্ষেত্রের মাপ বের করো।"
+      - en: "The path adds 2 m on each side, so: outer length = 18 + 2 + 2 = 22 m, outer width = 12 + 2 + 2 = 16 m. Path area = outer rectangle area − garden area."
+        bn: "পথ প্রতিদিকে ২ মিটার যোগ করে: বাইরের দৈর্ঘ্য = ১৮ + ২ + ২ = ২২ মি, বাইরের প্রস্থ = ১২ + ২ + ২ = ১৬ মি। পথের ক্ষেত্রফল = বাইরের আয়তক্ষেত্রের ক্ষেত্রফল − বাগানের ক্ষেত্রফল।"
+      - en: "Outer area = 22 × 16 = 352 m². Garden area = 18 × 12 = 216 m². Path area = 352 − 216 = 136 m²."
+        bn: "বাইরের ক্ষেত্রফল = ২২ × ১৬ = ৩৫২ বর্গ মিটার। বাগানের ক্ষেত্রফল = ১৮ × ১২ = ২১৬ বর্গ মিটার। পথের ক্ষেত্রফল = ৩৫২ − ২১৬ = ১৩৬ বর্গ মিটার।"
+
+  - grade: 6
+    topic: mensuration
+    difficulty: 3
+    question_en: "An L-shaped figure is formed by removing a 4 m × 3 m rectangle from one corner of a 10 m × 8 m rectangle. What is the area of the L-shape in m²?"
+    question_bn: "একটি ১০ মি × ৮ মি আয়তক্ষেত্রের এক কোণ থেকে একটি ৪ মি × ৩ মি আয়তক্ষেত্র কেটে নিয়ে একটি L-আকৃতি তৈরি হয়। L-আকৃতিটির ক্ষেত্রফল কত বর্গ মিটার?"
+    bn_reviewed: false
+    answer: "68"
+    answer_type: numeric
+    hints:
+      - en: "An L-shape is like a big rectangle with a small rectangle removed from one corner. Find the area of each and subtract."
+        bn: "L-আকৃতি হলো একটি বড় আয়তক্ষেত্র যার এক কোণ থেকে একটি ছোট আয়তক্ষেত্র কাটা হয়েছে। প্রতিটির ক্ষেত্রফল বের করে বিয়োগ করো।"
+      - en: "Large rectangle area = 10 × 8 = 80 m². Small rectangle removed = 4 × 3 = 12 m²."
+        bn: "বড় আয়তক্ষেত্রের ক্ষেত্রফল = ১০ × ৮ = ৮০ বর্গ মিটার। ছোট আয়তক্ষেত্রের ক্ষেত্রফল = ৪ × ৩ = ১২ বর্গ মিটার।"
+      - en: "L-shape area = 80 − 12 = 68 m²."
+        bn: "L-আকৃতির ক্ষেত্রফল = ৮০ − ১২ = ৬৮ বর্গ মিটার।"
+
+  - grade: 6
+    topic: mensuration
+    difficulty: 3
+    question_en: "Anita wants to put a border of tiles around her 7 m × 4 m rectangular courtyard. Each tile is 50 cm × 50 cm. How many tiles does she need for the border only? (The border is 1 tile wide on all sides.)"
+    question_bn: "অনিতা তার ৭ মি × ৪ মি আয়তাকার উঠানের চারদিকে একটি টাইলের সীমানা তৈরি করতে চায়। প্রতিটি টাইল ৫০ সেমি × ৫০ সেমি। সীমানার জন্য কয়টি টাইল লাগবে? (সীমানা সব দিকে ১টি টাইল চওড়া।)"
+    bn_reviewed: false
+    answer: "40"
+    answer_type: numeric
+    hints:
+      - en: "Convert everything to the same unit. 50 cm = 0.5 m. The whole courtyard in tiles: 7 ÷ 0.5 = 14 tiles long, 4 ÷ 0.5 = 8 tiles wide. The inner area (without border) is 2 tiles smaller each way."
+        bn: "সবকিছু একই এককে রূপান্তর করো। ৫০ সেমি = ০.৫ মিটার। টাইলে পুরো উঠান: ৭ ÷ ০.৫ = ১৪টি লম্বায়, ৪ ÷ ০.৫ = ৮টি চওড়ায়। সীমানা ছাড়া ভেতরের অংশ প্রতিদিকে ২ টাইল ছোট।"
+      - en: "Total tiles (whole area) = 14 × 8 = 112. Inner area (remove 1-tile border on each side) = (14 − 2) × (8 − 2) = 12 × 6 = 72 tiles."
+        bn: "মোট টাইল (পুরো ক্ষেত্রফল) = ১৪ × ৮ = ১১২। ভেতরের ক্ষেত্রফল (প্রতিদিক থেকে ১ টাইল সীমানা সরিয়ে) = (১৪ − ২) × (৮ − ২) = ১২ × ৬ = ৭২টি।"
+      - en: "Border tiles = Total − Inner = 112 − 72 = 40 tiles."
+        bn: "সীমানার টাইল = মোট − ভেতর = ১১২ − ৭২ = ৪০টি।"
+
+  - grade: 6
+    topic: mensuration
+    difficulty: 3
+    question_en: "A rectangular plot is 50 m long and 36 m wide. A square pond of side 8 m is dug inside. The remaining land is to be grassed at ₹15 per m². What is the total cost of grassing?"
+    question_bn: "একটি ৫০ মি × ৩৬ মি আয়তাকার জমির ভেতরে ৮ মিটার বাহুর একটি বর্গাকার পুকুর খোঁড়া হয়েছে। বাকি জমিতে প্রতি বর্গ মিটারে ₹১৫ খরচে ঘাস লাগানো হবে। ঘাস লাগানোর মোট খরচ কত?"
+    bn_reviewed: false
+    answer: "26040"
+    answer_type: numeric
+    hints:
+      - en: "Find the area of the land available for grassing: total plot area minus the pond area."
+        bn: "ঘাস লাগানোর জন্য উপলব্ধ জমির ক্ষেত্রফল বের করো: মোট জমির ক্ষেত্রফল বিয়োগ পুকুরের ক্ষেত্রফল।"
+      - en: "Total plot area = 50 × 36 = 1800 m². Pond area = 8² = 64 m². Remaining area = 1800 − 64 = 1736 m²."
+        bn: "মোট জমির ক্ষেত্রফল = ৫০ × ৩৬ = ১৮০০ বর্গ মিটার। পুকুরের ক্ষেত্রফল = ৮² = ৬৪ বর্গ মিটার। বাকি ক্ষেত্রফল = ১৮০০ − ৬৪ = ১৭৩৬ বর্গ মিটার।"
+      - en: "Total cost = 1736 × ₹15 = ₹26,040."
+        bn: "মোট খরচ = ১৭৩৬ × ₹১৫ = ₹২৬,০৪০।"

@@ -1,0 +1,172 @@
+# Grade 8 — Data Handling
+# WBBSE Chapter 7
+# Status: 10 / 10 problems complete ✅
+# Bengali translations: all flagged for native speaker review (bn_reviewed: false)
+# Hints schema: bilingual objects {en, bn}
+
+problems:
+  # --- EASY (difficulty 1) ---
+
+  - grade: 8
+    topic: data_handling
+    difficulty: 1
+    question_en: "A fair coin is tossed once. What is the probability of getting heads?"
+    question_bn: "একটি নিরপেক্ষ মুদ্রা একবার টস করা হয়। মাথা (হেডস) পাওয়ার সম্ভাবনা কত?"
+    bn_reviewed: false
+    answer: "1/2"
+    answer_type: text
+    hints:
+      - en: "Probability means how likely an event is. Think about how many total outcomes are possible when you toss a coin, and how many of those are heads."
+        bn: "সম্ভাবনা মানে কোনো ঘটনা কতটা সম্ভব। মুদ্রা টস করলে মোট কতটি ফলাফল সম্ভব এবং তার মধ্যে কতটি মাথা তা ভাবো।"
+      - en: "Probability = (Number of favourable outcomes) / (Total number of outcomes). A coin has 2 sides: Heads (H) and Tails (T). Favourable outcome for heads = 1."
+        bn: "সম্ভাবনা = (অনুকূল ফলাফলের সংখ্যা) / (মোট ফলাফলের সংখ্যা)। মুদ্রার ২টি পাশ আছে: মাথা (H) ও লেজ (T)। মাথার অনুকূল ফলাফল = ১।"
+      - en: "P(Heads) = 1/2."
+        bn: "P(মাথা) = 1/2।"
+
+  - grade: 8
+    topic: data_handling
+    difficulty: 1
+    question_en: "A fair die is rolled once. What is the probability of getting a 6?"
+    question_bn: "একটি নিরপেক্ষ ছক্কা একবার ছোড়া হয়। ৬ পাওয়ার সম্ভাবনা কত?"
+    bn_reviewed: false
+    answer: "1/6"
+    answer_type: text
+    hints:
+      - en: "Think about all the numbers that can appear on a die, and how many of them are the number 6."
+        bn: "ছক্কায় কোন কোন সংখ্যা আসতে পারে এবং তার মধ্যে কতটি ৬ তা ভাবো।"
+      - en: "A die has 6 faces: 1, 2, 3, 4, 5, 6. So total outcomes = 6. Number of times 6 appears = 1."
+        bn: "ছক্কার ৬টি তল আছে: ১, ২, ৩, ৪, ৫, ৬। তাই মোট ফলাফল = ৬। ৬ আসার সংখ্যা = ১।"
+      - en: "P(6) = 1/6."
+        bn: "P(6) = 1/6।"
+
+  - grade: 8
+    topic: data_handling
+    difficulty: 1
+    question_en: "A bag contains 3 red balls and 7 blue balls. One ball is drawn at random. What is the probability of drawing a red ball?"
+    question_bn: "একটি থলেতে ৩টি লাল বল এবং ৭টি নীল বল আছে। একটি বল দৈবচয়নে তুলে নেওয়া হয়। লাল বল পাওয়ার সম্ভাবনা কত?"
+    bn_reviewed: false
+    answer: "3/10"
+    answer_type: text
+    hints:
+      - en: "Count how many balls are in the bag altogether, and how many of those are red."
+        bn: "থলেতে মোট কতটি বল আছে এবং তার মধ্যে কতটি লাল তা গণনা করো।"
+      - en: "Total balls = 3 + 7 = 10. Favourable outcomes (red balls) = 3."
+        bn: "মোট বল = 3 + 7 = 10। অনুকূল ফলাফল (লাল বল) = ৩।"
+      - en: "P(red) = 3/10."
+        bn: "P(লাল) = 3/10।"
+
+  - grade: 8
+    topic: data_handling
+    difficulty: 1
+    question_en: "A fair die is rolled once. What is the probability of getting a number less than 3?"
+    question_bn: "একটি নিরপেক্ষ ছক্কা একবার ছোড়া হয়। ৩ এর চেয়ে ছোট সংখ্যা পাওয়ার সম্ভাবনা কত?"
+    bn_reviewed: false
+    answer: "1/3"
+    answer_type: text
+    hints:
+      - en: "First list all numbers on a die. Then identify which of those numbers are less than 3."
+        bn: "প্রথমে ছক্কার সব সংখ্যার তালিকা করো। তারপর কোনগুলো ৩ এর চেয়ে ছোট তা চিহ্নিত করো।"
+      - en: "Total outcomes = 6 (numbers 1 to 6). Numbers less than 3 are: 1 and 2. Favourable outcomes = 2."
+        bn: "মোট ফলাফল = ৬ (১ থেকে ৬ পর্যন্ত সংখ্যা)। ৩ এর চেয়ে ছোট সংখ্যা: ১ এবং ২। অনুকূল ফলাফল = ২।"
+      - en: "P(less than 3) = 2/6 = 1/3."
+        bn: "P(৩ এর চেয়ে ছোট) = 2/6 = 1/3।"
+
+  # --- MEDIUM (difficulty 2) ---
+
+  - grade: 8
+    topic: data_handling
+    difficulty: 2
+    question_en: "A fair die is rolled once. What is the probability of getting an even number?"
+    question_bn: "একটি নিরপেক্ষ ছক্কা একবার ছোড়া হয়। জোড় সংখ্যা পাওয়ার সম্ভাবনা কত?"
+    bn_reviewed: false
+    answer: "1/2"
+    answer_type: text
+    hints:
+      - en: "List all outcomes on a die, then separate the even numbers from the odd ones."
+        bn: "ছক্কার সব ফলাফলের তালিকা করো, তারপর জোড় এবং বিজোড় সংখ্যা আলাদা করো।"
+      - en: "Total outcomes = 6. Even numbers on a die: 2, 4, 6 — that is 3 favourable outcomes."
+        bn: "মোট ফলাফল = ৬। ছক্কায় জোড় সংখ্যা: ২, ৪, ৬ — অর্থাৎ ৩টি অনুকূল ফলাফল।"
+      - en: "P(even) = 3/6 = 1/2."
+        bn: "P(জোড়) = 3/6 = 1/2।"
+
+  - grade: 8
+    topic: data_handling
+    difficulty: 2
+    question_en: "A bag contains 4 green balls, 5 yellow balls, and 1 white ball. One ball is drawn at random. What is the probability of drawing a yellow ball?"
+    question_bn: "একটি থলেতে ৪টি সবুজ বল, ৫টি হলুদ বল এবং ১টি সাদা বল আছে। একটি বল দৈবচয়নে তুলে নেওয়া হয়। হলুদ বল পাওয়ার সম্ভাবনা কত?"
+    bn_reviewed: false
+    answer: "1/2"
+    answer_type: text
+    hints:
+      - en: "Count the total number of balls in the bag, and identify how many are yellow."
+        bn: "থলেতে মোট বলের সংখ্যা গণনা করো এবং কতটি হলুদ তা চিহ্নিত করো।"
+      - en: "Total balls = 4 + 5 + 1 = 10. Favourable outcomes (yellow) = 5."
+        bn: "মোট বল = 4 + 5 + 1 = 10। অনুকূল ফলাফল (হলুদ) = ৫।"
+      - en: "P(yellow) = 5/10 = 1/2."
+        bn: "P(হলুদ) = 5/10 = 1/2।"
+
+  - grade: 8
+    topic: data_handling
+    difficulty: 2
+    question_en: "A fair die is rolled. What is the probability of getting a multiple of 3?"
+    question_bn: "একটি নিরপেক্ষ ছক্কা ছোড়া হয়। ৩ এর গুণিতক পাওয়ার সম্ভাবনা কত?"
+    bn_reviewed: false
+    answer: "1/3"
+    answer_type: text
+    hints:
+      - en: "First recall what multiples of 3 are, then find which ones appear on a standard six-sided die."
+        bn: "প্রথমে ৩ এর গুণিতক কী তা মনে করো, তারপর একটি সাধারণ ছয়তলা ছক্কায় কোনগুলো আসে তা খোঁজো।"
+      - en: "Total outcomes = 6. Multiples of 3 on a die: 3 and 6. Favourable outcomes = 2."
+        bn: "মোট ফলাফল = ৬। ছক্কায় ৩ এর গুণিতক: ৩ এবং ৬। অনুকূল ফলাফল = ২।"
+      - en: "P(multiple of 3) = 2/6 = 1/3."
+        bn: "P(৩ এর গুণিতক) = 2/6 = 1/3।"
+
+  - grade: 8
+    topic: data_handling
+    difficulty: 2
+    question_en: "Priya has cards numbered 1 to 20. She picks one card at random. What is the probability of picking a prime number?"
+    question_bn: "প্রিয়ার কাছে ১ থেকে ২০ পর্যন্ত সংখ্যাযুক্ত কার্ড আছে। সে একটি কার্ড দৈবচয়নে তুলে নেয়। মৌলিক সংখ্যাযুক্ত কার্ড পাওয়ার সম্ভাবনা কত?"
+    bn_reviewed: false
+    answer: "2/5"
+    answer_type: text
+    hints:
+      - en: "List all the prime numbers between 1 and 20. A prime number has exactly two factors: 1 and itself. Remember that 1 is NOT prime."
+        bn: "১ থেকে ২০ এর মধ্যে সব মৌলিক সংখ্যার তালিকা করো। মৌলিক সংখ্যার মাত্র দুটি গুণনীয়ক থাকে: ১ এবং নিজে। মনে রাখবে ১ মৌলিক নয়।"
+      - en: "Total outcomes = 20. Primes from 1 to 20: 2, 3, 5, 7, 11, 13, 17, 19 — that is 8 prime numbers."
+        bn: "মোট ফলাফল = ২০। ১ থেকে ২০ এর মধ্যে মৌলিক সংখ্যা: ২, ৩, ৫, ৭, ১১, ১৩, ১৭, ১৯ — অর্থাৎ ৮টি মৌলিক সংখ্যা।"
+      - en: "P(prime) = 8/20 = 2/5."
+        bn: "P(মৌলিক) = 8/20 = 2/5।"
+
+  # --- HARD (difficulty 3) ---
+
+  - grade: 8
+    topic: data_handling
+    difficulty: 3
+    question_en: "Two fair dice are rolled together. What is the probability that the sum of the numbers on top is greater than 9?"
+    question_bn: "দুটি নিরপেক্ষ ছক্কা একসাথে ছোড়া হয়। উপরের সংখ্যাদ্বয়ের যোগফল ৯ এর বেশি হওয়ার সম্ভাবনা কত?"
+    bn_reviewed: false
+    answer: "1/6"
+    answer_type: text
+    hints:
+      - en: "When two dice are rolled, list all possible pairs. The total number of outcomes is 6 × 6. Count the pairs where the sum is greater than 9 (i.e., sum is 10, 11, or 12)."
+        bn: "দুটি ছক্কা ছোড়া হলে সব সম্ভাব্য জোড়া তালিকা করো। মোট ফলাফলের সংখ্যা 6 × 6। যোগফল ৯ এর বেশি (অর্থাৎ ১০, ১১ বা ১২) এমন জোড়া গণনা করো।"
+      - en: "Total outcomes = 36. Pairs with sum > 9: sum=10: (4,6),(5,5),(6,4) → 3 pairs; sum=11: (5,6),(6,5) → 2 pairs; sum=12: (6,6) → 1 pair. Total favourable = 6."
+        bn: "মোট ফলাফল = ৩৬। যোগফল > ৯ এমন জোড়া: যোগফল=১০: (4,6),(5,5),(6,4) → ৩টি; যোগফল=১১: (5,6),(6,5) → ২টি; যোগফল=১২: (6,6) → ১টি। মোট অনুকূল = ৬।"
+      - en: "P(sum > 9) = 6/36 = 1/6."
+        bn: "P(যোগফল > ৯) = 6/36 = 1/6।"
+
+  - grade: 8
+    topic: data_handling
+    difficulty: 3
+    question_en: "A bag contains 6 red balls and 4 blue balls. Two balls are drawn one after the other without replacement. What is the probability that both balls are red?"
+    question_bn: "একটি থলেতে ৬টি লাল বল এবং ৪টি নীল বল আছে। একটির পর একটি করে ২টি বল ফেরত না দিয়ে তোলা হয়। উভয় বল লাল হওয়ার সম্ভাবনা কত?"
+    bn_reviewed: false
+    answer: "1/3"
+    answer_type: text
+    hints:
+      - en: "When drawing without replacement, after the first ball is taken out, the total number of balls changes. Find the probability for each draw separately, then multiply."
+        bn: "ফেরত না দিয়ে তুলুলে প্রথম বলটি বের করার পরে মোট বলের সংখ্যা পরিবর্তন হয়। প্রতিটি টানার জন্য আলাদাভাবে সম্ভাবনা নির্ণয় করো, তারপর গুণ করো।"
+      - en: "P(1st ball red) = 6/10. After removing one red ball, 5 red and 4 blue remain (9 total). P(2nd ball red | 1st was red) = 5/9."
+        bn: "P(১ম বল লাল) = 6/10। একটি লাল বল বের করার পরে ৫টি লাল এবং ৪টি নীল থাকে (মোট ৯টি)। P(২য় বল লাল | ১ম লাল ছিল) = 5/9।"
+      - en: "P(both red) = (6/10) × (5/9) = 30/90 = 1/3."
+        bn: "P(উভয় লাল) = (6/10) × (5/9) = 30/90 = 1/3।"

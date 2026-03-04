@@ -1,0 +1,172 @@
+# Grade 8 — Mensuration
+# WBBSE Chapter 5
+# Status: 10 / 10 problems complete ✅
+# Bengali translations: all flagged for native speaker review (bn_reviewed: false)
+# Hints schema: bilingual objects {en, bn}
+
+problems:
+  # --- EASY (difficulty 1) ---
+
+  - grade: 8
+    topic: mensuration
+    difficulty: 1
+    question_en: "Find the volume of a cube with side 5 cm."
+    question_bn: "৫ সেমি বাহুবিশিষ্ট একটি ঘনকের আয়তন নির্ণয় করো।"
+    bn_reviewed: false
+    answer: "125"
+    answer_type: numeric
+    hints:
+      - en: "Think about what a cube looks like — all sides are equal. What formula gives the space inside a cube?"
+        bn: "একটি ঘনকের কথা ভাবো — সব বাহু সমান। কোন সূত্র ঘনকের ভিতরের স্থান দেয়?"
+      - en: "Volume of a cube = side³. Here side = 5 cm. Calculate 5³."
+        bn: "ঘনকের আয়তন = বাহু³। এখানে বাহু = ৫ সেমি। ৫³ হিসাব করো।"
+      - en: "5³ = 5 × 5 × 5 = 125 cm³."
+        bn: "5³ = 5 × 5 × 5 = 125 ঘন সেমি।"
+
+  - grade: 8
+    topic: mensuration
+    difficulty: 1
+    question_en: "Find the volume of a cuboid with length 8 cm, breadth 5 cm, and height 3 cm."
+    question_bn: "৮ সেমি দৈর্ঘ্য, ৫ সেমি প্রস্থ এবং ৩ সেমি উচ্চতাবিশিষ্ট একটি ঘনআয়তক্ষেত্রের আয়তন নির্ণয় করো।"
+    bn_reviewed: false
+    answer: "120"
+    answer_type: numeric
+    hints:
+      - en: "A cuboid has three different measurements — length, breadth, height. Think about how these three combine to give volume."
+        bn: "একটি ঘনআয়তক্ষেত্রের তিনটি পরিমাপ আছে — দৈর্ঘ্য, প্রস্থ, উচ্চতা। এই তিনটি কীভাবে আয়তন দেয় তা ভাবো।"
+      - en: "Volume of cuboid = length × breadth × height = l × b × h. Substitute l = 8, b = 5, h = 3."
+        bn: "ঘনআয়তক্ষেত্রের আয়তন = দৈর্ঘ্য × প্রস্থ × উচ্চতা = l × b × h। l = 8, b = 5, h = 3 বসাও।"
+      - en: "V = 8 × 5 × 3 = 40 × 3 = 120 cm³."
+        bn: "V = 8 × 5 × 3 = 40 × 3 = 120 ঘন সেমি।"
+
+  - grade: 8
+    topic: mensuration
+    difficulty: 1
+    question_en: "Find the total surface area of a cube with side 4 cm."
+    question_bn: "৪ সেমি বাহুবিশিষ্ট একটি ঘনকের সম্পূর্ণ পৃষ্ঠতলের ক্ষেত্রফল নির্ণয় করো।"
+    bn_reviewed: false
+    answer: "96"
+    answer_type: numeric
+    hints:
+      - en: "A cube has 6 faces, and every face is a square. Think about how many faces there are and the area of each one."
+        bn: "একটি ঘনকের ৬টি তল আছে এবং প্রতিটি তল একটি বর্গক্ষেত্র। কতটি তল আছে এবং প্রতিটির ক্ষেত্রফল কত তা ভাবো।"
+      - en: "Total Surface Area (TSA) of a cube = 6 × side². Here side = 4 cm. Calculate 6 × 4²."
+        bn: "ঘনকের সম্পূর্ণ পৃষ্ঠতলের ক্ষেত্রফল (TSA) = 6 × বাহু²। এখানে বাহু = ৪ সেমি। 6 × 4² হিসাব করো।"
+      - en: "TSA = 6 × 16 = 96 cm²."
+        bn: "TSA = 6 × 16 = 96 বর্গ সেমি।"
+
+  - grade: 8
+    topic: mensuration
+    difficulty: 1
+    question_en: "Find the total surface area of a cuboid with length 6 cm, breadth 4 cm, and height 3 cm."
+    question_bn: "৬ সেমি দৈর্ঘ্য, ৪ সেমি প্রস্থ এবং ৩ সেমি উচ্চতাবিশিষ্ট একটি ঘনআয়তক্ষেত্রের সম্পূর্ণ পৃষ্ঠতলের ক্ষেত্রফল নির্ণয় করো।"
+    bn_reviewed: false
+    answer: "108"
+    answer_type: numeric
+    hints:
+      - en: "A cuboid has 6 rectangular faces arranged in 3 pairs. Think about which faces are identical."
+        bn: "একটি ঘনআয়তক্ষেত্রের ৬টি আয়তকার তল ৩টি জোড়ায় সাজানো। কোন তলগুলো একই রকম তা ভাবো।"
+      - en: "TSA of cuboid = 2(lb + bh + lh). Substitute l = 6, b = 4, h = 3: TSA = 2(6×4 + 4×3 + 6×3)."
+        bn: "ঘনআয়তক্ষেত্রের TSA = 2(lb + bh + lh)। l = 6, b = 4, h = 3 বসাও: TSA = 2(6×4 + 4×3 + 6×3)।"
+      - en: "TSA = 2(24 + 12 + 18) = 2 × 54 = 108 cm²."
+        bn: "TSA = 2(24 + 12 + 18) = 2 × 54 = 108 বর্গ সেমি।"
+
+  # --- MEDIUM (difficulty 2) ---
+
+  - grade: 8
+    topic: mensuration
+    difficulty: 2
+    question_en: "Find the volume of a cylinder with radius 7 cm and height 10 cm. (Use π = 22/7)"
+    question_bn: "৭ সেমি ব্যাসার্ধ এবং ১০ সেমি উচ্চতাবিশিষ্ট একটি বেলনের আয়তন নির্ণয় করো। (π = 22/7 ব্যবহার করো)"
+    bn_reviewed: false
+    answer: "1540"
+    answer_type: numeric
+    hints:
+      - en: "A cylinder is like a stack of circles. The volume formula uses the area of the circular base multiplied by height."
+        bn: "একটি বেলন বৃত্তের স্তুপের মতো। আয়তন সূত্রে বৃত্তাকার ভূমির ক্ষেত্রফলকে উচ্চতা দিয়ে গুণ করা হয়।"
+      - en: "Volume of cylinder = πr²h. Substitute π = 22/7, r = 7, h = 10: V = (22/7) × 7² × 10."
+        bn: "বেলনের আয়তন = πr²h। π = 22/7, r = 7, h = 10 বসাও: V = (22/7) × 7² × 10।"
+      - en: "V = (22/7) × 49 × 10 = 22 × 7 × 10 = 1540 cm³."
+        bn: "V = (22/7) × 49 × 10 = 22 × 7 × 10 = 1540 ঘন সেমি।"
+
+  - grade: 8
+    topic: mensuration
+    difficulty: 2
+    question_en: "Find the curved surface area (CSA) of a cylinder with radius 7 cm and height 15 cm. (Use π = 22/7)"
+    question_bn: "৭ সেমি ব্যাসার্ধ এবং ১৫ সেমি উচ্চতাবিশিষ্ট একটি বেলনের বক্রতল ক্ষেত্রফল নির্ণয় করো। (π = 22/7 ব্যবহার করো)"
+    bn_reviewed: false
+    answer: "660"
+    answer_type: numeric
+    hints:
+      - en: "The curved surface area is the area of just the side of the cylinder, like unrolling a label from a tin can."
+        bn: "বক্রতল ক্ষেত্রফল শুধু বেলনের পার্শ্বতলের ক্ষেত্রফল — যেন একটি টিনের কৌটার লেবেল খুলে সমতল করা।"
+      - en: "CSA of cylinder = 2πrh. Substitute π = 22/7, r = 7, h = 15: CSA = 2 × (22/7) × 7 × 15."
+        bn: "বেলনের বক্রতল ক্ষেত্রফল = 2πrh। π = 22/7, r = 7, h = 15 বসাও: CSA = 2 × (22/7) × 7 × 15।"
+      - en: "CSA = 2 × 22 × 15 = 44 × 15 = 660 cm²."
+        bn: "CSA = 2 × 22 × 15 = 44 × 15 = 660 বর্গ সেমি।"
+
+  - grade: 8
+    topic: mensuration
+    difficulty: 2
+    question_en: "The volume of a cube is 216 cm³. Find the length of its side."
+    question_bn: "একটি ঘনকের আয়তন ২১৬ ঘন সেমি। তার বাহুর দৈর্ঘ্য নির্ণয় করো।"
+    bn_reviewed: false
+    answer: "6"
+    answer_type: numeric
+    hints:
+      - en: "You know the volume and need to find the side. Think about the reverse operation of the volume formula."
+        bn: "তুমি আয়তন জানো এবং বাহু খুঁজে বের করতে হবে। আয়তন সূত্রের বিপরীত অপারেশনের কথা ভাবো।"
+      - en: "Volume of cube = side³. So side = ∛(Volume) = ∛216. Which number cubed gives 216?"
+        bn: "ঘনকের আয়তন = বাহু³। তাই বাহু = ∛(আয়তন) = ∛216। কোন সংখ্যার ঘনফল ২১৬?"
+      - en: "6³ = 6 × 6 × 6 = 216. So side = 6 cm."
+        bn: "6³ = 6 × 6 × 6 = 216। তাই বাহু = ৬ সেমি।"
+
+  - grade: 8
+    topic: mensuration
+    difficulty: 2
+    question_en: "Find the total surface area of a cylinder with radius 7 cm and height 8 cm. (Use π = 22/7)"
+    question_bn: "৭ সেমি ব্যাসার্ধ এবং ৮ সেমি উচ্চতাবিশিষ্ট একটি বেলনের সম্পূর্ণ পৃষ্ঠতলের ক্ষেত্রফল নির্ণয় করো। (π = 22/7 ব্যবহার করো)"
+    bn_reviewed: false
+    answer: "660"
+    answer_type: numeric
+    hints:
+      - en: "A closed cylinder has three surfaces — the curved side and two circular ends (top and bottom)."
+        bn: "একটি বন্ধ বেলনের তিনটি পৃষ্ঠ আছে — বক্রতল এবং দুটি বৃত্তাকার প্রান্ত (উপর ও নিচ)।"
+      - en: "TSA of cylinder = 2πr(r + h). Substitute π = 22/7, r = 7, h = 8: TSA = 2 × (22/7) × 7 × (7 + 8)."
+        bn: "বেলনের TSA = 2πr(r + h)। π = 22/7, r = 7, h = 8 বসাও: TSA = 2 × (22/7) × 7 × (7 + 8)।"
+      - en: "TSA = 2 × 22 × 15 = 44 × 15 = 660 cm²."
+        bn: "TSA = 2 × 22 × 15 = 44 × 15 = 660 বর্গ সেমি।"
+
+  # --- HARD (difficulty 3) ---
+
+  - grade: 8
+    topic: mensuration
+    difficulty: 3
+    question_en: "Arjun wants to paint all the outer faces of a wooden box (cuboid) with length 50 cm, breadth 30 cm, and height 20 cm. If the cost of painting is ₹2 per cm², find the total cost."
+    question_bn: "অর্জুন ৫০ সেমি দৈর্ঘ্য, ৩০ সেমি প্রস্থ এবং ২০ সেমি উচ্চতাবিশিষ্ট একটি কাঠের বাক্সের (ঘনআয়তক্ষেত্র) সব বাইরের তল রং করতে চায়। রঙের খরচ প্রতি বর্গ সেমিতে ₹২ হলে মোট খরচ কত?"
+    bn_reviewed: false
+    answer: "12400"
+    answer_type: numeric
+    hints:
+      - en: "First find the total outer area to be painted. A cuboid has 6 faces in 3 pairs."
+        bn: "প্রথমে রং করার মোট বাইরের ক্ষেত্রফল নির্ণয় করো। একটি ঘনআয়তক্ষেত্রের ৩টি জোড়ায় ৬টি তল আছে।"
+      - en: "TSA = 2(lb + bh + lh) = 2(50×30 + 30×20 + 50×20) = 2(1500 + 600 + 1000) = 2 × 3100 = 6200 cm²."
+        bn: "TSA = 2(lb + bh + lh) = 2(50×30 + 30×20 + 50×20) = 2(1500 + 600 + 1000) = 2 × 3100 = 6200 বর্গ সেমি।"
+      - en: "Total cost = Area × rate = 6200 × 2 = ₹12400."
+        bn: "মোট খরচ = ক্ষেত্রফল × হার = 6200 × 2 = ₹12400।"
+
+  - grade: 8
+    topic: mensuration
+    difficulty: 3
+    question_en: "A cylindrical tank has radius 14 m and height 5 m. How many litres of water can it hold? (Use π = 22/7; 1 m³ = 1000 litres)"
+    question_bn: "একটি বেলনাকার ট্যাংকের ব্যাসার্ধ ১৪ মিটার এবং উচ্চতা ৫ মিটার। এটি কত লিটার জল ধারণ করতে পারে? (π = 22/7 ব্যবহার করো; 1 মিটার³ = 1000 লিটার)"
+    bn_reviewed: false
+    answer: "3080000"
+    answer_type: numeric
+    hints:
+      - en: "Find the volume of the cylinder in cubic metres first, then convert to litres."
+        bn: "প্রথমে বেলনের আয়তন ঘন মিটারে নির্ণয় করো, তারপর লিটারে রূপান্তর করো।"
+      - en: "V = πr²h = (22/7) × 14² × 5 = (22/7) × 196 × 5 = 22 × 28 × 5 = 3080 m³."
+        bn: "V = πr²h = (22/7) × 14² × 5 = (22/7) × 196 × 5 = 22 × 28 × 5 = 3080 মিটার³।"
+      - en: "Convert to litres: 3080 m³ × 1000 = 3,080,000 litres."
+        bn: "লিটারে রূপান্তর: 3080 মিটার³ × 1000 = 30,80,000 লিটার।"

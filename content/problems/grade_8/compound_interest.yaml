@@ -1,0 +1,172 @@
+# Simple and Compound Interest — Grade 8
+# WBBSE Chapter: Compound Interest, Depreciation, SI vs CI comparison
+# 10 / 10 problems complete ✅
+# Difficulty: 4 easy (1), 4 medium (2), 2 hard (3)
+# bn_reviewed: false — Bengali drafts pending native speaker review
+
+problems:
+  # --- EASY (difficulty 1) ---
+
+  - grade: 8
+    topic: compound_interest
+    difficulty: 1
+    question_en: "Find the Compound Interest on ₹1000 at 10% per annum for 2 years, compounded annually."
+    question_bn: "₹১০০০ এর উপর বার্ষিক ১০% হারে ২ বছরের বার্ষিক চক্রবৃদ্ধি সুদ নির্ণয় করো।"
+    bn_reviewed: false
+    answer: "210"
+    answer_type: numeric
+    hints:
+      - en: "For compound interest, use A = P(1 + R/100)^T. Then CI = A − P."
+        bn: "চক্রবৃদ্ধি সুদের জন্য, A = P(1 + R/100)^T সূত্র ব্যবহার করো। তারপর CI = A − P।"
+      - en: "A = 1000 × (1 + 10/100)² = 1000 × (1.1)² = 1000 × 1.21 = ₹1210."
+        bn: "A = 1000 × (1 + 10/100)² = 1000 × (1.1)² = 1000 × 1.21 = ₹1210।"
+      - en: "CI = A − P = 1210 − 1000 = ₹210."
+        bn: "CI = A − P = 1210 − 1000 = ₹210।"
+
+  - grade: 8
+    topic: compound_interest
+    difficulty: 1
+    question_en: "Find the Compound Interest on ₹2000 at 5% per annum for 2 years, compounded annually."
+    question_bn: "₹২০০০ এর উপর বার্ষিক ৫% হারে ২ বছরের বার্ষিক চক্রবৃদ্ধি সুদ নির্ণয় করো।"
+    bn_reviewed: false
+    answer: "205"
+    answer_type: numeric
+    hints:
+      - en: "A = P(1 + R/100)² = 2000 × (1.05)²."
+        bn: "A = P(1 + R/100)² = 2000 × (1.05)²।"
+      - en: "(1.05)² = 1.1025. A = 2000 × 1.1025 = ₹2205."
+        bn: "(1.05)² = 1.1025। A = 2000 × 1.1025 = ₹2205।"
+      - en: "CI = 2205 − 2000 = ₹205."
+        bn: "CI = 2205 − 2000 = ₹205।"
+
+  - grade: 8
+    topic: compound_interest
+    difficulty: 1
+    question_en: "The Simple Interest on ₹5000 at 4% for 2 years is ₹400. Find the Compound Interest for the same sum, rate and time. By how much does CI exceed SI?"
+    question_bn: "₹৫০০০ এর উপর ৪% হারে ২ বছরের সরল সুদ ₹৪০০। একই মূলধন, হার ও সময়ের জন্য চক্রবৃদ্ধি সুদ কত? CI কত বেশি?"
+    bn_reviewed: false
+    answer: "8"
+    answer_type: numeric
+    hints:
+      - en: "CI: A = 5000 × (1.04)². Compute (1.04)² = 1.0816. A = 5000 × 1.0816 = 5408. CI = 408."
+        bn: "CI: A = 5000 × (1.04)²। (1.04)² = 1.0816। A = 5000 × 1.0816 = 5408। CI = 408।"
+      - en: "SI = ₹400 (given). Difference = CI − SI = 408 − 400."
+        bn: "SI = ₹400 (দেওয়া আছে)। পার্থক্য = CI − SI = 408 − 400।"
+      - en: "CI exceeds SI by ₹8."
+        bn: "CI, SI এর চেয়ে ₹8 বেশি।"
+
+  - grade: 8
+    topic: compound_interest
+    difficulty: 1
+    question_en: "Find the amount when ₹8000 is invested at 5% per annum Compound Interest for 2 years."
+    question_bn: "₹৮০০০ বার্ষিক ৫% চক্রবৃদ্ধি সুদে ২ বছর বিনিয়োগ করলে পরিমাণ কত হবে?"
+    bn_reviewed: false
+    answer: "8820"
+    answer_type: numeric
+    hints:
+      - en: "Amount A = P(1 + R/100)^T = 8000 × (1 + 5/100)²."
+        bn: "পরিমাণ A = P(1 + R/100)^T = 8000 × (1 + 5/100)²।"
+      - en: "(1.05)² = 1.1025. A = 8000 × 1.1025."
+        bn: "(1.05)² = 1.1025। A = 8000 × 1.1025।"
+      - en: "A = 8000 × 1.1025 = ₹8820."
+        bn: "A = 8000 × 1.1025 = ₹8820।"
+
+  # --- MEDIUM (difficulty 2) ---
+
+  - grade: 8
+    topic: compound_interest
+    difficulty: 2
+    question_en: "Find the Compound Interest on ₹10,000 at 10% per annum for 3 years, compounded annually."
+    question_bn: "₹১০,০০০ এর উপর বার্ষিক ১০% হারে ৩ বছরের বার্ষিক চক্রবৃদ্ধি সুদ নির্ণয় করো।"
+    bn_reviewed: false
+    answer: "3310"
+    answer_type: numeric
+    hints:
+      - en: "A = P(1 + R/100)³ = 10000 × (1.1)³. First compute (1.1)³."
+        bn: "A = P(1 + R/100)³ = 10000 × (1.1)³। প্রথমে (1.1)³ হিসাব করো।"
+      - en: "(1.1)² = 1.21. (1.1)³ = 1.21 × 1.1 = 1.331. A = 10000 × 1.331 = ₹13310."
+        bn: "(1.1)² = 1.21। (1.1)³ = 1.21 × 1.1 = 1.331। A = 10000 × 1.331 = ₹13310।"
+      - en: "CI = 13310 − 10000 = ₹3310."
+        bn: "CI = 13310 − 10000 = ₹3310।"
+
+  - grade: 8
+    topic: compound_interest
+    difficulty: 2
+    question_en: "₹5000 is invested at 8% per annum, compounded half-yearly for 1 year. Find the Compound Interest."
+    question_bn: "₹৫০০০ বার্ষিক ৮% হারে অর্ধবার্ষিক চক্রবৃদ্ধিতে ১ বছর বিনিয়োগ করা হয়। চক্রবৃদ্ধি সুদ কত?"
+    bn_reviewed: false
+    answer: "408"
+    answer_type: numeric
+    hints:
+      - en: "For half-yearly compounding: Rate per period = 8/2 = 4%, Number of periods = 1 × 2 = 2."
+        bn: "অর্ধবার্ষিক চক্রবৃদ্ধিতে: প্রতি পর্যায়ে হার = 8/2 = 4%, পর্যায়ের সংখ্যা = 1 × 2 = 2।"
+      - en: "A = 5000 × (1 + 4/100)² = 5000 × (1.04)² = 5000 × 1.0816 = ₹5408."
+        bn: "A = 5000 × (1 + 4/100)² = 5000 × (1.04)² = 5000 × 1.0816 = ₹5408।"
+      - en: "CI = 5408 − 5000 = ₹408."
+        bn: "CI = 5408 − 5000 = ₹408।"
+
+  - grade: 8
+    topic: compound_interest
+    difficulty: 2
+    question_en: "A car is bought for ₹80,000. It depreciates at 10% per year. What is its value after 2 years?"
+    question_bn: "একটি গাড়ি ₹৮০,০০০ দিয়ে কেনা হয়। প্রতি বছর ১০% হারে দাম কমে। ২ বছর পরে এর মূল্য কত?"
+    bn_reviewed: false
+    answer: "64800"
+    answer_type: numeric
+    hints:
+      - en: "Depreciation works like compound interest but the value decreases. Use: V = P(1 − R/100)^T."
+        bn: "অবচয় চক্রবৃদ্ধি সুদের মতো কিন্তু মূল্য কমে। সূত্র: V = P(1 − R/100)^T।"
+      - en: "V = 80000 × (1 − 10/100)² = 80000 × (0.9)²."
+        bn: "V = 80000 × (1 − 10/100)² = 80000 × (0.9)²।"
+      - en: "(0.9)² = 0.81. V = 80000 × 0.81 = ₹64,800."
+        bn: "(0.9)² = 0.81। V = 80000 × 0.81 = ₹64,800।"
+
+  - grade: 8
+    topic: compound_interest
+    difficulty: 2
+    question_en: "Find the Amount when ₹6250 is invested at 4% per annum Compound Interest for 2 years."
+    question_bn: "₹৬২৫০ বার্ষিক ৪% চক্রবৃদ্ধি সুদে ২ বছর বিনিয়োগ করলে পরিমাণ কত হবে?"
+    bn_reviewed: false
+    answer: "6760"
+    answer_type: numeric
+    hints:
+      - en: "A = P(1 + R/100)² = 6250 × (1.04)²."
+        bn: "A = P(1 + R/100)² = 6250 × (1.04)²।"
+      - en: "(1.04)² = 1.0816. A = 6250 × 1.0816."
+        bn: "(1.04)² = 1.0816। A = 6250 × 1.0816।"
+      - en: "A = 6250 × 1.0816 = ₹6760."
+        bn: "A = 6250 × 1.0816 = ₹6760।"
+
+  # --- HARD (difficulty 3) ---
+
+  - grade: 8
+    topic: compound_interest
+    difficulty: 3
+    question_en: "In how many years will ₹15,625 amount to ₹17,576 at 4% per annum Compound Interest?"
+    question_bn: "বার্ষিক ৪% চক্রবৃদ্ধি সুদে ₹১৫,৬২৫ কত বছরে ₹১৭,৫৭৬ হবে?"
+    bn_reviewed: false
+    answer: "3"
+    answer_type: numeric
+    hints:
+      - en: "Use A = P(1 + R/100)^n → 17576 = 15625 × (1.04)^n. Divide both sides by 15625."
+        bn: "A = P(1 + R/100)^n → 17576 = 15625 × (1.04)^n। উভয়পক্ষ ১৫৬২৫ দিয়ে ভাগ করো।"
+      - en: "17576 / 15625 = (1.04)^n = 1.124864. Now find what power of 1.04 gives 1.124864."
+        bn: "17576 / 15625 = (1.04)^n = 1.124864। এখন কোন ঘাতে 1.04 দিয়ে 1.124864 পাওয়া যায় তা বের করো।"
+      - en: "(1.04)¹ = 1.04, (1.04)² = 1.0816, (1.04)³ = 1.0816 × 1.04 = 1.124864. So n = 3 years."
+        bn: "(1.04)¹ = 1.04, (1.04)² = 1.0816, (1.04)³ = 1.0816 × 1.04 = 1.124864। তাই n = 3 বছর।"
+
+  - grade: 8
+    topic: compound_interest
+    difficulty: 3
+    question_en: "The Compound Interest on a sum for 2 years is ₹832 and the Simple Interest on the same sum at the same rate for 2 years is ₹800. Find the rate of interest per annum."
+    question_bn: "একটি মূলধনের উপর ২ বছরের চক্রবৃদ্ধি সুদ ₹৮৩২ এবং একই মূলধনে একই হারে ২ বছরের সরল সুদ ₹৮০০। বার্ষিক সুদের হার কত?"
+    bn_reviewed: false
+    answer: "8"
+    answer_type: numeric
+    hints:
+      - en: "The difference CI − SI for 2 years equals P × R² / 10000. Here CI − SI = 832 − 800 = 32."
+        bn: "২ বছরের CI − SI = P × R² / 10000। এখানে CI − SI = 832 − 800 = 32।"
+      - en: "SI for 1 year = 800/2 = 400, so P × R/100 = 400. Also P × R²/10000 = 32. Divide: R/100 = 32/400 = 0.08."
+        bn: "১ বছরের SI = 800/2 = 400, তাই P × R/100 = 400। এবং P × R²/10000 = 32। ভাগ করো: R/100 = 32/400 = 0.08।"
+      - en: "R = 0.08 × 100 = 8% per annum. (Check: P = 400×100/8 = 5000. CI = 5000×1.08²−5000 = 832 ✓)"
+        bn: "R = 0.08 × 100 = বার্ষিক ৮%। (যাচাই: P = 5000। CI = 5000×1.08²−5000 = 832 ✓)"

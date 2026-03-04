@@ -1,0 +1,325 @@
+# Grade 7 — Profit & Loss
+# WBBSE Chapter 4
+# Status: 20 / 20 problems complete ✅
+# Bengali translations: all flagged for native speaker review (bn_reviewed: false)
+# Hints schema: bilingual objects {en, bn} — flag for Maryam: hints_json column must store this structure
+
+- grade: 7
+  topic: profit_and_loss
+  difficulty: 1
+  question_en: "Suresh bought a sack of potatoes for ₹450 and sold it for ₹540. How much profit did he make?"
+  question_bn: "সুরেশ একটি বস্তা আলু ৪৫০ টাকায় কিনে ৫৪০ টাকায় বিক্রি করল। সে কত টাকা লাভ করল?"
+  bn_reviewed: false
+  answer: "90"
+  answer_type: numeric
+  hints:
+    - en: "What does profit mean? Think about the relationship between what something costs to buy and what it sells for."
+      bn: "লাভ মানে কী? কোনো জিনিস কিনতে কত লাগে আর বিক্রি করলে কত পাওয়া যায় — এই দুটোর মধ্যে সম্পর্কটা ভাবো।"
+    - en: "Profit = Selling Price − Cost Price. What are the selling price and cost price in this problem?"
+      bn: "লাভ = বিক্রয়মূল্য − ক্রয়মূল্য। এই সমস্যায় বিক্রয়মূল্য ও ক্রয়মূল্য কত?"
+    - en: "Selling Price = ₹540, Cost Price = ₹450. Profit = ₹540 − ₹450. What does that come to?"
+      bn: "বিক্রয়মূল্য = ৫৪০ টাকা, ক্রয়মূল্য = ৪৫০ টাকা। লাভ = ৫৪০ − ৪৫০ টাকা। উত্তরটা কত হয়?"
+
+- grade: 7
+  topic: profit_and_loss
+  difficulty: 1
+  question_en: "Fatima bought a basket of tomatoes for ₹60 and could only sell them for ₹48. How much loss did she make?"
+  question_bn: "ফাতিমা একটি ঝুড়ি টমেটো ৬০ টাকায় কিনে মাত্র ৪৮ টাকায় বিক্রি করতে পারল। তার কত টাকা ক্ষতি হলো?"
+  bn_reviewed: false
+  answer: "12"
+  answer_type: numeric
+  hints:
+    - en: "When the selling price is less than the cost price, what do we call that — profit or loss? How is loss calculated?"
+      bn: "যখন বিক্রয়মূল্য ক্রয়মূল্যের চেয়ে কম হয়, তখন সেটাকে কী বলে — লাভ নাকি ক্ষতি? ক্ষতি কীভাবে হিসাব করা হয়?"
+    - en: "Loss = Cost Price − Selling Price. What are the cost price and selling price in this problem?"
+      bn: "ক্ষতি = ক্রয়মূল্য − বিক্রয়মূল্য। এই সমস্যায় ক্রয়মূল্য ও বিক্রয়মূল্য কত?"
+    - en: "Cost Price = ₹60, Selling Price = ₹48. Loss = ₹60 − ₹48. What does that come to?"
+      bn: "ক্রয়মূল্য = ৬০ টাকা, বিক্রয়মূল্য = ৪৮ টাকা। ক্ষতি = ৬০ − ৪৮ টাকা। উত্তরটা কত হয়?"
+
+- grade: 7
+  topic: profit_and_loss
+  difficulty: 2
+  question_en: "Abdul bought a bag of onions for ₹200 and sold them for ₹250. What is his profit percentage?"
+  question_bn: "আবদুল ২০০ টাকায় পেঁয়াজের একটি বস্তা কিনে ২৫০ টাকায় বিক্রি করল। তার লাভের percentage কত?"
+  bn_reviewed: false
+  answer: "25"
+  answer_type: numeric
+  hints:
+    - en: "You already know how to find profit in rupees. But how do you express that profit as a percentage of what the onions originally cost? Remember — profit percentage is always calculated with respect to the cost price."
+      bn: "তুমি ইতিমধ্যে টাকায় লাভ বের করতে জানো। কিন্তু সেই লাভকে পেঁয়াজের আসল দামের percentage হিসেবে কীভাবে প্রকাশ করবে? মনে রেখো — লাভের percentage সবসময় ক্রয়মূল্যের উপর হিসাব করা হয়।"
+    - en: "Profit % = (Profit ÷ Cost Price) × 100. Start by finding the profit in rupees, then apply this formula."
+      bn: "Profit % = (লাভ ÷ ক্রয়মূল্য) × ১০০। প্রথমে টাকায় লাভ বের করো, তারপর এই সূত্র ব্যবহার করো।"
+    - en: "Profit = ₹250 − ₹200 = ₹50. Now, Profit % = (50 ÷ 200) × 100. What does that give you?"
+      bn: "লাভ = ২৫০ − ২০০ = ৫০ টাকা। এখন, Profit % = (৫০ ÷ ২০০) × ১০০। উত্তরটা কত হয়?"
+
+- grade: 7
+  topic: profit_and_loss
+  difficulty: 2
+  question_en: "Rohan bought a basket of mangoes for ₹120. If he wants to make a 25% profit, at what price should he sell them?"
+  question_bn: "রোহান ১২০ টাকায় আমের একটি ঝুড়ি কিনল। সে যদি ২৫% লাভ করতে চায়, তাহলে কত টাকায় বিক্রি করতে হবে?"
+  bn_reviewed: false
+  answer: "150"
+  answer_type: numeric
+  hints:
+    - en: "You know what profit percentage means. If Rohan wants 25% profit, what does that tell you about how much extra money he needs to earn on top of what he paid?"
+      bn: "তুমি জানো profit percentage মানে কী। রোহান যদি ২৫% লাভ করতে চায়, তাহলে সে যা দিয়ে কিনেছে তার উপরে আরও কত টাকা বেশি পেতে হবে?"
+    - en: "First find the profit in rupees: Profit = (Profit% ÷ 100) × Cost Price. Then, Selling Price = Cost Price + Profit."
+      bn: "প্রথমে টাকায় লাভ বের করো: লাভ = (Profit% ÷ ১০০) × ক্রয়মূল্য। তারপর, বিক্রয়মূল্য = ক্রয়মূল্য + লাভ।"
+    - en: "Profit = (25 ÷ 100) × ₹120 = ₹30. So Selling Price = ₹120 + ₹30. What does that come to?"
+      bn: "লাভ = (২৫ ÷ ১০০) × ১২০ = ৩০ টাকা। তাহলে বিক্রয়মূল্য = ১২০ + ৩০ টাকা। উত্তরটা কত হয়?"
+
+- grade: 7
+  topic: profit_and_loss
+  difficulty: 3
+  question_en: "Meena sold a sack of rice for ₹240, making a profit of 20%. What was the cost price of the rice?"
+  question_bn: "মীনা একটি বস্তা চাল ২৪০ টাকায় বিক্রি করল এবং ২০% লাভ করল। চালের ক্রয়মূল্য কত ছিল?"
+  bn_reviewed: false
+  answer: "200"
+  answer_type: numeric
+  hints:
+    - en: "Be careful — the 20% profit is always calculated on the cost price, not the selling price. If the cost price is 100%, what percentage would the selling price be?"
+      bn: "সাবধান — ২০% লাভ সবসময় ক্রয়মূল্যের উপর হিসাব করা হয়, বিক্রয়মূল্যের উপর নয়। যদি ক্রয়মূল্য = ১০০% হয়, তাহলে বিক্রয়মূল্য কত percentage?"
+    - en: "If CP = 100%, then SP = 100% + 20% = 120% of CP. You know SP = ₹240. So 120% of CP = ₹240. Can you find what 100% of CP is?"
+      bn: "যদি ক্রয়মূল্য = ১০০% হয়, তাহলে বিক্রয়মূল্য = ১০০% + ২০% = ক্রয়মূল্যের ১২০%। তুমি জানো বিক্রয়মূল্য = ২৪০ টাকা। তাহলে ক্রয়মূল্যের ১২০% = ২৪০ টাকা। ক্রয়মূল্যের ১০০% বের করতে পারবে?"
+    - en: "120% of CP = ₹240, so 1% of CP = ₹240 ÷ 120 = ₹2. Therefore CP = 100 × ₹2. What does that come to?"
+      bn: "ক্রয়মূল্যের ১২০% = ২৪০ টাকা, তাহলে ১% = ২৪০ ÷ ১২০ = ২ টাকা। সুতরাং ক্রয়মূল্য = ১০০ × ২ টাকা। উত্তরটা কত হয়?"
+
+- grade: 7
+  topic: profit_and_loss
+  difficulty: 1
+  question_en: "Arjun bought a bunch of bananas for ₹150 and sold them for ₹120. What was his loss percentage?"
+  question_bn: "অর্জুন ১৫০ টাকা দিয়ে এক গুচ্ছ কলা কিনে ১২০ টাকায় বিক্রি করল। তার ক্ষতির percentage কত?"
+  bn_reviewed: false
+  answer: "20"
+  answer_type: numeric
+  hints:
+    - en: "You know how to calculate profit percentage. Loss percentage works the same way — but using loss instead of profit. Which value do you always use as the base?"
+      bn: "তুমি জানো profit percentage কীভাবে হিসাব করতে হয়। loss percentage-ও একইভাবে — কিন্তু লাভের বদলে ক্ষতি ব্যবহার করে। কোন মানটাকে সবসময় ভিত্তি ধরতে হয়?"
+    - en: "Loss % = (Loss ÷ Cost Price) × 100. Like profit percentage, loss percentage is always calculated with respect to the cost price. Find the loss in rupees first."
+      bn: "Loss % = (ক্ষতি ÷ ক্রয়মূল্য) × ১০০। profit percentage-এর মতোই, loss percentage সবসময় ক্রয়মূল্যের উপর হিসাব করা হয়। প্রথমে টাকায় ক্ষতি বের করো।"
+    - en: "Loss = ₹150 − ₹120 = ₹30. Loss % = (30 ÷ 150) × 100. What does that come to?"
+      bn: "ক্ষতি = ১৫০ − ১২০ = ৩০ টাকা। Loss % = (৩০ ÷ ১৫০) × ১০০। উত্তরটা কত হয়?"
+
+- grade: 7
+  topic: profit_and_loss
+  difficulty: 2
+  question_en: "Meena bought a tin of mustard oil for ₹200. Due to falling prices, she had to sell it at a 10% loss. At what price did she sell it?"
+  question_bn: "মীনা ২০০ টাকা দিয়ে এক টিন সর্ষের তেল কিনল। দাম কমে যাওয়ায় সে ১০% ক্ষতিতে বিক্রি করতে বাধ্য হলো। সে কত টাকায় বিক্রি করল?"
+  bn_reviewed: false
+  answer: "180"
+  answer_type: numeric
+  hints:
+    - en: "If Meena makes a 10% loss, will the selling price be higher or lower than the cost price? By how much?"
+      bn: "মীনা যদি ১০% ক্ষতি করে, তাহলে বিক্রয়মূল্য ক্রয়মূল্যের চেয়ে বেশি হবে না কম হবে? কতটা কম?"
+    - en: "Loss = (Loss% ÷ 100) × Cost Price. Then Selling Price = Cost Price − Loss. Find the loss in rupees first."
+      bn: "ক্ষতি = (Loss% ÷ ১০০) × ক্রয়মূল্য। তারপর বিক্রয়মূল্য = ক্রয়মূল্য − ক্ষতি। প্রথমে টাকায় ক্ষতি বের করো।"
+    - en: "Loss = (10 ÷ 100) × ₹200 = ₹20. So Selling Price = ₹200 − ₹20. What does that come to?"
+      bn: "ক্ষতি = (১০ ÷ ১০০) × ২০০ = ২০ টাকা। তাহলে বিক্রয়মূল্য = ২০০ − ২০ টাকা। উত্তরটা কত হয়?"
+
+- grade: 7
+  topic: profit_and_loss
+  difficulty: 2
+  question_en: "Priya's mother bought hilsa fish at the market for ₹360. By evening she had to sell the remaining fish at a 25% loss. What was the selling price?"
+  question_bn: "প্রিয়ার মা বাজার থেকে ৩৬০ টাকা দিয়ে ইলিশ মাছ কিনলেন। সন্ধ্যায় বাকি মাছ ২৫% ক্ষতিতে বিক্রি করতে হলো। বিক্রয়মূল্য কত ছিল?"
+  bn_reviewed: false
+  answer: "270"
+  answer_type: numeric
+  hints:
+    - en: "A 25% loss means Priya's mother sold the fish for less than she paid. How much less, as a fraction of the cost price?"
+      bn: "২৫% ক্ষতি মানে প্রিয়ার মা যা দিয়ে কিনেছিলেন তার চেয়ে কম দামে বিক্রি করলেন। ক্রয়মূল্যের কতটা অংশ কম?"
+    - en: "Loss = (Loss% ÷ 100) × Cost Price. Then Selling Price = Cost Price − Loss. Find the loss in rupees first."
+      bn: "ক্ষতি = (Loss% ÷ ১০০) × ক্রয়মূল্য। তারপর বিক্রয়মূল্য = ক্রয়মূল্য − ক্ষতি। প্রথমে টাকায় ক্ষতি বের করো।"
+    - en: "Loss = (25 ÷ 100) × ₹360 = ₹90. So Selling Price = ₹360 − ₹90. What does that come to?"
+      bn: "ক্ষতি = (২৫ ÷ ১০০) × ৩৬০ = ৯০ টাকা। তাহলে বিক্রয়মূল্য = ৩৬০ − ৯০ টাকা। উত্তরটা কত হয়?"
+
+- grade: 7
+  topic: profit_and_loss
+  difficulty: 3
+  question_en: "A cloth merchant sold a piece of fabric for ₹160, making a 20% loss. What was the cost price?"
+  question_bn: "একজন কাপড়ের ব্যবসায়ী একটি কাপড় ১৬০ টাকায় বিক্রি করে ২০% ক্ষতি করলেন। কাপড়টির ক্রয়মূল্য কত ছিল?"
+  bn_reviewed: false
+  answer: "200"
+  answer_type: numeric
+  hints:
+    - en: "Be careful — the 20% loss is calculated on the cost price, not the selling price. If the cost price is 100%, what percentage does the selling price represent?"
+      bn: "সাবধান — ২০% ক্ষতি ক্রয়মূল্যের উপর হিসাব করা হয়, বিক্রয়মূল্যের উপর নয়। যদি ক্রয়মূল্য = ১০০% হয়, তাহলে বিক্রয়মূল্য কত percentage?"
+    - en: "If CP = 100%, then SP = 100% − 20% = 80% of CP. You know SP = ₹160. So 80% of CP = ₹160. Can you find what 100% of CP is?"
+      bn: "যদি ক্রয়মূল্য = ১০০% হয়, তাহলে বিক্রয়মূল্য = ১০০% − ২০% = ক্রয়মূল্যের ৮০%। তুমি জানো বিক্রয়মূল্য = ১৬০ টাকা। তাহলে ক্রয়মূল্যের ৮০% = ১৬০ টাকা। ক্রয়মূল্যের ১০০% বের করতে পারবে?"
+    - en: "80% of CP = ₹160, so 1% of CP = ₹160 ÷ 80 = ₹2. Therefore CP = 100 × ₹2. What does that come to?"
+      bn: "ক্রয়মূল্যের ৮০% = ১৬০ টাকা, তাহলে ১% = ১৬০ ÷ ৮০ = ২ টাকা। সুতরাং ক্রয়মূল্য = ১০০ × ২ টাকা। উত্তরটা কত হয়?"
+
+- grade: 7
+  topic: profit_and_loss
+  difficulty: 1
+  question_en: "Riya bought a bunch of spinach for ₹30 and sold it for ₹42. How much profit did she make?"
+  question_bn: "রিয়া ৩০ টাকায় এক আঁটি পালং শাক কিনে ৪২ টাকায় বিক্রি করল। সে কত টাকা লাভ করল?"
+  bn_reviewed: false
+  answer: "12"
+  answer_type: numeric
+  hints:
+    - en: "What does profit mean? Think about the relationship between what something costs to buy and what it sells for."
+      bn: "লাভ মানে কী? কোনো জিনিস কিনতে কত লাগে আর বিক্রি করলে কত পাওয়া যায় — এই দুটোর মধ্যে সম্পর্কটা ভাবো।"
+    - en: "Profit = Selling Price − Cost Price. What are the selling price and cost price in this problem?"
+      bn: "লাভ = বিক্রয়মূল্য − ক্রয়মূল্য। এই সমস্যায় বিক্রয়মূল্য ও ক্রয়মূল্য কত?"
+    - en: "Selling Price = ₹42, Cost Price = ₹30. Profit = ₹42 − ₹30. What does that come to?"
+      bn: "বিক্রয়মূল্য = ৪২ টাকা, ক্রয়মূল্য = ৩০ টাকা। লাভ = ৪২ − ৩০ টাকা। উত্তরটা কত হয়?"
+
+- grade: 7
+  topic: profit_and_loss
+  difficulty: 1
+  question_en: "A fruit seller bought a box of guavas for ₹75 and could only sell them for ₹60. What was his loss?"
+  question_bn: "একজন ফলওয়ালা ৭৫ টাকায় পেয়ারার একটি বাক্স কিনে মাত্র ৬০ টাকায় বিক্রি করতে পারল। তার কত টাকা ক্ষতি হলো?"
+  bn_reviewed: false
+  answer: "15"
+  answer_type: numeric
+  hints:
+    - en: "When the selling price is less than the cost price, do we have a profit or a loss? How is loss calculated?"
+      bn: "যখন বিক্রয়মূল্য ক্রয়মূল্যের চেয়ে কম হয়, তখন লাভ হয় না ক্ষতি হয়? ক্ষতি কীভাবে হিসাব করা হয়?"
+    - en: "Loss = Cost Price − Selling Price. What are the cost price and selling price in this problem?"
+      bn: "ক্ষতি = ক্রয়মূল্য − বিক্রয়মূল্য। এই সমস্যায় ক্রয়মূল্য ও বিক্রয়মূল্য কত?"
+    - en: "Cost Price = ₹75, Selling Price = ₹60. Loss = ₹75 − ₹60. What does that come to?"
+      bn: "ক্রয়মূল্য = ৭৫ টাকা, বিক্রয়মূল্য = ৬০ টাকা। ক্ষতি = ৭৫ − ৬০ টাকা। উত্তরটা কত হয়?"
+
+- grade: 7
+  topic: profit_and_loss
+  difficulty: 1
+  question_en: "Ananya bought 2 kg of tomatoes for ₹50 and sold them for ₹65. How much profit did she make?"
+  question_bn: "অনন্যা ৫০ টাকায় ২ কেজি টমেটো কিনে ৬৫ টাকায় বিক্রি করল। সে কত টাকা লাভ করল?"
+  bn_reviewed: false
+  answer: "15"
+  answer_type: numeric
+  hints:
+    - en: "What does profit mean? Think about the relationship between what something costs to buy and what it sells for."
+      bn: "লাভ মানে কী? কোনো জিনিস কিনতে কত লাগে আর বিক্রি করলে কত পাওয়া যায় — এই দুটোর মধ্যে সম্পর্কটা ভাবো।"
+    - en: "Profit = Selling Price − Cost Price. What are the selling price and cost price here?"
+      bn: "লাভ = বিক্রয়মূল্য − ক্রয়মূল্য। এখানে বিক্রয়মূল্য ও ক্রয়মূল্য কত?"
+    - en: "Selling Price = ₹65, Cost Price = ₹50. Profit = ₹65 − ₹50. What does that come to?"
+      bn: "বিক্রয়মূল্য = ৬৫ টাকা, ক্রয়মূল্য = ৫০ টাকা। লাভ = ৬৫ − ৫০ টাকা। উত্তরটা কত হয়?"
+
+- grade: 7
+  topic: profit_and_loss
+  difficulty: 1
+  question_en: "A shopkeeper bought a tin of ghee for ₹280 and sold it for ₹245. What was his loss?"
+  question_bn: "একজন দোকানদার ২৮০ টাকায় এক টিন ঘি কিনে ২৪৫ টাকায় বিক্রি করল। তার কত টাকা ক্ষতি হলো?"
+  bn_reviewed: false
+  answer: "35"
+  answer_type: numeric
+  hints:
+    - en: "Is the selling price higher or lower than the cost price? What does that tell you — profit or loss?"
+      bn: "বিক্রয়মূল্য কি ক্রয়মূল্যের চেয়ে বেশি না কম? এটা দেখে বুঝতে পারো — লাভ হয়েছে না ক্ষতি হয়েছে?"
+    - en: "Loss = Cost Price − Selling Price. What are the cost price and selling price in this problem?"
+      bn: "ক্ষতি = ক্রয়মূল্য − বিক্রয়মূল্য। এই সমস্যায় ক্রয়মূল্য ও বিক্রয়মূল্য কত?"
+    - en: "Cost Price = ₹280, Selling Price = ₹245. Loss = ₹280 − ₹245. What does that come to?"
+      bn: "ক্রয়মূল্য = ২৮০ টাকা, বিক্রয়মূল্য = ২৪৫ টাকা। ক্ষতি = ২৮০ − ২৪৫ টাকা। উত্তরটা কত হয়?"
+
+- grade: 7
+  topic: profit_and_loss
+  difficulty: 1
+  question_en: "Ramesh bought a sack of flour for ₹320 and sold it for ₹400. How much profit did he make?"
+  question_bn: "রমেশ ৩২০ টাকায় এক বস্তা ময়দা কিনে ৪০০ টাকায় বিক্রি করল। সে কত টাকা লাভ করল?"
+  bn_reviewed: false
+  answer: "80"
+  answer_type: numeric
+  hints:
+    - en: "Look at the selling price and the cost price. Is the selling price higher? What does that mean?"
+      bn: "বিক্রয়মূল্য ও ক্রয়মূল্যের দিকে তাকাও। বিক্রয়মূল্য কি বেশি? এটা কী বোঝায়?"
+    - en: "Profit = Selling Price − Cost Price. What are the selling price and cost price in this problem?"
+      bn: "লাভ = বিক্রয়মূল্য − ক্রয়মূল্য। এই সমস্যায় বিক্রয়মূল্য ও ক্রয়মূল্য কত?"
+    - en: "Selling Price = ₹400, Cost Price = ₹320. Profit = ₹400 − ₹320. What does that come to?"
+      bn: "বিক্রয়মূল্য = ৪০০ টাকা, ক্রয়মূল্য = ৩২০ টাকা। লাভ = ৪০০ − ৩২০ টাকা। উত্তরটা কত হয়?"
+
+- grade: 7
+  topic: profit_and_loss
+  difficulty: 2
+  question_en: "A bookseller bought a set of textbooks for ₹250 and wants to make a 20% profit. At what price should he sell them?"
+  question_bn: "একজন বইওয়ালা ২৫০ টাকায় পাঠ্যবইয়ের একটি সেট কিনল। সে ২০% লাভ করতে চায়। কত টাকায় বিক্রি করতে হবে?"
+  bn_reviewed: false
+  answer: "300"
+  answer_type: numeric
+  hints:
+    - en: "If the bookseller wants a 20% profit, will the selling price be more or less than the cost price? By how much?"
+      bn: "বইওয়ালা যদি ২০% লাভ করতে চায়, তাহলে বিক্রয়মূল্য কি ক্রয়মূল্যের চেয়ে বেশি হবে না কম হবে? কতটা?"
+    - en: "Profit = (Profit% ÷ 100) × Cost Price. Then Selling Price = Cost Price + Profit. Find the profit in rupees first."
+      bn: "লাভ = (Profit% ÷ ১০০) × ক্রয়মূল্য। তারপর বিক্রয়মূল্য = ক্রয়মূল্য + লাভ। প্রথমে টাকায় লাভ বের করো।"
+    - en: "Profit = (20 ÷ 100) × ₹250 = ₹50. So Selling Price = ₹250 + ₹50. What does that come to?"
+      bn: "লাভ = (২০ ÷ ১০০) × ২৫০ = ৫০ টাকা। তাহলে বিক্রয়মূল্য = ২৫০ + ৫০ টাকা। উত্তরটা কত হয়?"
+
+- grade: 7
+  topic: profit_and_loss
+  difficulty: 2
+  question_en: "A vegetable seller bought a crate of mangoes for ₹500 and had to sell it at a 15% loss. What was his selling price?"
+  question_bn: "একজন সবজিওয়ালা ৫০০ টাকায় আমের একটি ক্রেট কিনল। দাম পড়ে যাওয়ায় সে ১৫% ক্ষতিতে বিক্রি করতে বাধ্য হলো। তার বিক্রয়মূল্য কত ছিল?"
+  bn_reviewed: false
+  answer: "425"
+  answer_type: numeric
+  hints:
+    - en: "A 15% loss means the selling price is lower than the cost price. How much lower, as a fraction of the cost price?"
+      bn: "১৫% ক্ষতি মানে বিক্রয়মূল্য ক্রয়মূল্যের চেয়ে কম। ক্রয়মূল্যের কতটা অংশ কম?"
+    - en: "Loss = (Loss% ÷ 100) × Cost Price. Then Selling Price = Cost Price − Loss. Find the loss in rupees first."
+      bn: "ক্ষতি = (Loss% ÷ ১০০) × ক্রয়মূল্য। তারপর বিক্রয়মূল্য = ক্রয়মূল্য − ক্ষতি। প্রথমে টাকায় ক্ষতি বের করো।"
+    - en: "Loss = (15 ÷ 100) × ₹500 = ₹75. So Selling Price = ₹500 − ₹75. What does that come to?"
+      bn: "ক্ষতি = (১৫ ÷ ১০০) × ৫০০ = ৭৫ টাকা। তাহলে বিক্রয়মূল্য = ৫০০ − ৭৫ টাকা। উত্তরটা কত হয়?"
+
+- grade: 7
+  topic: profit_and_loss
+  difficulty: 2
+  question_en: "Riya bought a school bag for ₹350 and sold it for ₹420. What is her profit percentage?"
+  question_bn: "রিয়া ৩৫০ টাকায় একটি স্কুলব্যাগ কিনে ৪২০ টাকায় বিক্রি করল। তার লাভের শতকরা হার কত?"
+  bn_reviewed: false
+  answer: "20"
+  answer_type: numeric
+  hints:
+    - en: "You know how to find profit in rupees. To express it as a percentage, think about how to relate that profit to what the bag originally cost."
+      bn: "তুমি টাকায় লাভ বের করতে জানো। সেই লাভকে শতকরা হিসেবে প্রকাশ করতে হলে, আসল দামের সাথে লাভের সম্পর্কটা ভাবো।"
+    - en: "Profit % = (Profit ÷ Cost Price) × 100. Find the profit in rupees first, then apply this formula."
+      bn: "Profit % = (লাভ ÷ ক্রয়মূল্য) × ১০০। প্রথমে টাকায় লাভ বের করো, তারপর এই সূত্র ব্যবহার করো।"
+    - en: "Profit = ₹420 − ₹350 = ₹70. Now, Profit % = (70 ÷ 350) × 100. What does that come to?"
+      bn: "লাভ = ৪২০ − ৩৫০ = ৭০ টাকা। এখন, Profit % = (৭০ ÷ ৩৫০) × ১০০। উত্তরটা কত হয়?"
+
+- grade: 7
+  topic: profit_and_loss
+  difficulty: 2
+  question_en: "Abdul's father bought a mobile phone for ₹3,200 and sold it six months later for ₹2,720. What was his loss percentage?"
+  question_bn: "আবদুলের বাবা ৩,২০০ টাকায় একটি মোবাইল ফোন কিনে ছয় মাস পর ২,৭২০ টাকায় বিক্রি করলেন। তাঁর ক্ষতির শতকরা হার কত ছিল?"
+  bn_reviewed: false
+  answer: "15"
+  answer_type: numeric
+  hints:
+    - en: "Loss percentage is always calculated with respect to the cost price, not the selling price. Start by finding how much was lost in rupees."
+      bn: "ক্ষতির শতকরা হার সবসময় ক্রয়মূল্যের উপর হিসাব করা হয়, বিক্রয়মূল্যের উপর নয়। প্রথমে টাকায় কত ক্ষতি হয়েছে তা বের করো।"
+    - en: "Loss % = (Loss ÷ Cost Price) × 100. Find the loss in rupees first, then apply this formula."
+      bn: "Loss % = (ক্ষতি ÷ ক্রয়মূল্য) × ১০০। প্রথমে টাকায় ক্ষতি বের করো, তারপর এই সূত্র ব্যবহার করো।"
+    - en: "Loss = ₹3,200 − ₹2,720 = ₹480. Now, Loss % = (480 ÷ 3,200) × 100. What does that come to?"
+      bn: "ক্ষতি = ৩,২০০ − ২,৭২০ = ৪৮০ টাকা। এখন, Loss % = (৪৮০ ÷ ৩,২০০) × ১০০। উত্তরটা কত হয়?"
+
+- grade: 7
+  topic: profit_and_loss
+  difficulty: 3
+  question_en: "A shopkeeper sold a pressure cooker for ₹675, making a 35% profit. What was the cost price?"
+  question_bn: "একজন দোকানদার একটি প্রেশার কুকার ৬৭৫ টাকায় বিক্রি করে ৩৫% লাভ করলেন। কুকারটির ক্রয়মূল্য কত ছিল?"
+  bn_reviewed: false
+  answer: "500"
+  answer_type: numeric
+  hints:
+    - en: "Be careful — the 35% profit is always calculated on the cost price, not the selling price. If cost price = 100%, what percentage does the selling price represent?"
+      bn: "সাবধান — ৩৫% লাভ সবসময় ক্রয়মূল্যের উপর হিসাব করা হয়, বিক্রয়মূল্যের উপর নয়। যদি ক্রয়মূল্য = ১০০% হয়, তাহলে বিক্রয়মূল্য কত percentage?"
+    - en: "If CP = 100%, then SP = 100% + 35% = 135% of CP. You know SP = ₹675. So 135% of CP = ₹675. Can you find what 100% of CP is?"
+      bn: "যদি ক্রয়মূল্য = ১০০% হয়, তাহলে বিক্রয়মূল্য = ১০০% + ৩৫% = ক্রয়মূল্যের ১৩৫%। তুমি জানো বিক্রয়মূল্য = ৬৭৫ টাকা। তাহলে ক্রয়মূল্যের ১৩৫% = ৬৭৫ টাকা। ক্রয়মূল্যের ১০০% বের করতে পারবে?"
+    - en: "135% of CP = ₹675, so 1% of CP = ₹675 ÷ 135 = ₹5. Therefore CP = 100 × ₹5. What does that come to?"
+      bn: "ক্রয়মূল্যের ১৩৫% = ৬৭৫ টাকা, তাহলে ১% = ৬৭৫ ÷ ১৩৫ = ৫ টাকা। সুতরাং ক্রয়মূল্য = ১০০ × ৫ টাকা। উত্তরটা কত হয়?"
+
+- grade: 7
+  topic: profit_and_loss
+  difficulty: 3
+  question_en: "Priya bought a bicycle for ₹2,800 and spent ₹200 on repairs. She then sold it for ₹3,750. What was her profit percentage?"
+  question_bn: "প্রিয়া ২,৮০০ টাকায় একটি সাইকেল কিনে মেরামতে ২০০ টাকা খরচ করল। এরপর সে ৩,৭৫০ টাকায় বিক্রি করল। তার লাভের শতকরা হার কত?"
+  bn_reviewed: false
+  answer: "25"
+  answer_type: numeric
+  hints:
+    - en: "When calculating profit, the cost price includes not just the purchase price but also any additional expenses. What is Priya's total cost?"
+      bn: "লাভ হিসাব করার সময়, ক্রয়মূল্যে শুধু কেনার দাম নয়, অন্যান্য খরচও যোগ করতে হয়। প্রিয়ার মোট খরচ কত?"
+    - en: "Total CP = Purchase Price + Repair Cost. Then Profit % = (Profit ÷ Total CP) × 100. Find the total cost and profit in rupees first."
+      bn: "মোট ক্রয়মূল্য = ক্রয়মূল্য + মেরামতের খরচ। তারপর Profit % = (লাভ ÷ মোট ক্রয়মূল্য) × ১০০। প্রথমে মোট খরচ ও টাকায় লাভ বের করো।"
+    - en: "Total CP = ₹2,800 + ₹200 = ₹3,000. Profit = ₹3,750 − ₹3,000 = ₹750. Now, Profit % = (750 ÷ 3,000) × 100. What does that come to?"
+      bn: "মোট ক্রয়মূল্য = ২,৮০০ + ২০০ = ৩,০০০ টাকা। লাভ = ৩,৭৫০ − ৩,০০০ = ৭৫০ টাকা। এখন, Profit % = (৭৫০ ÷ ৩,০০০) × ১০০। উত্তরটা কত হয়?"

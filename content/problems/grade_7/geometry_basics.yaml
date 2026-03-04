@@ -1,0 +1,252 @@
+# Geometry Basics — Grade 7
+# WBBSE Chapter 7: Angle Properties, Triangles, Quadrilaterals, Circles
+# 15 / 15 problems complete ✅
+# Difficulty: 6 easy (1), 6 medium (2), 3 hard (3)
+# bn_reviewed: false — Bengali drafts pending native speaker review
+
+problems:
+  # --- EASY (difficulty 1) ---
+
+  - grade: 7
+    topic: geometry_basics
+    difficulty: 1
+    question_en: "What is the sum of interior angles of a pentagon (5-sided polygon)?"
+    question_bn: "একটি পঞ্চভুজের (৫ বাহুবিশিষ্ট বহুভুজ) অন্তঃকোণগুলোর যোগফল কত?"
+    bn_reviewed: false
+    answer: "540"
+    answer_type: numeric
+    hints:
+      - en: "There is a formula for the sum of interior angles of any polygon with n sides: (n − 2) × 180°."
+        bn: "n বাহুবিশিষ্ট যেকোনো বহুভুজের অন্তঃকোণের যোগফলের সূত্র আছে: (n − 2) × 180°।"
+      - en: "A pentagon has 5 sides, so n = 5. Apply the formula: (5 − 2) × 180°."
+        bn: "পঞ্চভুজে ৫টি বাহু আছে, তাই n = 5। সূত্র প্রয়োগ করো: (5 − 2) × 180°।"
+      - en: "(5 − 2) × 180° = 3 × 180° = 540°."
+        bn: "(5 − 2) × 180° = 3 × 180° = 540°।"
+
+  - grade: 7
+    topic: geometry_basics
+    difficulty: 1
+    question_en: "A circle has a diameter of 14 cm. What is its radius in cm?"
+    question_bn: "একটি বৃত্তের ব্যাস ১৪ সেমি। এর ব্যাসার্ধ কত সেমি?"
+    bn_reviewed: false
+    answer: "7"
+    answer_type: numeric
+    hints:
+      - en: "The diameter is a chord that passes through the centre of a circle. The radius goes from the centre to the edge."
+        bn: "ব্যাস হলো একটি জ্যা যা বৃত্তের কেন্দ্রের মধ্য দিয়ে যায়। ব্যাসার্ধ কেন্দ্র থেকে প্রান্ত পর্যন্ত যায়।"
+      - en: "Diameter = 2 × Radius. So Radius = Diameter ÷ 2 = 14 ÷ 2."
+        bn: "ব্যাস = ২ × ব্যাসার্ধ। সুতরাং ব্যাসার্ধ = ব্যাস ÷ ২ = ১৪ ÷ ২।"
+      - en: "Radius = 14 ÷ 2 = 7 cm."
+        bn: "ব্যাসার্ধ = ১৪ ÷ ২ = ৭ সেমি।"
+
+  - grade: 7
+    topic: geometry_basics
+    difficulty: 1
+    question_en: "In a parallelogram, one angle is 65°. What is the opposite angle in degrees?"
+    question_bn: "একটি সমান্তরিকের একটি কোণ ৬৫°। বিপরীত কোণটি কত ডিগ্রি?"
+    bn_reviewed: false
+    answer: "65"
+    answer_type: numeric
+    hints:
+      - en: "A parallelogram has special properties about its angles. Opposite angles in a parallelogram are related to each other."
+        bn: "সমান্তরিকের কোণ সম্পর্কে বিশেষ নিয়ম আছে। সমান্তরিকের বিপরীত কোণগুলো পরস্পর সম্পর্কিত।"
+      - en: "In a parallelogram, opposite angles are always equal."
+        bn: "সমান্তরিকে বিপরীত কোণ সর্বদা সমান হয়।"
+      - en: "Opposite angle = 65° (same as the given angle)."
+        bn: "বিপরীত কোণ = ৬৫° (প্রদত্ত কোণের সমান)।"
+
+  - grade: 7
+    topic: geometry_basics
+    difficulty: 1
+    question_en: "A triangle is called scalene if all three sides are different. How many axes of symmetry does a scalene triangle have?"
+    question_bn: "একটি ত্রিভুজকে বিষমবাহু বলা হয় যদি তার তিনটি বাহু আলাদা হয়। একটি বিষমবাহু ত্রিভুজের কয়টি প্রতিসাম্য অক্ষ আছে?"
+    bn_reviewed: false
+    answer: "0"
+    answer_type: numeric
+    hints:
+      - en: "An axis of symmetry is a line that divides a shape into two mirror-image halves. Think about whether a scalene triangle can be folded along any line to match both sides."
+        bn: "প্রতিসাম্য অক্ষ হলো একটি রেখা যা একটি আকৃতিকে দুটি দর্পণ-প্রতিচ্ছবি ভাগে বিভক্ত করে। ভাবো, বিষমবাহু ত্রিভুজকে কোনো রেখা বরাবর ভাঁজ করলে উভয় দিক মিলবে কি?"
+      - en: "An equilateral triangle has 3 axes of symmetry. An isosceles triangle has 1. A scalene triangle has all sides and angles different — no fold will make both halves match."
+        bn: "সমবাহু ত্রিভুজের ৩টি প্রতিসাম্য অক্ষ আছে। সমদ্বিবাহুর ১টি। বিষমবাহু ত্রিভুজের সব বাহু ও কোণ আলাদা — কোনো ভাঁজেই দুদিক মিলবে না।"
+      - en: "A scalene triangle has 0 axes of symmetry."
+        bn: "বিষমবাহু ত্রিভুজের প্রতিসাম্য অক্ষ = ০।"
+
+  - grade: 7
+    topic: geometry_basics
+    difficulty: 1
+    question_en: "What is the sum of all interior angles of a hexagon (6-sided polygon)?"
+    question_bn: "একটি ষড়ভুজের (৬ বাহুবিশিষ্ট বহুভুজ) সকল অন্তঃকোণের যোগফল কত?"
+    bn_reviewed: false
+    answer: "720"
+    answer_type: numeric
+    hints:
+      - en: "Use the polygon angle-sum formula: (n − 2) × 180°, where n is the number of sides."
+        bn: "বহুভুজের কোণ-যোগফল সূত্র ব্যবহার করো: (n − 2) × 180°, যেখানে n হলো বাহুর সংখ্যা।"
+      - en: "For a hexagon, n = 6. So the sum = (6 − 2) × 180°."
+        bn: "ষড়ভুজের জন্য n = 6। তাই যোগফল = (6 − 2) × 180°।"
+      - en: "(6 − 2) × 180° = 4 × 180° = 720°."
+        bn: "(6 − 2) × 180° = 4 × 180° = 720°।"
+
+  - grade: 7
+    topic: geometry_basics
+    difficulty: 1
+    question_en: "Two angles in a parallelogram are adjacent (next to each other). One is 110°. What is the adjacent angle in degrees?"
+    question_bn: "সমান্তরিকের দুটি সন্নিহিত কোণ (পাশাপাশি কোণ)। একটি কোণ ১১০°। সন্নিহিত কোণটি কত ডিগ্রি?"
+    bn_reviewed: false
+    answer: "70"
+    answer_type: numeric
+    hints:
+      - en: "In a parallelogram, adjacent angles are supplementary — they add up to 180°."
+        bn: "সমান্তরিকে সন্নিহিত কোণগুলো সম্পূরক — তাদের যোগফল ১৮০°।"
+      - en: "Adjacent angle = 180° − 110°."
+        bn: "সন্নিহিত কোণ = ১৮০° − ১১০°।"
+      - en: "180° − 110° = 70°."
+        bn: "১৮০° − ১১০° = ৭০°।"
+
+  # --- MEDIUM (difficulty 2) ---
+
+  - grade: 7
+    topic: geometry_basics
+    difficulty: 2
+    question_en: "In a rhombus, one angle is 60°. What are the other three angles? Write the larger angle."
+    question_bn: "একটি রম্বসের একটি কোণ ৬০°। অন্য তিনটি কোণ কত? বড় কোণটি লেখো।"
+    bn_reviewed: false
+    answer: "120"
+    answer_type: numeric
+    hints:
+      - en: "A rhombus is a parallelogram with all four sides equal. Like a parallelogram, opposite angles are equal and adjacent angles are supplementary."
+        bn: "রম্বস একটি সমান্তরিক যার চার বাহু সমান। সমান্তরিকের মতো, বিপরীত কোণ সমান এবং সন্নিহিত কোণ সম্পূরক।"
+      - en: "One angle is 60°. The opposite angle is also 60°. The adjacent angles = 180° − 60°."
+        bn: "একটি কোণ ৬০°। বিপরীত কোণও ৬০°। সন্নিহিত কোণ = ১৮০° − ৬০°।"
+      - en: "Adjacent angles = 180° − 60° = 120°. So the four angles are 60°, 120°, 60°, 120°. The larger angle is 120°."
+        bn: "সন্নিহিত কোণ = ১৮০° − ৬০° = ১২০°। তাই চার কোণ হলো ৬০°, ১২০°, ৬০°, ১২০°। বড় কোণ ১২০°।"
+
+  - grade: 7
+    topic: geometry_basics
+    difficulty: 2
+    question_en: "A circle has a radius of 7 cm. What is its circumference? (Use π = 22/7)"
+    question_bn: "একটি বৃত্তের ব্যাসার্ধ ৭ সেমি। এর পরিধি কত? (π = ২২/৭ ব্যবহার করো)"
+    bn_reviewed: false
+    answer: "44"
+    answer_type: numeric
+    hints:
+      - en: "The circumference (perimeter) of a circle is calculated using the formula C = 2πr, where r is the radius."
+        bn: "বৃত্তের পরিধি (পরিসীমা) সূত্র: C = 2πr, যেখানে r হলো ব্যাসার্ধ।"
+      - en: "C = 2 × (22/7) × 7. Notice that 7 in the denominator cancels with the radius 7."
+        bn: "C = 2 × (22/7) × 7। লক্ষ করো যে হর-এর ৭ এবং ব্যাসার্ধের ৭ বাদ যাবে।"
+      - en: "C = 2 × 22 = 44 cm."
+        bn: "C = 2 × 22 = ৪৪ সেমি।"
+
+  - grade: 7
+    topic: geometry_basics
+    difficulty: 2
+    question_en: "In triangle ABC, angle A = 50° and angle B = 70°. What is the exterior angle at C (the angle outside the triangle at vertex C)?"
+    question_bn: "ত্রিভুজ ABC-এ, কোণ A = ৫০° এবং কোণ B = ৭০°। C তে বহিঃকোণ (শীর্ষ C-তে ত্রিভুজের বাইরের কোণ) কত?"
+    bn_reviewed: false
+    answer: "120"
+    answer_type: numeric
+    hints:
+      - en: "First find angle C. The sum of angles in a triangle is 180°. Then use the fact that the exterior angle and interior angle at C form a straight line (180°)."
+        bn: "প্রথমে কোণ C খোঁজো। ত্রিভুজের কোণের যোগফল ১৮০°। তারপর C-তে বহিঃকোণ ও অন্তঃকোণ মিলে সরলরেখা (১৮০°) তৈরি করে।"
+      - en: "Angle C = 180° − 50° − 70° = 60°. Exterior angle at C = 180° − 60°."
+        bn: "কোণ C = ১৮০° − ৫০° − ৭০° = ৬০°। C-তে বহিঃকোণ = ১৮০° − ৬০°।"
+      - en: "Exterior angle at C = 180° − 60° = 120°. (Also equals 50° + 70° — the Exterior Angle Theorem!)"
+        bn: "C-তে বহিঃকোণ = ১৮০° − ৬০° = ১২০°। (এটি ৫০° + ৭০° এর সমানও — বহিঃকোণ উপপাদ্য!)"
+
+  - grade: 7
+    topic: geometry_basics
+    difficulty: 2
+    question_en: "A regular polygon has each interior angle equal to 120°. How many sides does it have?"
+    question_bn: "একটি সমবাহু বহুভুজের প্রতিটি অন্তঃকোণ ১২০°। এর কয়টি বাহু আছে?"
+    bn_reviewed: false
+    answer: "6"
+    answer_type: numeric
+    hints:
+      - en: "For a regular polygon with n sides, each interior angle = (n − 2) × 180° ÷ n. We know this equals 120°."
+        bn: "n বাহুবিশিষ্ট সমবাহু বহুভুজের প্রতিটি অন্তঃকোণ = (n − 2) × 180° ÷ n। এটি ১২০° এর সমান।"
+      - en: "Set up the equation: (n − 2) × 180 ÷ n = 120. Multiply both sides by n: (n − 2) × 180 = 120n."
+        bn: "সমীকরণ তৈরি করো: (n − 2) × 180 ÷ n = 120। উভয়পক্ষ n দিয়ে গুণ করো: (n − 2) × 180 = 120n।"
+      - en: "180n − 360 = 120n → 60n = 360 → n = 6. It is a hexagon!"
+        bn: "180n − 360 = 120n → 60n = 360 → n = 6। এটি একটি ষড়ভুজ!"
+
+  - grade: 7
+    topic: geometry_basics
+    difficulty: 2
+    question_en: "A circle has a circumference of 88 cm. What is its diameter? (Use π = 22/7)"
+    question_bn: "একটি বৃত্তের পরিধি ৮৮ সেমি। এর ব্যাস কত? (π = ২২/৭ ব্যবহার করো)"
+    bn_reviewed: false
+    answer: "28"
+    answer_type: numeric
+    hints:
+      - en: "The circumference formula is C = πd, where d is the diameter. We know C = 88 and π = 22/7."
+        bn: "পরিধির সূত্র: C = πd, যেখানে d হলো ব্যাস। আমরা জানি C = 88 এবং π = 22/7।"
+      - en: "88 = (22/7) × d. Rearrange to find d: d = 88 × (7/22)."
+        bn: "88 = (22/7) × d। d খুঁজতে সাজাও: d = 88 × (7/22)।"
+      - en: "d = 88 × 7 ÷ 22 = 616 ÷ 22 = 28 cm."
+        bn: "d = 88 × 7 ÷ 22 = 616 ÷ 22 = 28 সেমি।"
+
+  - grade: 7
+    topic: geometry_basics
+    difficulty: 2
+    question_en: "In a trapezium, two angles on the same parallel side are 65° and 75°. What is the sum of the other two angles?"
+    question_bn: "একটি ট্র্যাপিজিয়ামে একই সমান্তরাল বাহুতে দুটি কোণ ৬৫° এবং ৭৫°। অন্য দুটি কোণের যোগফল কত?"
+    bn_reviewed: false
+    answer: "220"
+    answer_type: numeric
+    hints:
+      - en: "A trapezium has one pair of parallel sides. The angles between the non-parallel sides (legs) and the parallel sides have a special relationship."
+        bn: "ট্র্যাপিজিয়ামে এক জোড়া সমান্তরাল বাহু থাকে। অসমান্তরাল বাহু এবং সমান্তরাল বাহুর মধ্যবর্তী কোণের বিশেষ সম্পর্ক আছে।"
+      - en: "The sum of all four angles in any quadrilateral = 360°. Two angles are 65° and 75°. Their sum = 140°."
+        bn: "যেকোনো চতুর্ভুজের চার কোণের যোগফল = ৩৬০°। দুটি কোণ ৬৫° এবং ৭৫°। তাদের যোগফল = ১৪০°।"
+      - en: "Remaining two angles = 360° − 140° = 220°."
+        bn: "বাকি দুটি কোণের যোগফল = ৩৬০° − ১৪০° = ২২০°।"
+
+  # --- HARD (difficulty 3) ---
+
+  - grade: 7
+    topic: geometry_basics
+    difficulty: 3
+    question_en: "In triangle ABC, angle A = (2x + 15)°, angle B = (3x − 5)°, and angle C = (x − 10)°. What is angle B in degrees?"
+    question_bn: "ত্রিভুজ ABC-এ, কোণ A = (2x + 15)°, কোণ B = (3x − 5)°, এবং কোণ C = (x − 10)°। কোণ B কত ডিগ্রি?"
+    bn_reviewed: false
+    answer: "85"
+    answer_type: numeric
+    hints:
+      - en: "All three angles of a triangle sum to 180°. Add all three expressions and set them equal to 180."
+        bn: "ত্রিভুজের তিন কোণের যোগফল ১৮০°। তিনটি রাশি যোগ করে ১৮০ এর সমান ধরো।"
+      - en: "(2x + 15) + (3x − 5) + (x − 10) = 180. Combine like terms: 6x + 0 = 180, so 6x = 180."
+        bn: "(2x + 15) + (3x − 5) + (x − 10) = 180। সদৃশ পদ একত্রিত করো: 6x + 0 = 180, সুতরাং 6x = 180।"
+      - en: "x = 180 ÷ 6 = 30. Angle B = 3(30) − 5 = 90 − 5 = 85°."
+        bn: "x = 180 ÷ 6 = 30। কোণ B = 3(30) − 5 = 90 − 5 = 85°।"
+
+  - grade: 7
+    topic: geometry_basics
+    difficulty: 3
+    question_en: "In triangle ABC, AB = AC (isosceles). The exterior angle at vertex A is 110°. What is angle B in degrees?"
+    question_bn: "ত্রিভুজ ABC-এ, AB = AC (সমদ্বিবাহু)। শীর্ষ A-তে বহিঃকোণ ১১০°। কোণ B কত ডিগ্রি?"
+    bn_reviewed: false
+    answer: "55"
+    answer_type: numeric
+    hints:
+      - en: "The exterior angle at A and the interior angle at A are supplementary (they form a straight line). Find angle A first."
+        bn: "A-তে বহিঃকোণ ও অন্তঃকোণ সম্পূরক (তারা সরলরেখা তৈরি করে)। প্রথমে কোণ A খোঁজো।"
+      - en: "Angle A (interior) = 180° − 110° = 70°. Since AB = AC, the triangle is isosceles, so angles B and C are equal."
+        bn: "অন্তঃকোণ A = 180° − 110° = 70°। AB = AC হওয়ায় ত্রিভুজটি সমদ্বিবাহু, তাই কোণ B এবং C সমান।"
+      - en: "Angle B + Angle C = 180° − 70° = 110°. Since they are equal, angle B = 110° ÷ 2 = 55°."
+        bn: "কোণ B + কোণ C = 180° − 70° = 110°। তারা সমান বলে, কোণ B = 110° ÷ 2 = 55°।"
+
+  - grade: 7
+    topic: geometry_basics
+    difficulty: 3
+    question_en: "A circle has an area of 154 cm². What is its radius in cm? (Use π = 22/7)"
+    question_bn: "একটি বৃত্তের ক্ষেত্রফল ১৫৪ বর্গ সেমি। এর ব্যাসার্ধ কত সেমি? (π = ২২/৭ ব্যবহার করো)"
+    bn_reviewed: false
+    answer: "7"
+    answer_type: numeric
+    hints:
+      - en: "The area of a circle formula is A = πr². We know A = 154 and π = 22/7. Set up the equation."
+        bn: "বৃত্তের ক্ষেত্রফলের সূত্র: A = πr²। আমরা জানি A = 154 এবং π = 22/7। সমীকরণ তৈরি করো।"
+      - en: "154 = (22/7) × r². Rearrange: r² = 154 × (7/22) = 1078 ÷ 22 = 49."
+        bn: "154 = (22/7) × r²। সাজাও: r² = 154 × (7/22) = 1078 ÷ 22 = 49।"
+      - en: "r² = 49, so r = √49 = 7 cm."
+        bn: "r² = 49, সুতরাং r = √49 = 7 সেমি।"

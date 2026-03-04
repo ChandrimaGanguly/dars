@@ -1,0 +1,252 @@
+# Geometry Basics — Grade 6
+# WBBSE Chapter 4: Lines, Angles, Triangles, Quadrilaterals
+# 15 / 15 problems complete ✅
+# Difficulty: 6 easy (1), 6 medium (2), 3 hard (3)
+# bn_reviewed: false — Bengali drafts pending native speaker review
+
+problems:
+  # --- EASY (difficulty 1) ---
+
+  - grade: 6
+    topic: geometry_basics
+    difficulty: 1
+    question_en: "How many degrees are there in a right angle?"
+    question_bn: "একটি সমকোণে কত ডিগ্রি থাকে?"
+    bn_reviewed: false
+    answer: "90"
+    answer_type: numeric
+    hints:
+      - en: "Angles are measured in degrees. A right angle is the angle you see at the corner of a square or a book."
+        bn: "কোণ ডিগ্রিতে পরিমাপ করা হয়। সমকোণ হলো একটি বর্গক্ষেত্র বা বইয়ের কোণায় যে কোণ দেখা যায়।"
+      - en: "A full rotation is 360°. A straight line is 180°. A right angle is exactly half of a straight angle."
+        bn: "পূর্ণ আবর্তন = ৩৬০°। সরলরেখা = ১৮০°। সমকোণ হলো সরলকোণের ঠিক অর্ধেক।"
+      - en: "Half of 180° = 90°. So a right angle = 90°."
+        bn: "১৮০° এর অর্ধেক = ৯০°। সুতরাং সমকোণ = ৯০°।"
+
+  - grade: 6
+    topic: geometry_basics
+    difficulty: 1
+    question_en: "Two angles together form a straight line. One angle is 65°. What is the other angle?"
+    question_bn: "দুটি কোণ মিলে একটি সরলরেখা তৈরি করে। একটি কোণ ৬৫°। অন্য কোণটি কত?"
+    bn_reviewed: false
+    answer: "115"
+    answer_type: numeric
+    hints:
+      - en: "When two angles sit on a straight line, they are called supplementary angles. What do supplementary angles add up to?"
+        bn: "দুটি কোণ একটি সরলরেখায় থাকলে তাদের সম্পূরক কোণ বলে। সম্পূরক কোণের যোগফল কত হয়?"
+      - en: "Supplementary angles add up to 180°. So if one angle is 65°, the other is 180° − 65°."
+        bn: "সম্পূরক কোণের যোগফল ১৮০°। তাহলে একটি কোণ ৬৫° হলে অন্যটি = ১৮০° − ৬৫°।"
+      - en: "180° − 65° = 115°."
+        bn: "১৮০° − ৬৫° = ১১৫°।"
+
+  - grade: 6
+    topic: geometry_basics
+    difficulty: 1
+    question_en: "A triangle has angles of 60° and 70°. What is the third angle?"
+    question_bn: "একটি ত্রিভুজের দুটি কোণ ৬০° ও ৭০°। তৃতীয় কোণটি কত?"
+    bn_reviewed: false
+    answer: "50"
+    answer_type: numeric
+    hints:
+      - en: "Every triangle has a special property about the sum of its three angles. Do you remember what all three angles add up to?"
+        bn: "প্রতিটি ত্রিভুজের তিনটি কোণের যোগফল সম্পর্কে একটি বিশেষ নিয়ম আছে। তিনটি কোণের যোগফল কত মনে আছে?"
+      - en: "The sum of all angles in a triangle = 180°. So the third angle = 180° − 60° − 70°."
+        bn: "ত্রিভুজের তিনটি কোণের যোগফল = ১৮০°। তাহলে তৃতীয় কোণ = ১৮০° − ৬০° − ৭০°।"
+      - en: "180° − 60° − 70° = 180° − 130° = 50°."
+        bn: "১৮০° − ৬০° − ৭০° = ১৮০° − ১৩০° = ৫০°।"
+
+  - grade: 6
+    topic: geometry_basics
+    difficulty: 1
+    question_en: "An equilateral triangle has all three angles equal. What is each angle in degrees?"
+    question_bn: "একটি সমবাহু ত্রিভুজের তিনটি কোণ সমান। প্রতিটি কোণ কত ডিগ্রি?"
+    bn_reviewed: false
+    answer: "60"
+    answer_type: numeric
+    hints:
+      - en: "In an equilateral triangle, all three angles are equal. The sum of angles in any triangle is 180°."
+        bn: "সমবাহু ত্রিভুজে তিনটি কোণ সমান। যেকোনো ত্রিভুজের কোণের যোগফল ১৮০°।"
+      - en: "If all three angles are equal and they add up to 180°, each angle = 180° ÷ 3."
+        bn: "তিনটি কোণ সমান এবং যোগফল ১৮০° হলে, প্রতিটি কোণ = ১৮০° ÷ ৩।"
+      - en: "180° ÷ 3 = 60°. Each angle of an equilateral triangle is 60°."
+        bn: "১৮০° ÷ ৩ = ৬০°। সমবাহু ত্রিভুজের প্রতিটি কোণ ৬০°।"
+
+  - grade: 6
+    topic: geometry_basics
+    difficulty: 1
+    question_en: "How many sides does a hexagon have?"
+    question_bn: "একটি ষড়ভুজের কয়টি বাহু আছে?"
+    bn_reviewed: false
+    answer: "6"
+    answer_type: numeric
+    hints:
+      - en: "The prefix 'hexa' comes from Greek and means six. Think of common words: hexagonal tiles, a honeycomb shape."
+        bn: "'ষড়' মানে ছয়। মধুচাকের মতো আকৃতিকে ষড়ভুজ বলে।"
+      - en: "Tri = 3, Quad = 4, Penta = 5, Hexa = 6. Count the sides of a hexagon."
+        bn: "ত্রি = ৩, চতুর্ভুজ = ৪, পঞ্চভুজ = ৫, ষড়ভুজ = ৬। ষড়ভুজের বাহু গণনা করো।"
+      - en: "A hexagon has 6 sides."
+        bn: "একটি ষড়ভুজের ৬টি বাহু আছে।"
+
+  - grade: 6
+    topic: geometry_basics
+    difficulty: 1
+    question_en: "Two angles are complementary. One angle is 35°. What is the other angle?"
+    question_bn: "দুটি কোণ পরিপূরক। একটি কোণ ৩৫°। অন্য কোণটি কত?"
+    bn_reviewed: false
+    answer: "55"
+    answer_type: numeric
+    hints:
+      - en: "Complementary angles are two angles that together form a right angle (90°). They add up to 90°."
+        bn: "পরিপূরক কোণ হলো দুটি কোণ যারা মিলে একটি সমকোণ (৯০°) তৈরি করে। তাদের যোগফল ৯০°।"
+      - en: "Complementary angles sum = 90°. So the other angle = 90° − 35°."
+        bn: "পরিপূরক কোণের যোগফল = ৯০°। তাহলে অন্য কোণ = ৯০° − ৩৫°।"
+      - en: "90° − 35° = 55°."
+        bn: "৯০° − ৩৫° = ৫৫°।"
+
+  # --- MEDIUM (difficulty 2) ---
+
+  - grade: 6
+    topic: geometry_basics
+    difficulty: 2
+    question_en: "In a quadrilateral ABCD, three angles are 85°, 95°, and 110°. What is the fourth angle?"
+    question_bn: "চতুর্ভুজ ABCD-এ তিনটি কোণ ৮৫°, ৯৫° এবং ১১০°। চতুর্থ কোণটি কত?"
+    bn_reviewed: false
+    answer: "70"
+    answer_type: numeric
+    hints:
+      - en: "A quadrilateral has 4 sides and 4 angles. What is the sum of all angles in any quadrilateral?"
+        bn: "একটি চতুর্ভুজে ৪টি বাহু ও ৪টি কোণ আছে। যেকোনো চতুর্ভুজের সকল কোণের যোগফল কত?"
+      - en: "The sum of angles in a quadrilateral = 360°. Add the three known angles, then subtract from 360°."
+        bn: "চতুর্ভুজের কোণের যোগফল = ৩৬০°। তিনটি পরিচিত কোণ যোগ করো, তারপর ৩৬০° থেকে বিয়োগ করো।"
+      - en: "85° + 95° + 110° = 290°. Fourth angle = 360° − 290° = 70°."
+        bn: "৮৫° + ৯৫° + ১১০° = ২৯০°। চতুর্থ কোণ = ৩৬০° − ২৯০° = ৭০°।"
+
+  - grade: 6
+    topic: geometry_basics
+    difficulty: 2
+    question_en: "Two lines intersect. One of the angles formed is 130°. What is the vertically opposite angle?"
+    question_bn: "দুটি রেখা পরস্পর ছেদ করে। গঠিত একটি কোণ ১৩০°। বিপরীত কোণটি কত?"
+    bn_reviewed: false
+    answer: "130"
+    answer_type: numeric
+    hints:
+      - en: "When two lines cross, they form two pairs of opposite angles. These opposite angles have a special name — vertically opposite angles."
+        bn: "দুটি রেখা ছেদ করলে দুই জোড়া বিপরীত কোণ তৈরি হয়। এই বিপরীত কোণগুলোকে বিপ্রতীপ কোণ বলে।"
+      - en: "Vertically opposite angles are always equal. So the angle directly across is the same as the given angle."
+        bn: "বিপ্রতীপ কোণ সর্বদা সমান হয়। সুতরাং সরাসরি বিপরীত কোণটি প্রদত্ত কোণের সমান।"
+      - en: "Vertically opposite angle = 130°."
+        bn: "বিপ্রতীপ কোণ = ১৩০°।"
+
+  - grade: 6
+    topic: geometry_basics
+    difficulty: 2
+    question_en: "A right-angled triangle has one angle of 90° and another of 35°. What is the third angle?"
+    question_bn: "একটি সমকোণী ত্রিভুজে একটি কোণ ৯০° এবং আরেকটি ৩৫°। তৃতীয় কোণটি কত?"
+    bn_reviewed: false
+    answer: "55"
+    answer_type: numeric
+    hints:
+      - en: "A right-angled triangle always has one angle that is exactly 90°. The other two angles must sum to the remaining degrees."
+        bn: "সমকোণী ত্রিভুজে সবসময় একটি কোণ ঠিক ৯০° হয়। অন্য দুটি কোণের যোগফল হবে বাকি ডিগ্রি।"
+      - en: "Sum of all three angles = 180°. Remaining after the right angle = 180° − 90° = 90°. Third angle = 90° − 35°."
+        bn: "তিন কোণের যোগফল = ১৮০°। সমকোণ বাদ দিলে বাকি = ১৮০° − ৯০° = ৯০°। তৃতীয় কোণ = ৯০° − ৩৫°।"
+      - en: "90° − 35° = 55°. The third angle is 55°."
+        bn: "৯০° − ৩৫° = ৫৫°। তৃতীয় কোণ ৫৫°।"
+
+  - grade: 6
+    topic: geometry_basics
+    difficulty: 2
+    question_en: "A rectangle has a length of 12 cm and a width of 5 cm. What is the length of its diagonal? (Use 5-12-13 Pythagorean triple)"
+    question_bn: "একটি আয়তক্ষেত্রের দৈর্ঘ্য ১২ সেমি এবং প্রস্থ ৫ সেমি। এর কর্ণের দৈর্ঘ্য কত? (৫-১২-১৩ পিথাগোরাস ট্রিপল ব্যবহার করো)"
+    bn_reviewed: false
+    answer: "13"
+    answer_type: numeric
+    hints:
+      - en: "A diagonal of a rectangle cuts it into two right-angled triangles. The diagonal is the hypotenuse of each triangle."
+        bn: "একটি আয়তক্ষেত্রের কর্ণ এটিকে দুটি সমকোণী ত্রিভুজে ভাগ করে। কর্ণটি প্রতিটি ত্রিভুজের অতিভুজ।"
+      - en: "Use Pythagoras theorem: diagonal² = length² + width² = 12² + 5²."
+        bn: "পিথাগোরাস উপপাদ্য ব্যবহার করো: কর্ণ² = দৈর্ঘ্য² + প্রস্থ² = ১২² + ৫²।"
+      - en: "12² + 5² = 144 + 25 = 169. √169 = 13 cm."
+        bn: "১২² + ৫² = ১৪৪ + ২৫ = ১৬৯। √১৬৯ = ১৩ সেমি।"
+
+  - grade: 6
+    topic: geometry_basics
+    difficulty: 2
+    question_en: "One angle of an isosceles triangle is 40° (the angle between the two equal sides). What are the other two angles? Write the value of one of them."
+    question_bn: "একটি সমদ্বিবাহু ত্রিভুজের দুই সমান বাহুর মধ্যবর্তী কোণটি ৪০°। অন্য দুটি কোণ কত? তাদের একটির মান লেখো।"
+    bn_reviewed: false
+    answer: "70"
+    answer_type: numeric
+    hints:
+      - en: "In an isosceles triangle, the two base angles (opposite the equal sides) are always equal to each other."
+        bn: "সমদ্বিবাহু ত্রিভুজে ভূমি-সংলগ্ন দুটি কোণ (সমান বাহুগুলোর বিপরীতে) সবসময় সমান হয়।"
+      - en: "The three angles add up to 180°. The top angle is 40°. Remaining = 180° − 40° = 140°. This is shared equally by the two base angles."
+        bn: "তিনটি কোণের যোগফল ১৮০°। শীর্ষ কোণ ৪০°। বাকি = ১৮০° − ৪০° = ১৪০°। এটি দুটি ভূমিকোণে সমানভাবে ভাগ হবে।"
+      - en: "Each base angle = 140° ÷ 2 = 70°."
+        bn: "প্রতিটি ভূমিকোণ = ১৪০° ÷ ২ = ৭০°।"
+
+  - grade: 6
+    topic: geometry_basics
+    difficulty: 2
+    question_en: "A line segment AB is 18 cm long. Point M is the midpoint of AB. What is the length of AM in cm?"
+    question_bn: "একটি রেখাংশ AB এর দৈর্ঘ্য ১৮ সেমি। M হলো AB এর মধ্যবিন্দু। AM এর দৈর্ঘ্য কত সেমি?"
+    bn_reviewed: false
+    answer: "9"
+    answer_type: numeric
+    hints:
+      - en: "A midpoint divides a line segment into two equal halves. If M is the midpoint of AB, then AM = MB."
+        bn: "মধ্যবিন্দু একটি রেখাংশকে দুটি সমান ভাগে বিভক্ত করে। M যদি AB এর মধ্যবিন্দু হয়, তাহলে AM = MB।"
+      - en: "AM = MB = AB ÷ 2 = 18 ÷ 2."
+        bn: "AM = MB = AB ÷ ২ = ১৮ ÷ ২।"
+      - en: "AM = 18 ÷ 2 = 9 cm."
+        bn: "AM = ১৮ ÷ ২ = ৯ সেমি।"
+
+  # --- HARD (difficulty 3) ---
+
+  - grade: 6
+    topic: geometry_basics
+    difficulty: 3
+    question_en: "In triangle PQR, angle P = 2x°, angle Q = 3x°, and angle R = 4x°. What is the value of x?"
+    question_bn: "ত্রিভুজ PQR-এ, কোণ P = 2x°, কোণ Q = 3x°, এবং কোণ R = 4x°। x এর মান কত?"
+    bn_reviewed: false
+    answer: "20"
+    answer_type: numeric
+    hints:
+      - en: "The three angles of a triangle always add up to 180°. Write an equation using all three angles."
+        bn: "ত্রিভুজের তিনটি কোণের যোগফল সর্বদা ১৮০°। তিনটি কোণ ব্যবহার করে একটি সমীকরণ লেখো।"
+      - en: "2x + 3x + 4x = 180°. Simplify the left side by combining like terms."
+        bn: "2x + 3x + 4x = ১৮০°। বামপক্ষ সরল করো।"
+      - en: "9x = 180°. So x = 180° ÷ 9 = 20°."
+        bn: "9x = ১৮০°। সুতরাং x = ১৮০° ÷ ৯ = ২০°।"
+
+  - grade: 6
+    topic: geometry_basics
+    difficulty: 3
+    question_en: "Two parallel lines are cut by a transversal. One of the alternate interior angles is (3y + 10)° and the other is (5y − 14)°. What is y?"
+    question_bn: "একটি তির্যক রেখা দুটি সমান্তরাল রেখা কাটে। একটি একান্তর অন্তঃকোণ (3y + 10)° এবং অন্যটি (5y − 14)°। y এর মান কত?"
+    bn_reviewed: false
+    answer: "12"
+    answer_type: numeric
+    hints:
+      - en: "When a transversal cuts two parallel lines, the alternate interior angles are always equal. Set the two expressions equal to each other."
+        bn: "একটি তির্যক রেখা দুটি সমান্তরাল রেখা কাটলে একান্তর অন্তঃকোণগুলো সর্বদা সমান হয়। দুটি রাশি সমান করো।"
+      - en: "3y + 10 = 5y − 14. Rearrange to get all y terms on one side."
+        bn: "3y + 10 = 5y − 14। সব y একদিকে নিয়ে সাজাও।"
+      - en: "10 + 14 = 5y − 3y → 24 = 2y → y = 12."
+        bn: "10 + 14 = 5y − 3y → 24 = 2y → y = 12।"
+
+  - grade: 6
+    topic: geometry_basics
+    difficulty: 3
+    question_en: "The exterior angle of a triangle is 125°. The two non-adjacent interior angles are in the ratio 2:3. What is the smaller interior angle (in degrees)?"
+    question_bn: "একটি ত্রিভুজের একটি বহিঃকোণ ১২৫°। দুটি অ-সন্নিহিত অন্তঃকোণ ২:৩ অনুপাতে আছে। ছোট অন্তঃকোণটি কত ডিগ্রি?"
+    bn_reviewed: false
+    answer: "50"
+    answer_type: numeric
+    hints:
+      - en: "The Exterior Angle Theorem says: an exterior angle of a triangle equals the sum of the two non-adjacent interior angles."
+        bn: "বহিঃকোণ উপপাদ্য বলে: একটি ত্রিভুজের বহিঃকোণ হলো দুটি অ-সন্নিহিত অন্তঃকোণের যোগফলের সমান।"
+      - en: "The two non-adjacent interior angles add up to 125°. They are in ratio 2:3. So they are 2k and 3k where 2k + 3k = 125."
+        bn: "দুটি অ-সন্নিহিত অন্তঃকোণের যোগফল ১২৫°। তারা ২:৩ অনুপাতে আছে। সুতরাং তারা 2k এবং 3k যেখানে 2k + 3k = ১২৫।"
+      - en: "5k = 125 → k = 25. Smaller angle = 2k = 2 × 25 = 50°."
+        bn: "5k = ১২৫ → k = ২৫। ছোট কোণ = 2k = ২ × ২৫ = ৫০°।"

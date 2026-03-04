@@ -1,0 +1,166 @@
+# Grade 7 — Mensuration
+# WBBSE Chapter 8
+# Status: 10 / 10 problems complete ✅
+# Bengali translations: all flagged for native speaker review (bn_reviewed: false)
+# Hints schema: bilingual objects {en, bn}
+# Subtopics: rectangle area/perimeter (3), triangle area (2), square area (1), missing dimension (1), composite shapes (2), tiling cost (1)
+
+- grade: 7
+  topic: mensuration
+  difficulty: 1
+  question_en: "A room is 8 m long and 5 m wide. What is its area in square metres?"
+  question_bn: "একটি ঘরের দৈর্ঘ্য ৮ মিটার এবং প্রস্থ ৫ মিটার। ঘরটির ক্ষেত্রফল কত বর্গ মিটার?"
+  bn_reviewed: false
+  answer: "40"
+  answer_type: numeric
+  hints:
+    - en: "Area of a rectangle = length × width. Identify the length and width from the problem."
+      bn: "আয়তক্ষেত্রের ক্ষেত্রফল = দৈর্ঘ্য × প্রস্থ। সমস্যা থেকে দৈর্ঘ্য ও প্রস্থ খুঁজে বের করো।"
+    - en: "Length = 8 m, Width = 5 m. Multiply these to find the area."
+      bn: "দৈর্ঘ্য = ৮ মি, প্রস্থ = ৫ মি। এই দুটি গুণ করো।"
+    - en: "Area = 8 × 5 = ? square metres."
+      bn: "ক্ষেত্রফল = ৮ × ৫ = ? বর্গ মিটার।"
+
+- grade: 7
+  topic: mensuration
+  difficulty: 1
+  question_en: "A garden is 12 m long and 7 m wide. What is its perimeter in metres?"
+  question_bn: "একটি বাগানের দৈর্ঘ্য ১২ মিটার এবং প্রস্থ ৭ মিটার। বাগানটির পরিসীমা কত মিটার?"
+  bn_reviewed: false
+  answer: "38"
+  answer_type: numeric
+  hints:
+    - en: "Perimeter is the total length around the outside. For a rectangle, add all four sides."
+      bn: "পরিসীমা হলো চারপাশের মোট দৈর্ঘ্য। আয়তক্ষেত্রের চারটি বাহু যোগ করো।"
+    - en: "Perimeter of a rectangle = 2 × (length + width). Substitute the values."
+      bn: "আয়তক্ষেত্রের পরিসীমা = ২ × (দৈর্ঘ্য + প্রস্থ)। মানগুলো বসাও।"
+    - en: "Perimeter = 2 × (12 + 7) = 2 × 19. What is that?"
+      bn: "পরিসীমা = ২ × (১২ + ৭) = ২ × ১৯। উত্তর কত?"
+
+- grade: 7
+  topic: mensuration
+  difficulty: 1
+  question_en: "A triangle has a base of 10 cm and a height of 6 cm. What is its area in square cm?"
+  question_bn: "একটি ত্রিভুজের ভূমি ১০ সেমি এবং উচ্চতা ৬ সেমি। ত্রিভুজটির ক্ষেত্রফল কত বর্গ সেমি?"
+  bn_reviewed: false
+  answer: "30"
+  answer_type: numeric
+  hints:
+    - en: "Area of a triangle = ½ × base × height. Identify the base and height."
+      bn: "ত্রিভুজের ক্ষেত্রফল = ½ × ভূমি × উচ্চতা। ভূমি ও উচ্চতা চিহ্নিত করো।"
+    - en: "Base = 10 cm, Height = 6 cm. Apply the formula: ½ × 10 × 6."
+      bn: "ভূমি = ১০ সেমি, উচ্চতা = ৬ সেমি। সূত্রে বসাও: ½ × ১০ × ৬।"
+    - en: "Area = ½ × 60 = ? sq cm."
+      bn: "ক্ষেত্রফল = ½ × ৬০ = ? বর্গ সেমি।"
+
+- grade: 7
+  topic: mensuration
+  difficulty: 1
+  question_en: "A square tile has a side of 9 cm. What is its area in square cm?"
+  question_bn: "একটি বর্গাকার টাইলের বাহু ৯ সেমি। এর ক্ষেত্রফল কত বর্গ সেমি?"
+  bn_reviewed: false
+  answer: "81"
+  answer_type: numeric
+  hints:
+    - en: "For a square, all sides are equal. Area of a square = side × side."
+      bn: "বর্গক্ষেত্রের সব বাহু সমান। বর্গক্ষেত্রের ক্ষেত্রফল = বাহু × বাহু।"
+    - en: "Side = 9 cm. Area = 9 × 9."
+      bn: "বাহু = ৯ সেমি। ক্ষেত্রফল = ৯ × ৯।"
+    - en: "Area = 9 × 9 = ? sq cm."
+      bn: "ক্ষেত্রফল = ৯ × ৯ = ? বর্গ সেমি।"
+
+- grade: 7
+  topic: mensuration
+  difficulty: 2
+  question_en: "A rectangle has an area of 84 sq cm and a width of 7 cm. What is its length in cm?"
+  question_bn: "একটি আয়তক্ষেত্রের ক্ষেত্রফল ৮৪ বর্গ সেমি এবং প্রস্থ ৭ সেমি। এর দৈর্ঘ্য কত সেমি?"
+  bn_reviewed: false
+  answer: "12"
+  answer_type: numeric
+  hints:
+    - en: "Area = length × width. You know the area and the width. Rearrange the formula to find the length."
+      bn: "ক্ষেত্রফল = দৈর্ঘ্য × প্রস্থ। ক্ষেত্রফল ও প্রস্থ জানা আছে। সূত্রটি পরিবর্তন করে দৈর্ঘ্য বের করো।"
+    - en: "Length = Area ÷ Width. Substitute the values."
+      bn: "দৈর্ঘ্য = ক্ষেত্রফল ÷ প্রস্থ। মানগুলো বসাও।"
+    - en: "Length = 84 ÷ 7. What is that?"
+      bn: "দৈর্ঘ্য = ৮৪ ÷ ৭। উত্তর কত?"
+
+- grade: 7
+  topic: mensuration
+  difficulty: 2
+  question_en: "An L-shaped floor is made by joining two rectangles: one 6 m × 4 m and another 3 m × 2 m. What is the total area in square metres?"
+  question_bn: "একটি L-আকৃতির মেঝে দুটি আয়তক্ষেত্র দিয়ে তৈরি: একটি ৬ মি × ৪ মি এবং অন্যটি ৩ মি × ২ মি। মোট ক্ষেত্রফল কত বর্গ মিটার?"
+  bn_reviewed: false
+  answer: "30"
+  answer_type: numeric
+  hints:
+    - en: "An L-shaped figure can be split into two separate rectangles. Find the area of each rectangle."
+      bn: "L-আকৃতি দুটি আলাদা আয়তক্ষেত্রে ভাগ করা যায়। প্রতিটির ক্ষেত্রফল আলাদাভাবে বের করো।"
+    - en: "Rectangle 1: 6 × 4 = ? sq m. Rectangle 2: 3 × 2 = ? sq m. Add both areas."
+      bn: "আয়তক্ষেত্র ১: ৬ × ৪ = ? বর্গ মি। আয়তক্ষেত্র ২: ৩ × ২ = ? বর্গ মি। দুটো যোগ করো।"
+    - en: "Area 1 = 24 sq m, Area 2 = 6 sq m. Total = 24 + 6. What is that?"
+      bn: "ক্ষেত্রফল ১ = ২৪ বর্গ মি, ক্ষেত্রফল ২ = ৬ বর্গ মি। মোট = ২৪ + ৬। উত্তর কত?"
+
+- grade: 7
+  topic: mensuration
+  difficulty: 2
+  question_en: "A rectangular garden is 15 m long and 10 m wide. A path 1 m wide runs all around it. What is the area of the path in square metres?"
+  question_bn: "একটি আয়তাকার বাগানের দৈর্ঘ্য ১৫ মি এবং প্রস্থ ১০ মি। বাগানের চারপাশে ১ মি চওড়া একটি রাস্তা আছে। রাস্তার ক্ষেত্রফল কত বর্গ মিটার?"
+  bn_reviewed: false
+  answer: "54"
+  answer_type: numeric
+  hints:
+    - en: "The path surrounds the garden. Think of it as the outer rectangle minus the inner garden."
+      bn: "রাস্তাটি বাগানকে ঘিরে আছে। বাইরের আয়তক্ষেত্র থেকে ভেতরের বাগান বাদ দেওয়া হয়।"
+    - en: "The outer rectangle has dimensions (15+2) × (10+2). Find its area, then subtract the garden area."
+      bn: "বাইরের আয়তক্ষেত্রের মাপ (১৫+২) × (১০+২)। ক্ষেত্রফল বের করো, তারপর বাগানের ক্ষেত্রফল বাদ দাও।"
+    - en: "Outer area = 17 × 12 = 204 sq m. Garden area = 15 × 10 = 150 sq m. Path = 204 − 150. What is that?"
+      bn: "বাইরের ক্ষেত্রফল = ১৭ × ১২ = ২০৪ বর্গ মি। বাগান = ১৫ × ১০ = ১৫০ বর্গ মি। রাস্তা = ২০৪ − ১৫০। উত্তর কত?"
+
+- grade: 7
+  topic: mensuration
+  difficulty: 2
+  question_en: "A triangular park has a base of 24 m and a height of 15 m. What is its area in square metres?"
+  question_bn: "একটি ত্রিভুজাকার পার্কের ভূমি ২৪ মি এবং উচ্চতা ১৫ মি। পার্কটির ক্ষেত্রফল কত বর্গ মিটার?"
+  bn_reviewed: false
+  answer: "180"
+  answer_type: numeric
+  hints:
+    - en: "Area of a triangle = ½ × base × height. Identify the base and height from the problem."
+      bn: "ত্রিভুজের ক্ষেত্রফল = ½ × ভূমি × উচ্চতা। সমস্যা থেকে ভূমি ও উচ্চতা চিহ্নিত করো।"
+    - en: "Base = 24 m, Height = 15 m. Apply the formula: ½ × 24 × 15."
+      bn: "ভূমি = ২৪ মি, উচ্চতা = ১৫ মি। সূত্রে বসাও: ½ × ২৪ × ১৫।"
+    - en: "½ × 24 = 12. Now multiply 12 × 15. What is that?"
+      bn: "½ × ২৪ = ১২। এখন ১২ × ১৫ গুণ করো। উত্তর কত?"
+
+- grade: 7
+  topic: mensuration
+  difficulty: 3
+  question_en: "A floor is 9 m long and 6 m wide. It is tiled with square tiles of side 30 cm. If each tile costs ₹15, what is the total cost in rupees?"
+  question_bn: "একটি মেঝের দৈর্ঘ্য ৯ মি এবং প্রস্থ ৬ মি। ৩০ সেমি বাহুর বর্গাকার টাইল দিয়ে মেঝে ঢাকতে হবে। প্রতিটি টাইলের দাম ₹১৫ হলে মোট খরচ কত টাকা?"
+  bn_reviewed: false
+  answer: "9000"
+  answer_type: numeric
+  hints:
+    - en: "Convert floor dimensions to cm (1 m = 100 cm), then find how many tiles fit."
+      bn: "মেঝের মাপ সেমিতে রূপান্তর করো (১ মি = ১০০ সেমি), তারপর কয়টি টাইল লাগবে হিসাব করো।"
+    - en: "Floor = 900 cm × 600 cm = 540,000 sq cm. Each tile = 30 × 30 = 900 sq cm. Tiles needed = 540,000 ÷ 900."
+      bn: "মেঝে = ৯০০ সেমি × ৬০০ সেমি = ৫,৪০,০০০ বর্গ সেমি। প্রতিটি টাইল = ৩০ × ৩০ = ৯০০ বর্গ সেমি। টাইলের সংখ্যা = ৫,৪০,০০০ ÷ ৯০০।"
+    - en: "Number of tiles = 600. Total cost = 600 × ₹15. What is that?"
+      bn: "টাইলের সংখ্যা = ৬০০। মোট খরচ = ৬০০ × ₹১৫। উত্তর কত?"
+
+- grade: 7
+  topic: mensuration
+  difficulty: 3
+  question_en: "An L-shaped room has outer dimensions 10 m × 8 m. A rectangular portion of 4 m × 3 m is cut from one corner. What is the area of the room in square metres?"
+  question_bn: "একটি L-আকৃতির ঘরের বাইরের মাপ ১০ মি × ৮ মি। একটি কোণ থেকে ৪ মি × ৩ মি আয়তক্ষেত্র বাদ দেওয়া হয়েছে। ঘরটির ক্ষেত্রফল কত বর্গ মিটার?"
+  bn_reviewed: false
+  answer: "68"
+  answer_type: numeric
+  hints:
+    - en: "Think of this as a large rectangle with a corner removed. Find the full rectangle area first."
+      bn: "এটিকে একটি বড় আয়তক্ষেত্র থেকে একটি কোণ বাদ দেওয়া হয়েছে বলে ভাবো। পুরো আয়তক্ষেত্রের ক্ষেত্রফল আগে বের করো।"
+    - en: "Full area = 10 × 8 = 80 sq m. The cut corner is a rectangle of 4 × 3. Subtract its area."
+      bn: "পুরো ক্ষেত্রফল = ১০ × ৮ = ৮০ বর্গ মি। কাটা অংশ = ৪ × ৩ এর আয়তক্ষেত্র। এটির ক্ষেত্রফল বাদ দাও।"
+    - en: "Area = 80 − (4 × 3) = 80 − 12. What is that?"
+      bn: "ক্ষেত্রফল = ৮০ − (৪ × ৩) = ৮০ − ১২। উত্তর কত?"

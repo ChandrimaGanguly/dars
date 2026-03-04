@@ -1,0 +1,166 @@
+# Grade 7 — Data Handling
+# WBBSE Chapter 9
+# Status: 10 / 10 problems complete ✅
+# Bengali translations: all flagged for native speaker review (bn_reviewed: false)
+# Hints schema: bilingual objects {en, bn}
+# Subtopics: mean (3), median (2), mode (2), range (1), combined mean (1), changing mean (1)
+
+- grade: 7
+  topic: data_handling
+  difficulty: 1
+  question_en: "Arjun scored 45, 60, 55, 70, and 50 in five tests. What is his mean score?"
+  question_bn: "অর্জুন পাঁচটি পরীক্ষায় যথাক্রমে ৪৫, ৬০, ৫৫, ৭০ এবং ৫০ নম্বর পেল। তার গড় নম্বর কত?"
+  bn_reviewed: false
+  answer: "56"
+  answer_type: numeric
+  hints:
+    - en: "Mean is the fair share of a set of values. What operation combines all the values into one total?"
+      bn: "গড় হলো কিছু মানের সমান ভাগ। সব মানগুলো একসাথে যোগ করলে কী পাবে?"
+    - en: "Add all five scores together to get the total, then divide by the number of scores."
+      bn: "পাঁচটি নম্বর যোগ করো, তারপর সংখ্যার পরিমাণ (৫) দিয়ে ভাগ করো।"
+    - en: "Total = 45 + 60 + 55 + 70 + 50 = 280. Mean = 280 ÷ 5. What is that?"
+      bn: "মোট = ৪৫ + ৬০ + ৫৫ + ৭০ + ৫০ = ২৮০। গড় = ২৮০ ÷ ৫। উত্তর কত?"
+
+- grade: 7
+  topic: data_handling
+  difficulty: 1
+  question_en: "Goals scored in 7 matches: 2, 3, 2, 5, 2, 4, 3. What is the mode?"
+  question_bn: "৭টি ম্যাচে করা গোলের সংখ্যা: 2, 3, 2, 5, 2, 4, 3। বহুলক (mode) কত?"
+  bn_reviewed: false
+  answer: "2"
+  answer_type: numeric
+  hints:
+    - en: "The mode is the value that appears most often. Count how many times each number appears."
+      bn: "বহুলক হলো সেই মান যেটি সবচেয়ে বেশিবার আসে। প্রতিটি সংখ্যা কতবার আছে গণনা করো।"
+    - en: "Count: 2 appears ___ times, 3 appears ___ times, 4 and 5 appear once each. Which appears most?"
+      bn: "গণনা করো: ২ কতবার আছে, ৩ কতবার আছে, ৪ ও ৫ একবার করে। কোনটি সবচেয়ে বেশি?"
+    - en: "2 appears 3 times, 3 appears 2 times. Which number occurs most frequently?"
+      bn: "২ আছে ৩ বার, ৩ আছে ২ বার। কোন সংখ্যাটি সবচেয়ে বেশিবার এসেছে?"
+
+- grade: 7
+  topic: data_handling
+  difficulty: 2
+  question_en: "Marks of 5 students: 72, 45, 60, 55, 80. What is the median?"
+  question_bn: "৫ জন ছাত্রের প্রাপ্ত নম্বর: ৭২, ৪৫, ৬০, ৫৫, ৮০। মধ্যমমান (median) কত?"
+  bn_reviewed: false
+  answer: "60"
+  answer_type: numeric
+  hints:
+    - en: "To find the median, first arrange the data from smallest to largest."
+      bn: "মধ্যমমান বের করতে হলে প্রথমে তথ্যগুলো ছোট থেকে বড় ক্রমে সাজাও।"
+    - en: "Sorted: 45, 55, 60, 72, 80. For 5 values, the median is the middle (3rd) value."
+      bn: "সাজানো মান: ৪৫, ৫৫, ৬০, ৭২, ৮০। ৫টি মানের মধ্যে মধ্যমমান হলো মাঝের (৩য়) মানটি।"
+    - en: "The sorted values are 45, 55, 60, 72, 80. The 3rd value is the median. What is it?"
+      bn: "সাজানো মানগুলো হলো ৪৫, ৫৫, ৬০, ৭২, ৮০। ৩য় মানটিই মধ্যমমান। সেটি কত?"
+
+- grade: 7
+  topic: data_handling
+  difficulty: 2
+  question_en: "The mean weight of 6 students is 42 kg. Five of them weigh 40, 38, 45, 44, and 42 kg. What is the sixth student's weight in kg?"
+  question_bn: "৬ জন ছাত্রের গড় ওজন ৪২ কেজি। পাঁচ জনের ওজন যথাক্রমে ৪০, ৩৮, ৪৫, ৪৪ এবং ৪২ কেজি হলে ষষ্ঠ ছাত্রের ওজন কত?"
+  bn_reviewed: false
+  answer: "43"
+  answer_type: numeric
+  hints:
+    - en: "If you know the mean and the count, you can find the total. Mean × Count = Total."
+      bn: "গড় এবং সংখ্যার পরিমাণ জানা থাকলে মোট বের করা যায়। গড় × সংখ্যা = মোট।"
+    - en: "Total weight = 6 × 42 = 252 kg. Find the sum of the 5 given weights. Sixth = Total − Sum of 5."
+      bn: "৬ জনের মোট ওজন = ৬ × ৪২ = ২৫২ কেজি। ৫ জনের ওজনের যোগফল বের করো। ৬ষ্ঠ জনের ওজন = মোট − ৫ জনের যোগফল।"
+    - en: "Sum of 5 = 40 + 38 + 45 + 44 + 42 = 209. Sixth = 252 − 209. What is that?"
+      bn: "৫ জনের যোগফল = ৪০ + ৩৮ + ৪৫ + ৪৪ + ৪২ = ২০৯। ৬ষ্ঠ জনের ওজন = ২৫২ − ২০৯। উত্তর কত?"
+
+- grade: 7
+  topic: data_handling
+  difficulty: 3
+  question_en: "Mean marks of 20 boys is 65 and mean marks of 10 girls is 80. What is the combined mean of all 30 students?"
+  question_bn: "২০ জন ছেলের গড় নম্বর ৬৫ এবং ১০ জন মেয়ের গড় নম্বর ৮০। মোট ৩০ জনের সম্মিলিত গড় নম্বর কত?"
+  bn_reviewed: false
+  answer: "70"
+  answer_type: numeric
+  hints:
+    - en: "Combined mean is NOT just the average of 65 and 80 — group sizes matter. Think about total marks first."
+      bn: "সম্মিলিত গড় কেবল দুটি গড়ের গড় নয় — দলের আকার গুরুত্বপূর্ণ। প্রথমে মোট নম্বর বের করো।"
+    - en: "Find total marks for boys (20 × 65) and for girls (10 × 80). Combined mean = (total boys + total girls) ÷ 30."
+      bn: "ছেলেদের মোট নম্বর (২০ × ৬৫) এবং মেয়েদের মোট নম্বর (১০ × ৮০) বের করো। সম্মিলিত গড় = (দুটি মোটের যোগফল) ÷ ৩০।"
+    - en: "Boys total = 1300, girls total = 800. Combined mean = (1300 + 800) ÷ 30. What is that?"
+      bn: "ছেলেদের মোট = ১৩০০, মেয়েদের মোট = ৮০০। সম্মিলিত গড় = (১৩০০ + ৮০০) ÷ ৩০। উত্তর কত?"
+
+- grade: 7
+  topic: data_handling
+  difficulty: 1
+  question_en: "Temperatures in Kolkata over 5 days: 28, 32, 35, 30, 27°C. What is the range?"
+  question_bn: "কলকাতায় ৫ দিনের তাপমাত্রা (°C): ২৮, ৩২, ৩৫, ৩০, ২৭। পরিসর (range) কত?"
+  bn_reviewed: false
+  answer: "8"
+  answer_type: numeric
+  hints:
+    - en: "Range shows how spread out the data is. It is the difference between the highest and lowest values."
+      bn: "পরিসর (range) তথ্যের বিস্তার দেখায়। এটি সর্বোচ্চ ও সর্বনিম্ন মানের পার্থক্য।"
+    - en: "Find the highest temperature and the lowest temperature in the list."
+      bn: "তালিকায় সর্বোচ্চ এবং সর্বনিম্ন তাপমাত্রা খুঁজে বের করো।"
+    - en: "Highest = 35, Lowest = 27. Range = 35 − 27. What is that?"
+      bn: "সর্বোচ্চ = ৩৫, সর্বনিম্ন = ২৭। পরিসর = ৩৫ − ২৭। উত্তর কত?"
+
+- grade: 7
+  topic: data_handling
+  difficulty: 1
+  question_en: "Number of siblings of 10 students: 0, 1, 2, 1, 0, 1, 3, 1, 2, 1. What is the mode?"
+  question_bn: "১০ জন ছাত্রের ভাই-বোনের সংখ্যা: 0, 1, 2, 1, 0, 1, 3, 1, 2, 1। বহুলক কত?"
+  bn_reviewed: false
+  answer: "1"
+  answer_type: numeric
+  hints:
+    - en: "The mode is the value that occurs most frequently. Make a tally for each number."
+      bn: "বহুলক হলো সেই মান যেটি সবচেয়ে বেশিবার আসে। প্রতিটি সংখ্যার জন্য তালি গণনা করো।"
+    - en: "Count how many times each value appears: 0 appears 2 times, 1 appears ___ times, 2 appears 2 times, 3 appears 1 time."
+      bn: "গণনা করো: ০ আছে ২ বার, ১ আছে ___ বার, ২ আছে ২ বার, ৩ আছে ১ বার।"
+    - en: "1 appears 5 times — more than any other value. What is the mode?"
+      bn: "১ আছে ৫ বার — অন্য যেকোনো মানের চেয়ে বেশি। বহুলক কত?"
+
+- grade: 7
+  topic: data_handling
+  difficulty: 2
+  question_en: "Heights (in cm) of 6 students: 140, 155, 148, 160, 152, 144. What is the median height?"
+  question_bn: "৬ জন ছাত্রের উচ্চতা (সেমি): ১৪০, ১৫৫, ১৪৮, ১৬০, ১৫২, ১৪৪। মধ্যমমান কত?"
+  bn_reviewed: false
+  answer: "150"
+  answer_type: numeric
+  hints:
+    - en: "For an even number of values, sort them first. The median is the average of the two middle values."
+      bn: "জোড় সংখ্যার মান থাকলে প্রথমে সাজাও। মধ্যমমান হলো মাঝের দুটি মানের গড়।"
+    - en: "Sorted: 140, 144, 148, 152, 155, 160. The two middle values are the 3rd and 4th."
+      bn: "সাজানো: ১৪০, ১৪৪, ১৪৮, ১৫২, ১৫৫, ১৬০। মাঝের দুটি মান হলো ৩য় এবং ৪র্থ।"
+    - en: "The 3rd and 4th values are 148 and 152. Median = (148 + 152) ÷ 2. What is that?"
+      bn: "৩য় এবং ৪র্থ মান হলো ১৪৮ এবং ১৫২। মধ্যমমান = (১৪৮ + ১৫২) ÷ ২। উত্তর কত?"
+
+- grade: 7
+  topic: data_handling
+  difficulty: 2
+  question_en: "Books read by 10 students in a month: 3, 5, 2, 4, 5, 3, 4, 5, 2, 7. What is the mean number of books read?"
+  question_bn: "১০ জন ছাত্র এক মাসে যথাক্রমে ৩, ৫, ২, ৪, ৫, ৩, ৪, ৫, ২ এবং ৭টি বই পড়েছে। গড়ে কতটি বই পড়া হয়েছে?"
+  bn_reviewed: false
+  answer: "4"
+  answer_type: numeric
+  hints:
+    - en: "Mean = Sum of all values ÷ Number of values. Start by adding all the values."
+      bn: "গড় = সব মানের যোগফল ÷ মানের সংখ্যা। প্রথমে সব মান যোগ করো।"
+    - en: "Add: 3 + 5 + 2 + 4 + 5 + 3 + 4 + 5 + 2 + 7. Then divide by 10."
+      bn: "যোগ করো: ৩ + ৫ + ২ + ৪ + ৫ + ৩ + ৪ + ৫ + ২ + ৭। তারপর ১০ দিয়ে ভাগ করো।"
+    - en: "Total = 40. Mean = 40 ÷ 10. What is that?"
+      bn: "মোট = ৪০। গড় = ৪০ ÷ ১০। উত্তর কত?"
+
+- grade: 7
+  topic: data_handling
+  difficulty: 3
+  question_en: "The mean of 5 numbers is 18. When a sixth number is added, the new mean becomes 20. What is the sixth number?"
+  question_bn: "৫টি সংখ্যার গড় ১৮। একটি নতুন সংখ্যা যোগ করলে গড় ২০ হয়। নতুন সংখ্যাটি কত?"
+  bn_reviewed: false
+  answer: "30"
+  answer_type: numeric
+  hints:
+    - en: "If you know the mean of 5 numbers, you can find their total. What is the total of the original 5 numbers?"
+      bn: "৫টি সংখ্যার গড় জানা থাকলে তাদের মোট বের করা যায়। মূল ৫টি সংখ্যার মোট কত?"
+    - en: "Total of 5 = 5 × 18 = 90. Now find the new total of 6 numbers using the new mean."
+      bn: "৫টির মোট = ৫ × ১৮ = ৯০। এখন নতুন গড় ব্যবহার করে ৬টি সংখ্যার মোট বের করো।"
+    - en: "New total = 6 × 20 = 120. The 6th number = New total − Original total = 120 − 90. What is that?"
+      bn: "নতুন মোট = ৬ × ২০ = ১২০। ৬ষ্ঠ সংখ্যা = নতুন মোট − পুরনো মোট = ১২০ − ৯০। উত্তর কত?"

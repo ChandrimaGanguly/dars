@@ -1,0 +1,246 @@
+# Grade 6 — Fractions
+# WBBSE Chapter 2
+# Status: 15 / 15 problems complete ✅
+# Bengali translations: all flagged for native speaker review (bn_reviewed: false)
+# Hints schema: bilingual objects {en, bn}
+# Subtopics: converting fractions (3), same-denominator ops (5), different-denominator ops (4), area/word problems (3)
+
+- grade: 6
+  topic: fractions
+  difficulty: 1
+  question_en: "Write 7/4 as a mixed number."
+  question_bn: "৭/৪ কে মিশ্র সংখ্যায় প্রকাশ করো।"
+  bn_reviewed: false
+  answer: "1 3/4"
+  answer_type: text
+  hints:
+    - en: "A mixed number has a whole part and a fraction part. Think: how many complete ones fit inside 7/4?"
+      bn: "মিশ্র সংখ্যায় একটি পূর্ণ অংশ এবং একটি ভগ্নাংশ অংশ থাকে। ভাবো: ৭/৪-এর মধ্যে কতটি পূর্ণ সংখ্যা আঁটে?"
+    - en: "Divide the numerator by the denominator: 7 ÷ 4. The quotient is the whole number; the remainder is the new numerator."
+      bn: "লবকে হর দিয়ে ভাগ করো: ৭ ÷ ৪। ভাগফল হবে পূর্ণ সংখ্যা; ভাগশেষ হবে নতুন লব।"
+    - en: "7 ÷ 4 = 1 remainder 3. So 7/4 = 1 and 3/4. Write it as a mixed number."
+      bn: "৭ ÷ ৪ = ১ ভাগশেষ ৩। তাই ৭/৪ = ১ এবং ৩/৪। মিশ্র সংখ্যায় লেখো।"
+
+- grade: 6
+  topic: fractions
+  difficulty: 1
+  question_en: "Write 2 1/3 as an improper fraction."
+  question_bn: "২ ১/৩ কে অপ্রকৃত ভগ্নাংশে প্রকাশ করো।"
+  bn_reviewed: false
+  answer: "7/3"
+  answer_type: text
+  hints:
+    - en: "To convert a mixed number to an improper fraction, think: how many thirds are in 2 whole ones, plus the extra 1/3?"
+      bn: "মিশ্র সংখ্যাকে অপ্রকৃত ভগ্নাংশে রূপান্তর করতে ভাবো: ২টি পূর্ণ সংখ্যায় কতটি তৃতীয়াংশ আছে, এবং তার সাথে আরও ১/৩?"
+    - en: "Multiply the whole number by the denominator, then add the numerator: (2 × 3) + 1. The denominator stays the same."
+      bn: "পূর্ণ সংখ্যাটিকে হর দিয়ে গুণ করো, তারপর লব যোগ করো: (২ × ৩) + ১। হর একই থাকবে।"
+    - en: "(2 × 3) + 1 = 7. The denominator is still 3. So 2 1/3 = 7/3."
+      bn: "(২ × ৩) + ১ = ৭। হর এখনও ৩। তাই ২ ১/৩ = ৭/৩।"
+
+- grade: 6
+  topic: fractions
+  difficulty: 1
+  question_en: "Add: 1/5 + 3/5"
+  question_bn: "যোগ করো: ১/৫ + ৩/৫"
+  bn_reviewed: false
+  answer: "4/5"
+  answer_type: text
+  hints:
+    - en: "When fractions have the same denominator, adding is straightforward. What do you do with the numerators? What stays the same?"
+      bn: "যখন ভগ্নাংশের হর একই থাকে, তখন যোগ করা সহজ। লবগুলোর সাথে কী করতে হয়? কী একই থাকে?"
+    - en: "Add the numerators and keep the denominator: (1 + 3) and the denominator stays 5."
+      bn: "লবগুলো যোগ করো এবং হর একই রাখো: (১ + ৩) এবং হর ৫ থাকবে।"
+    - en: "1 + 3 = 4, denominator stays 5. So the answer is 4/5. Is this already in its simplest form?"
+      bn: "১ + ৩ = ৪, হর ৫ থাকে। তাই উত্তর হলো ৪/৫। এটা কি ইতিমধ্যে সরলতম আকারে আছে?"
+
+- grade: 6
+  topic: fractions
+  difficulty: 1
+  question_en: "Subtract: 5/9 − 2/9"
+  question_bn: "বিয়োগ করো: ৫/৯ − ২/৯"
+  bn_reviewed: false
+  answer: "1/3"
+  answer_type: text
+  hints:
+    - en: "When fractions have the same denominator, subtract the numerators and keep the denominator. What is 5 − 2?"
+      bn: "যখন ভগ্নাংশের হর একই থাকে, লব বিয়োগ করো এবং হর একই রাখো। ৫ − ২ কত?"
+    - en: "5/9 − 2/9 = 3/9. Now check if 3/9 can be simplified. What is the HCF of 3 and 9?"
+      bn: "৫/৯ − ২/৯ = ৩/৯। এখন দেখো ৩/৯ সরল করা যায় কিনা। ৩ এবং ৯-এর গসাগু কত?"
+    - en: "HCF of 3 and 9 is 3. Divide both: 3÷3 = 1, 9÷3 = 3. So 3/9 = 1/3."
+      bn: "৩ এবং ৯-এর গসাগু হলো ৩। উভয়কে ভাগ করো: ৩÷৩ = ১, ৯÷৩ = ৩। তাই ৩/৯ = ১/৩।"
+
+- grade: 6
+  topic: fractions
+  difficulty: 1
+  question_en: "Which fraction is greater: 3/7 or 5/7?"
+  question_bn: "কোন ভগ্নাংশটি বড়: ৩/৭ না ৫/৭?"
+  bn_reviewed: false
+  answer: "5/7"
+  answer_type: text
+  hints:
+    - en: "When two fractions have the same denominator, they are made of the same-sized pieces. Which has more pieces — 3 or 5?"
+      bn: "যখন দুটি ভগ্নাংশের হর একই থাকে, তারা একই আকারের টুকরো দিয়ে তৈরি। কোনটিতে বেশি টুকরো আছে — ৩ না ৫?"
+    - en: "Just compare the numerators. 5 sevenths means 5 equal pieces, 3 sevenths means 3 equal pieces. Which is more?"
+      bn: "শুধু লবগুলো তুলনা করো। ৫/৭ মানে ৫টি সমান টুকরো, ৩/৭ মানে ৩টি সমান টুকরো। কোনটি বেশি?"
+    - en: "5 > 3, so 5/7 > 3/7. Which fraction is greater?"
+      bn: "৫ > ৩, তাই ৫/৭ > ৩/৭। কোন ভগ্নাংশটি বড়?"
+
+- grade: 6
+  topic: fractions
+  difficulty: 1
+  question_en: "Write 6/8 in its simplest form."
+  question_bn: "৬/৮ কে সরলতম আকারে লেখো।"
+  bn_reviewed: false
+  answer: "3/4"
+  answer_type: text
+  hints:
+    - en: "To simplify a fraction, divide both the numerator and denominator by their Highest Common Factor (HCF). What numbers divide both 6 and 8?"
+      bn: "ভগ্নাংশ সরল করতে লব ও হর উভয়কে তাদের গসাগু দিয়ে ভাগ করো। কোন সংখ্যা ৬ এবং ৮ উভয়কে ভাগ করে?"
+    - en: "Factors of 6: 1, 2, 3, 6. Factors of 8: 1, 2, 4, 8. The HCF is the largest number in both lists."
+      bn: "৬-এর উৎপাদক: ১, ২, ৩, ৬। ৮-এর উৎপাদক: ১, ২, ৪, ৮। গসাগু হলো উভয় তালিকায় থাকা বৃহত্তম সংখ্যা।"
+    - en: "HCF of 6 and 8 is 2. Divide both: 6÷2 = 3, 8÷2 = 4. So 6/8 = 3/4."
+      bn: "৬ এবং ৮-এর গসাগু হলো ২। উভয়কে ভাগ করো: ৬÷২ = ৩, ৮÷২ = ৪। তাই ৬/৮ = ৩/৪।"
+
+- grade: 6
+  topic: fractions
+  difficulty: 2
+  question_en: "Ananya ate 2/8 of a pizza and Rohan ate 3/8. How much of the pizza did they eat altogether?"
+  question_bn: "অনন্যা একটি পিৎজার ২/৮ অংশ খেল এবং রোহান ৩/৮ অংশ খেল। তারা মোট কত অংশ খেল?"
+  bn_reviewed: false
+  answer: "5/8"
+  answer_type: text
+  hints:
+    - en: "Both fractions have the same denominator. To find the total, add the numerators and keep the denominator."
+      bn: "উভয় ভগ্নাংশের হর একই। মোট বের করতে লব যোগ করো এবং হর একই রাখো।"
+    - en: "2/8 + 3/8 = (2 + 3)/8. What is 2 + 3?"
+      bn: "২/৮ + ৩/৮ = (২ + ৩)/৮। ২ + ৩ কত?"
+    - en: "2 + 3 = 5, denominator stays 8. So they ate 5/8 altogether. Check: is 5/8 already in simplest form? (HCF of 5 and 8 is 1, so yes.)"
+      bn: "২ + ৩ = ৫, হর ৮ থাকে। তাই তারা মোট ৫/৮ খেল। যাচাই করো: ৫/৮ কি সরলতম আকারে? (৫ এবং ৮-এর গসাগু ১, তাই হ্যাঁ।)"
+
+- grade: 6
+  topic: fractions
+  difficulty: 2
+  question_en: "What is 1/2 of 48?"
+  question_bn: "৪৮-এর ১/২ কত?"
+  bn_reviewed: false
+  answer: "24"
+  answer_type: numeric
+  hints:
+    - en: "'1/2 of 48' means dividing 48 into 2 equal parts. How many are in each part?"
+      bn: "'৪৮-এর ১/২' মানে ৪৮-কে ২টি সমান ভাগে ভাগ করা। প্রতিটি ভাগে কতটি থাকবে?"
+    - en: "In maths, 'of' means multiply. So 1/2 of 48 = 1/2 × 48. You can also think of it as 48 ÷ 2."
+      bn: "গণিতে 'এর' মানে গুণ। তাই ৪৮-এর ১/২ = ১/২ × ৪৮। তুমি এটিকে ৪৮ ÷ ২ হিসেবেও ভাবতে পারো।"
+    - en: "1/2 × 48 = 48 ÷ 2. What does that come to?"
+      bn: "১/২ × ৪৮ = ৪৮ ÷ ২। উত্তরটা কত হয়?"
+
+- grade: 6
+  topic: fractions
+  difficulty: 2
+  question_en: "Priya has 7/10 m of cloth. She uses 3/10 m for a craft. How much cloth remains?"
+  question_bn: "প্রিয়ার কাছে ৭/১০ মিটার কাপড় আছে। সে একটি হস্তশিল্পে ৩/১০ মিটার ব্যবহার করল। কত কাপড় বাকি থাকল?"
+  bn_reviewed: false
+  answer: "2/5"
+  answer_type: text
+  hints:
+    - en: "Both fractions have the same denominator. Subtract the numerators to find how much remains."
+      bn: "উভয় ভগ্নাংশের হর একই। কত বাকি আছে বের করতে লব বিয়োগ করো।"
+    - en: "7/10 − 3/10 = (7 − 3)/10 = 4/10. Now check if 4/10 can be simplified."
+      bn: "৭/১০ − ৩/১০ = (৭ − ৩)/১০ = ৪/১০। এখন দেখো ৪/১০ সরল করা যায় কিনা।"
+    - en: "HCF of 4 and 10 is 2. So 4/10 = 2/5."
+      bn: "৪ এবং ১০-এর গসাগু হলো ২। তাই ৪/১০ = ২/৫।"
+
+- grade: 6
+  topic: fractions
+  difficulty: 2
+  question_en: "Add: 1/6 + 1/6 + 1/6"
+  question_bn: "যোগ করো: ১/৬ + ১/৬ + ১/৬"
+  bn_reviewed: false
+  answer: "1/2"
+  answer_type: text
+  hints:
+    - en: "All three fractions have the same denominator. Add all the numerators together and keep the denominator."
+      bn: "তিনটি ভগ্নাংশের হর একই। সব লব একসাথে যোগ করো এবং হর একই রাখো।"
+    - en: "1 + 1 + 1 = 3, denominator stays 6. So the answer is 3/6. Can you simplify this?"
+      bn: "১ + ১ + ১ = ৩, হর ৬ থাকে। তাই উত্তর হলো ৩/৬। এটি কি সরল করা যায়?"
+    - en: "HCF of 3 and 6 is 3. Divide both: 3÷3 = 1, 6÷3 = 2. So 3/6 = 1/2."
+      bn: "৩ এবং ৬-এর গসাগু হলো ৩। উভয়কে ভাগ করো: ৩÷৩ = ১, ৬÷৩ = ২। তাই ৩/৬ = ১/২।"
+
+- grade: 6
+  topic: fractions
+  difficulty: 2
+  question_en: "Add: 1/3 + 1/4"
+  question_bn: "যোগ করো: ১/৩ + ১/৪"
+  bn_reviewed: false
+  answer: "7/12"
+  answer_type: text
+  hints:
+    - en: "These fractions have different denominators. You need to make them the same before adding. What is the smallest number that both 3 and 4 divide into exactly?"
+      bn: "এই ভগ্নাংশগুলোর হর আলাদা। যোগ করার আগে হর সমান করতে হবে। এমন ক্ষুদ্রতম সংখ্যা কী যাকে ৩ এবং ৪ উভয়ই নিঃশেষে ভাগ করে?"
+    - en: "LCM of 3 and 4 is 12. Convert: 1/3 = 4/12 (multiply top and bottom by 4) and 1/4 = 3/12 (multiply top and bottom by 3)."
+      bn: "৩ এবং ৪-এর লসাগু হলো ১২। রূপান্তর করো: ১/৩ = ৪/১২ (লব ও হর ৪ দিয়ে গুণ) এবং ১/৪ = ৩/১২ (লব ও হর ৩ দিয়ে গুণ)।"
+    - en: "4/12 + 3/12 = 7/12. Is 7/12 in simplest form? (HCF of 7 and 12 is 1, so yes.)"
+      bn: "৪/১২ + ৩/১২ = ৭/১২। ৭/১২ কি সরলতম আকারে? (৭ এবং ১২-এর গসাগু ১, তাই হ্যাঁ।)"
+
+- grade: 6
+  topic: fractions
+  difficulty: 2
+  question_en: "Subtract: 3/4 − 2/3"
+  question_bn: "বিয়োগ করো: ৩/৪ − ২/৩"
+  bn_reviewed: false
+  answer: "1/12"
+  answer_type: text
+  hints:
+    - en: "The denominators are different. Find the LCM of 4 and 3 to make a common denominator."
+      bn: "হর আলাদা। সাধারণ হর পেতে ৪ এবং ৩-এর লসাগু খোঁজো।"
+    - en: "LCM of 3 and 4 is 12. Convert: 3/4 = 9/12 (multiply by 3/3) and 2/3 = 8/12 (multiply by 4/4)."
+      bn: "৩ এবং ৪-এর লসাগু হলো ১২। রূপান্তর করো: ৩/৪ = ৯/১২ (৩/৩ দিয়ে গুণ) এবং ২/৩ = ৮/১২ (৪/৪ দিয়ে গুণ)।"
+    - en: "9/12 − 8/12 = 1/12. Is this in simplest form? (HCF of 1 and 12 is 1, so yes.)"
+      bn: "৯/১২ − ৮/১২ = ১/১২। এটা কি সরলতম আকারে? (১ এবং ১২-এর গসাগু ১, তাই হ্যাঁ।)"
+
+- grade: 6
+  topic: fractions
+  difficulty: 3
+  question_en: "A field is 3/5 km long and 2/5 km wide. What is its area in km²?"
+  question_bn: "একটি মাঠ ৩/৫ কিমি লম্বা এবং ২/৫ কিমি চওড়া। এর ক্ষেত্রফল কত বর্গ কিমি?"
+  bn_reviewed: false
+  answer: "6/25"
+  answer_type: text
+  hints:
+    - en: "Area of a rectangle = length × width. Here length = 3/5 km and width = 2/5 km. How do you multiply two fractions?"
+      bn: "আয়তক্ষেত্রের ক্ষেত্রফল = দৈর্ঘ্য × প্রস্থ। এখানে দৈর্ঘ্য = ৩/৫ কিমি এবং প্রস্থ = ২/৫ কিমি। দুটি ভগ্নাংশ কীভাবে গুণ করতে হয়?"
+    - en: "To multiply fractions, multiply the numerators together and the denominators together: (3 × 2) / (5 × 5)."
+      bn: "ভগ্নাংশ গুণ করতে লবগুলো একসাথে এবং হরগুলো একসাথে গুণ করো: (৩ × ২) / (৫ × ৫)।"
+    - en: "3 × 2 = 6 and 5 × 5 = 25. So the area = 6/25 km². Is this in simplest form? (HCF of 6 and 25 is 1, so yes.)"
+      bn: "৩ × ২ = ৬ এবং ৫ × ৫ = ২৫। তাই ক্ষেত্রফল = ৬/২৫ বর্গ কিমি। এটা কি সরলতম আকারে? (৬ এবং ২৫-এর গসাগু ১, তাই হ্যাঁ।)"
+
+- grade: 6
+  topic: fractions
+  difficulty: 3
+  question_en: "Fatima has a ribbon 6 3/4 m long. She cuts pieces of 1 1/2 m, 2 1/4 m, and 1 3/4 m. How much ribbon remains?"
+  question_bn: "ফাতিমার কাছে ৬ ৩/৪ মিটার লম্বা একটি ফিতা আছে। সে ১ ১/২ মিটার, ২ ১/৪ মিটার এবং ১ ৩/৪ মিটারের টুকরো কাটল। কত মিটার ফিতা বাকি থাকল?"
+  bn_reviewed: false
+  answer: "1 1/4"
+  answer_type: text
+  hints:
+    - en: "Find the total length cut first by adding the three pieces, then subtract from the original length."
+      bn: "প্রথমে তিনটি টুকরোর মোট দৈর্ঘ্য যোগ করে বের করো, তারপর আসল দৈর্ঘ্য থেকে বিয়োগ করো।"
+    - en: "Use quarters as the common denominator: 1 1/2 = 1 2/4. So: 1 2/4 + 2 1/4 + 1 3/4. Add the fractions and then the whole numbers."
+      bn: "সাধারণ হর হিসেবে চতুর্থাংশ ব্যবহার করো: ১ ১/২ = ১ ২/৪। তাই: ১ ২/৪ + ২ ১/৪ + ১ ৩/৪। আগে ভগ্নাংশ যোগ করো, তারপর পূর্ণ সংখ্যা।"
+    - en: "Fraction parts: 2/4 + 1/4 + 3/4 = 6/4 = 1 2/4. Whole parts: 1 + 2 + 1 = 4. Total cut = 5 2/4 = 5 1/2. Remaining = 6 3/4 − 5 2/4 = 1 1/4."
+      bn: "ভগ্নাংশ অংশ: ২/৪ + ১/৪ + ৩/৪ = ৬/৪ = ১ ২/৪। পূর্ণ অংশ: ১ + ২ + ১ = ৪। মোট কাটা = ৫ ২/৪ = ৫ ১/২। বাকি = ৬ ৩/৪ − ৫ ২/৪ = ১ ১/৪।"
+
+- grade: 6
+  topic: fractions
+  difficulty: 3
+  question_en: "What fraction of 36 is 27?"
+  question_bn: "৩৬-এর কত অংশ ২৭?"
+  bn_reviewed: false
+  answer: "3/4"
+  answer_type: text
+  hints:
+    - en: "'What fraction of 36 is 27?' means: write 27 as a part of 36. Set it up as a fraction: 27/36."
+      bn: "'৩৬-এর কত অংশ ২৭?' মানে: ২৭-কে ৩৬-এর অংশ হিসেবে লেখো। এটিকে ভগ্নাংশ হিসেবে লেখো: ২৭/৩৬।"
+    - en: "Now simplify 27/36. Find the HCF of 27 and 36. What numbers divide both exactly?"
+      bn: "এখন ২৭/৩৬ সরল করো। ২৭ এবং ৩৬-এর গসাগু খোঁজো। কোন সংখ্যা উভয়কে নিঃশেষে ভাগ করে?"
+    - en: "HCF of 27 and 36 is 9. Divide: 27÷9 = 3 and 36÷9 = 4. So 27/36 = 3/4."
+      bn: "২৭ এবং ৩৬-এর গসাগু হলো ৯। ভাগ করো: ২৭÷৯ = ৩ এবং ৩৬÷৯ = ৪। তাই ২৭/৩৬ = ৩/৪।"

@@ -1,0 +1,300 @@
+# Algebra — Grade 7
+# WBBSE Chapter: Algebraic Expressions, Substitution, Simple Linear Equations
+# 18 / 18 problems complete ✅
+# Difficulty: 7 easy (1), 7 medium (2), 4 hard (3)
+# bn_reviewed: false — Bengali drafts pending native speaker review
+
+problems:
+  # --- EASY (difficulty 1) ---
+
+  - grade: 7
+    topic: algebra
+    difficulty: 1
+    question_en: "Simplify: 5x + 3x"
+    question_bn: "সরল করো: 5x + 3x"
+    bn_reviewed: false
+    answer: "8x"
+    answer_type: text
+    hints:
+      - en: "5x and 3x are like terms — they both have the variable x. Like terms can be combined by adding their coefficients."
+        bn: "5x এবং 3x সদৃশ পদ — উভয়তে চলরাশি x আছে। সদৃশ পদ যোগ করতে তাদের সহগ যোগ করো।"
+      - en: "Think of it like counting: 5 apples + 3 apples = ? apples. The same logic applies to x."
+        bn: "গণনার মতো ভাবো: ৫টি আপেল + ৩টি আপেল = ? আপেল। x এর ক্ষেত্রেও একই নিয়ম।"
+      - en: "5x + 3x = (5 + 3)x = 8x."
+        bn: "5x + 3x = (5 + 3)x = 8x।"
+
+  - grade: 7
+    topic: algebra
+    difficulty: 1
+    question_en: "If x = 4, find the value of 3x + 7."
+    question_bn: "যদি x = 4 হয়, তাহলে 3x + 7 এর মান কত?"
+    bn_reviewed: false
+    answer: "19"
+    answer_type: numeric
+    hints:
+      - en: "Substitution means replacing the variable with its given value. Replace every x with 4."
+        bn: "প্রতিস্থাপন মানে চলরাশিকে তার প্রদত্ত মান দিয়ে বদলানো। প্রতিটি x এর জায়গায় ৪ বসাও।"
+      - en: "3x + 7 = 3(4) + 7. First multiply, then add."
+        bn: "3x + 7 = 3(4) + 7। প্রথমে গুণ করো, তারপর যোগ করো।"
+      - en: "3(4) + 7 = 12 + 7 = 19."
+        bn: "3(4) + 7 = 12 + 7 = 19।"
+
+  - grade: 7
+    topic: algebra
+    difficulty: 1
+    question_en: "Solve for x: x + 9 = 15"
+    question_bn: "x এর জন্য সমাধান করো: x + 9 = 15"
+    bn_reviewed: false
+    answer: "6"
+    answer_type: numeric
+    hints:
+      - en: "To find x, we need to isolate it on one side. We can do this by undoing the addition of 9."
+        bn: "x খুঁজতে, আমাদের এটিকে এক পাশে আলাদা করতে হবে। ৯ এর যোগকে বাতিল করতে বিয়োগ করো।"
+      - en: "Subtract 9 from both sides: x + 9 − 9 = 15 − 9."
+        bn: "উভয়পক্ষ থেকে ৯ বিয়োগ করো: x + 9 − 9 = 15 − 9।"
+      - en: "x = 15 − 9 = 6."
+        bn: "x = 15 − 9 = 6।"
+
+  - grade: 7
+    topic: algebra
+    difficulty: 1
+    question_en: "Solve for y: y − 5 = 12"
+    question_bn: "y এর জন্য সমাধান করো: y − 5 = 12"
+    bn_reviewed: false
+    answer: "17"
+    answer_type: numeric
+    hints:
+      - en: "To isolate y, undo the subtraction of 5 by adding 5 to both sides."
+        bn: "y আলাদা করতে, ৫ এর বিয়োগ বাতিল করতে উভয়পক্ষে ৫ যোগ করো।"
+      - en: "y − 5 + 5 = 12 + 5."
+        bn: "y − 5 + 5 = 12 + 5।"
+      - en: "y = 12 + 5 = 17."
+        bn: "y = 12 + 5 = 17।"
+
+  - grade: 7
+    topic: algebra
+    difficulty: 1
+    question_en: "Simplify: 7a − 2a + 3a"
+    question_bn: "সরল করো: 7a − 2a + 3a"
+    bn_reviewed: false
+    answer: "8a"
+    answer_type: text
+    hints:
+      - en: "All three terms are like terms (all have the variable a). Combine them left to right."
+        bn: "তিনটি পদই সদৃশ (সবগুলোতে চলরাশি a আছে)। বাম থেকে ডানে একত্রিত করো।"
+      - en: "7a − 2a = 5a. Then 5a + 3a = ?"
+        bn: "7a − 2a = 5a। তারপর 5a + 3a = ?"
+      - en: "7a − 2a + 3a = 5a + 3a = 8a."
+        bn: "7a − 2a + 3a = 5a + 3a = 8a।"
+
+  - grade: 7
+    topic: algebra
+    difficulty: 1
+    question_en: "Solve for n: 4n = 28"
+    question_bn: "n এর জন্য সমাধান করো: 4n = 28"
+    bn_reviewed: false
+    answer: "7"
+    answer_type: numeric
+    hints:
+      - en: "4n means 4 multiplied by n. To undo multiplication, divide both sides by 4."
+        bn: "4n মানে 4 গুণ n। গুণফল বাতিল করতে উভয়পক্ষকে ৪ দিয়ে ভাগ করো।"
+      - en: "4n ÷ 4 = 28 ÷ 4."
+        bn: "4n ÷ 4 = 28 ÷ 4।"
+      - en: "n = 28 ÷ 4 = 7."
+        bn: "n = 28 ÷ 4 = 7।"
+
+  - grade: 7
+    topic: algebra
+    difficulty: 1
+    question_en: "If a = 3 and b = 5, find the value of 2a + 3b."
+    question_bn: "যদি a = 3 এবং b = 5 হয়, তাহলে 2a + 3b এর মান কত?"
+    bn_reviewed: false
+    answer: "21"
+    answer_type: numeric
+    hints:
+      - en: "Substitute both values: replace a with 3 and b with 5 in the expression."
+        bn: "উভয় মান প্রতিস্থাপন করো: রাশিতে a এর জায়গায় ৩ এবং b এর জায়গায় ৫ বসাও।"
+      - en: "2a + 3b = 2(3) + 3(5) = 6 + 15."
+        bn: "2a + 3b = 2(3) + 3(5) = 6 + 15।"
+      - en: "6 + 15 = 21."
+        bn: "6 + 15 = 21।"
+
+  # --- MEDIUM (difficulty 2) ---
+
+  - grade: 7
+    topic: algebra
+    difficulty: 2
+    question_en: "Solve for x: 3x + 5 = 20"
+    question_bn: "x এর জন্য সমাধান করো: 3x + 5 = 20"
+    bn_reviewed: false
+    answer: "5"
+    answer_type: numeric
+    hints:
+      - en: "Solve step-by-step: first remove the constant on the left side, then deal with the coefficient of x."
+        bn: "ধাপে ধাপে সমাধান করো: প্রথমে বামপক্ষের ধ্রুবক সরাও, তারপর x এর সহগ নিয়ে কাজ করো।"
+      - en: "Step 1: Subtract 5 from both sides → 3x = 20 − 5 = 15."
+        bn: "ধাপ ১: উভয়পক্ষ থেকে ৫ বিয়োগ করো → 3x = 20 − 5 = 15।"
+      - en: "Step 2: Divide both sides by 3 → x = 15 ÷ 3 = 5."
+        bn: "ধাপ ২: উভয়পক্ষকে ৩ দিয়ে ভাগ করো → x = 15 ÷ 3 = 5।"
+
+  - grade: 7
+    topic: algebra
+    difficulty: 2
+    question_en: "Solve for x: 2x − 7 = 11"
+    question_bn: "x এর জন্য সমাধান করো: 2x − 7 = 11"
+    bn_reviewed: false
+    answer: "9"
+    answer_type: numeric
+    hints:
+      - en: "First, add 7 to both sides to isolate the term with x."
+        bn: "প্রথমে, x সহ পদটি আলাদা করতে উভয়পক্ষে ৭ যোগ করো।"
+      - en: "2x − 7 + 7 = 11 + 7 → 2x = 18."
+        bn: "2x − 7 + 7 = 11 + 7 → 2x = 18।"
+      - en: "Divide both sides by 2 → x = 18 ÷ 2 = 9."
+        bn: "উভয়পক্ষকে ২ দিয়ে ভাগ করো → x = 18 ÷ 2 = 9।"
+
+  - grade: 7
+    topic: algebra
+    difficulty: 2
+    question_en: "Simplify: 4x + 3y − 2x + 5y"
+    question_bn: "সরল করো: 4x + 3y − 2x + 5y"
+    bn_reviewed: false
+    answer: "2x + 8y"
+    answer_type: text
+    hints:
+      - en: "Group the like terms together — x terms with x terms, y terms with y terms."
+        bn: "সদৃশ পদ একসাথে গুচ্ছ করো — x পদগুলো একসাথে, y পদগুলো একসাথে।"
+      - en: "x terms: 4x − 2x = 2x. y terms: 3y + 5y = 8y."
+        bn: "x পদ: 4x − 2x = 2x। y পদ: 3y + 5y = 8y।"
+      - en: "Combined: 2x + 8y."
+        bn: "একত্রিত: 2x + 8y।"
+
+  - grade: 7
+    topic: algebra
+    difficulty: 2
+    question_en: "A number is multiplied by 6 and then 4 is added. The result is 34. Write and solve the equation to find the number."
+    question_bn: "একটি সংখ্যাকে ৬ দিয়ে গুণ করে ৪ যোগ করলে ৩৪ হয়। সমীকরণ লিখে সংখ্যাটি নির্ণয় করো।"
+    bn_reviewed: false
+    answer: "5"
+    answer_type: numeric
+    hints:
+      - en: "Let the number be x. 'Multiplied by 6 and then 4 is added' → write this as an algebraic expression equal to 34."
+        bn: "সংখ্যাটিকে x ধরো। '৬ দিয়ে গুণ করে ৪ যোগ' → এটি বীজগাণিতিক রাশি হিসেবে ৩৪ এর সমান লেখো।"
+      - en: "Equation: 6x + 4 = 34. Subtract 4 from both sides → 6x = 30."
+        bn: "সমীকরণ: 6x + 4 = 34। উভয়পক্ষ থেকে ৪ বিয়োগ করো → 6x = 30।"
+      - en: "Divide both sides by 6 → x = 30 ÷ 6 = 5."
+        bn: "উভয়পক্ষকে ৬ দিয়ে ভাগ করো → x = 30 ÷ 6 = 5।"
+
+  - grade: 7
+    topic: algebra
+    difficulty: 2
+    question_en: "If p = 2 and q = −3, find the value of p² − 2pq."
+    question_bn: "যদি p = 2 এবং q = −3 হয়, তাহলে p² − 2pq এর মান কত?"
+    bn_reviewed: false
+    answer: "16"
+    answer_type: numeric
+    hints:
+      - en: "Substitute p = 2 and q = −3 into the expression. Be careful with signs when multiplying."
+        bn: "রাশিতে p = 2 এবং q = −3 প্রতিস্থাপন করো। গুণের সময় চিহ্নের ব্যাপারে সাবধান থাকো।"
+      - en: "p² = 2² = 4. 2pq = 2 × 2 × (−3) = −12. So p² − 2pq = 4 − (−12)."
+        bn: "p² = 2² = 4। 2pq = 2 × 2 × (−3) = −12। তাই p² − 2pq = 4 − (−12)।"
+      - en: "4 − (−12) = 4 + 12 = 16."
+        bn: "4 − (−12) = 4 + 12 = 16।"
+
+  - grade: 7
+    topic: algebra
+    difficulty: 2
+    question_en: "Raju thinks of a number. He doubles it and subtracts 3. The result is 13. What is the number?"
+    question_bn: "রাজু একটি সংখ্যা ভাবে। সে সেটিকে দ্বিগুণ করে ৩ বিয়োগ করে। ফলাফল ১৩। সংখ্যাটি কত?"
+    bn_reviewed: false
+    answer: "8"
+    answer_type: numeric
+    hints:
+      - en: "Let the number be n. 'Doubles it' means 2n. 'Subtracts 3' means − 3. Set the expression equal to 13."
+        bn: "সংখ্যাটিকে n ধরো। 'দ্বিগুণ করা' মানে 2n। '৩ বিয়োগ' মানে − 3। রাশিকে ১৩ এর সমান করো।"
+      - en: "Equation: 2n − 3 = 13. Add 3 to both sides → 2n = 16."
+        bn: "সমীকরণ: 2n − 3 = 13। উভয়পক্ষে ৩ যোগ করো → 2n = 16।"
+      - en: "Divide by 2 → n = 8."
+        bn: "২ দিয়ে ভাগ করো → n = 8।"
+
+  - grade: 7
+    topic: algebra
+    difficulty: 2
+    question_en: "Solve for x: x/3 + 4 = 9"
+    question_bn: "x এর জন্য সমাধান করো: x/3 + 4 = 9"
+    bn_reviewed: false
+    answer: "15"
+    answer_type: numeric
+    hints:
+      - en: "First isolate the fraction term. Subtract 4 from both sides."
+        bn: "প্রথমে ভগ্নাংশ পদটি আলাদা করো। উভয়পক্ষ থেকে ৪ বিয়োগ করো।"
+      - en: "x/3 + 4 − 4 = 9 − 4 → x/3 = 5. Now multiply both sides by 3."
+        bn: "x/3 + 4 − 4 = 9 − 4 → x/3 = 5। এখন উভয়পক্ষকে ৩ দিয়ে গুণ করো।"
+      - en: "x = 5 × 3 = 15."
+        bn: "x = 5 × 3 = 15।"
+
+  # --- HARD (difficulty 3) ---
+
+  - grade: 7
+    topic: algebra
+    difficulty: 3
+    question_en: "The sum of three consecutive integers is 48. Find the smallest integer."
+    question_bn: "তিনটি ক্রমিক পূর্ণসংখ্যার যোগফল ৪৮। সবচেয়ে ছোট পূর্ণসংখ্যাটি কত?"
+    bn_reviewed: false
+    answer: "15"
+    answer_type: numeric
+    hints:
+      - en: "Let the smallest integer be n. Then the three consecutive integers are n, n+1, and n+2."
+        bn: "সবচেয়ে ছোট পূর্ণসংখ্যাটিকে n ধরো। তাহলে তিনটি ক্রমিক পূর্ণসংখ্যা হবে n, n+1 এবং n+2।"
+      - en: "Their sum: n + (n+1) + (n+2) = 48 → 3n + 3 = 48 → 3n = 45."
+        bn: "তাদের যোগফল: n + (n+1) + (n+2) = 48 → 3n + 3 = 48 → 3n = 45।"
+      - en: "n = 45 ÷ 3 = 15. The three integers are 15, 16, 17."
+        bn: "n = 45 ÷ 3 = 15। তিনটি পূর্ণসংখ্যা হলো 15, 16, 17।"
+
+  - grade: 7
+    topic: algebra
+    difficulty: 3
+    question_en: "Priya is 3 times as old as her brother Sonu. In 4 years, she will be twice Sonu's age. How old is Sonu now?"
+    question_bn: "প্রিয়া তার ভাই সোনুর চেয়ে ৩ গুণ বড়। ৪ বছর পরে সে সোনুর দ্বিগুণ বয়সী হবে। সোনুর এখন বয়স কত?"
+    bn_reviewed: false
+    answer: "4"
+    answer_type: numeric
+    hints:
+      - en: "Let Sonu's current age = x. Then Priya's current age = 3x. In 4 years: Sonu = x + 4, Priya = 3x + 4."
+        bn: "সোনুর বর্তমান বয়স = x ধরো। তাহলে প্রিয়ার বর্তমান বয়স = 3x। ৪ বছর পরে: সোনু = x + 4, প্রিয়া = 3x + 4।"
+      - en: "In 4 years, Priya = twice Sonu's age: 3x + 4 = 2(x + 4). Expand: 3x + 4 = 2x + 8."
+        bn: "৪ বছর পরে, প্রিয়া = সোনুর বয়সের দ্বিগুণ: 3x + 4 = 2(x + 4)। বিস্তার করো: 3x + 4 = 2x + 8।"
+      - en: "3x − 2x = 8 − 4 → x = 4. Sonu is 4 years old."
+        bn: "3x − 2x = 8 − 4 → x = 4। সোনুর বয়স ৪ বছর।"
+
+  - grade: 7
+    topic: algebra
+    difficulty: 3
+    question_en: "A rectangle's length is 5 more than twice its width. Its perimeter is 52 cm. Find the width in cm."
+    question_bn: "একটি আয়তক্ষেত্রের দৈর্ঘ্য তার প্রস্থের দ্বিগুণের চেয়ে ৫ বেশি। পরিসীমা ৫২ সেমি। প্রস্থ কত সেমি?"
+    bn_reviewed: false
+    answer: "7"
+    answer_type: numeric
+    hints:
+      - en: "Let width = w. Then length = 2w + 5. Use the perimeter formula: P = 2(length + width)."
+        bn: "প্রস্থ = w ধরো। তাহলে দৈর্ঘ্য = 2w + 5। পরিসীমার সূত্র ব্যবহার করো: P = 2(দৈর্ঘ্য + প্রস্থ)।"
+      - en: "52 = 2((2w + 5) + w) = 2(3w + 5) = 6w + 10. So 6w = 42."
+        bn: "52 = 2((2w + 5) + w) = 2(3w + 5) = 6w + 10। তাই 6w = 42।"
+      - en: "w = 42 ÷ 6 = 7 cm."
+        bn: "w = 42 ÷ 6 = 7 সেমি।"
+
+  - grade: 7
+    topic: algebra
+    difficulty: 3
+    question_en: "If 2(4x − 3) = 3(2x + 2), find x."
+    question_bn: "যদি 2(4x − 3) = 3(2x + 2) হয়, তাহলে x এর মান কত?"
+    bn_reviewed: false
+    answer: "6"
+    answer_type: numeric
+    hints:
+      - en: "Expand both sides by multiplying through the brackets first."
+        bn: "প্রথমে বন্ধনী দিয়ে গুণ করে উভয়পক্ষ বিস্তার করো।"
+      - en: "Left side: 2(4x − 3) = 8x − 6. Right side: 3(2x + 2) = 6x + 6. Equation: 8x − 6 = 6x + 6."
+        bn: "বামপক্ষ: 2(4x − 3) = 8x − 6। ডানপক্ষ: 3(2x + 2) = 6x + 6। সমীকরণ: 8x − 6 = 6x + 6।"
+      - en: "8x − 6x = 6 + 6 → 2x = 12 → x = 6."
+        bn: "8x − 6x = 6 + 6 → 2x = 12 → x = 6।"
