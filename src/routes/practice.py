@@ -1,21 +1,28 @@
 """Practice session endpoints.
 
+Implements the complete practice session lifecycle:
+- GET /practice — select 5 problems (or resume existing session)
+- POST /practice/{problem_id}/answer — evaluate and persist an answer
+- POST /practice/{problem_id}/hint — deliver a pre-written hint from the DB
+
 Security (SEC-003, SEC-005):
 - All endpoints require student authentication (SEC-003)
 - Hint endpoint rate limited to 10 requests/day per student (SEC-005)
-- Prevents abuse of expensive Claude API calls
-- Prevents IDOR attacks
-"""
+- Basic 403/404/410 ownership and expiry checks on every write endpoint
 
-from datetime import UTC, datetime, timedelta
+PHASE3-B-3
+"""
 
 from fastapi import APIRouter, Depends, HTTPException, Request
 from slowapi import Limiter
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.auth.student import verify_student
 from src.database import get_session
 from src.logging import get_logger
+from src.models.student import Student
+from src.repositories import ProblemRepository, ResponseRepository, SessionRepository
 from src.schemas.practice import (
     AnswerRequest,
     AnswerResponse,
@@ -24,6 +31,10 @@ from src.schemas.practice import (
     PracticeResponse,
     ProblemWithoutAnswer,
 )
+from src.services.answer_evaluator import AnswerEvaluator
+from src.services.cost_tracker import CostTracker
+from src.services.problem_selector import ProblemSelector
+from src.utils.pii import hash_telegram_id, redact_answer
 
 router = APIRouter()
 logger = get_logger(__name__)
@@ -44,6 +55,50 @@ def get_student_rate_limit_key(request: Request) -> str:
 limiter = Limiter(key_func=get_student_rate_limit_key)
 
 
+async def _get_student_by_telegram_id(db: AsyncSession, telegram_id: int) -> Student:
+    """Fetch Student row by telegram_id.
+
+    Args:
+        db: Async database session.
+        telegram_id: The telegram ID returned by verify_student.
+
+    Returns:
+        Student instance.
+
+    Raises:
+        HTTPException: 404 if not found (should not happen after verify_student).
+    """
+    result = await db.execute(select(Student).where(Student.telegram_id == telegram_id))
+    student = result.scalar_one_or_none()
+    if not student:
+        raise HTTPException(status_code=404, detail="Student not found")
+    return student
+
+
+def _problem_to_schema(problem: "Problem") -> ProblemWithoutAnswer:  # type: ignore[name-defined]  # noqa: F821
+    """Convert a Problem ORM instance to the API schema (no answer included).
+
+    Args:
+        problem: Problem ORM instance.
+
+    Returns:
+        ProblemWithoutAnswer schema.
+    """
+    answer_type = getattr(problem, "answer_type", "numeric") or "numeric"
+    mc_options = getattr(problem, "multiple_choice_options", None)
+
+    return ProblemWithoutAnswer(
+        problem_id=problem.problem_id,
+        grade=problem.grade,
+        topic=problem.topic,
+        question_en=problem.question_en,
+        question_bn=problem.question_bn,
+        difficulty=problem.difficulty,
+        answer_type=answer_type,
+        multiple_choice_options=mc_options,
+    )
+
+
 @router.get("/practice", response_model=PracticeResponse, tags=["Student Practice"])
 async def get_practice_problems(
     student_id: int = Depends(verify_student),  # SEC-003: Database verification
@@ -52,8 +107,8 @@ async def get_practice_problems(
     """Get daily practice problems.
 
     Returns 5 problems for the student's daily practice session.
-    Problems are selected based on grade level, performance history,
-    and adaptive difficulty algorithm.
+    Resumes an existing IN_PROGRESS session or returns an already-COMPLETED
+    session summary if the student has already finished today.
 
     Security (SEC-003):
     - Student must be authenticated via X-Student-ID header
@@ -64,36 +119,89 @@ async def get_practice_problems(
         db: Database session (from dependency).
 
     Returns:
-        PracticeResponse with 5 selected problems.
+        PracticeResponse with selected problems and session metadata.
 
     Raises:
         HTTPException: If student not found or problem selection fails.
     """
-    # TODO: Implement problem selection
-    # - Run problem selection algorithm (REQ-008)
-    # - Create new session in database
-    # - Return problems without answers
-    # Note: Student validation now handled by Depends(verify_student)
+    # TODO C-1: add verify_session_owner Depends (Noor wires full session auth)
 
-    # Mock data for now
-    mock_problems = [
-        ProblemWithoutAnswer(
-            problem_id=1,
-            grade=7,
-            topic="Profit & Loss",
-            question_en="A shopkeeper buys 15 mangoes for Rs. 300...",
-            question_bn="একজন দোকানদার 15টি আম ₹300 এর জন্য ক্রয় করেন...",
-            difficulty=1,
-            answer_type="numeric",
-            multiple_choice_options=None,
-        ),
-    ]
+    student = await _get_student_by_telegram_id(db, student_id)
+
+    problem_repo = ProblemRepository()
+    session_repo = SessionRepository()
+    response_repo = ResponseRepository()
+
+    # Expire any stale sessions first
+    await session_repo.expire_stale_sessions(db)
+
+    hashed_tid = hash_telegram_id(student_id)
+
+    # Check for existing session today
+    existing = await session_repo.get_active_session_for_today(db, student.student_id)
+
+    if existing is not None:
+        from src.models.session import SessionStatus
+
+        if existing.status == SessionStatus.COMPLETED:
+            logger.info(
+                "Student already completed practice today",
+                hashed_telegram_id=hashed_tid,
+            )
+            return PracticeResponse(
+                session_id=existing.session_id,
+                problems=[],
+                problem_count=0,
+                expires_at=existing.expires_at,
+            )
+
+        if existing.status == SessionStatus.IN_PROGRESS:
+            # Resume: return only unanswered problems
+            answered_ids = await response_repo.get_answered_problem_ids(db, existing.session_id)
+            remaining_ids = [pid for pid in existing.problem_ids if pid not in answered_ids]
+            remaining_problems = await problem_repo.get_problems_by_ids(db, remaining_ids)
+            logger.info(
+                "Resuming mid-session",
+                hashed_telegram_id=hashed_tid,
+                remaining=len(remaining_problems),
+            )
+            return PracticeResponse(
+                session_id=existing.session_id,
+                problems=[_problem_to_schema(p) for p in remaining_problems],
+                problem_count=len(remaining_problems),
+                expires_at=existing.expires_at,
+            )
+
+    # No existing session — run selection algorithm
+    selector = ProblemSelector(problem_repo, response_repo)
+    selected_problems = await selector.select_problems(db, student.student_id, student.grade)
+
+    if not selected_problems:
+        raise HTTPException(
+            status_code=404,
+            detail="No problems found for your grade level. Please contact your teacher.",
+        )
+
+    # Create new session
+    problem_ids = [p.problem_id for p in selected_problems]
+    session = await session_repo.create_session(db, student.student_id, problem_ids)
+    # Capture values before commit (commit expires ORM attributes)
+    new_session_id = session.session_id
+    new_expires_at = session.expires_at
+    await db.commit()
+
+    logger.info(
+        "Created new practice session",
+        hashed_telegram_id=hashed_tid,
+        session_id=new_session_id,
+        problem_count=len(selected_problems),
+    )
 
     return PracticeResponse(
-        session_id=1,
-        problems=mock_problems,
-        problem_count=len(mock_problems),
-        expires_at=datetime.now(UTC) + timedelta(minutes=30),
+        session_id=new_session_id,
+        problems=[_problem_to_schema(p) for p in selected_problems],
+        problem_count=len(selected_problems),
+        expires_at=new_expires_at,
     )
 
 
@@ -110,36 +218,145 @@ async def submit_answer(
 ) -> AnswerResponse:
     """Submit answer to a problem.
 
-    Evaluates the student's answer and provides feedback.
-    Updates session progress and difficulty level.
+    Evaluates the student's answer and provides bilingual feedback.
+    Updates session progress and persists the response.
 
     Args:
         problem_id: ID of the problem being answered.
-        request: Answer submission with student's answer.
-        x_student_id: Student telegram ID from header.
+        request: Answer submission containing student_answer and session_id.
+        student_id: Verified student telegram ID (from dependency).
+        db: Database session (from dependency).
 
     Returns:
-        AnswerResponse with evaluation result and feedback.
+        AnswerResponse with evaluation result, feedback, and next problem ID.
 
     Raises:
-        HTTPException: If problem not found or session invalid.
+        HTTPException:
+            - 404 if session or problem not found
+            - 403 if session belongs to a different student
+            - 410 if session has expired
     """
-    # TODO: Implement answer evaluation
-    # - Validate problem exists and belongs to session
-    # - Evaluate answer (numeric ±5%, MC exact, text semantic)
-    # - Update session progress
-    # - Update adaptive difficulty
-    # - Store response in database
-    # - Generate feedback message
+    # TODO C-1: add verify_session_owner Depends (Noor wires full session auth)
 
-    # Mock response
-    is_correct = len(request.student_answer) > 0
-    feedback = "Correct! Well done!" if is_correct else "Not quite. Try again or ask for a hint."
+    student = await _get_student_by_telegram_id(db, student_id)
+
+    problem_repo = ProblemRepository()
+    session_repo = SessionRepository()
+    response_repo = ResponseRepository()
+
+    # Fetch and validate session
+    session = await session_repo.get_session_by_id(db, request.session_id)
+    if session is None:
+        raise HTTPException(status_code=404, detail="Session not found")
+
+    # Basic ownership check (full Depends wired by Noor in C-1)
+    if session.student_id != student.student_id:
+        logger.warning(
+            "IDOR attempt: student tried to answer another student's session",
+            hashed_telegram_id=hash_telegram_id(student_id),
+        )
+        raise HTTPException(status_code=403, detail="Forbidden: session belongs to another student")
+
+    if session.is_expired():
+        raise HTTPException(status_code=410, detail="ERR_SESSION_EXPIRED: session has expired")
+
+    # Verify problem is in this session
+    if problem_id not in session.problem_ids:
+        raise HTTPException(status_code=404, detail="Problem not found in this session")
+
+    # Check for duplicate submission (idempotent: return cached result)
+    existing_response = await response_repo.get_response_for_problem(
+        db, request.session_id, problem_id
+    )
+    if existing_response is not None and existing_response.student_answer:
+        # Already answered — return cached result
+        answered_ids = await response_repo.get_answered_problem_ids(db, request.session_id)
+        next_id = next(
+            (pid for pid in session.problem_ids if pid not in answered_ids),
+            None,
+        )
+        feedback = (
+            "সঠিক! ✅ শাবাশ!"
+            if existing_response.is_correct
+            else (
+                "ঠিক হয়নি। আবার চেষ্টা করো বা hint চাও।"
+                if student.language == "bn"
+                else (
+                    "Correct! ✅ Well done!"
+                    if existing_response.is_correct
+                    else "Not quite. Try again or ask for a hint."
+                )
+            )
+        )
+        if student.language != "bn":
+            feedback = (
+                "Correct! ✅ Well done!"
+                if existing_response.is_correct
+                else "Not quite. Try again or ask for a hint."
+            )
+        return AnswerResponse(
+            is_correct=existing_response.is_correct,
+            feedback_text=feedback,
+            next_problem_id=next_id,
+        )
+
+    # Fetch problem
+    problem = await problem_repo.get_problem_by_id(db, problem_id)
+    if problem is None:
+        raise HTTPException(status_code=404, detail="Problem not found")
+
+    # Determine hints already used for this problem
+    hints_used = existing_response.hints_used if existing_response else 0
+
+    # Evaluate the answer
+    evaluator = AnswerEvaluator()
+    result = evaluator.evaluate(problem, request.student_answer, hints_used)
+
+    # Log answer (redacted for PII)
+    logger.info(
+        "Evaluating answer",
+        hashed_telegram_id=hash_telegram_id(student_id),
+        problem_id=problem_id,
+        redacted_answer=redact_answer(request.student_answer),
+        is_correct=result.is_correct,
+    )
+
+    # Persist response
+    await response_repo.create_response(
+        db=db,
+        session_id=request.session_id,
+        problem_id=problem_id,
+        student_answer=request.student_answer,
+        is_correct=result.is_correct,
+        hints_used=hints_used,
+        time_spent_seconds=request.time_spent_seconds or 0,
+        confidence_level=result.confidence_level,
+    )
+
+    # Update session correct count
+    if result.is_correct:
+        await session_repo.increment_correct_count(db, session)
+
+    # Determine next problem
+    answered_ids = await response_repo.get_answered_problem_ids(db, request.session_id)
+    next_id = next(
+        (pid for pid in session.problem_ids if pid not in answered_ids),
+        None,
+    )
+
+    # Complete session if all problems answered
+    if next_id is None:
+        await session_repo.mark_session_complete(db, session)
+
+    await db.commit()
+
+    # Pick feedback language
+    feedback = result.feedback_bn if student.language == "bn" else result.feedback_en
 
     return AnswerResponse(
-        is_correct=is_correct,
+        is_correct=result.is_correct,
         feedback_text=feedback,
-        next_problem_id=problem_id + 1 if problem_id < 5 else None,
+        next_problem_id=next_id,
     )
 
 
@@ -148,7 +365,7 @@ async def submit_answer(
     response_model=HintResponse,
     tags=["Student Practice"],
 )
-@limiter.limit("10/day")  # SEC-005: Rate limit expensive Claude API calls
+@limiter.limit("10/day")  # SEC-005: Rate limit hint requests per student
 async def request_hint(
     req: Request,  # Required by slowapi rate limiter
     problem_id: int,
@@ -156,55 +373,125 @@ async def request_hint(
     student_id: int = Depends(verify_student),  # SEC-003: Database verification
     db: AsyncSession = Depends(get_session),
 ) -> HintResponse:
-    """Request a Socratic hint for a problem.
+    """Request a pre-written Socratic hint for a problem.
 
-    Generates or retrieves a hint to guide the student toward the answer
-    without revealing it directly. Maximum 3 hints per problem.
+    Returns the stored hint for the requested level. Maximum 3 hints
+    per problem. This endpoint serves pre-written hints from the database
+    (Claude-generated hints are deferred to Phase 4).
 
     Security (SEC-005):
-    - Rate limited to 10 requests/day per IP address
-    - Prevents abuse of expensive Claude API calls
+    - Rate limited to 10 requests/day per student
     - Returns 429 Too Many Requests if limit exceeded
 
     Args:
         req: FastAPI request object (required by rate limiter).
         problem_id: ID of the problem.
-        request: Hint request with hint number.
-        x_student_id: Student telegram ID from header.
+        request: Hint request containing session_id and hint_number (1-3).
+        student_id: Verified student telegram ID (from dependency).
+        db: Database session (from dependency).
 
     Returns:
-        HintResponse with hint text.
+        HintResponse with hint text in student's language.
 
     Raises:
         HTTPException:
-            - 400 if too many hints requested (>3)
-            - 429 if rate limit exceeded (>10/day)
-            - 404 if problem not found
+            - 400 if hint limit exceeded (>3 hints)
+            - 403 if session belongs to another student
+            - 404 if session or problem not found
+            - 410 if session expired
+            - 429 if rate limit exceeded
     """
+    # TODO C-1: add verify_session_owner Depends (Noor wires full session auth)
+
+    student = await _get_student_by_telegram_id(db, student_id)
+
+    problem_repo = ProblemRepository()
+    session_repo = SessionRepository()
+    response_repo = ResponseRepository()
+
+    # Fetch and validate session
+    session = await session_repo.get_session_by_id(db, request.session_id)
+    if session is None:
+        raise HTTPException(status_code=404, detail="Session not found")
+
+    if session.student_id != student.student_id:
+        logger.warning(
+            "IDOR attempt on hint endpoint",
+            hashed_telegram_id=hash_telegram_id(student_id),
+        )
+        raise HTTPException(status_code=403, detail="Forbidden: session belongs to another student")
+
+    if session.is_expired():
+        raise HTTPException(status_code=410, detail="ERR_SESSION_EXPIRED: session has expired")
+
+    # Verify problem belongs to this session
+    if problem_id not in session.problem_ids:
+        raise HTTPException(status_code=404, detail="Problem not found in this session")
+
+    # Fetch problem and verify it exists
+    problem = await problem_repo.get_problem_by_id(db, problem_id)
+    if problem is None:
+        raise HTTPException(status_code=404, detail="Problem not found")
+
+    # Check existing response for hint count
+    existing_response = await response_repo.get_response_for_problem(
+        db, request.session_id, problem_id
+    )
+    hints_already_used = existing_response.hints_used if existing_response else 0
+
+    # Enforce hint limit
+    if hints_already_used >= 3:
+        raise HTTPException(status_code=400, detail="ERR_HINT_LIMIT_EXCEEDED")
+
+    # Idempotent: if student is requesting a hint they've already seen, return it
+    hints = problem.get_hints()
+    hint_index = request.hint_number - 1
+
+    if hint_index >= len(hints):
+        raise HTTPException(
+            status_code=400,
+            detail=f"Hint {request.hint_number} not available for this problem",
+        )
+
+    hint_obj = hints[hint_index]
+    hint_dict = hint_obj.to_dict()
+    hint_text = hint_dict["text_bn"] if student.language == "bn" else hint_dict["text_en"]
+
+    # Create response stub if first interaction, or update hint count
+    if existing_response is None:
+        existing_response = await response_repo.create_response(
+            db=db,
+            session_id=request.session_id,
+            problem_id=problem_id,
+            student_answer="",
+            is_correct=False,
+            hints_used=0,
+            time_spent_seconds=0,
+            confidence_level="high",
+        )
+
+    # Only increment hint count if this is a new hint level
+    if request.hint_number > hints_already_used:
+        await response_repo.update_hint_count(
+            db, existing_response, hints_already_used + 1, hint_dict
+        )
+
+    # Record cost (Phase 3 stub: cost_usd=0.00 for pre-written hints)
+    cost_tracker = CostTracker()
+    await cost_tracker.record_hint_cost(db, student.student_id, problem_id, request.hint_number)
+    await cost_tracker.check_budget_alert(db, student.student_id)
+
+    await db.commit()
+
     logger.info(
-        f"Student {student_id} requested hint {request.hint_number} for problem {problem_id}"
+        "Hint served",
+        hashed_telegram_id=hash_telegram_id(student_id),
+        problem_id=problem_id,
+        hint_number=request.hint_number,
     )
 
-    # TODO: Implement hint generation
-    # - Validate problem exists and session is active
-    # - Check hints_used < 3
-    # - Generate hint via Claude API (REQ-015)
-    # - Check cache first (REQ-016)
-    # - Store hint usage in database
-    # - Track cost
-
-    if request.hint_number > 3:
-        raise HTTPException(status_code=400, detail="Maximum 3 hints allowed per problem")
-
-    # Mock hint
-    hints = {
-        1: "Think about the cost of each item first.",
-        2: "Calculate the total selling price, then compare with cost.",
-        3: "Profit = Selling Price - Cost Price. Now calculate step by step.",
-    }
-
     return HintResponse(
-        hint_text=hints.get(request.hint_number, "No more hints available."),
+        hint_text=hint_text,
         hint_number=request.hint_number,
         hints_remaining=3 - request.hint_number,
     )

@@ -242,6 +242,92 @@ class ResponseRepository:
                 accuracies[topic] = (correct or 0) / total
         return accuracies
 
+    async def get_answered_problem_ids(
+        self,
+        db: AsyncSession,
+        session_id: int,
+    ) -> set[int]:
+        """Return the set of problem IDs that have been answered in a session.
+
+        A problem is considered answered if a Response row exists for it in the
+        session, regardless of correctness.
+
+        Args:
+            db: Active async database session.
+            session_id: Session to look up.
+
+        Returns:
+            Set of problem_id integers that have been answered.
+        """
+        stmt = select(Response.problem_id).where(
+            Response.session_id == session_id,
+            Response.student_answer != "",
+        )
+        result = await db.execute(stmt)
+        return set(result.scalars().all())
+
+    async def get_recent_by_student(
+        self,
+        db: AsyncSession,
+        student_id: int,
+        since: datetime,
+    ) -> list[dict[str, object]]:
+        """Return recent responses for a student since a given timestamp.
+
+        Joins Response with Problem to include the topic. Used by ProblemSelector
+        to build per-topic accuracy statistics.
+
+        Each returned dict contains:
+            - "problem_id": int
+            - "topic": str
+            - "is_correct": bool
+            - "answered_at": datetime (UTC-aware)
+
+        Args:
+            db: Active async database session.
+            student_id: Student primary key.
+            since: Only return responses at or after this UTC datetime.
+
+        Returns:
+            List of response dicts. Empty list for new students.
+        """
+        # Sub-query: session IDs for this student
+        session_stmt = select(Session.session_id).where(
+            Session.student_id == student_id,
+        )
+        session_result = await db.execute(session_stmt)
+        session_ids = [row[0] for row in session_result.fetchall()]
+
+        if not session_ids:
+            return []
+
+        stmt = (
+            select(
+                Response.problem_id,
+                Problem.topic,
+                Response.is_correct,
+                Response.evaluated_at,
+            )
+            .join(Problem, Response.problem_id == Problem.problem_id)
+            .where(
+                Response.session_id.in_(session_ids),
+                Response.evaluated_at >= since,
+                Response.student_answer != "",
+            )
+        )
+        result = await db.execute(stmt)
+        rows = result.fetchall()
+
+        return [
+            {
+                "problem_id": row[0],
+                "topic": row[1],
+                "is_correct": bool(row[2]),
+                "answered_at": row[3],
+            }
+            for row in rows
+        ]
+
     async def update_hint_count(
         self,
         db: AsyncSession,

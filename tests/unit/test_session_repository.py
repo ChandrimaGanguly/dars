@@ -149,8 +149,13 @@ class TestGetActiveSessionForToday:
         assert result.session_id == created_session.session_id
 
     @pytest.mark.asyncio
-    async def test_returns_none_for_completed_session(self, db: AsyncSession) -> None:
-        """A completed session from today should not be returned as 'active'."""
+    async def test_returns_completed_session_for_today(self, db: AsyncSession) -> None:
+        """A completed session from today should be returned so the caller can detect it.
+
+        get_active_session_for_today now returns both IN_PROGRESS and COMPLETED
+        sessions. The practice route checks the status to decide whether to
+        resume the session or surface a 'you finished today' message.
+        """
         repo = SessionRepository()
         student = await _make_student(db, telegram_id=1004)
         session = await repo.create_session(db, student_id=student.student_id, problem_ids=[1])
@@ -158,7 +163,8 @@ class TestGetActiveSessionForToday:
         await repo.mark_session_complete(db, session)
 
         result = await repo.get_active_session_for_today(db, student_id=student.student_id)
-        assert result is None
+        assert result is not None
+        assert result.status == SessionStatus.COMPLETED
 
 
 class TestGetSessionById:

@@ -2,7 +2,7 @@
 
 **Duration:** Week 2-3 (8 days of agent work)
 **Complexity:** M+M+M across three parallel tracks = ~8 days total
-**Status:** Ready for implementation
+**Status:** ✅ COMPLETE — All tracks A, B, C done. 180 tests passing.
 
 **Demo Target:** "Student sends `/practice`, receives 5 real problems from the database, submits answers, sees per-problem feedback in Bengali, and the session state is saved so they can resume after disconnect."
 
@@ -25,15 +25,15 @@
 
 | Task ID | Task Name | Owner | Duration | Blocked By | Blocks | Status |
 |---------|-----------|-------|----------|-----------|--------|--------|
-| PHASE3-A-1 | answer_type migration + seed script | Maryam | 2 days | None | PHASE3-A-2, PHASE3-B-2 | 📋 Pending |
-| PHASE3-A-2 | Session, Response & Problem repositories | Maryam | 1.5 days | PHASE3-A-1 | PHASE3-B-2, PHASE3-B-3 | 📋 Pending |
-| PHASE3-B-1 | Problem selection algorithm (REQ-008) | Jodha | 2.5 days | None (parallel with A-1) | PHASE3-B-3 | 📋 Pending |
-| PHASE3-B-2 | Answer evaluation service (REQ-003) | Jodha | 1.5 days | PHASE3-A-1, PHASE3-A-2 | PHASE3-B-3 | 📋 Pending |
-| PHASE3-B-3 | Wire practice.py endpoints end-to-end | Jodha | 2 days | PHASE3-B-1, PHASE3-B-2, PHASE3-A-2 | PHASE3-B-4, PHASE3-C-1,2,3 | 📋 Pending |
-| PHASE3-B-4 | Telegram /practice command wiring | Jodha | 1 day | PHASE3-B-3 | Phase 4 | 📋 Pending |
-| PHASE3-C-1 | Session ownership + IDOR prevention | Noor | 1.5 days | PHASE3-B-3 | Phase 4 | 📋 Pending |
-| PHASE3-C-2 | Structured practice event logging | Noor | 1 day | PHASE3-B-3 | Phase 4 | 📋 Pending |
-| PHASE3-C-3 | Cost tracking stubs for future Claude calls | Noor | 1 day | PHASE3-B-3 | Phase 4 | 📋 Pending |
+| PHASE3-A-1 | answer_type migration + seed script | Maryam | 2 days | None | PHASE3-A-2, PHASE3-B-2 | ✅ Complete |
+| PHASE3-A-2 | Session, Response & Problem repositories | Maryam | 1.5 days | PHASE3-A-1 | PHASE3-B-2, PHASE3-B-3 | ✅ Complete |
+| PHASE3-B-1 | Problem selection algorithm (REQ-008) | Jodha | 2.5 days | None (parallel with A-1) | PHASE3-B-3 | ✅ Complete |
+| PHASE3-B-2 | Answer evaluation service (REQ-003) | Jodha | 1.5 days | PHASE3-A-1, PHASE3-A-2 | PHASE3-B-3 | ✅ Complete |
+| PHASE3-B-3 | Wire practice.py endpoints end-to-end | Jodha | 2 days | PHASE3-B-1, PHASE3-B-2, PHASE3-A-2 | PHASE3-B-4, PHASE3-C-1,2,3 | ✅ Complete |
+| PHASE3-B-4 | Telegram /practice command wiring | Jodha | 1 day | PHASE3-B-3 | Phase 4 | ✅ Complete |
+| PHASE3-C-1 | Session ownership + IDOR prevention | Noor | 1.5 days | PHASE3-B-3 | Phase 4 | ✅ Complete |
+| PHASE3-C-2 | Structured practice event logging | Noor | 1 day | PHASE3-B-3 | Phase 4 | ✅ Complete |
+| PHASE3-C-3 | Cost tracking stubs for future Claude calls | Noor | 1 day | PHASE3-B-3 | Phase 4 | ✅ Complete |
 
 **Dependency chain (critical path):**
 ```

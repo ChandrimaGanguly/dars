@@ -158,13 +158,21 @@ class ProblemSelector:
         <500ms budget including network latency.
     """
 
+    def __init__(
+        self,
+        problem_repo: ProblemRepository | None = None,
+        response_repo: ResponseRepository | None = None,
+    ) -> None:
+        self._problem_repo = problem_repo
+        self._response_repo = response_repo
+
     async def select_problems(
         self,
+        db: AsyncSession,
         student_id: int,
         grade: int,
-        db: AsyncSession,
-        problem_repo: ProblemRepository,
-        response_repo: ResponseRepository,
+        problem_repo: ProblemRepository | None = None,
+        response_repo: ResponseRepository | None = None,
     ) -> list[Problem]:
         """Select up to 5 problems for a student's daily practice session.
 
@@ -183,9 +191,16 @@ class ProblemSelector:
             min(5, len(available_problems)).
         """
         now = datetime.now(UTC)
+        p_repo = problem_repo if problem_repo is not None else self._problem_repo
+        r_repo = response_repo if response_repo is not None else self._response_repo
+        if p_repo is None or r_repo is None:
+            raise ValueError(
+                "ProblemSelector requires problem_repo and response_repo. "
+                "Pass them to __init__ or to select_problems()."
+            )
 
         # Fetch all problems for this grade (single query)
-        problems = await problem_repo.get_by_grade(db=db, grade=grade)
+        problems = await p_repo.get_by_grade(db=db, grade=grade)
 
         if not problems:
             logger.info("No problems found for grade %d (student_id=%d)", grade, student_id)
@@ -193,7 +208,7 @@ class ProblemSelector:
 
         # Fetch recent responses (covers recency + mastery windows)
         mastery_since = now - timedelta(days=MASTERY_WINDOW_DAYS)
-        responses = await response_repo.get_recent_by_student(
+        responses = await r_repo.get_recent_by_student(
             db=db,
             student_id=student_id,
             since=mastery_since,

@@ -64,25 +64,26 @@ class SessionRepository:
         db: AsyncSession,
         student_id: int,
     ) -> Session | None:
-        """Return the student's active (in_progress) session for today.
+        """Return the student's session for today (IN_PROGRESS or COMPLETED).
 
-        Returns the most recent in_progress session created today (UTC). If
-        the session has expired, it is still returned — the caller decides
-        whether to expire it.
+        Returns the most recent session created today (UTC) in either
+        IN_PROGRESS or COMPLETED status. Callers check the status to decide
+        how to proceed (e.g. resume an in-progress session, or short-circuit
+        for a completed one).
 
         Args:
             db: Active async database session.
             student_id: Student to look up.
 
         Returns:
-            Active Session object if one exists for today, None otherwise.
+            Session object if one exists for today, None otherwise.
         """
         today_start = datetime.now(UTC).replace(hour=0, minute=0, second=0, microsecond=0)
         stmt = (
             select(Session)
             .where(
                 Session.student_id == student_id,
-                Session.status == SessionStatus.IN_PROGRESS,
+                Session.status.in_([SessionStatus.IN_PROGRESS, SessionStatus.COMPLETED]),
                 Session.created_at >= today_start,
             )
             .order_by(Session.created_at.desc())

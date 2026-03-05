@@ -135,6 +135,48 @@ class ProblemRepository:
         result = await db.execute(stmt)
         return [row[0] for row in result.fetchall()]
 
+    async def get_by_grade(
+        self,
+        db: AsyncSession,
+        grade: int,
+    ) -> list[Problem]:
+        """Alias for get_problems_by_grade with no optional filters.
+
+        Satisfies the ProblemRepository Protocol expected by ProblemSelector.
+
+        Args:
+            db: Active async database session.
+            grade: Grade level (6, 7, or 8).
+
+        Returns:
+            List of all Problem objects for that grade, ordered by problem_id.
+        """
+        return await self.get_problems_by_grade(db, grade)
+
+    async def get_problems_by_ids(
+        self,
+        db: AsyncSession,
+        problem_ids: list[int],
+    ) -> list[Problem]:
+        """Retrieve multiple problems by their primary keys.
+
+        Returns problems in the same order as problem_ids. Problems not found
+        are silently omitted.
+
+        Args:
+            db: Active async database session.
+            problem_ids: List of problem primary keys to fetch.
+
+        Returns:
+            List of Problem objects (may be shorter than problem_ids if some not found).
+        """
+        if not problem_ids:
+            return []
+        stmt = select(Problem).where(Problem.problem_id.in_(problem_ids))
+        result = await db.execute(stmt)
+        problems_by_id = {p.problem_id: p for p in result.scalars().all()}
+        return [problems_by_id[pid] for pid in problem_ids if pid in problems_by_id]
+
     async def get_problem_count_by_grade(
         self,
         db: AsyncSession,

@@ -245,23 +245,64 @@ class TestPracticeEndpoints:
 
     def test_get_practice_returns_problems(self, mock_db) -> None:
         """Practice endpoint should return problem list."""
-        # Override dependencies to avoid database connection
+        from datetime import UTC, datetime, timedelta
+        from unittest.mock import MagicMock
+
         app.dependency_overrides[get_session] = get_mock_db(mock_db)
         app.dependency_overrides[verify_student] = get_mock_verify_student(123)
 
-        try:
-            response = client.get("/practice", headers={"X-Student-ID": "123"})
-            assert response.status_code == 200
-            data = response.json()
-            assert "problems" in data
-            assert "session_id" in data
-            assert "problem_count" in data
-        finally:
-            # Clean up dependency overrides
-            if get_session in app.dependency_overrides:
-                del app.dependency_overrides[get_session]
-            if verify_student in app.dependency_overrides:
-                del app.dependency_overrides[verify_student]
+        # Build mock student
+        mock_student = MagicMock()
+        mock_student.student_id = 1
+        mock_student.grade = 7
+        mock_student.language = "en"
+
+        # Build mock problem (used by _problem_to_schema)
+        mock_problem = MagicMock()
+        mock_problem.problem_id = 1
+        mock_problem.grade = 7
+        mock_problem.topic = "algebra"
+        mock_problem.question_en = "What is 2+2?"
+        mock_problem.question_bn = "২+২ কত?"
+        mock_problem.difficulty = 1
+        mock_problem.answer_type = "numeric"
+        mock_problem.multiple_choice_options = None
+
+        # Build mock session returned by create_session
+        mock_session = MagicMock()
+        mock_session.session_id = 42
+        mock_session.expires_at = datetime.now(UTC) + timedelta(hours=24)
+
+        with (
+            patch(
+                "src.routes.practice._get_student_by_telegram_id",
+                new=AsyncMock(return_value=mock_student),
+            ),
+            patch("src.routes.practice.SessionRepository") as MockSessionRepo,
+            patch("src.routes.practice.ProblemRepository"),
+            patch("src.routes.practice.ResponseRepository"),
+            patch("src.routes.practice.ProblemSelector") as MockSelector,
+        ):
+            mock_session_repo = MockSessionRepo.return_value
+            mock_session_repo.expire_stale_sessions = AsyncMock(return_value=0)
+            mock_session_repo.get_active_session_for_today = AsyncMock(return_value=None)
+            mock_session_repo.create_session = AsyncMock(return_value=mock_session)
+
+            mock_selector = MockSelector.return_value
+            mock_selector.select_problems = AsyncMock(return_value=[mock_problem])
+
+            try:
+                response = client.get("/practice", headers={"X-Student-ID": "123"})
+                assert response.status_code == 200
+                data = response.json()
+                assert "problems" in data
+                assert "session_id" in data
+                assert "problem_count" in data
+            finally:
+                if get_session in app.dependency_overrides:
+                    del app.dependency_overrides[get_session]
+                if verify_student in app.dependency_overrides:
+                    del app.dependency_overrides[verify_student]
 
     def test_submit_answer_requires_body(self, mock_db) -> None:
         """Submit answer should require request body."""
@@ -284,30 +325,82 @@ class TestPracticeEndpoints:
 
     def test_submit_answer_returns_feedback(self, mock_db) -> None:
         """Submit answer should return evaluation feedback."""
-        # Override dependencies to avoid database connection
+        from unittest.mock import MagicMock
+
+        from src.services.answer_evaluator import EvaluationResult
+
         app.dependency_overrides[get_session] = get_mock_db(mock_db)
         app.dependency_overrides[verify_student] = get_mock_verify_student(123)
 
-        try:
-            response = client.post(
-                "/practice/1/answer",
-                headers={"X-Student-ID": "123"},
-                json={
-                    "session_id": 1,
-                    "student_answer": "75",
-                    "time_spent_seconds": 45,
-                },
-            )
-            assert response.status_code == 200
-            data = response.json()
-            assert "is_correct" in data
-            assert "feedback_text" in data
-        finally:
-            # Clean up dependency overrides
-            if get_session in app.dependency_overrides:
-                del app.dependency_overrides[get_session]
-            if verify_student in app.dependency_overrides:
-                del app.dependency_overrides[verify_student]
+        mock_student = MagicMock()
+        mock_student.student_id = 1
+        mock_student.grade = 7
+        mock_student.language = "en"
+
+        mock_problem = MagicMock()
+        mock_problem.problem_id = 1
+        mock_problem.answer = "75"
+        mock_problem.answer_type = "numeric"
+        mock_problem.acceptable_tolerance_percent = 5.0
+
+        mock_sess = MagicMock()
+        mock_sess.student_id = 1
+        mock_sess.problem_ids = [1]
+        mock_sess.is_expired.return_value = False
+
+        mock_eval_result = EvaluationResult(
+            is_correct=True,
+            feedback_en="Correct! ✅ Well done!",
+            feedback_bn="সঠিক! ✅ শাবাশ!",
+            normalized_answer="75",
+            confidence_level="high",
+            answer_format_valid=True,
+        )
+
+        with (
+            patch(
+                "src.routes.practice._get_student_by_telegram_id",
+                new=AsyncMock(return_value=mock_student),
+            ),
+            patch("src.routes.practice.SessionRepository") as MockSessionRepo,
+            patch("src.routes.practice.ProblemRepository") as MockProblemRepo,
+            patch("src.routes.practice.ResponseRepository") as MockResponseRepo,
+            patch("src.routes.practice.AnswerEvaluator") as MockEvaluator,
+        ):
+            mock_session_repo = MockSessionRepo.return_value
+            mock_session_repo.get_session_by_id = AsyncMock(return_value=mock_sess)
+            mock_session_repo.increment_correct_count = AsyncMock()
+            mock_session_repo.mark_session_complete = AsyncMock()
+
+            mock_problem_repo = MockProblemRepo.return_value
+            mock_problem_repo.get_problem_by_id = AsyncMock(return_value=mock_problem)
+
+            mock_response_repo = MockResponseRepo.return_value
+            mock_response_repo.get_response_for_problem = AsyncMock(return_value=None)
+            mock_response_repo.create_response = AsyncMock(return_value=MagicMock())
+            mock_response_repo.get_answered_problem_ids = AsyncMock(return_value={1})
+
+            MockEvaluator.return_value.evaluate.return_value = mock_eval_result
+
+            try:
+                response = client.post(
+                    "/practice/1/answer",
+                    headers={"X-Student-ID": "123"},
+                    json={
+                        "session_id": 1,
+                        "student_answer": "75",
+                        "time_spent_seconds": 45,
+                    },
+                )
+                assert response.status_code == 200
+                data = response.json()
+                assert "is_correct" in data
+                assert "feedback_text" in data
+            finally:
+                if get_session in app.dependency_overrides:
+                    del app.dependency_overrides[get_session]
+                if verify_student in app.dependency_overrides:
+                    del app.dependency_overrides[verify_student]
 
     @pytest.mark.skip(reason="Rate limiter requires integration test with real Request object")
     def test_request_hint_returns_hint_text(self) -> None:

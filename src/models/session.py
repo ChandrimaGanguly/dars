@@ -159,11 +159,19 @@ class Session(Base, TimestampMixin):
     def is_expired(self) -> bool:
         """Check if session has expired.
 
+        Handles both timezone-aware (PostgreSQL production) and timezone-naive
+        (SQLite test) datetimes. SQLite strips timezone info from DateTime columns,
+        so we normalise both sides to UTC-aware before comparing.
+
         Returns:
             True if current time is past expires_at timestamp.
         """
-
-        return datetime.now(UTC) > self.expires_at
+        now = datetime.now(UTC)
+        expires = self.expires_at
+        # SQLite returns naive datetimes; treat them as UTC for comparison.
+        if expires.tzinfo is None:
+            expires = expires.replace(tzinfo=UTC)
+        return now > expires
 
     def get_accuracy(self) -> float:
         """Calculate accuracy percentage for session.
