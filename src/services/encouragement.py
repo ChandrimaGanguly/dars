@@ -8,7 +8,18 @@ and easy to test. The selection index is derived from a context value (streak,
 hints_used, or grade) modulo the pool length.
 
 REQ-009 (streak tracking), REQ-010 (streak display), REQ-012 (milestones).
+REQ-013 (non-repeat): async variants get_unique_correct_message() and
+get_unique_incorrect_message() track sent variants via the SentMessage DB table.
 """
+
+from __future__ import annotations
+
+from datetime import UTC, datetime, timedelta
+
+from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
+
+from src.models.sent_message import SentMessage
 
 # ---------------------------------------------------------------------------
 # Correct-answer message templates
@@ -155,6 +166,117 @@ class EncouragementService:
             return _pick(pool, streak).format(streak=streak)
         pool = templates[:3]
         return _pick(pool, streak)
+
+    async def _get_unique_message(
+        self,
+        db: AsyncSession,
+        student_id: int,
+        pool: list[str],
+        prefix: str,
+        default_idx: int,
+        streak: int | None = None,
+    ) -> str:
+        """Select an unseen message variant and record it in SentMessage.
+
+        Queries SentMessage rows for this student within the last 7 days to find
+        which variants have been sent. Cycles to the first unseen variant; if all
+        have been seen, falls back to the deterministic default_idx and records
+        it anyway (repeat is acceptable after exhaustion).
+
+        The row is flushed but not committed — the caller's transaction commit
+        persists it. Trade-off: if the caller's transaction rolls back after this
+        returns, the SentMessage row is lost and the variant may repeat on the
+        next call. Callers should commit promptly after sending the message.
+
+        Args:
+            db: Async database session (within an open transaction).
+            student_id: Student primary key for tracking.
+            pool: Ordered list of message template strings.
+            prefix: Key prefix used to identify this message type (e.g. 'correct_streak_low').
+            default_idx: Fallback index when all variants have been seen recently.
+            streak: If provided, substituted into '{streak}' placeholders in the text.
+
+        Returns:
+            Selected message string, formatted if applicable.
+        """
+        cutoff = datetime.now(UTC) - timedelta(days=7)
+        result = await db.execute(
+            select(SentMessage.message_key).where(
+                SentMessage.student_id == student_id,
+                SentMessage.sent_at >= cutoff,
+                SentMessage.message_key.like(f"{prefix}_%"),
+            )
+        )
+        recently_sent: set[str] = {row[0] for row in result.fetchall()}
+
+        chosen_idx = default_idx
+        for i in range(len(pool)):
+            if f"{prefix}_{i}" not in recently_sent:
+                chosen_idx = i
+                break
+
+        text = pool[chosen_idx]
+        if streak is not None and "{streak}" in text:
+            text = text.format(streak=streak)
+
+        db.add(SentMessage(student_id=student_id, message_key=f"{prefix}_{chosen_idx}"))
+        await db.flush()
+        return text
+
+    async def get_unique_correct_message(
+        self,
+        db: AsyncSession,
+        student_id: int,
+        streak: int,
+        language: str,
+    ) -> str:
+        """Return a correct-answer message not sent to this student in the last 7 days.
+
+        Delegates to _get_unique_message with the appropriate pool and prefix
+        for the student's current streak level.
+
+        Args:
+            db: Async database session (within an open transaction).
+            student_id: Student primary key for tracking.
+            streak: Student's current streak for streak-aware variant selection.
+            language: Preferred language code ('en' or 'bn').
+
+        Returns:
+            Encouragement string in the requested language.
+        """
+        templates = _CORRECT_TEMPLATES.get(language, _CORRECT_TEMPLATES[_FALLBACK_LANGUAGE])
+        if streak >= 7:
+            pool, prefix = templates[3:], "correct_streak_high"
+        else:
+            pool, prefix = templates[:3], "correct_streak_low"
+        return await self._get_unique_message(
+            db, student_id, pool, prefix, default_idx=streak % len(pool), streak=streak
+        )
+
+    async def get_unique_incorrect_message(
+        self,
+        db: AsyncSession,
+        student_id: int,
+        hints_used: int,
+        language: str,
+    ) -> str:
+        """Return an incorrect-answer nudge not sent to this student in the last 7 days.
+
+        Delegates to _get_unique_message with the incorrect-answer template pool.
+
+        Args:
+            db: Async database session (within an open transaction).
+            student_id: Student primary key for tracking.
+            hints_used: Number of hints already used (0-3).
+            language: Preferred language code ('en' or 'bn').
+
+        Returns:
+            Supportive message string in the requested language.
+        """
+        templates = _INCORRECT_TEMPLATES.get(language, _INCORRECT_TEMPLATES[_FALLBACK_LANGUAGE])
+        return await self._get_unique_message(
+            db, student_id, templates, "incorrect", default_idx=hints_used % len(templates)
+        )
 
     def get_incorrect_message(self, hints_used: int, language: str) -> str:
         """Return a supportive nudge after an incorrect answer.

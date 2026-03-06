@@ -15,6 +15,7 @@ from src.models.cost_record import CostRecord
 from src.models.message_template import MessageCategory, MessageTemplate
 from src.models.problem import Hint, Problem
 from src.models.response import Response
+from src.models.sent_message import SentMessage
 from src.models.session import Session
 from src.models.streak import Streak
 from src.models.student import Student
@@ -26,6 +27,7 @@ __all__ = [
     "MessageTemplate",
     "Problem",
     "Response",
+    "SentMessage",
     "Session",
     "Streak",
     "Student",

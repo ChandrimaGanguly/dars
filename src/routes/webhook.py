@@ -8,7 +8,7 @@ Security (SEC-002):
 PHASE3-B-4: Adds /practice, /hint, and free-text answer routing.
 """
 
-from datetime import date
+from datetime import UTC, date, datetime, timedelta
 
 from fastapi import APIRouter, Depends
 from sqlalchemy import select
@@ -19,6 +19,7 @@ from src.database import get_session
 from src.logging import get_logger
 from src.models.response import Response
 from src.models.session import Session, SessionStatus
+from src.models.streak import Streak
 from src.models.student import Student
 from src.repositories import ProblemRepository, ResponseRepository, SessionRepository
 from src.repositories.streak_repository import StreakRepository
@@ -39,6 +40,13 @@ logger = get_logger(__name__)
 # Maps telegram_id → {"session_id": int, "current_problem_id": int}
 # ---------------------------------------------------------------------------
 _active_sessions: dict[int, dict[str, int]] = {}
+
+# ---------------------------------------------------------------------------
+# Streak calendar constants (PHASE6-B-1 / REQ-010)
+# ---------------------------------------------------------------------------
+_MILESTONES: list[int] = [7, 14, 30]
+_DAY_NAMES_EN: list[str] = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+_DAY_NAMES_BN: list[str] = ["সোম", "মঙ্গল", "বুধ", "বৃহ", "শুক্র", "শনি", "রবি"]
 
 
 # ---------------------------------------------------------------------------
@@ -371,6 +379,112 @@ async def handle_hint_command(telegram_id: int, db: AsyncSession) -> str:
     return f"Hint {next_hint_number}: {hint_text}\n({remaining} hints remaining)"
 
 
+def _format_streak_message(
+    streak: Streak | None,
+    last_7_days: list[date],
+    language: str,
+) -> str:
+    """Format streak data into a Telegram-friendly calendar view.
+
+    Renders current/longest streak, a 7-day ●/○ calendar, and the next
+    milestone countdown. Handles zero-streak and all-milestones-achieved
+    edge cases.
+
+    Args:
+        streak: Streak ORM object, or None if student has no streak row yet.
+        last_7_days: Dates (UTC) when student practiced in the last 7 days.
+        language: 'en' or 'bn'.
+
+    Returns:
+        Formatted multi-line message string.
+    """
+    current = streak.current_streak if streak is not None else 0
+    longest = streak.longest_streak if streak is not None else 0
+
+    if current == 0:
+        if language == "bn":
+            return "\U0001f4da প্রথম ধারা শুরু করো! আজকের অনুশীলন সম্পন্ন করো।"
+        return (
+            "\U0001f4da Start your first streak! Complete today's practice to begin your journey."
+        )
+
+    # Build 7-day calendar — use UTC date explicitly (Fix 1)
+    today = datetime.now(UTC).date()
+    practiced_set: set[date] = set(last_7_days)
+    day_names = _DAY_NAMES_BN if language == "bn" else _DAY_NAMES_EN
+    calendar_parts: list[str] = []
+    for offset in range(6, -1, -1):
+        d = today - timedelta(days=offset)
+        dot = "\u25cf" if d in practiced_set else "\u25cb"
+        name = day_names[d.weekday()]
+        calendar_parts.append(f"{name} {dot}")
+    calendar_row = "  ".join(calendar_parts)
+
+    # Next milestone
+    next_milestone = next((m for m in _MILESTONES if m > current), None)
+
+    if language == "bn":
+        # Literal Bengali Unicode — readable and spot-checkable without a decoder
+        # Note: দীর্ঘতম (longest) corrected from original \u09a6\u09c0\u09b0\u09cd\u09a6\u09a4\u09ae (দীর্দতম, a typo)
+        header = f"🔥 বর্তমান ধারা: {current} দিন\n⭐ দীর্ঘতম ধারা: {longest} দিন"
+        cal_header = "\n\n📅 গত ৭ দিন:\n"  # noqa: RUF001 — Bengali digit 7 is intentional
+        if next_milestone is not None:
+            days_away = next_milestone - current
+            milestone_line = (
+                f"\n\n🎯 পরবর্তী মাইলস্টোন: {next_milestone} দিন ({days_away} দিন বাকি!)"
+            )
+        else:
+            milestone_line = "\n\n🏆 সব মাইলস্টোন অর্জিত!"
+    else:
+        header = f"🔥 Current Streak: {current} days\n⭐ Longest Streak: {longest} days"
+        cal_header = "\n\n📅 Last 7 Days:\n"
+        if next_milestone is not None:
+            days_away = next_milestone - current
+            milestone_line = (
+                f"\n\n🎯 Next Milestone: {next_milestone} days ({days_away} days away!)"
+            )
+        else:
+            milestone_line = "\n\n🏆 All milestones achieved!"
+
+    return header + cal_header + calendar_row + milestone_line
+
+
+async def handle_streak_command(telegram_id: int, db: AsyncSession) -> str:
+    """Handle /streak Telegram command — formatted calendar view.
+
+    Fetches the student's streak data and the last 7 practice days, then
+    returns a human-readable calendar view (REQ-010).
+
+    Args:
+        telegram_id: Telegram user ID.
+        db: Async database session.
+
+    Returns:
+        Formatted streak message string.
+    """
+    result = await db.execute(select(Student).where(Student.telegram_id == telegram_id))
+    student = result.scalar_one_or_none()
+    if student is None:
+        # Fix 3: bilingual — language unknown for unregistered users
+        return (
+            "Student not found. Please type /start to register.\n"
+            "আপনাকে খুঁজে পাওয়া যাচ্ছে না। /start লিখে নিবন্ধন করুন।"
+        )
+
+    streak_repo = StreakRepository()
+    streak = await streak_repo.get_for_student(db, student.student_id)
+    # Skip get_last_7_days on zero-streak path — _format_streak_message doesn't use it
+    current = streak.current_streak if streak else 0
+    last_7_days = await streak_repo.get_last_7_days(db, student.student_id) if current > 0 else []
+
+    logger.info(
+        "Handled /streak",
+        hashed_telegram_id=hash_telegram_id(telegram_id),
+        current_streak=streak.current_streak if streak else 0,
+    )
+    return _format_streak_message(streak, last_7_days, student.language)
+
+
 async def handle_unknown_message(telegram_id: int, text: str, student_language: str = "en") -> str:
     """Return a helpful response for unknown commands.
 
@@ -593,6 +707,10 @@ async def _handle_message(message: TelegramMessage, db: AsyncSession) -> None:
             "Handled /hint",
             hashed_telegram_id=hash_telegram_id(telegram_id),
         )
+
+    elif text.startswith("/streak"):
+        reply = await handle_streak_command(telegram_id, db)
+        await telegram.send_message(chat_id, reply)
 
     elif telegram_id in _active_sessions:
         # Free-text message in active session → treat as answer

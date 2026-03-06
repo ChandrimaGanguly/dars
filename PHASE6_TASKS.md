@@ -1,7 +1,7 @@
 # Phase 6 Tasks: Engagement Completion — Reminders & UX Polish
 
 **Duration:** Week 5 (3-4 days of agent work across 3 parallel tracks)
-**Status:** ⬜ TODO
+**Status:** ✅ COMPLETE
 
 **Roadmap references:**
 - AGENT_ROADMAP.md → Phase 6 (Engagement & Habit Formation)
@@ -39,13 +39,13 @@
 
 | Task ID | Task | Owner | Duration | Blocked By | Blocks | Status |
 |---------|------|-------|----------|------------|--------|--------|
-| PHASE6-A-1 | Add APScheduler to pyproject.toml + app lifecycle | Maryam | 0.5 days | None | PHASE6-A-2 | ⬜ Todo |
-| PHASE6-A-2 | Daily reminder job: query + send (REQ-011) | Jodha | 1.5 days | PHASE6-A-1 | PHASE6-C-1 | ⬜ Todo |
-| PHASE6-B-1 | `/streak` Telegram command calendar view (REQ-010) | Jodha | 1 day | None | PHASE6-C-2 | ⬜ Todo |
-| PHASE6-B-2 | Non-repeat messages: SentMessage model + tracking | Maryam | 1 day | None | PHASE6-C-2 | ⬜ Todo |
-| PHASE6-C-1 | Integration tests: reminder flow | Noor | 1 day | PHASE6-A-2 | — | ⬜ Todo |
-| PHASE6-C-2 | Integration tests: streak Telegram UX + non-repeat | Noor | 0.5 days | PHASE6-B-1, PHASE6-B-2 | — | ⬜ Todo |
-| PHASE6-C-3 | Coverage gate: maintain ≥70% | Noor | ongoing | All | — | ⬜ Todo |
+| PHASE6-A-1 | Add APScheduler to pyproject.toml + app lifecycle | Maryam | 0.5 days | None | PHASE6-A-2 | ✅ Done |
+| PHASE6-A-2 | Daily reminder job: query + send (REQ-011) | Jodha | 1.5 days | PHASE6-A-1 | PHASE6-C-1 | ✅ Done |
+| PHASE6-B-1 | `/streak` Telegram command calendar view (REQ-010) | Jodha | 1 day | None | PHASE6-C-2 | ✅ Done |
+| PHASE6-B-2 | Non-repeat messages: SentMessage model + tracking | Maryam | 1 day | None | PHASE6-C-2 | ✅ Done |
+| PHASE6-C-1 | Integration tests: reminder flow | Noor | 1 day | PHASE6-A-2 | — | ✅ Done |
+| PHASE6-C-2 | Integration tests: streak Telegram UX + non-repeat | Noor | 0.5 days | PHASE6-B-1, PHASE6-B-2 | — | ✅ Done |
+| PHASE6-C-3 | Coverage gate: maintain ≥70% | Noor | ongoing | All | — | ✅ Done |
 
 **Parallel tracks:**
 ```
@@ -396,25 +396,25 @@ bash scripts/validate.sh
 By end of Phase 6, all of the following must be true:
 
 **REQ-011 (Streak Reminders):**
-- [ ] Scheduler fires daily at 12:30 UTC (6pm IST)
-- [ ] Students who have NOT practiced today receive a reminder
-- [ ] Students who HAVE practiced receive no reminder
-- [ ] streak=0 students get motivational message, not "at risk" message
-- [ ] Message uses student's language preference (en/bn)
-- [ ] Send failures logged, do not crash scheduler
+- [x] Scheduler fires daily at 12:30 UTC (6pm IST)
+- [x] Students who have NOT practiced today receive a reminder
+- [x] Students who HAVE practiced receive no reminder
+- [x] streak=0 students get motivational message, not "at risk" message
+- [x] Message uses student's language preference (en/bn)
+- [x] Send failures logged, do not crash scheduler
 
 **REQ-010 (Streak Display UX):**
-- [ ] Telegram `/streak` command shows calendar view (●/○ for last 7 days)
-- [ ] Shows "Next milestone: X days (Y days away!)"
-- [ ] Zero-streak shows "Start your first streak!" message
-- [ ] Both languages display correctly
+- [x] Telegram `/streak` command shows calendar view (●/○ for last 7 days)
+- [x] Shows "Next milestone: X days (Y days away!)"
+- [x] Zero-streak shows "Start your first streak!" message
+- [x] Both languages display correctly
 
 **REQ-013 (Non-Repeat Messages):**
-- [ ] Same encouragement message key not sent twice in 7 days to same student
-- [ ] SentMessage rows written after each encouragement sent
-- [ ] Old rows (>7 days) ignored without deletion
+- [x] Same encouragement message key not sent twice in 7 days to same student
+- [x] SentMessage rows written after each encouragement sent
+- [x] Old rows (>7 days) ignored without deletion
 
 **Pipeline:**
-- [ ] All 7 pre-commit stages pass
-- [ ] All new tests pass
-- [ ] Coverage ≥70% maintained
+- [x] All 7 pre-commit stages pass
+- [x] All new tests pass
+- [x] Coverage ≥70% maintained (76%)

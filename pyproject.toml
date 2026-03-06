@@ -21,6 +21,7 @@ dependencies = [
     "pydantic-settings>=2.0.0",
     "python-dotenv>=1.0.0",
     "slowapi>=0.1.9",  # Rate limiting (SEC-005)
+    "apscheduler>=3.10.0,<4.0",  # Background scheduler for daily reminders (PHASE6-A-1)
 ]
 
 [project.optional-dependencies]
@@ -120,6 +121,10 @@ ignore_missing_imports = true
 
 [[tool.mypy.overrides]]
 module = "anthropic.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "apscheduler.*"
 ignore_missing_imports = true
 
 # Pytest configuration

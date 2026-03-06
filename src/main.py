@@ -19,6 +19,7 @@ from src.database import check_connection, get_engine
 from src.errors.handlers import register_exception_handlers
 from src.logging import get_logger
 from src.routes import admin, health, practice, streak, student, webhook
+from src.scheduler import start_scheduler, stop_scheduler
 
 logger = get_logger(__name__)
 
@@ -58,12 +59,18 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
     if not settings.anthropic_api_key:
         logger.warning("Anthropic API key not configured")
 
+    # Start background scheduler (daily reminders)
+    start_scheduler()
+
     logger.info("Dars API startup complete")
 
     yield
 
     # SHUTDOWN
     logger.info("Dars API shutting down...")
+
+    # Stop background scheduler
+    stop_scheduler()
 
     # Close database connections
     engine = get_engine()
