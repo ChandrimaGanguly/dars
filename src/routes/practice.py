@@ -37,6 +37,7 @@ from src.schemas.practice import (
 from src.services.answer_evaluator import AnswerEvaluator
 from src.services.cost_tracker import CostTracker
 from src.services.encouragement import EncouragementService
+from src.services.hint_state import hint_generator as _hint_generator
 from src.services.problem_selector import ProblemSelector
 from src.utils.pii import hash_telegram_id, redact_answer
 
@@ -164,8 +165,6 @@ async def get_practice_problems(
     Raises:
         HTTPException: If student not found or problem selection fails.
     """
-    # TODO C-1: add verify_session_owner Depends (Noor wires full session auth)
-
     student = await _get_student_by_telegram_id(db, student_id)
 
     problem_repo = ProblemRepository()
@@ -290,8 +289,6 @@ async def submit_answer(
             - 403 if session belongs to a different student
             - 410 if session has expired
     """
-    # TODO C-1: add verify_session_owner Depends (Noor wires full session auth)
-
     student = await _get_student_by_telegram_id(db, student_id)
 
     problem_repo = ProblemRepository()
@@ -416,11 +413,12 @@ async def request_hint(
     student_id: int = Depends(verify_student),  # SEC-003: Database verification
     db: AsyncSession = Depends(get_session),
 ) -> HintResponse:
-    """Request a pre-written Socratic hint for a problem.
+    """Deliver the next Socratic hint via Claude Haiku (cached + fallback).
 
-    Returns the stored hint for the requested level. Maximum 3 hints
-    per problem. This endpoint serves pre-written hints from the database
-    (Claude-generated hints are deferred to Phase 4).
+    Calls Claude Haiku with a Socratic prompt; serves from the shared
+    HintCache on repeat requests; falls back to pre-written hints when
+    the API key is absent, the daily rate limit is reached, or all
+    retries fail. Maximum 3 hints per problem.
 
     Security (SEC-005):
     - Rate limited to 10 requests/day per student
@@ -444,8 +442,6 @@ async def request_hint(
             - 410 if session expired
             - 429 if rate limit exceeded
     """
-    # TODO C-1: add verify_session_owner Depends (Noor wires full session auth)
-
     student = await _get_student_by_telegram_id(db, student_id)
 
     problem_repo = ProblemRepository()
@@ -486,21 +482,23 @@ async def request_hint(
     if hints_already_used >= 3:
         raise HTTPException(status_code=400, detail="ERR_HINT_LIMIT_EXCEEDED")
 
-    # Idempotent: if student is requesting a hint they've already seen, return it
-    hints = problem.get_hints()
-    hint_index = request.hint_number - 1
+    # Generate hint via Claude Haiku (with cache + fallback) — PHASE5-B-2
+    hint_text, is_ai, in_tok, out_tok = await _hint_generator.get_hint(
+        db=db,
+        problem=problem,
+        student_answer="",  # REST endpoint doesn't carry last answer; use empty
+        hint_number=request.hint_number,
+        student_id=student.student_id,
+        language=student.language,
+    )
 
-    if hint_index >= len(hints):
+    if not hint_text:
         raise HTTPException(
             status_code=400,
             detail=f"Hint {request.hint_number} not available for this problem",
         )
 
-    hint_obj = hints[hint_index]
-    hint_dict = hint_obj.to_dict()
-    hint_text = hint_dict["text_bn"] if student.language == "bn" else hint_dict["text_en"]
-
-    # Create response stub if first interaction, or update hint count
+    # Create response stub if first interaction
     if existing_response is None:
         existing_response = await response_repo.create_response(
             db=db,
@@ -515,13 +513,26 @@ async def request_hint(
 
     # Only increment hint count if this is a new hint level
     if request.hint_number > hints_already_used:
+        hint_dict = {
+            "text_en": hint_text if student.language == "en" else "",
+            "text_bn": hint_text if student.language == "bn" else "",
+            "hint_number": request.hint_number,
+        }
         await response_repo.update_hint_count(
             db, existing_response, hints_already_used + 1, hint_dict
         )
 
-    # Record cost (Phase 3 stub: cost_usd=0.00 for pre-written hints)
+    # Record cost with real token data when AI-generated
     cost_tracker = CostTracker()
-    await cost_tracker.record_hint_cost(db, student.student_id, problem_id, request.hint_number)
+    await cost_tracker.record_hint_cost(
+        db,
+        student.student_id,
+        request.session_id,
+        request.hint_number,
+        is_ai_generated=is_ai,
+        input_tokens=in_tok,
+        output_tokens=out_tok,
+    )
     await cost_tracker.check_budget_alert(db, student.student_id)
 
     await db.commit()

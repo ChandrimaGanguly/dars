@@ -27,6 +27,7 @@ from src.services import StudentService, TelegramClient
 from src.services.answer_evaluator import AnswerEvaluator, EvaluationResult
 from src.services.cost_tracker import CostTracker
 from src.services.encouragement import EncouragementService
+from src.services.hint_state import hint_generator as _hint_generator
 from src.services.problem_selector import ProblemSelector
 from src.utils.pii import hash_telegram_id, redact_answer
 
@@ -314,17 +315,22 @@ async def handle_hint_command(telegram_id: int, db: AsyncSession) -> str:
         return "You have used all 3 hints for this problem."
 
     next_hint_number = hints_already_used + 1
-    hints = problem.get_hints()
-    hint_index = next_hint_number - 1
 
-    if hint_index >= len(hints):
-        return "কোনো hint পাওয়া যায়নি।"
+    # Capture primitives before any await that could expire ORM objects
+    student_id = student.student_id
+    student_language = student.language
 
-    hint_obj = hints[hint_index]
-    hint_dict = hint_obj.to_dict()
-    hint_text = hint_dict["text_bn"] if student.language == "bn" else hint_dict["text_en"]
+    # Generate hint via AI (with cache + fallback) — PHASE5-B-2
+    hint_text, is_ai, in_tok, out_tok = await _hint_generator.get_hint(
+        db=db,
+        problem=problem,
+        student_answer="",
+        hint_number=next_hint_number,
+        student_id=student_id,
+        language=student_language,
+    )
 
-    # Create or update response with hint count
+    # Create or update response with hint count (idempotent — only on new level)
     if existing_response is None:
         existing_response = await response_repo.create_response(
             db=db,
@@ -337,16 +343,26 @@ async def handle_hint_command(telegram_id: int, db: AsyncSession) -> str:
             confidence_level="high",
         )
 
-    await response_repo.update_hint_count(db, existing_response, next_hint_number, hint_dict)
+    if next_hint_number > hints_already_used:
+        hint_dict = {
+            "text_en": hint_text if student_language == "en" else "",
+            "text_bn": hint_text if student_language == "bn" else "",
+        }
+        await response_repo.update_hint_count(db, existing_response, next_hint_number, hint_dict)
 
     # Record cost
     cost_tracker = CostTracker()
     await cost_tracker.record_hint_cost(
-        db, student.student_id, current_problem_id, next_hint_number
+        db,
+        student_id,
+        session_id,
+        next_hint_number,
+        is_ai_generated=is_ai,
+        input_tokens=in_tok,
+        output_tokens=out_tok,
     )
-    await cost_tracker.check_budget_alert(db, student.student_id)
+    await cost_tracker.check_budget_alert(db, student_id)
 
-    student_language = student.language  # capture before commit
     await db.commit()
 
     remaining = 3 - next_hint_number
