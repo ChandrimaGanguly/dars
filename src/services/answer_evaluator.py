@@ -43,6 +43,11 @@ _ARABIC_COMMA = re.compile(r"[،,٬]")
 # Letter-to-index mapping for multiple choice
 _MC_LETTER_MAP: dict[str, int] = {"a": 0, "b": 1, "c": 2, "d": 3}
 
+# Bengali (Bangla) digit to ASCII digit translation table (U+09E6..U+09EF)
+_BENGALI_TO_ASCII = str.maketrans(
+    "\u09e6\u09e7\u09e8\u09e9\u09ea\u09eb\u09ec\u09ed\u09ee\u09ef", "0123456789"
+)
+
 
 @dataclass
 class EvaluationResult:
@@ -99,11 +104,19 @@ class AnswerEvaluator:
         confidence = self._derive_confidence(hints_used)
         normalized = self._normalize_answer(student_answer)
 
+        # Format hint messages are answer-type-aware
+        if answer_type == "multiple_choice":
+            format_hint_en = "Please enter A, B, C, or D."
+            format_hint_bn = "অনুগ্রহ করে A, B, C বা D লেখো।"
+        else:
+            format_hint_en = "Please write just the number."
+            format_hint_bn = "শুধু সংখ্যাটা লেখো।"
+
         if not normalized:
             return EvaluationResult(
                 is_correct=False,
-                feedback_en="Please write just the number.",
-                feedback_bn="শুধু সংখ্যাটা লেখো।",
+                feedback_en=format_hint_en,
+                feedback_bn=format_hint_bn,
                 normalized_answer="",
                 confidence_level=confidence,
                 answer_format_valid=False,
@@ -123,8 +136,8 @@ class AnswerEvaluator:
         if not format_valid:
             return EvaluationResult(
                 is_correct=False,
-                feedback_en="Please write just the number.",
-                feedback_bn="শুধু সংখ্যাটা লেখো।",
+                feedback_en=format_hint_en,
+                feedback_bn=format_hint_bn,
                 normalized_answer=normalized,
                 confidence_level=confidence,
                 answer_format_valid=False,
@@ -258,6 +271,9 @@ class AnswerEvaluator:
             return ""
 
         text = raw.strip()
+
+        # Convert Bengali digits to ASCII (e.g., "৩" → "3")
+        text = text.translate(_BENGALI_TO_ASCII)
 
         # Remove currency symbols
         text = _CURRENCY_SYMBOLS.sub("", text)

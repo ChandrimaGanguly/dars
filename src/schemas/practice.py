@@ -37,6 +37,9 @@ class PracticeResponse(BaseModel):
     problems: list[ProblemWithoutAnswer] = Field(..., description="List of 5 problems")
     problem_count: int = Field(..., description="Number of problems", examples=[5])
     expires_at: datetime = Field(..., description="Session expiration time")
+    session_start_message: str | None = Field(
+        None, description="Motivational session-start message with topic preview"
+    )
 
 
 class AnswerRequest(BaseModel):

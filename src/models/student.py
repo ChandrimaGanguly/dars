@@ -69,6 +69,14 @@ class Student(Base, TimestampMixin):
         comment="Preferred language (bn=Bengali, en=English)",
     )
 
+    difficulty_level: Mapped[int] = mapped_column(
+        Integer,
+        nullable=False,
+        server_default="1",
+        default=1,
+        comment="Current adaptive difficulty level (1=easy, 2=medium, 3=hard; REQ-004)",
+    )
+
     # Relationships
     sessions: Mapped[list["Session"]] = relationship(
         "Session",
@@ -102,6 +110,10 @@ class Student(Base, TimestampMixin):
             "language IN ('bn', 'en')",
             name="ck_students_language_valid",
         ),
+        CheckConstraint(
+            "difficulty_level IN (1, 2, 3)",
+            name="ck_students_difficulty_level_valid",
+        ),
         Index("idx_students_telegram_id", "telegram_id"),
         Index("idx_students_grade", "grade"),
     )
@@ -110,5 +122,6 @@ class Student(Base, TimestampMixin):
         """String representation of Student."""
         return (
             f"<Student(id={self.student_id}, telegram_id={self.telegram_id}, "
-            f"name='{self.name}', grade={self.grade}, language='{self.language}')>"
+            f"name='{self.name}', grade={self.grade}, language='{self.language}', "
+            f"difficulty_level={self.difficulty_level})>"
         )

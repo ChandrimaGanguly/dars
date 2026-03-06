@@ -66,7 +66,7 @@ This project is documented across three interrelated documents:
 | **1** | 1 | Backend foundation | Telegram bot responds, DB connected | 6 core | 3 |
 | **2** | 1-2 | Content curation | 280 problems in DB | 3 content | 2+human |
 | **3** | 2-3 | Core learning | Student completes 5-problem session | 4 learning | 3 |
-| **4** | 3-4 | Smart difficulty | Problems get harder/easier adaptively | 2 algo | 2 |
+| **4** | 3-4 | Smart difficulty ✅ | Problems get harder/easier adaptively | 7 reqs | 4 |
 | **5** | 4 | AI-powered hints | Student gets Socratic hint via Claude | 3 AI | 3 |
 | **6** | 5 | Engagement | Streaks, milestones, reminders | 5 gamification | 2 |
 | **7** | 5-6 | Localization & ops | Bengali language, cost tracking, monitoring | 4 operations | 2 |
@@ -147,9 +147,12 @@ WEEK 7-8
 - Answers evaluated correctly
 - Session persists across disconnections
 
-### Phase 4: Learning Personalizes
-- Difficulty adapts based on performance
-- Problems selected intelligently
+### Phase 4: Learning Personalizes ✅ COMPLETE (2026-03-05)
+- ✅ Difficulty adapts: upgrades after 2 strong sessions, downgrades after weak session
+- ✅ Problems filtered by student's `difficulty_level` (1=easy, 2=medium, 3=hard)
+- ✅ Streak tracking live: increments on session complete, milestones at 7/14/30 days
+- ✅ `/streak` returns real DB data; bilingual encouragement on session complete
+- ✅ 419 tests passing (75% coverage)
 
 ### Phase 5: Hints Work
 - Claude API integration stable

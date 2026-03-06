@@ -13,6 +13,8 @@ Security (SEC-003, SEC-005):
 PHASE3-B-3
 """
 
+from datetime import date
+
 from fastapi import APIRouter, Depends, HTTPException, Request
 from slowapi import Limiter
 from sqlalchemy import select
@@ -23,6 +25,7 @@ from src.database import get_session
 from src.logging import get_logger
 from src.models.student import Student
 from src.repositories import ProblemRepository, ResponseRepository, SessionRepository
+from src.repositories.streak_repository import StreakRepository
 from src.schemas.practice import (
     AnswerRequest,
     AnswerResponse,
@@ -33,6 +36,7 @@ from src.schemas.practice import (
 )
 from src.services.answer_evaluator import AnswerEvaluator
 from src.services.cost_tracker import CostTracker
+from src.services.encouragement import EncouragementService
 from src.services.problem_selector import ProblemSelector
 from src.utils.pii import hash_telegram_id, redact_answer
 
@@ -73,6 +77,42 @@ async def _get_student_by_telegram_id(db: AsyncSession, telegram_id: int) -> Stu
     if not student:
         raise HTTPException(status_code=404, detail="Student not found")
     return student
+
+
+def _cached_answer_response(
+    existing_response: "Response",  # type: ignore[name-defined]  # noqa: F821
+    session: "Session",  # type: ignore[name-defined]  # noqa: F821
+    next_id: int | None,
+    language: str,
+) -> AnswerResponse:
+    """Return a cached AnswerResponse for a problem the student already answered.
+
+    Args:
+        existing_response: The already-persisted Response row.
+        session: The practice Session (for problem ordering).
+        next_id: Next unanswered problem ID (or None if session complete).
+        language: Student's preferred language ('en' or 'bn').
+
+    Returns:
+        AnswerResponse with cached correctness and language-appropriate feedback.
+    """
+    if language == "bn":
+        feedback = (
+            "সঠিক! \u2705 শাবাশ!"
+            if existing_response.is_correct
+            else "ঠিক হয়নি। আবার চেষ্টা করো বা hint চাও।"
+        )
+    else:
+        feedback = (
+            "Correct! \u2705 Well done!"
+            if existing_response.is_correct
+            else "Not quite. Try again or ask for a hint."
+        )
+    return AnswerResponse(
+        is_correct=existing_response.is_correct,
+        feedback_text=feedback,
+        next_problem_id=next_id,
+    )
 
 
 def _problem_to_schema(problem: "Problem") -> ProblemWithoutAnswer:  # type: ignore[name-defined]  # noqa: F821
@@ -153,6 +193,7 @@ async def get_practice_problems(
                 problems=[],
                 problem_count=0,
                 expires_at=existing.expires_at,
+                session_start_message=None,
             )
 
         if existing.status == SessionStatus.IN_PROGRESS:
@@ -170,17 +211,28 @@ async def get_practice_problems(
                 problems=[_problem_to_schema(p) for p in remaining_problems],
                 problem_count=len(remaining_problems),
                 expires_at=existing.expires_at,
+                session_start_message=None,
             )
 
-    # No existing session — run selection algorithm
+    # No existing session — run selection algorithm with adaptive difficulty
+    difficulty_level = student.difficulty_level  # REQ-004: read before commit expires attrs
     selector = ProblemSelector(problem_repo, response_repo)
-    selected_problems = await selector.select_problems(db, student.student_id, student.grade)
+    selected_problems = await selector.select_problems(
+        db, student.student_id, student.grade, difficulty_level=difficulty_level
+    )
 
     if not selected_problems:
         raise HTTPException(
             status_code=404,
             detail="No problems found for your grade level. Please contact your teacher.",
         )
+
+    # Build session-start encouragement message
+    topics = list({p.topic for p in selected_problems})
+    student_language = student.language
+    start_message = EncouragementService().get_session_start_message(
+        grade=student.grade, topics=topics, language=student_language
+    )
 
     # Create new session
     problem_ids = [p.problem_id for p in selected_problems]
@@ -195,6 +247,7 @@ async def get_practice_problems(
         hashed_telegram_id=hashed_tid,
         session_id=new_session_id,
         problem_count=len(selected_problems),
+        difficulty_level=difficulty_level,
     )
 
     return PracticeResponse(
@@ -202,6 +255,7 @@ async def get_practice_problems(
         problems=[_problem_to_schema(p) for p in selected_problems],
         problem_count=len(selected_problems),
         expires_at=new_expires_at,
+        session_start_message=start_message,
     )
 
 
@@ -275,30 +329,7 @@ async def submit_answer(
             (pid for pid in session.problem_ids if pid not in answered_ids),
             None,
         )
-        feedback = (
-            "সঠিক! ✅ শাবাশ!"
-            if existing_response.is_correct
-            else (
-                "ঠিক হয়নি। আবার চেষ্টা করো বা hint চাও।"
-                if student.language == "bn"
-                else (
-                    "Correct! ✅ Well done!"
-                    if existing_response.is_correct
-                    else "Not quite. Try again or ask for a hint."
-                )
-            )
-        )
-        if student.language != "bn":
-            feedback = (
-                "Correct! ✅ Well done!"
-                if existing_response.is_correct
-                else "Not quite. Try again or ask for a hint."
-            )
-        return AnswerResponse(
-            is_correct=existing_response.is_correct,
-            feedback_text=feedback,
-            next_problem_id=next_id,
-        )
+        return _cached_answer_response(existing_response, session, next_id, student.language)
 
     # Fetch problem
     problem = await problem_repo.get_problem_by_id(db, problem_id)
@@ -345,8 +376,20 @@ async def submit_answer(
     )
 
     # Complete session if all problems answered
+    milestone_msg = ""
     if next_id is None:
         await session_repo.mark_session_complete(db, session)
+        # Record streak practice (flush inside, commit below)
+        _, new_milestones = await StreakRepository().record_practice(
+            db, student.student_id, date.today()
+        )
+        # Build milestone message (captured before commit)
+        if new_milestones:
+            enc = EncouragementService()
+            lang = student.language
+            milestone_msg = "\n\n" + "\n".join(
+                enc.get_milestone_message(m, lang) for m in new_milestones
+            )
 
     await db.commit()
 
@@ -355,7 +398,7 @@ async def submit_answer(
 
     return AnswerResponse(
         is_correct=result.is_correct,
-        feedback_text=feedback,
+        feedback_text=feedback + milestone_msg,
         next_problem_id=next_id,
     )
 

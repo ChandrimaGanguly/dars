@@ -171,6 +171,7 @@ class ProblemSelector:
         db: AsyncSession,
         student_id: int,
         grade: int,
+        difficulty_level: int = 0,
         problem_repo: ProblemRepository | None = None,
         response_repo: ResponseRepository | None = None,
     ) -> list[Problem]:
@@ -182,6 +183,9 @@ class ProblemSelector:
         Args:
             student_id: Primary key of the student.
             grade: Grade level (6, 7, or 8).
+            difficulty_level: Student's adaptive difficulty level (1-3).
+                When >0, only problems with difficulty ≤ difficulty_level are
+                considered. 0 means no filtering (backward-compatible default).
             db: Active async database session.
             problem_repo: Repository for fetching problems.
             response_repo: Repository for fetching student responses.
@@ -201,6 +205,10 @@ class ProblemSelector:
 
         # Fetch all problems for this grade (single query)
         problems = await p_repo.get_by_grade(db=db, grade=grade)
+
+        # Filter by adaptive difficulty level when specified (REQ-004)
+        if difficulty_level > 0:
+            problems = [p for p in problems if p.difficulty <= difficulty_level]
 
         if not problems:
             logger.info("No problems found for grade %d (student_id=%d)", grade, student_id)

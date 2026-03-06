@@ -8,6 +8,8 @@ Security (SEC-002):
 PHASE3-B-4: Adds /practice, /hint, and free-text answer routing.
 """
 
+from datetime import date
+
 from fastapi import APIRouter, Depends
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -19,10 +21,12 @@ from src.models.response import Response
 from src.models.session import Session, SessionStatus
 from src.models.student import Student
 from src.repositories import ProblemRepository, ResponseRepository, SessionRepository
+from src.repositories.streak_repository import StreakRepository
 from src.schemas.telegram import TelegramMessage, TelegramUpdate, WebhookResponse
 from src.services import StudentService, TelegramClient
 from src.services.answer_evaluator import AnswerEvaluator, EvaluationResult
 from src.services.cost_tracker import CostTracker
+from src.services.encouragement import EncouragementService
 from src.services.problem_selector import ProblemSelector
 from src.utils.pii import hash_telegram_id, redact_answer
 
@@ -210,6 +214,21 @@ async def handle_answer_message(telegram_id: int, text: str, db: AsyncSession) -
         correct = session.problems_correct  # capture before commit
         total = len(session.problem_ids)  # capture before commit
         student_language = student.language  # capture before commit
+        student_id_int = student.student_id  # capture before commit
+
+        # Record streak practice (flush inside, commit below covers it)
+        _, new_milestones = await StreakRepository().record_practice(
+            db, student_id_int, date.today()
+        )
+
+        # Build milestone messages before commit
+        milestone_msg = ""
+        if new_milestones:
+            enc = EncouragementService()
+            milestone_msg = "\n" + "\n".join(
+                enc.get_milestone_message(m, student_language) for m in new_milestones
+            )
+
         await db.commit()
         _active_sessions.pop(telegram_id, None)
 
@@ -217,12 +236,12 @@ async def handle_answer_message(telegram_id: int, text: str, db: AsyncSession) -
             return (
                 f"{feedback}\n\n"
                 f"অনুশীলন শেষ! তুমি {total}টির মধ্যে {correct}টি সঠিক করেছ। "
-                f"\U0001f3c6 কাল আবার এসো!"
+                f"\U0001f3c6 কাল আবার এসো!{milestone_msg}"
             )
         return (
             f"{feedback}\n\n"
             f"Practice complete! You got {correct}/{total} correct. "
-            f"\U0001f3c6 See you tomorrow!"
+            f"\U0001f3c6 See you tomorrow!{milestone_msg}"
         )
 
     # Move to next problem

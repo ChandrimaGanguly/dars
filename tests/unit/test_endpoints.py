@@ -366,11 +366,15 @@ class TestPracticeEndpoints:
             patch("src.routes.practice.ProblemRepository") as MockProblemRepo,
             patch("src.routes.practice.ResponseRepository") as MockResponseRepo,
             patch("src.routes.practice.AnswerEvaluator") as MockEvaluator,
+            patch("src.routes.practice.StreakRepository") as MockStreakRepo,
         ):
             mock_session_repo = MockSessionRepo.return_value
             mock_session_repo.get_session_by_id = AsyncMock(return_value=mock_sess)
             mock_session_repo.increment_correct_count = AsyncMock()
             mock_session_repo.mark_session_complete = AsyncMock()
+
+            mock_streak_repo = MockStreakRepo.return_value
+            mock_streak_repo.record_practice = AsyncMock(return_value=(MagicMock(), []))
 
             mock_problem_repo = MockProblemRepo.return_value
             mock_problem_repo.get_problem_by_id = AsyncMock(return_value=mock_problem)
@@ -453,18 +457,50 @@ class TestStreakEndpoint:
     """Tests for streak tracking endpoint."""
 
     def test_get_streak_requires_student_id(self) -> None:
-        """Streak endpoint should require X-Student-ID header."""
+        """Streak endpoint should return 401 when no student ID is provided."""
         response = client.get("/streak")
-        assert response.status_code == 422
+        assert response.status_code == 401
 
-    def test_get_streak_returns_streak_data(self) -> None:
-        """Streak endpoint should return streak information."""
-        response = client.get("/streak", headers={"X-Student-ID": "123"})
-        assert response.status_code == 200
-        data = response.json()
-        assert "current_streak" in data
-        assert "longest_streak" in data
-        assert "student_id" in data
+    def test_get_streak_returns_streak_data(self, mock_db: AsyncMock) -> None:
+        """Streak endpoint should return streak information from the database."""
+        from unittest.mock import MagicMock
+
+        from src.models.streak import Streak
+
+        mock_student = MagicMock()
+        mock_student.student_id = 1
+
+        mock_streak = MagicMock(spec=Streak)
+        mock_streak.current_streak = 5
+        mock_streak.longest_streak = 10
+        mock_streak.last_practice_date = None
+        mock_streak.milestones_achieved = [7]
+
+        app.dependency_overrides[get_session] = get_mock_db(mock_db)
+        app.dependency_overrides[verify_student] = get_mock_verify_student(123)
+
+        with (
+            patch(
+                "src.routes.streak._get_student_by_telegram_id",
+                new=AsyncMock(return_value=mock_student),
+            ),
+            patch("src.routes.streak.StreakRepository") as MockStreakRepo,
+        ):
+            mock_streak_repo = MockStreakRepo.return_value
+            mock_streak_repo.get_or_create = AsyncMock(return_value=mock_streak)
+
+            try:
+                response = client.get("/streak", headers={"X-Student-ID": "123"})
+                assert response.status_code == 200
+                data = response.json()
+                assert "current_streak" in data
+                assert "longest_streak" in data
+                assert "student_id" in data
+            finally:
+                if get_session in app.dependency_overrides:
+                    del app.dependency_overrides[get_session]
+                if verify_student in app.dependency_overrides:
+                    del app.dependency_overrides[verify_student]
 
 
 @pytest.mark.unit
