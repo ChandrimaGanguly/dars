@@ -87,10 +87,15 @@ def do_run_migrations(connection: Connection) -> None:
 
 async def run_async_migrations() -> None:
     """Run migrations in async mode."""
+    # Use SSL when connecting via public URL (Railway public endpoint requires it)
+    using_public_url = bool(os.getenv("DATABASE_PUBLIC_URL"))
+    connect_args = {"ssl": "require"} if using_public_url else {}
+
     connectable = async_engine_from_config(
         config.get_section(config.config_ini_section, {}),
         prefix="sqlalchemy.",
         poolclass=pool.NullPool,
+        connect_args=connect_args,
     )
 
     async with connectable.connect() as connection:
