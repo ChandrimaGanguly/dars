@@ -1,8 +1,16 @@
 #!/bin/sh
-# Log which DB host alembic will use (strip password for safety)
-db_url="${DATABASE_PUBLIC_URL:-${DATABASE_URL:-unset}}"
-db_host=$(echo "$db_url" | python3 -c "import sys,urllib.parse; u=urllib.parse.urlparse(sys.stdin.read().strip()); print(u.hostname, u.port)" 2>/dev/null)
-echo "Alembic target: $db_host"
+# Diagnose private networking
+echo "=== Network diagnostics ==="
+python3 -c "
+import socket
+for host in ['postgres.railway.internal', 'gondola.proxy.rlwy.net']:
+    try:
+        results = socket.getaddrinfo(host, 5432, type=socket.SOCK_STREAM)
+        print(f'DNS {host}: {[(r[0].name, r[4]) for r in results]}')
+    except Exception as e:
+        print(f'DNS {host}: FAILED - {e}')
+"
+echo "==========================="
 
 for i in 1 2 3; do
   echo "Alembic migration attempt $i..."
