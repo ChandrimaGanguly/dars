@@ -111,7 +111,6 @@ async def handle_practice_command(telegram_id: int, db: AsyncSession) -> str:
         if not remaining_ids:
             # All answered but not marked complete — edge case
             await session_repo.mark_session_complete(db, existing)
-            await db.commit()
             return get_message(MessageKey.ALREADY_COMPLETED, student.language)
 
         problems = await problem_repo.get_problems_by_ids(db, remaining_ids)
@@ -132,16 +131,15 @@ async def handle_practice_command(telegram_id: int, db: AsyncSession) -> str:
         return get_message(MessageKey.NO_PROBLEMS_FOUND, student.language)
 
     problem_ids = [p.problem_id for p in selected_problems]
-    first_problem_id = problem_ids[0]
+    first_problem = selected_problems[0]
     student_language = student.language
     num_selected = len(selected_problems)
     session = await session_repo.create_session(db, student.student_id, problem_ids)
-    new_session_id = session.session_id  # capture before commit expires session
-    await db.commit()
+    new_session_id = session.session_id  # capture before commit; auto-commit on exit
 
     _active_sessions[telegram_id] = {
         "session_id": new_session_id,
-        "current_problem_id": first_problem_id,
+        "current_problem_id": first_problem.problem_id,
     }
 
     logger.info(
@@ -150,10 +148,7 @@ async def handle_practice_command(telegram_id: int, db: AsyncSession) -> str:
         session_id=new_session_id,
     )
 
-    first_problem_fetched = await problem_repo.get_problem_by_id(db, first_problem_id)
-    if first_problem_fetched is None:
-        return get_message(MessageKey.NO_PROBLEMS_FOUND, student_language)
-    return _format_problem_message(first_problem_fetched, student_language, num_selected)
+    return _format_problem_message(first_problem, student_language, num_selected)
 
 
 async def handle_answer_message(telegram_id: int, text: str, db: AsyncSession) -> str:
@@ -255,7 +250,6 @@ async def handle_answer_message(telegram_id: int, text: str, db: AsyncSession) -
                 enc.get_milestone_message(m, student_language) for m in new_milestones
             )
 
-        await db.commit()
         _active_sessions.pop(telegram_id, None)
 
         if student_language == "bn":
@@ -272,9 +266,8 @@ async def handle_answer_message(telegram_id: int, text: str, db: AsyncSession) -
 
     # Move to next problem
     next_problem_id = remaining_ids[0]
-    student_language = student.language  # capture before commit
+    student_language = student.language  # capture before auto-commit
     next_problem = await problem_repo.get_problem_by_id(db, next_problem_id)
-    await db.commit()
 
     _active_sessions[telegram_id] = {
         "session_id": session_id,
@@ -284,7 +277,6 @@ async def handle_answer_message(telegram_id: int, text: str, db: AsyncSession) -
     if next_problem is None:
         return feedback
 
-    await db.refresh(next_problem)  # re-load expired object after commit
     remaining_count = len(remaining_ids)
     return f"{feedback}\n\n" + _format_problem_message(
         next_problem, student_language, remaining_count
@@ -389,8 +381,6 @@ async def handle_hint_command(telegram_id: int, db: AsyncSession) -> str:
         output_tokens=out_tok,
     )
     await cost_tracker.check_budget_alert(db, student_id)
-
-    await db.commit()
 
     remaining = 3 - next_hint_number
     if student_language == "bn":
@@ -653,8 +643,6 @@ async def handle_language_choice(telegram_id: int, text: str, db: AsyncSession) 
 
     student.language = new_language
     await db.flush()
-    await db.commit()
-    await db.refresh(student)
 
     _pending_language_choice.pop(telegram_id, None)
     logger.info(
