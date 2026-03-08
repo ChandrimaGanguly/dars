@@ -95,7 +95,9 @@ async def run_async_migrations() -> None:
         ssl_ctx = ssl.create_default_context()
         ssl_ctx.check_hostname = False
         ssl_ctx.verify_mode = ssl.CERT_NONE
-        connect_args: dict[str, object] = {"ssl": ssl_ctx}
+        # direct_tls=True: skip PostgreSQL SSLRequest negotiation and go straight
+        # to TLS — required for Railway's public proxy which uses direct TLS.
+        connect_args: dict[str, object] = {"ssl": ssl_ctx, "direct_tls": True}
     else:
         connect_args = {}
 
