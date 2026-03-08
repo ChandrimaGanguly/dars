@@ -807,8 +807,10 @@ async def telegram_webhook(
         if update.message and update.message.text:
             await _handle_message(update.message, db)
             message_id = update.message.message_id
-    except Exception as e:
-        logger.error("Error processing message", error=str(e), exc_info=True)
+    except Exception:
+        import traceback
+
+        logger.error("Error processing message: " + traceback.format_exc())
         # Still return 200 to avoid Telegram retrying endlessly
 
     return WebhookResponse(status="ok", message_id=message_id)
