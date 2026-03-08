@@ -5,7 +5,9 @@ Provides async PostgreSQL connection using SQLAlchemy 2.0+ with asyncpg.
 Handles connection pooling, session management, and environment configuration.
 """
 
+import logging
 import os
+import time
 from collections.abc import AsyncGenerator
 from typing import Any
 
@@ -18,6 +20,27 @@ from sqlalchemy.ext.asyncio import (
 from sqlalchemy.pool import AsyncAdaptedQueuePool, NullPool
 
 from src.models.base import Base
+
+_db_logger = logging.getLogger(__name__)
+_SLOW_COMMIT_MS: float = 200.0
+
+
+class _TimedSession(AsyncSession):
+    """AsyncSession subclass that logs slow commit operations."""
+
+    async def commit(self) -> None:
+        start = time.monotonic()
+        await super().commit()
+        elapsed_ms = (time.monotonic() - start) * 1000
+        if elapsed_ms > _SLOW_COMMIT_MS:
+            _db_logger.warning(
+                "slow_db_operation",
+                extra={
+                    "event": "db.slow_commit",
+                    "duration_ms": round(elapsed_ms, 1),
+                    "operation": "commit",
+                },
+            )
 
 
 def get_database_url() -> str:
@@ -117,7 +140,7 @@ def get_session_factory() -> async_sessionmaker[AsyncSession]:
     if _session_factory is None:
         _session_factory = async_sessionmaker(
             bind=get_engine(),
-            class_=AsyncSession,
+            class_=_TimedSession,
             expire_on_commit=False,
             autocommit=False,
             autoflush=False,

@@ -4,12 +4,31 @@ These tests verify the full end-to-end user flows work correctly,
 including database persistence and API interactions.
 """
 
+from unittest.mock import AsyncMock, patch
+
 import pytest
 from sqlalchemy import select
 
 from src.models.student import Student
-from src.routes.webhook import _handle_message
+from src.routes.webhook import _handle_message, _pending_onboarding
 from src.schemas.telegram import TelegramMessage
+
+
+def _make_message(telegram_id: int, text: str, name: str = "TestUser") -> TelegramMessage:
+    """Build a TelegramMessage for testing."""
+    return TelegramMessage.model_validate(
+        {
+            "message_id": 1,
+            "date": 1643129200,
+            "chat": {"id": telegram_id, "type": "private"},
+            "from": {
+                "id": telegram_id,
+                "is_bot": False,
+                "first_name": name,
+            },
+            "text": text,
+        }
+    )
 
 
 @pytest.mark.integration
@@ -17,27 +36,26 @@ class TestStudentOnboardingFlow:
     """Integration tests for student onboarding via /start command."""
 
     async def test_new_student_registration(self, db_session) -> None:
-        """Test that /start command correctly registers a new student."""
-        # Create test message (using model_validate for proper alias handling)
-        message = TelegramMessage.model_validate(
-            {
-                "message_id": 1,
-                "date": 1643129200,
-                "chat": {"id": 123456, "type": "private"},
-                "from": {
-                    "id": 987654321,
-                    "is_bot": False,
-                    "first_name": "TestUser",
-                },
-                "text": "/start",
-            }
-        )
+        """Test that /start → grade → language creates student in DB."""
+        telegram_id = 987654321
+        _pending_onboarding.pop(telegram_id, None)  # clean state
 
-        # Handle message
-        await _handle_message(message, db_session)
+        with patch("src.services.telegram_client.TelegramClient.send_message", new=AsyncMock()):
 
-        # Verify student created in database
-        result = await db_session.execute(select(Student).where(Student.telegram_id == 987654321))
+            # Step 1: /start → begins onboarding, student NOT yet created
+            await _handle_message(_make_message(telegram_id, "/start", "TestUser"), db_session)
+            result = await db_session.execute(
+                select(Student).where(Student.telegram_id == telegram_id)
+            )
+            assert result.scalar_one_or_none() is None  # not yet
+
+            # Step 2: choose grade
+            await _handle_message(_make_message(telegram_id, "7"), db_session)
+
+            # Step 3: choose language → student created
+            await _handle_message(_make_message(telegram_id, "1"), db_session)
+
+        result = await db_session.execute(select(Student).where(Student.telegram_id == telegram_id))
         student = result.scalar_one_or_none()
 
         assert student is not None

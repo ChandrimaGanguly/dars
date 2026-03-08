@@ -28,11 +28,20 @@ from src.services.cost_tracker import (
 # ---------------------------------------------------------------------------
 
 
-def _make_db() -> AsyncMock:
-    """Return a minimal mock AsyncSession with add() and flush() available."""
+def _make_db(mtd_cost: float = 0.0) -> AsyncMock:
+    """Return a minimal mock AsyncSession with add(), flush(), and execute() available.
+
+    Args:
+        mtd_cost: Simulated month-to-date cost returned by execute/scalar_one.
+                  Defaults to 0.0 (under budget — no alert).
+    """
     db = AsyncMock()
     db.add = MagicMock()  # synchronous add
     db.flush = AsyncMock()
+    # Mock execute so get_student_cost_this_month works during budget alert check
+    mock_result = MagicMock()
+    mock_result.scalar_one = MagicMock(return_value=mtd_cost)
+    db.execute = AsyncMock(return_value=mock_result)
     return db
 
 

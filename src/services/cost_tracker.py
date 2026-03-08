@@ -103,6 +103,18 @@ class CostTracker:
         # Flush so cost_id is populated and record survives disconnect
         await db.flush()
 
+        # PHASE7-C-1: Budget alert — warn if student has exceeded monthly ceiling
+        mtd_cost = await self.get_student_cost_this_month(db, student_id)
+        if mtd_cost > BUDGET_PER_STUDENT_USD:
+            logger.warning(
+                "cost_budget_exceeded",
+                extra={
+                    "student_id": student_id,
+                    "mtd_cost_usd": round(mtd_cost, 4),
+                    "budget_usd": BUDGET_PER_STUDENT_USD,
+                },
+            )
+
         logger.info(
             "Hint cost recorded",
             extra={

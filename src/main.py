@@ -7,9 +7,12 @@ registers all routers, and sets up middleware.
 import uuid
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
+from pathlib import Path
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse, HTMLResponse
+from fastapi.staticfiles import StaticFiles
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
 from slowapi.util import get_remote_address
@@ -20,6 +23,8 @@ from src.errors.handlers import register_exception_handlers
 from src.logging import get_logger
 from src.routes import admin, health, practice, streak, student, webhook
 from src.scheduler import start_scheduler, stop_scheduler
+
+_STATIC_DIR = Path(__file__).parent.parent / "static"
 
 logger = get_logger(__name__)
 
@@ -152,7 +157,7 @@ async def add_request_id(request: Request, call_next):  # type: ignore
     Returns:
         Response with X-Request-ID header.
     """
-    request_id = str(uuid.uuid4())
+    request_id = request.headers.get("X-Request-ID", str(uuid.uuid4()))
     request.state.request_id = request_id
 
     response = await call_next(request)
@@ -209,6 +214,20 @@ app.include_router(practice.router)
 app.include_router(streak.router)
 app.include_router(student.router)
 app.include_router(admin.router)
+
+# Serve static files (admin dashboard assets)
+if _STATIC_DIR.exists():
+    app.mount("/static", StaticFiles(directory=str(_STATIC_DIR)), name="static")
+
+
+@app.get("/admin/dashboard", response_class=HTMLResponse, tags=["Admin"], include_in_schema=False)
+async def admin_dashboard() -> FileResponse:
+    """Serve the admin web dashboard.
+
+    Returns:
+        HTML admin dashboard page.
+    """
+    return FileResponse(str(_STATIC_DIR / "admin" / "index.html"))
 
 
 # Root endpoint

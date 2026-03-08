@@ -1,7 +1,7 @@
 """Unit tests for API endpoints."""
 
 import os
-from unittest.mock import AsyncMock, patch
+from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 from fastapi.testclient import TestClient
@@ -507,6 +507,45 @@ class TestStreakEndpoint:
 class TestStudentEndpoints:
     """Tests for student profile endpoints."""
 
+    def _make_mock_student(self) -> MagicMock:
+        from datetime import UTC, datetime
+
+        s = MagicMock()
+        s.student_id = 1
+        s.telegram_id = 123
+        s.name = "Test Student"
+        s.grade = 7
+        s.language = "en"
+        s.created_at = datetime.now(UTC)
+        s.updated_at = datetime.now(UTC)
+        return s
+
+    def setup_method(self) -> None:
+        """Override get_session with a mock that returns a test student."""
+        mock_student = self._make_mock_student()
+
+        # First execute() call: Student lookup → scalar_one_or_none() returns mock_student
+        # Subsequent execute() calls: Streak/other lookups → scalar_one_or_none() returns None
+        student_result = MagicMock()
+        student_result.scalar_one_or_none = MagicMock(return_value=mock_student)
+        none_result = MagicMock()
+        none_result.scalar_one_or_none = MagicMock(return_value=None)
+
+        mock_db = AsyncMock()
+        mock_db.execute = AsyncMock(
+            side_effect=[student_result, none_result, student_result, none_result]
+        )
+        mock_db.scalar = AsyncMock(return_value=0)
+        mock_db.flush = AsyncMock()
+        mock_db.commit = AsyncMock()
+        mock_db.refresh = AsyncMock(side_effect=lambda _: None)
+
+        app.dependency_overrides[get_session] = get_mock_db(mock_db)
+
+    def teardown_method(self) -> None:
+        """Remove get_session override after each test."""
+        app.dependency_overrides.pop(get_session, None)
+
     def test_get_profile_requires_student_id(self) -> None:
         """Profile endpoint should require X-Student-ID header."""
         response = client.get("/student/profile")
@@ -547,6 +586,21 @@ class TestAdminEndpoints:
 
     Tests verify admin authentication is enforced on all admin endpoints.
     """
+
+    def setup_method(self) -> None:
+        """Override get_session for all admin endpoint tests with a zero-data mock."""
+        mock_db = AsyncMock()
+        # scalar() returns None so all `or 0` / None-guard paths yield zero values
+        mock_db.scalar = AsyncMock(return_value=None)
+        # execute() returns a result whose .all() yields an empty list (no students)
+        mock_exec = MagicMock()
+        mock_exec.all.return_value = []
+        mock_db.execute = AsyncMock(return_value=mock_exec)
+        app.dependency_overrides[get_session] = get_mock_db(mock_db)
+
+    def teardown_method(self) -> None:
+        """Remove get_session override after each test."""
+        app.dependency_overrides.pop(get_session, None)
 
     def test_admin_stats_requires_admin_id(self) -> None:
         """Admin stats should require X-Admin-ID header.
@@ -642,9 +696,9 @@ class TestAdminEndpoints:
         assert response.status_code == 200
         data = response.json()
         assert "period" in data
-        assert "total_cost" in data
-        assert "per_student_cost" in data
-        assert "alert" in data
+        assert "total_cost_usd" in data
+        assert "per_student_avg_usd" in data
+        assert "budget_alert" in data
 
     def test_admin_cost_validates_period(self, monkeypatch: pytest.MonkeyPatch) -> None:
         """Admin cost should validate period parameter."""

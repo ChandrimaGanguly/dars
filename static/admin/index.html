@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dars Admin Dashboard</title>
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <style>
+    body { background: #f8f9fa; }
+    .stat-card { border-left: 4px solid #0d6efd; }
+    .stat-card.green { border-left-color: #198754; }
+    .stat-card.yellow { border-left-color: #ffc107; }
+    .stat-card.red { border-left-color: #dc3545; }
+    .stat-value { font-size: 2rem; font-weight: 700; }
+    .badge-alert { animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:.6; } }
+    #admin-login { max-width: 360px; }
+    .last-refresh { font-size: .75rem; color: #6c757d; }
+  </style>
+</head>
+<body>
+<div class="container-fluid py-3">
+
+  <!-- Login panel -->
+  <div id="login-section" class="d-flex justify-content-center mt-5">
+    <div id="admin-login" class="card shadow-sm p-4 w-100">
+      <h4 class="mb-3">Dars Admin</h4>
+      <p class="text-muted small">Enter your Telegram ID to access the dashboard.</p>
+      <div class="mb-3">
+        <label class="form-label">Admin Telegram ID</label>
+        <input id="admin-id-input" type="number" class="form-control"
+               placeholder="e.g. 123456789" autofocus>
+      </div>
+      <button class="btn btn-primary w-100" onclick="login()">Login</button>
+      <div id="login-error" class="alert alert-danger mt-3 d-none"></div>
+    </div>
+  </div>
+
+  <!-- Dashboard -->
+  <div id="dashboard-section" class="d-none">
+    <div class="d-flex align-items-center justify-content-between mb-3">
+      <h4 class="mb-0">Dars Admin Dashboard</h4>
+      <div class="d-flex align-items-center gap-3">
+        <span class="last-refresh" id="last-refresh">Refreshing…</span>
+        <select class="form-select form-select-sm w-auto" id="period-select"
+                onchange="loadCost()">
+          <option value="week" selected>This Week</option>
+          <option value="day">Today</option>
+          <option value="month">This Month</option>
+        </select>
+        <button class="btn btn-sm btn-outline-secondary" onclick="loadAll()">Refresh</button>
+        <button class="btn btn-sm btn-outline-danger" onclick="logout()">Logout</button>
+      </div>
+    </div>
+
+    <!-- Stat cards -->
+    <div class="row g-3 mb-4" id="stat-cards">
+      <div class="col-6 col-md-3">
+        <div class="card stat-card h-100 p-3">
+          <div class="text-muted small">Total Students</div>
+          <div class="stat-value text-primary" id="s-total">—</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="card stat-card green h-100 p-3">
+          <div class="text-muted small">Active This Week</div>
+          <div class="stat-value text-success" id="s-active">—</div>
+          <div class="small text-muted" id="s-active-pct"></div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="card stat-card yellow h-100 p-3">
+          <div class="text-muted small">Avg Streak</div>
+          <div class="stat-value text-warning" id="s-streak">—</div>
+          <div class="small text-muted">days</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="card stat-card h-100 p-3" id="cost-card">
+          <div class="text-muted small">Week Cost (USD)</div>
+          <div class="stat-value text-info" id="s-cost">—</div>
+          <div class="small text-muted" id="s-cost-projected"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cost details -->
+    <div class="row g-3 mb-4">
+      <div class="col-md-6">
+        <div class="card p-3">
+          <h6 class="mb-3">Cost Breakdown
+            <span id="budget-alert-badge" class="badge bg-danger ms-2 badge-alert d-none">
+              Budget Alert!
+            </span>
+          </h6>
+          <table class="table table-sm mb-0">
+            <tbody>
+              <tr><td>Total cost</td><td id="c-total" class="fw-bold"></td></tr>
+              <tr><td>AI hints served</td><td id="c-ai"></td></tr>
+              <tr><td>Cached hints served</td><td id="c-cache"></td></tr>
+              <tr><td>Per-student avg</td><td id="c-per-student"></td></tr>
+              <tr><td>Daily avg</td><td id="c-daily"></td></tr>
+              <tr><td>Projected monthly</td><td id="c-projected"></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card p-3">
+          <h6 class="mb-2">Sessions This Week</h6>
+          <div class="stat-value text-primary" id="s-sessions">—</div>
+          <canvas id="activity-chart" height="120"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Student table -->
+    <div class="card p-3">
+      <div class="d-flex align-items-center justify-content-between mb-3">
+        <h6 class="mb-0">Students</h6>
+        <div class="d-flex gap-2">
+          <select class="form-select form-select-sm w-auto" id="grade-filter"
+                  onchange="loadStudents(1)">
+            <option value="">All Grades</option>
+            <option value="6">Grade 6</option>
+            <option value="7">Grade 7</option>
+            <option value="8">Grade 8</option>
+          </select>
+          <input class="form-control form-control-sm w-auto" type="search"
+                 id="name-search" placeholder="Search name…"
+                 oninput="filterStudentTable()">
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-sm table-hover">
+          <thead class="table-light">
+            <tr>
+              <th>Name</th><th>Grade</th><th>Lang</th>
+              <th>Streak</th><th>Best</th><th>Sessions</th><th>Last Practice</th>
+            </tr>
+          </thead>
+          <tbody id="students-tbody">
+            <tr><td colspan="7" class="text-center text-muted">Loading…</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <nav>
+        <ul class="pagination pagination-sm justify-content-end mb-0" id="pagination"></ul>
+      </nav>
+    </div>
+  </div><!-- /dashboard -->
+</div>
+
+<script>
+// ── State ─────────────────────────────────────────────────────────────────────
+let adminId = localStorage.getItem('dars_admin_id') || '';
+let currentPage = 1;
+let totalStudents = 0;
+const PAGE_SIZE = 20;
+let activityChart = null;
+let refreshTimer = null;
+
+// ── Auth ──────────────────────────────────────────────────────────────────────
+function login() {
+  const val = document.getElementById('admin-id-input').value.trim();
+  if (!val || isNaN(val)) {
+    showLoginError('Please enter a valid numeric Telegram ID.');
+    return;
+  }
+  adminId = val;
+  // Try loading stats — if 403 it's wrong
+  fetch('/admin/stats', { headers: { 'X-Admin-ID': adminId } })
+    .then(r => {
+      if (r.status === 401 || r.status === 403) {
+        showLoginError('Access denied. Your Telegram ID is not authorised.');
+        return;
+      }
+      localStorage.setItem('dars_admin_id', adminId);
+      document.getElementById('login-section').classList.add('d-none');
+      document.getElementById('dashboard-section').classList.remove('d-none');
+      loadAll();
+      refreshTimer = setInterval(loadAll, 30000);
+    })
+    .catch(() => showLoginError('Network error. Is the server running?'));
+}
+
+function logout() {
+  localStorage.removeItem('dars_admin_id');
+  adminId = '';
+  clearInterval(refreshTimer);
+  document.getElementById('dashboard-section').classList.add('d-none');
+  document.getElementById('login-section').classList.remove('d-none');
+}
+
+function showLoginError(msg) {
+  const el = document.getElementById('login-error');
+  el.textContent = msg;
+  el.classList.remove('d-none');
+}
+
+// ── Data loading ──────────────────────────────────────────────────────────────
+function headers() { return { 'X-Admin-ID': adminId }; }
+
+async function loadAll() {
+  await Promise.all([loadStats(), loadCost(), loadStudents(currentPage)]);
+  document.getElementById('last-refresh').textContent =
+    'Last refresh: ' + new Date().toLocaleTimeString();
+}
+
+async function loadStats() {
+  try {
+    const r = await fetch('/admin/stats', { headers: headers() });
+    if (!r.ok) return;
+    const d = await r.json();
+    document.getElementById('s-total').textContent = d.total_students;
+    document.getElementById('s-active').textContent = d.active_this_week;
+    document.getElementById('s-active-pct').textContent =
+      d.active_this_week_percent != null
+        ? d.active_this_week_percent.toFixed(1) + '% of students'
+        : '';
+    document.getElementById('s-streak').textContent = d.avg_streak.toFixed(1);
+    document.getElementById('s-cost').textContent = '$' + d.week_cost_usd.toFixed(4);
+    document.getElementById('s-sessions').textContent = d.sessions_this_week;
+    updateActivityChart(d.sessions_this_week);
+  } catch(e) { console.error('loadStats', e); }
+}
+
+async function loadCost() {
+  const period = document.getElementById('period-select').value;
+  try {
+    const r = await fetch('/admin/cost?period=' + period, { headers: headers() });
+    if (!r.ok) return;
+    const d = await r.json();
+    document.getElementById('c-total').textContent   = '$' + d.total_cost_usd.toFixed(4);
+    document.getElementById('c-ai').textContent      = d.ai_hint_count;
+    document.getElementById('c-cache').textContent   = d.cache_hit_count;
+    document.getElementById('c-per-student').textContent = '$' + d.per_student_avg_usd.toFixed(4);
+    document.getElementById('c-daily').textContent   = '$' + d.daily_avg_usd.toFixed(4);
+    document.getElementById('c-projected').textContent = '$' + d.projected_monthly_usd.toFixed(2) + '/mo';
+    const badge = document.getElementById('budget-alert-badge');
+    const costCard = document.getElementById('cost-card');
+    if (d.budget_alert) {
+      badge.classList.remove('d-none');
+      costCard.classList.add('red');
+    } else {
+      badge.classList.add('d-none');
+      costCard.classList.remove('red');
+    }
+    document.getElementById('s-cost-projected').textContent =
+      '$' + d.projected_monthly_usd.toFixed(2) + '/mo projected';
+  } catch(e) { console.error('loadCost', e); }
+}
+
+async function loadStudents(page) {
+  currentPage = page;
+  const grade = document.getElementById('grade-filter').value;
+  let url = `/admin/students?page=${page}&limit=${PAGE_SIZE}`;
+  if (grade) url += `&grade=${grade}`;
+  try {
+    const r = await fetch(url, { headers: headers() });
+    if (!r.ok) return;
+    const d = await r.json();
+    totalStudents = d.total;
+    renderStudents(d.students);
+    renderPagination(d.page, Math.ceil(d.total / PAGE_SIZE));
+  } catch(e) { console.error('loadStudents', e); }
+}
+
+function renderStudents(students) {
+  const tbody = document.getElementById('students-tbody');
+  if (!students.length) {
+    tbody.innerHTML = '<tr><td colspan="7" class="text-center text-muted">No students found.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = students.map(s => `
+    <tr>
+      <td>${esc(s.name)}</td>
+      <td>Grade ${s.grade}</td>
+      <td><span class="badge bg-secondary">${s.language.toUpperCase()}</span></td>
+      <td>${s.current_streak > 0 ? '🔥 ' + s.current_streak : s.current_streak}</td>
+      <td>${s.longest_streak}</td>
+      <td>${s.total_sessions}</td>
+      <td>${s.last_practice_date || '—'}</td>
+    </tr>
+  `).join('');
+}
+
+function filterStudentTable() {
+  const q = document.getElementById('name-search').value.toLowerCase();
+  document.querySelectorAll('#students-tbody tr').forEach(row => {
+    row.style.display = row.textContent.toLowerCase().includes(q) ? '' : 'none';
+  });
+}
+
+function renderPagination(current, total) {
+  const ul = document.getElementById('pagination');
+  if (total <= 1) { ul.innerHTML = ''; return; }
+  let html = `<li class="page-item ${current===1?'disabled':''}">
+    <a class="page-link" href="#" onclick="loadStudents(${current-1});return false">«</a></li>`;
+  for (let p = Math.max(1,current-2); p <= Math.min(total,current+2); p++) {
+    html += `<li class="page-item ${p===current?'active':''}">
+      <a class="page-link" href="#" onclick="loadStudents(${p});return false">${p}</a></li>`;
+  }
+  html += `<li class="page-item ${current===total?'disabled':''}">
+    <a class="page-link" href="#" onclick="loadStudents(${current+1});return false">»</a></li>`;
+  ul.innerHTML = html;
+}
+
+function updateActivityChart(sessionsThisWeek) {
+  const ctx = document.getElementById('activity-chart').getContext('2d');
+  if (activityChart) { activityChart.destroy(); }
+  activityChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+      datasets: [{
+        label: 'Sessions',
+        data: Array(7).fill(null).map((_,i) =>
+          i === new Date().getDay() ? sessionsThisWeek : 0),
+        backgroundColor: '#0d6efd55',
+        borderColor: '#0d6efd',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      plugins: { legend: { display: false } },
+      scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } }
+    }
+  });
+}
+
+function esc(s) {
+  return String(s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ── Boot ──────────────────────────────────────────────────────────────────────
+window.addEventListener('DOMContentLoaded', () => {
+  if (adminId) {
+    document.getElementById('admin-id-input').value = adminId;
+    login();
+  }
+});
+document.getElementById('admin-id-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') login();
+});
+</script>
+</body>
+</html>
