@@ -7,7 +7,7 @@ Provides shared configuration and utilities for all models.
 from datetime import datetime
 from typing import Any
 
-from sqlalchemy import MetaData
+from sqlalchemy import DateTime, MetaData
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from sqlalchemy.sql import func
 
@@ -41,12 +41,14 @@ class TimestampMixin:
     """Mixin providing created_at and updated_at timestamps."""
 
     created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
         server_default=func.now(),
         nullable=False,
         comment="Timestamp when record was created (UTC)",
     )
 
     updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
         server_default=func.now(),
         onupdate=func.now(),
         nullable=False,
