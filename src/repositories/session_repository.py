@@ -45,7 +45,7 @@ class SessionRepository:
         Returns:
             Newly created Session object with session_id populated after flush.
         """
-        now = datetime.now(UTC)
+        now = datetime.now(UTC).replace(tzinfo=None)
         session = Session(
             student_id=student_id,
             date=now,
@@ -78,7 +78,9 @@ class SessionRepository:
         Returns:
             Session object if one exists for today, None otherwise.
         """
-        today_start = datetime.now(UTC).replace(hour=0, minute=0, second=0, microsecond=0)
+        today_start = datetime.now(UTC).replace(
+            hour=0, minute=0, second=0, microsecond=0, tzinfo=None
+        )
         stmt = (
             select(Session)
             .where(
@@ -127,7 +129,7 @@ class SessionRepository:
             Updated Session object.
         """
         session.status = SessionStatus.COMPLETED
-        session.completed_at = datetime.now(UTC)
+        session.completed_at = datetime.now(UTC).replace(tzinfo=None)
         db.add(session)
         await db.flush()
         return session
@@ -168,7 +170,7 @@ class SessionRepository:
         Returns:
             Number of sessions that were marked abandoned.
         """
-        now = datetime.now(UTC)
+        now = datetime.now(UTC).replace(tzinfo=None)
         stmt = (
             update(Session)
             .where(
