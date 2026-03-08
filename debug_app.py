@@ -15,7 +15,11 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
     try:
         from src.scheduler import start_scheduler
         start_scheduler()
-        _startup_error = None
+        from src.database import check_connection
+        await check_connection()
+        from src.config import get_settings
+        get_settings()
+        _startup_error = "all startup steps OK"
     except Exception:
         _startup_error = traceback.format_exc()
     yield
@@ -34,5 +38,5 @@ def root() -> dict:
     return {
         "status": "ok",
         "port": os.environ.get("PORT", "not set"),
-        "scheduler_error": _startup_error,
+        "startup": _startup_error,
     }
