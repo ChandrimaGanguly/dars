@@ -2,7 +2,7 @@
 builder = "nixpacks"
 
 [deploy]
-startCommand = "echo 'Container starting...' && PYTHONUNBUFFERED=1 /opt/venv/bin/uvicorn src.main:app --host 0.0.0.0 --port $PORT"
+startCommand = "/opt/venv/bin/uvicorn debug_app:app --host 0.0.0.0 --port ${PORT:-8000}"
 healthcheckPath = "/"
 healthcheckTimeout = 30
 restartPolicyType = "on_failure"
