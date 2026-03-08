@@ -1,8 +1,14 @@
 #!/bin/sh
-# Retry alembic up to 3 times with backoff (DB may not be ready at container start)
 for i in 1 2 3; do
   echo "Alembic migration attempt $i..."
-  timeout 20 /opt/venv/bin/alembic upgrade head && break
+  output=$(timeout 20 /opt/venv/bin/alembic upgrade head 2>&1)
+  exit_code=$?
+  echo "$output"
+  echo "Alembic exit code: $exit_code"
+  if [ $exit_code -eq 0 ]; then
+    echo "Alembic migration succeeded"
+    break
+  fi
   echo "Attempt $i failed, waiting 5s..."
   sleep 5
 done
