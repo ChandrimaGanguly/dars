@@ -2,13 +2,39 @@
 # Diagnose private networking
 echo "=== Network diagnostics ==="
 python3 -c "
-import socket
+import socket, time
+
+# DNS resolution
 for host in ['postgres.railway.internal', 'gondola.proxy.rlwy.net']:
     try:
         results = socket.getaddrinfo(host, 5432, type=socket.SOCK_STREAM)
         print(f'DNS {host}: {[(r[0].name, r[4]) for r in results]}')
     except Exception as e:
         print(f'DNS {host}: FAILED - {e}')
+
+# TCP connectivity tests
+tests = [
+    ('10.205.136.78', 5432),
+    ('postgres.railway.internal', 5432),
+    ('gondola.proxy.rlwy.net', 21425),
+]
+for host, port in tests:
+    for family in [socket.AF_INET6, socket.AF_INET]:
+        s = socket.socket(family, socket.SOCK_STREAM)
+        s.settimeout(5)
+        try:
+            s.connect((host, port))
+            s.close()
+            print(f'TCP {socket.AddressFamily(family).name} {host}:{port}: CONNECTED')
+            break
+        except socket.timeout:
+            print(f'TCP {socket.AddressFamily(family).name} {host}:{port}: TIMEOUT')
+        except ConnectionRefusedError:
+            print(f'TCP {socket.AddressFamily(family).name} {host}:{port}: REFUSED')
+        except OSError as e:
+            print(f'TCP {socket.AddressFamily(family).name} {host}:{port}: {e}')
+        finally:
+            s.close()
 "
 echo "==========================="
 
