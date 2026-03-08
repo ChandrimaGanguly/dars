@@ -1,4 +1,9 @@
 #!/bin/sh
+# Log which DB host alembic will use (strip password for safety)
+db_url="${DATABASE_PUBLIC_URL:-${DATABASE_URL:-unset}}"
+db_host=$(echo "$db_url" | python3 -c "import sys,urllib.parse; u=urllib.parse.urlparse(sys.stdin.read().strip()); print(u.hostname, u.port)" 2>/dev/null)
+echo "Alembic target: $db_host"
+
 for i in 1 2 3; do
   echo "Alembic migration attempt $i..."
   output=$(timeout 20 /opt/venv/bin/alembic upgrade head 2>&1)
