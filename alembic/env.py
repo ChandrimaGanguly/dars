@@ -1,5 +1,6 @@
 import asyncio
 import os
+import socket
 from logging.config import fileConfig
 
 from sqlalchemy import create_engine, pool
@@ -32,31 +33,45 @@ config = context.config
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-# Prefer DATABASE_PUBLIC_URL for migrations (avoids private networking timeouts at startup).
-# When set, use psycopg2 (sync) with sslmode=require — Railway's public proxy requires SSL
-# and asyncpg's SSL negotiation is incompatible with Railway's proxy.
-# Fall back to DATABASE_URL (private) with asyncpg when public URL is not available.
-_public_url = os.getenv("DATABASE_PUBLIC_URL")
-_private_url = os.getenv("DATABASE_URL")
-_use_sync = bool(_public_url)
+# Use DATABASE_URL (private Railway internal) with psycopg2 for migrations.
+# We always use the private URL — it's reliable from within Railway containers
+# once we force IPv4 (postgres.railway.internal resolves to both IPv6 and IPv4;
+# IPv6 routing is unreliable in Railway containers, IPv4 works fine).
+_raw_url = os.getenv("DATABASE_URL", "")
 
-if _public_url:
-    # Build psycopg2 URL with sslmode=require
-    url = _public_url
-    if url.startswith("postgres://"):
-        url = url.replace("postgres://", "postgresql+psycopg2://", 1)
-    elif url.startswith("postgresql://"):
-        url = url.replace("postgresql://", "postgresql+psycopg2://", 1)
-    sep = "&" if "?" in url else "?"
-    url = f"{url}{sep}sslmode=disable"
-    config.set_main_option("sqlalchemy.url", url)
-elif _private_url:
-    url = _private_url
-    if url.startswith("postgres://"):
-        url = url.replace("postgres://", "postgresql+asyncpg://", 1)
-    elif url.startswith("postgresql://"):
-        url = url.replace("postgresql://", "postgresql+asyncpg://", 1)
-    config.set_main_option("sqlalchemy.url", url)
+
+def _build_migration_url(raw: str) -> str:
+    """Convert DATABASE_URL to a psycopg2 URL with IPv4 resolution."""
+    if not raw:
+        return raw
+    # Switch to psycopg2 (sync driver) — asyncpg has no benefit for migrations
+    if raw.startswith("postgres://"):
+        url = raw.replace("postgres://", "postgresql+psycopg2://", 1)
+    elif raw.startswith("postgresql+asyncpg://"):
+        url = raw.replace("postgresql+asyncpg://", "postgresql+psycopg2://", 1)
+    elif raw.startswith("postgresql://"):
+        url = raw.replace("postgresql://", "postgresql+psycopg2://", 1)
+    else:
+        url = raw
+    # Force IPv4 to avoid IPv6 timeout in Railway containers
+    hostname = "postgres.railway.internal"
+    if hostname in url:
+        try:
+            results = socket.getaddrinfo(hostname, None, family=socket.AF_INET)
+            if results:
+                ipv4 = results[0][4][0]
+                url = url.replace(hostname, ipv4)
+                print(f"[alembic] Resolved {hostname} → {ipv4}")
+        except OSError as exc:
+            print(f"[alembic] WARNING: could not resolve {hostname} to IPv4: {exc}")
+    return url
+
+
+_migration_url = _build_migration_url(_raw_url)
+_use_sync = True  # always use psycopg2 for migrations
+
+if _migration_url:
+    config.set_main_option("sqlalchemy.url", _migration_url)
 
 # add your model's MetaData object here
 # for 'autogenerate' support
@@ -111,10 +126,8 @@ async def run_async_migrations() -> None:
 
 def run_migrations_online() -> None:
     """Run migrations in 'online' mode."""
-    if _use_sync:
-        run_migrations_sync()
-    else:
-        asyncio.run(run_async_migrations())
+    # Always use psycopg2 (sync) — more reliable in Railway containers than asyncpg
+    run_migrations_sync()
 
 
 if context.is_offline_mode():

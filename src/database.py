@@ -7,6 +7,7 @@ Handles connection pooling, session management, and environment configuration.
 
 import logging
 import os
+import socket
 import time
 from collections.abc import AsyncGenerator
 from typing import Any
@@ -23,6 +24,26 @@ from src.models.base import Base
 
 _db_logger = logging.getLogger(__name__)
 _SLOW_COMMIT_MS: float = 200.0
+_RAILWAY_PRIVATE_HOST = "postgres.railway.internal"
+
+
+def _resolve_to_ipv4(url: str) -> str:
+    """Replace postgres.railway.internal with its IPv4 address.
+
+    Railway private networking resolves to both IPv6 and IPv4, but asyncpg
+    may try IPv6 first which fails. Forcing IPv4 ensures reliable connections.
+    """
+    if _RAILWAY_PRIVATE_HOST not in url:
+        return url
+    try:
+        results = socket.getaddrinfo(_RAILWAY_PRIVATE_HOST, None, family=socket.AF_INET)
+        if results:
+            ipv4 = str(results[0][4][0])
+            _db_logger.info("Resolved %s → %s (IPv4)", _RAILWAY_PRIVATE_HOST, ipv4)
+            return url.replace(_RAILWAY_PRIVATE_HOST, ipv4)
+    except OSError:
+        _db_logger.warning("Could not resolve %s to IPv4, using hostname", _RAILWAY_PRIVATE_HOST)
+    return url
 
 
 class _TimedSession(AsyncSession):
@@ -65,6 +86,9 @@ def get_database_url() -> str:
         database_url = database_url.replace("postgres://", "postgresql+asyncpg://", 1)
     elif database_url.startswith("postgresql://"):
         database_url = database_url.replace("postgresql://", "postgresql+asyncpg://", 1)
+
+    # Force IPv4 for Railway private networking (IPv6 often fails in containers)
+    database_url = _resolve_to_ipv4(database_url)
 
     return database_url
 
