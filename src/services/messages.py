@@ -10,7 +10,7 @@ MessageTemplate rows is deferred to Phase 1+ (GAP-3 in PHASE7_TASKS.md).
 
 from __future__ import annotations
 
-from enum import Enum
+from enum import StrEnum
 
 from src.logging import get_logger
 
@@ -18,7 +18,7 @@ _FALLBACK = "en"
 _logger = get_logger(__name__)
 
 
-class MessageKey(str, Enum):
+class MessageKey(StrEnum):
     """Stable identifiers for bilingual student-facing messages."""
 
     WELCOME = "welcome"
