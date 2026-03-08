@@ -2,7 +2,7 @@
 # Diagnose private networking
 echo "=== Network diagnostics ==="
 python3 -c "
-import socket, time
+import socket
 
 # DNS resolution
 for host in ['postgres.railway.internal', 'gondola.proxy.rlwy.net']:
@@ -12,29 +12,29 @@ for host in ['postgres.railway.internal', 'gondola.proxy.rlwy.net']:
     except Exception as e:
         print(f'DNS {host}: FAILED - {e}')
 
-# TCP connectivity tests
+# Quick TCP connectivity (2s timeout to stay within healthcheck window)
 tests = [
-    ('10.205.136.78', 5432),
-    ('postgres.railway.internal', 5432),
-    ('gondola.proxy.rlwy.net', 21425),
+    ('10.205.136.78', 5432, socket.AF_INET),
+    ('postgres.railway.internal', 5432, socket.AF_INET6),
+    ('postgres.railway.internal', 5432, socket.AF_INET),
+    ('gondola.proxy.rlwy.net', 21425, socket.AF_INET),
 ]
-for host, port in tests:
-    for family in [socket.AF_INET6, socket.AF_INET]:
-        s = socket.socket(family, socket.SOCK_STREAM)
-        s.settimeout(5)
-        try:
-            s.connect((host, port))
-            s.close()
-            print(f'TCP {socket.AddressFamily(family).name} {host}:{port}: CONNECTED')
-            break
-        except socket.timeout:
-            print(f'TCP {socket.AddressFamily(family).name} {host}:{port}: TIMEOUT')
-        except ConnectionRefusedError:
-            print(f'TCP {socket.AddressFamily(family).name} {host}:{port}: REFUSED')
-        except OSError as e:
-            print(f'TCP {socket.AddressFamily(family).name} {host}:{port}: {e}')
-        finally:
-            s.close()
+for host, port, family in tests:
+    s = socket.socket(family, socket.SOCK_STREAM)
+    s.settimeout(2)
+    label = f'TCP {socket.AddressFamily(family).name} {host}:{port}'
+    try:
+        s.connect((host, port))
+        s.close()
+        print(f'{label}: CONNECTED')
+    except socket.timeout:
+        print(f'{label}: TIMEOUT')
+    except ConnectionRefusedError:
+        print(f'{label}: REFUSED')
+    except OSError as e:
+        print(f'{label}: {e}')
+    finally:
+        s.close()
 "
 echo "==========================="
 
