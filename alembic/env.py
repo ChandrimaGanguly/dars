@@ -1,9 +1,8 @@
 import asyncio
 import os
-import ssl
 from logging.config import fileConfig
 
-from sqlalchemy import pool
+from sqlalchemy import create_engine, pool
 from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
 
@@ -33,39 +32,39 @@ config = context.config
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-# Override sqlalchemy.url from environment variable if present
-# Prefer DATABASE_PUBLIC_URL for migrations (avoids private networking timeouts at startup)
-database_url = os.getenv("DATABASE_PUBLIC_URL") or os.getenv("DATABASE_URL")
-if database_url:
-    # Replace postgres:// with postgresql+asyncpg:// if needed
-    if database_url.startswith("postgres://"):
-        database_url = database_url.replace("postgres://", "postgresql+asyncpg://", 1)
-    elif database_url.startswith("postgresql://"):
-        database_url = database_url.replace("postgresql://", "postgresql+asyncpg://", 1)
-    config.set_main_option("sqlalchemy.url", database_url)
+# Prefer DATABASE_PUBLIC_URL for migrations (avoids private networking timeouts at startup).
+# When set, use psycopg2 (sync) with sslmode=require — Railway's public proxy requires SSL
+# and asyncpg's SSL negotiation is incompatible with Railway's proxy.
+# Fall back to DATABASE_URL (private) with asyncpg when public URL is not available.
+_public_url = os.getenv("DATABASE_PUBLIC_URL")
+_private_url = os.getenv("DATABASE_URL")
+_use_sync = bool(_public_url)
+
+if _public_url:
+    # Build psycopg2 URL with sslmode=require
+    url = _public_url
+    if url.startswith("postgres://"):
+        url = url.replace("postgres://", "postgresql+psycopg2://", 1)
+    elif url.startswith("postgresql://"):
+        url = url.replace("postgresql://", "postgresql+psycopg2://", 1)
+    sep = "&" if "?" in url else "?"
+    url = f"{url}{sep}sslmode=require"
+    config.set_main_option("sqlalchemy.url", url)
+elif _private_url:
+    url = _private_url
+    if url.startswith("postgres://"):
+        url = url.replace("postgres://", "postgresql+asyncpg://", 1)
+    elif url.startswith("postgresql://"):
+        url = url.replace("postgresql://", "postgresql+asyncpg://", 1)
+    config.set_main_option("sqlalchemy.url", url)
 
 # add your model's MetaData object here
 # for 'autogenerate' support
 target_metadata = Base.metadata
 
-# other values from the config, defined by the needs of env.py,
-# can be acquired:
-# my_important_option = config.get_main_option("my_important_option")
-# ... etc.
-
 
 def run_migrations_offline() -> None:
-    """Run migrations in 'offline' mode.
-
-    This configures the context with just a URL
-    and not an Engine, though an Engine is acceptable
-    here as well.  By skipping the Engine creation
-    we don't even need a DBAPI to be available.
-
-    Calls to context.execute() here emit the given string to the
-    script output.
-
-    """
+    """Run migrations in 'offline' mode."""
     url = config.get_main_option("sqlalchemy.url")
     context.configure(
         url=url,
@@ -86,26 +85,22 @@ def do_run_migrations(connection: Connection) -> None:
         context.run_migrations()
 
 
-async def run_async_migrations() -> None:
-    """Run migrations in async mode."""
-    # Use SSL when connecting via public URL (Railway public endpoint requires it)
-    # Disable cert verification — Railway uses a self-signed cert on the public proxy
-    using_public_url = bool(os.getenv("DATABASE_PUBLIC_URL"))
-    if using_public_url:
-        ssl_ctx = ssl.create_default_context()
-        ssl_ctx.check_hostname = False
-        ssl_ctx.verify_mode = ssl.CERT_NONE
-        # direct_tls=True: skip PostgreSQL SSLRequest negotiation and go straight
-        # to TLS — required for Railway's public proxy which uses direct TLS.
-        connect_args: dict[str, object] = {"ssl": ssl_ctx, "direct_tls": True}
-    else:
-        connect_args = {}
+def run_migrations_sync() -> None:
+    """Run migrations synchronously via psycopg2 (used for public URL)."""
+    connectable = create_engine(
+        config.get_main_option("sqlalchemy.url"),  # type: ignore[arg-type]
+        poolclass=pool.NullPool,
+    )
+    with connectable.connect() as connection:
+        do_run_migrations(connection)
 
+
+async def run_async_migrations() -> None:
+    """Run migrations asynchronously via asyncpg (used for private URL)."""
     connectable = async_engine_from_config(
         config.get_section(config.config_ini_section, {}),
         prefix="sqlalchemy.",
         poolclass=pool.NullPool,
-        connect_args=connect_args,
     )
 
     async with connectable.connect() as connection:
@@ -115,8 +110,11 @@ async def run_async_migrations() -> None:
 
 
 def run_migrations_online() -> None:
-    """Run migrations in 'online' mode with async support."""
-    asyncio.run(run_async_migrations())
+    """Run migrations in 'online' mode."""
+    if _use_sync:
+        run_migrations_sync()
+    else:
+        asyncio.run(run_async_migrations())
 
 
 if context.is_offline_mode():
