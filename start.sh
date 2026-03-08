@@ -2,29 +2,31 @@
 # Diagnose private networking
 echo "=== Network diagnostics ==="
 python3 -c "
-import socket
+import os, socket
+from urllib.parse import urlparse
+
+db_url = os.getenv('DATABASE_URL', '')
+parsed = urlparse(db_url)
+db_host = parsed.hostname or 'unknown'
+db_port = parsed.port or 5432
+
+print(f'DATABASE_URL host: {db_host}:{db_port}')
 
 # DNS resolution
-for host in ['postgres.railway.internal', 'gondola.proxy.rlwy.net']:
+for host in [db_host]:
     try:
-        results = socket.getaddrinfo(host, 5432, type=socket.SOCK_STREAM)
+        results = socket.getaddrinfo(host, db_port, type=socket.SOCK_STREAM)
         print(f'DNS {host}: {[(r[0].name, r[4]) for r in results]}')
     except Exception as e:
         print(f'DNS {host}: FAILED - {e}')
 
-# Quick TCP connectivity (2s timeout to stay within healthcheck window)
-tests = [
-    ('10.205.136.78', 5432, socket.AF_INET),
-    ('postgres.railway.internal', 5432, socket.AF_INET6),
-    ('postgres.railway.internal', 5432, socket.AF_INET),
-    ('gondola.proxy.rlwy.net', 21425, socket.AF_INET),
-]
-for host, port, family in tests:
+# Quick TCP connectivity (2s timeout)
+for family in [socket.AF_INET, socket.AF_INET6]:
     s = socket.socket(family, socket.SOCK_STREAM)
     s.settimeout(2)
-    label = f'TCP {socket.AddressFamily(family).name} {host}:{port}'
+    label = f'TCP {socket.AddressFamily(family).name} {db_host}:{db_port}'
     try:
-        s.connect((host, port))
+        s.connect((db_host, db_port))
         s.close()
         print(f'{label}: CONNECTED')
     except socket.timeout:

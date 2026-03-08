@@ -24,25 +24,35 @@ from src.models.base import Base
 
 _db_logger = logging.getLogger(__name__)
 _SLOW_COMMIT_MS: float = 200.0
-_RAILWAY_PRIVATE_HOST = "postgres.railway.internal"
+_RAILWAY_PRIVATE_SUFFIX = ".railway.internal"
 
 
 def _resolve_to_ipv4(url: str) -> str:
-    """Replace postgres.railway.internal with its IPv4 address.
+    """Replace any *.railway.internal hostname with its IPv4 address.
 
     Railway private networking resolves to both IPv6 and IPv4, but asyncpg
     may try IPv6 first which fails. Forcing IPv4 ensures reliable connections.
     """
-    if _RAILWAY_PRIVATE_HOST not in url:
+    if _RAILWAY_PRIVATE_SUFFIX not in url:
+        return url
+    # Extract the railway.internal hostname from the URL
+    try:
+        from urllib.parse import urlparse
+
+        parsed = urlparse(url)
+        hostname = parsed.hostname
+    except Exception:
+        hostname = None
+    if not hostname or not hostname.endswith(_RAILWAY_PRIVATE_SUFFIX):
         return url
     try:
-        results = socket.getaddrinfo(_RAILWAY_PRIVATE_HOST, None, family=socket.AF_INET)
+        results = socket.getaddrinfo(hostname, None, family=socket.AF_INET)
         if results:
             ipv4 = str(results[0][4][0])
-            _db_logger.info("Resolved %s → %s (IPv4)", _RAILWAY_PRIVATE_HOST, ipv4)
-            return url.replace(_RAILWAY_PRIVATE_HOST, ipv4)
+            _db_logger.info("Resolved %s → %s (IPv4)", hostname, ipv4)
+            return url.replace(hostname, ipv4)
     except OSError:
-        _db_logger.warning("Could not resolve %s to IPv4, using hostname", _RAILWAY_PRIVATE_HOST)
+        _db_logger.warning("Could not resolve %s to IPv4, using hostname", hostname)
     return url
 
 

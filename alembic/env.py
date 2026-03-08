@@ -35,7 +35,7 @@ if config.config_file_name is not None:
 
 # Use DATABASE_URL (private Railway internal) with psycopg2 for migrations.
 # We always use the private URL — it's reliable from within Railway containers
-# once we force IPv4 (postgres.railway.internal resolves to both IPv6 and IPv4;
+# once we force IPv4 (*.railway.internal may resolve to both IPv6 and IPv4;
 # IPv6 routing is unreliable in Railway containers, IPv4 works fine).
 _raw_url = os.getenv("DATABASE_URL", "")
 
@@ -54,8 +54,14 @@ def _build_migration_url(raw: str) -> str:
     else:
         url = raw
     # Force IPv4 to avoid IPv6 timeout in Railway containers
-    hostname = "postgres.railway.internal"
-    if hostname in url:
+    # Extract any *.railway.internal hostname dynamically
+    from urllib.parse import urlparse
+    try:
+        parsed = urlparse(url)
+        hostname = parsed.hostname or ""
+    except Exception:
+        hostname = ""
+    if hostname.endswith(".railway.internal"):
         try:
             results = socket.getaddrinfo(hostname, None, family=socket.AF_INET)
             if results:
