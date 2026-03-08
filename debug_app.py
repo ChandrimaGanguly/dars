@@ -1,19 +1,32 @@
-"""Debug app to identify Railway startup failure."""
+"""Debug app to identify Railway lifespan startup failure."""
 import os
 import traceback
+from collections.abc import AsyncIterator
+from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
-app = FastAPI()
+_startup_error: str | None = None
 
-# Try importing src.main and capture any error
-_import_error: str | None = None
-try:
-    import src.main as _main_module  # noqa: F401
-    _import_result = "OK"
-except Exception as e:
-    _import_error = traceback.format_exc()
-    _import_result = f"FAILED: {e}"
+
+@asynccontextmanager
+async def lifespan(app: FastAPI) -> AsyncIterator[None]:
+    global _startup_error
+    try:
+        from src.scheduler import start_scheduler
+        start_scheduler()
+        _startup_error = None
+    except Exception:
+        _startup_error = traceback.format_exc()
+    yield
+    try:
+        from src.scheduler import stop_scheduler
+        stop_scheduler()
+    except Exception:
+        pass
+
+
+app = FastAPI(lifespan=lifespan)
 
 
 @app.get("/")
@@ -21,6 +34,5 @@ def root() -> dict:
     return {
         "status": "ok",
         "port": os.environ.get("PORT", "not set"),
-        "src_main_import": _import_result,
-        "error": _import_error,
+        "scheduler_error": _startup_error,
     }
