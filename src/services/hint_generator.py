@@ -191,9 +191,12 @@ class HintGenerator:
                         extra={"error": str(exc), "problem_id": problem.problem_id},
                     )
 
-            except anthropic.AuthenticationError as exc:
-                logger.error("hint_api_auth_error", extra={"error_type": type(exc).__name__})
-                break  # No point retrying auth failures
+            except (anthropic.AuthenticationError, anthropic.BadRequestError) as exc:
+                logger.error(
+                    "hint_api_auth_or_billing_error",
+                    extra={"error_type": type(exc).__name__, "error": str(exc)},
+                )
+                break  # No point retrying auth/billing failures
 
         # 5. All retries exhausted — serve pre-written fallback
         return fallback_text, False, None, None
