@@ -33,7 +33,8 @@ if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
 # Override sqlalchemy.url from environment variable if present
-database_url = os.getenv("DATABASE_URL")
+# Prefer DATABASE_PUBLIC_URL for migrations (avoids private networking timeouts at startup)
+database_url = os.getenv("DATABASE_PUBLIC_URL") or os.getenv("DATABASE_URL")
 if database_url:
     # Replace postgres:// with postgresql+asyncpg:// if needed
     if database_url.startswith("postgres://"):
