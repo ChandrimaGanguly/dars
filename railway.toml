@@ -2,7 +2,7 @@
 builder = "nixpacks"
 
 [deploy]
-startCommand = "/opt/venv/bin/uvicorn debug_app:app --host 0.0.0.0 --port ${PORT:-8000}"
+startCommand = "/opt/venv/bin/alembic upgrade head && /opt/venv/bin/uvicorn src.main:app --host 0.0.0.0 --port ${PORT:-8000}"
 healthcheckPath = "/"
 healthcheckTimeout = 30
 restartPolicyType = "on_failure"

@@ -4,6 +4,7 @@ This is the main FastAPI application entry point. It configures the app,
 registers all routers, and sets up middleware.
 """
 
+import asyncio
 import uuid
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
@@ -51,8 +52,11 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
     logger.info(f"Environment: {settings.environment}")
     logger.info(f"Log level: {settings.log_level}")
 
-    # Check database connection
-    db_connected = await check_connection()
+    # Check database connection (with timeout to avoid hanging startup)
+    try:
+        db_connected = await asyncio.wait_for(check_connection(), timeout=5.0)
+    except TimeoutError:
+        db_connected = False
     if db_connected:
         logger.info("Database connection: OK")
     else:
