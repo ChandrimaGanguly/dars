@@ -48,7 +48,7 @@ if _public_url:
     elif url.startswith("postgresql://"):
         url = url.replace("postgresql://", "postgresql+psycopg2://", 1)
     sep = "&" if "?" in url else "?"
-    url = f"{url}{sep}sslmode=require"
+    url = f"{url}{sep}sslmode=disable"
     config.set_main_option("sqlalchemy.url", url)
 elif _private_url:
     url = _private_url
