@@ -59,6 +59,13 @@ _pending_onboarding: dict[int, dict[str, Any]] = {}
 _PENDING_ONBOARDING_CAP: int = 200
 
 # ---------------------------------------------------------------------------
+# Idempotency: track recently processed update_ids to prevent double handling
+# (Telegram may deliver the same update twice during retries or rolling deploys)
+# ---------------------------------------------------------------------------
+_processed_update_ids: set[int] = set()
+_PROCESSED_UPDATE_IDS_MAX: int = 1000  # Bound memory; evict oldest when full
+
+# ---------------------------------------------------------------------------
 # Streak calendar constants (PHASE6-B-1 / REQ-010)
 # ---------------------------------------------------------------------------
 _MILESTONES: list[int] = [7, 14, 30]
@@ -789,6 +796,16 @@ async def telegram_webhook(
         WebhookResponse confirming processing.
     """
     logger.info("Received Telegram update", update_id=update.update_id)
+
+    # Idempotency guard: skip duplicate deliveries of the same update
+    if update.update_id in _processed_update_ids:
+        logger.warning("Duplicate update_id, skipping", update_id=update.update_id)
+        return WebhookResponse(status="ok", message_id=None)
+
+    # Evict oldest entries when cap is reached to bound memory usage
+    if len(_processed_update_ids) >= _PROCESSED_UPDATE_IDS_MAX:
+        _processed_update_ids.clear()
+    _processed_update_ids.add(update.update_id)
 
     message_id: int | None = None
     try:
