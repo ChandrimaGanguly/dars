@@ -42,6 +42,17 @@ class MessageKey(StrEnum):
     ONBOARDING_GRADE_PROMPT = "onboarding_grade_prompt"
     ONBOARDING_INVALID_GRADE = "onboarding_invalid_grade"
     ONBOARDING_COMPLETE = "onboarding_complete"
+    # Topic selection flow
+    TOPIC_INVALID = "topic_invalid"
+    TOPIC_NO_PROBLEMS = "topic_no_problems"
+    # Wrong answer choice prompt
+    WRONG_ANSWER_CHOICE = "wrong_answer_choice"
+    WRONG_ANSWER_CHOICE_INVALID = "wrong_answer_choice_invalid"
+    # Session concluded / continue prompt
+    SESSION_CONCLUDED = "session_concluded"
+    CONTINUE_INVALID = "continue_invalid"
+    # Exit command
+    SESSION_EXITED = "session_exited"
 
 
 # Bilingual message templates.  All {placeholders} are documented inline.
@@ -53,14 +64,16 @@ MESSAGES: dict[str, dict[str, str]] = {
             "I'm your AI tutor. Send /practice to start learning!\n\n"
             "/practice — Daily problems\n"
             "/streak   — Streak calendar\n"
-            "/language — Change language"
+            "/language — Change language\n"
+            "/exit     — End current session"
         ),
         "bn": (
             "Dars-এ স্বাগতম, {name}! \U0001f393\n\n"
             "আমি তোমার AI টিউটর। অনুশীলন শুরু করতে /practice লেখো!\n\n"
             "/practice — প্রতিদিনের প্রশ্ন\n"
             "/streak   — ধারা ক্যালেন্ডার\n"
-            "/language — ভাষা পরিবর্তন"
+            "/language — ভাষা পরিবর্তন\n"
+            "/exit     — অনুশীলন শেষ করো"
         ),
     },
     MessageKey.HELP: {
@@ -171,6 +184,34 @@ MESSAGES: dict[str, dict[str, str]] = {
     MessageKey.ONBOARDING_INVALID_GRADE: {
         "en": "Please reply with 6, 7, or 8 for your grade.",
         "bn": "অনুগ্রহ করে 6, 7, বা 8 দিয়ে তোমার শ্রেণী জানাও।",
+    },
+    MessageKey.TOPIC_INVALID: {
+        "en": "Please reply with a number from the list.",
+        "bn": "তালিকা থেকে একটি নম্বর দিয়ে উত্তর দাও।",
+    },
+    MessageKey.TOPIC_NO_PROBLEMS: {
+        "en": "No problems found for that topic. Please choose another.",
+        "bn": "ওই বিষয়ে কোনো প্রশ্ন পাওয়া যায়নি। অন্য বিষয় বেছে নাও।",
+    },
+    MessageKey.WRONG_ANSWER_CHOICE: {
+        "en": "What would you like to do?\n\n1. Get a hint\n2. Next problem",
+        "bn": "তুমি কী করতে চাও?\n\n1. Hint নাও\n2. পরের প্রশ্ন",
+    },
+    MessageKey.WRONG_ANSWER_CHOICE_INVALID: {
+        "en": "Please reply with 1 (Hint) or 2 (Next problem).",
+        "bn": "অনুগ্রহ করে 1 (Hint) বা 2 (পরের প্রশ্ন) দিয়ে উত্তর দাও।",
+    },
+    MessageKey.SESSION_CONCLUDED: {
+        "en": "Daily practice concluded! \U0001f3c6\n\nDo you want to continue?\n\n1. Yes\n2. No",
+        "bn": "দৈনিক অনুশীলন শেষ! \U0001f3c6\n\nআরও করতে চাও?\n\n1. হ্যাঁ\n2. না",
+    },
+    MessageKey.CONTINUE_INVALID: {
+        "en": "Please reply with 1 (Yes) or 2 (No).",
+        "bn": "অনুগ্রহ করে 1 (হ্যাঁ) বা 2 (না) দিয়ে উত্তর দাও।",
+    },
+    MessageKey.SESSION_EXITED: {
+        "en": "Practice session ended. Type /practice to start again. \U0001f44b",
+        "bn": "অনুশীলন শেষ হয়েছে। আবার শুরু করতে /practice লেখো। \U0001f44b",
     },
     # {name} — student's first name
     MessageKey.ONBOARDING_COMPLETE: {

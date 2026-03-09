@@ -18,9 +18,11 @@ from src.models.student import Student
 from src.routes.webhook import (
     _active_sessions,
     _handle_message,
+    _pending_topic_choice,
     handle_answer_message,
     handle_hint_command,
     handle_practice_command,
+    handle_topic_choice,
 )
 from src.schemas.telegram import TelegramMessage
 
@@ -124,40 +126,46 @@ async def _populate_problems(db_session, count: int = 5) -> list[Problem]:
 class TestPracticeCommandWiring:
     """Integration tests for /practice command via handle_practice_command."""
 
-    async def test_practice_command_sends_problems(self, db_session) -> None:
-        """handle_practice_command returns a message with a question."""
+    async def test_practice_command_sends_topic_menu(self, db_session) -> None:
+        """handle_practice_command returns a topic selection menu."""
         await _create_student(db_session)
         await _populate_problems(db_session, 5)
 
-        # Clear active sessions to start fresh
         _active_sessions.pop(TELEGRAM_ID, None)
+        _pending_topic_choice.pop(TELEGRAM_ID, None)
 
         reply = await handle_practice_command(TELEGRAM_ID, db_session)
 
         assert reply is not None
         assert len(reply) > 0
-        # Should contain question text
-        assert "Question" in reply or "প্রশ্ন" in reply
+        # Should show a numbered topic list
+        assert "1." in reply
 
-    async def test_practice_command_stores_session_state(self, db_session) -> None:
-        """handle_practice_command stores session state in _active_sessions."""
+    async def test_practice_command_stores_session_after_topic_choice(self, db_session) -> None:
+        """Session state is stored in _active_sessions after topic is chosen."""
         await _create_student(db_session)
         await _populate_problems(db_session, 5)
 
         _active_sessions.pop(TELEGRAM_ID, None)
+        _pending_topic_choice.pop(TELEGRAM_ID, None)
+
         await handle_practice_command(TELEGRAM_ID, db_session)
+        # Now pick topic 1
+        await handle_topic_choice(TELEGRAM_ID, "1", db_session)
 
         assert TELEGRAM_ID in _active_sessions
         state = _active_sessions[TELEGRAM_ID]
         assert "session_id" in state
         assert "current_problem_id" in state
 
-    async def test_practice_command_already_complete(self, db_session) -> None:
-        """handle_practice_command returns 'complete' message if already done today."""
+    async def test_practice_command_after_completed_shows_topic_menu(self, db_session) -> None:
+        """After a completed session, /practice shows topic menu (not 'complete' gate)."""
         student = await _create_student(db_session)
+        student_id = student.student_id  # capture before _populate_problems commits
+        await _populate_problems(db_session, 5)
 
         session = Session(
-            student_id=student.student_id,
+            student_id=student_id,
             date=datetime.now(UTC),
             status=SessionStatus.COMPLETED,
             problem_ids=[1, 2, 3, 4, 5],
@@ -168,9 +176,11 @@ class TestPracticeCommandWiring:
         await db_session.commit()
 
         _active_sessions.pop(TELEGRAM_ID, None)
+        _pending_topic_choice.pop(TELEGRAM_ID, None)
         reply = await handle_practice_command(TELEGRAM_ID, db_session)
 
-        assert "complete" in reply.lower() or "শেষ" in reply
+        # With topic-based flow, user always gets a topic menu (no hard "already done" gate)
+        assert "1." in reply
 
     async def test_practice_command_unregistered_student(self, db_session) -> None:
         """handle_practice_command for unknown student returns register message."""
@@ -208,6 +218,7 @@ class TestAnswerMessageWiring:
         _active_sessions[TELEGRAM_ID] = {
             "session_id": session.session_id,
             "current_problem_id": problem_id,
+            "topic": "",
         }
 
         reply = await handle_answer_message(TELEGRAM_ID, problem.answer, db_session)
@@ -248,12 +259,13 @@ class TestAnswerMessageWiring:
         _active_sessions[TELEGRAM_ID] = {
             "session_id": session.session_id,
             "current_problem_id": problem_id,
+            "topic": "",
         }
 
         reply = await handle_answer_message(TELEGRAM_ID, problem.answer, db_session)
 
-        # Score summary should mention completion
-        assert "complete" in reply.lower() or "শেষ" in reply
+        # Score summary should show concluded prompt
+        assert "concluded" in reply.lower() or "শেষ" in reply
         # Should be removed from active sessions
         assert TELEGRAM_ID not in _active_sessions
 

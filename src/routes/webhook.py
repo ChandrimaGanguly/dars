@@ -31,7 +31,6 @@ from src.services.cost_tracker import CostTracker
 from src.services.encouragement import EncouragementService
 from src.services.hint_state import hint_generator as _hint_generator
 from src.services.messages import MessageKey, get_message
-from src.services.problem_selector import ProblemSelector
 from src.utils.pii import hash_telegram_id, redact_answer
 
 router = APIRouter()
@@ -39,9 +38,9 @@ logger = get_logger(__name__)
 
 # ---------------------------------------------------------------------------
 # In-memory session state for 50-student pilot (PHASE3-B-4.2)
-# Maps telegram_id → {"session_id": int, "current_problem_id": int}
+# Maps telegram_id → {"session_id": int, "current_problem_id": int, "topic": str}
 # ---------------------------------------------------------------------------
-_active_sessions: dict[int, dict[str, int]] = {}
+_active_sessions: dict[int, dict[str, int | str]] = {}
 
 # ---------------------------------------------------------------------------
 # Language selection pending state (PHASE7-A-1 / REQ-021)
@@ -57,6 +56,25 @@ _PENDING_LANGUAGE_CAP: int = 200
 # ---------------------------------------------------------------------------
 _pending_onboarding: dict[int, dict[str, Any]] = {}
 _PENDING_ONBOARDING_CAP: int = 200
+
+# ---------------------------------------------------------------------------
+# Topic selection pending state
+# Maps telegram_id → ordered list of topic strings shown to the user
+# ---------------------------------------------------------------------------
+_pending_topic_choice: dict[int, list[str]] = {}
+_PENDING_TOPIC_CAP: int = 200
+
+# ---------------------------------------------------------------------------
+# Wrong answer choice pending state
+# Maps telegram_id → True while awaiting "1 (hint)" or "2 (next)" reply
+# ---------------------------------------------------------------------------
+_pending_wrong_answer: dict[int, bool] = {}
+
+# ---------------------------------------------------------------------------
+# Post-session continue pending state
+# Maps telegram_id → {topic, seen_ids, student_id, grade, language}
+# ---------------------------------------------------------------------------
+_pending_continue: dict[int, dict[str, object]] = {}
 
 # ---------------------------------------------------------------------------
 # Idempotency: track recently processed update_ids to prevent double handling
@@ -81,81 +99,119 @@ _DAY_NAMES_BN: list[str] = ["সোম", "মঙ্গল", "বুধ", "বৃ
 async def handle_practice_command(telegram_id: int, db: AsyncSession) -> str:
     """Handle /practice Telegram command.
 
-    Runs the full problem selection flow for the student, stores state in
-    _active_sessions, and returns the first problem as a formatted string.
+    Shows a numbered topic menu for the student to choose from. The actual
+    problem selection runs in handle_topic_choice once the student replies.
 
     Args:
         telegram_id: Telegram user ID.
         db: Async database session.
 
     Returns:
-        Formatted message string for the Telegram user.
+        Formatted topic menu string for the Telegram user.
     """
-    # Fetch student
     result = await db.execute(select(Student).where(Student.telegram_id == telegram_id))
     student = result.scalar_one_or_none()
     if student is None:
         return get_message(MessageKey.REGISTER_FIRST, "en")
 
-    problem_repo = ProblemRepository()
     session_repo = SessionRepository()
-    response_repo = ResponseRepository()
-
-    # Expire stale sessions
     await session_repo.expire_stale_sessions(db)
 
-    # Check for existing session
     existing = await session_repo.get_active_session_for_today(db, student.student_id)
-
-    if existing is not None and existing.status == SessionStatus.COMPLETED:
-        # Already done today
-        return get_message(MessageKey.ALREADY_COMPLETED, student.language)
-
     if existing is not None and existing.status == SessionStatus.IN_PROGRESS:
-        # Resume existing session
+        # Resume in-progress session — skip topic selection
+        problem_repo = ProblemRepository()
+        response_repo = ResponseRepository()
         answered_ids = await response_repo.get_answered_problem_ids(db, existing.session_id)
         remaining_ids = [pid for pid in existing.problem_ids if pid not in answered_ids]
         if not remaining_ids:
-            # All answered but not marked complete — edge case
             await session_repo.mark_session_complete(db, existing)
             return get_message(MessageKey.ALREADY_COMPLETED, student.language)
-
         problems = await problem_repo.get_problems_by_ids(db, remaining_ids)
         first_problem = problems[0]
-
         _active_sessions[telegram_id] = {
             "session_id": existing.session_id,
             "current_problem_id": first_problem.problem_id,
+            "topic": "",
         }
-
         return _format_problem_message(first_problem, student.language, len(remaining_ids))
 
-    # Start new session
-    selector = ProblemSelector(problem_repo, response_repo)
-    selected_problems = await selector.select_problems(db, student.student_id, student.grade)
-
-    if not selected_problems:
+    # Show topic selection menu
+    problem_repo = ProblemRepository()
+    topics = await problem_repo.get_topics_for_grade(db, student.grade)
+    if not topics:
         return get_message(MessageKey.NO_PROBLEMS_FOUND, student.language)
 
-    problem_ids = [p.problem_id for p in selected_problems]
-    first_problem = selected_problems[0]
-    student_language = student.language
-    num_selected = len(selected_problems)
-    session = await session_repo.create_session(db, student.student_id, problem_ids)
-    new_session_id = session.session_id  # capture before commit; auto-commit on exit
+    # Store topics so handle_topic_choice can resolve the user's number
+    if len(_pending_topic_choice) >= _PENDING_TOPIC_CAP:
+        oldest = next(iter(_pending_topic_choice))
+        del _pending_topic_choice[oldest]
+    _pending_topic_choice[telegram_id] = topics
+
+    numbered = "\n".join(f"{i + 1}. {t}" for i, t in enumerate(topics))
+    if student.language == "bn":
+        return f"একটি বিষয় বেছে নাও:\n\n{numbered}\n\nনম্বর দিয়ে উত্তর দাও।"
+    return f"Choose a topic to practice:\n\n{numbered}\n\nReply with the number."
+
+
+async def handle_topic_choice(telegram_id: int, text: str, db: AsyncSession) -> str:
+    """Handle the student's topic number reply after /practice.
+
+    Fetches 5 problems from the chosen topic, creates a session, and
+    returns the first problem.
+
+    Args:
+        telegram_id: Telegram user ID.
+        text: Raw message text (expected to be a number string).
+        db: Async database session.
+
+    Returns:
+        First problem message or an error prompt.
+    """
+    topics = _pending_topic_choice.get(telegram_id, [])
+
+    result = await db.execute(select(Student).where(Student.telegram_id == telegram_id))
+    student = result.scalar_one_or_none()
+    language = student.language if student else "en"
+    grade = student.grade if student else 7
+    student_id = student.student_id if student else 0
+
+    try:
+        choice = int(text.strip())
+        if choice < 1 or choice > len(topics):
+            raise ValueError
+    except ValueError:
+        return get_message(MessageKey.TOPIC_INVALID, language)
+
+    topic = topics[choice - 1]
+    _pending_topic_choice.pop(telegram_id, None)
+
+    problem_repo = ProblemRepository()
+    problems = await problem_repo.get_problems_by_grade(db, grade, topic=topic)
+    problems.sort(key=lambda p: p.difficulty)
+    problems = problems[:5]
+
+    if not problems:
+        return get_message(MessageKey.TOPIC_NO_PROBLEMS, language)
+
+    problem_ids = [p.problem_id for p in problems]
+    session_repo = SessionRepository()
+    session = await session_repo.create_session(db, student_id, problem_ids)
+    new_session_id = session.session_id
 
     _active_sessions[telegram_id] = {
         "session_id": new_session_id,
-        "current_problem_id": first_problem.problem_id,
+        "current_problem_id": problems[0].problem_id,
+        "topic": topic,
     }
 
     logger.info(
-        "Telegram /practice session started",
+        "Topic practice session started",
         hashed_telegram_id=hash_telegram_id(telegram_id),
+        topic=topic,
         session_id=new_session_id,
     )
-
-    return _format_problem_message(first_problem, student_language, num_selected)
+    return _format_problem_message(problems[0], language, len(problems))
 
 
 async def handle_answer_message(telegram_id: int, text: str, db: AsyncSession) -> str:
@@ -177,8 +233,8 @@ async def handle_answer_message(telegram_id: int, text: str, db: AsyncSession) -
             MessageKey.NO_ACTIVE_SESSION, lang_student.language if lang_student else "en"
         )
 
-    session_id = state["session_id"]
-    current_problem_id = state["current_problem_id"]
+    session_id = int(state["session_id"])
+    current_problem_id = int(state["current_problem_id"])
 
     # Fetch student
     result = await db.execute(select(Student).where(Student.telegram_id == telegram_id))
@@ -232,62 +288,215 @@ async def handle_answer_message(telegram_id: int, text: str, db: AsyncSession) -
 
     feedback = eval_result.feedback_bn if student.language == "bn" else eval_result.feedback_en
 
-    # Determine next problem
+    # Determine remaining problems after this answer
     answered_ids = await response_repo.get_answered_problem_ids(db, session_id)
     remaining_ids = [pid for pid in session.problem_ids if pid not in answered_ids]
 
+    # Wrong answer — prompt hint or next problem
+    if not eval_result.is_correct:
+        _pending_wrong_answer[telegram_id] = True
+        choice_prompt = get_message(MessageKey.WRONG_ANSWER_CHOICE, student.language)
+        return f"{feedback}\n\n{choice_prompt}"
+
+    # Correct answer — check if session is complete
     if not remaining_ids:
-        # Session complete
-        await session_repo.mark_session_complete(db, session)
-        correct = session.problems_correct  # capture before commit
-        total = len(session.problem_ids)  # capture before commit
-        student_language = student.language  # capture before commit
-        student_id_int = student.student_id  # capture before commit
+        return await _complete_session(telegram_id, session, db, session_repo, student, feedback)
 
-        # Record streak practice (flush inside, commit below covers it)
-        _, new_milestones = await StreakRepository().record_practice(
-            db, student_id_int, date.today()
-        )
-
-        # Build milestone messages before commit
-        milestone_msg = ""
-        if new_milestones:
-            enc = EncouragementService()
-            milestone_msg = "\n" + "\n".join(
-                enc.get_milestone_message(m, student_language) for m in new_milestones
-            )
-
-        _active_sessions.pop(telegram_id, None)
-
-        if student_language == "bn":
-            return (
-                f"{feedback}\n\n"
-                f"অনুশীলন শেষ! তুমি {total}টির মধ্যে {correct}টি সঠিক করেছ। "
-                f"\U0001f3c6 কাল আবার এসো!{milestone_msg}"
-            )
-        return (
-            f"{feedback}\n\n"
-            f"Practice complete! You got {correct}/{total} correct. "
-            f"\U0001f3c6 See you tomorrow!{milestone_msg}"
-        )
-
-    # Move to next problem
+    # Correct answer — advance to next problem
     next_problem_id = remaining_ids[0]
-    student_language = student.language  # capture before auto-commit
+    student_language = student.language
     next_problem = await problem_repo.get_problem_by_id(db, next_problem_id)
-
     _active_sessions[telegram_id] = {
         "session_id": session_id,
         "current_problem_id": next_problem_id,
+        "topic": state.get("topic", ""),
     }
-
     if next_problem is None:
         return feedback
-
-    remaining_count = len(remaining_ids)
     return f"{feedback}\n\n" + _format_problem_message(
-        next_problem, student_language, remaining_count
+        next_problem, student_language, len(remaining_ids)
     )
+
+
+async def _complete_session(
+    telegram_id: int,
+    session: "Session",
+    db: AsyncSession,
+    session_repo: SessionRepository,
+    student: "Student",
+    feedback: str,
+) -> str:
+    """Mark session complete, record streak, and prompt continue.
+
+    Args:
+        telegram_id: Telegram user ID.
+        session: Active Session ORM instance.
+        db: Async database session.
+        session_repo: SessionRepository instance.
+        student: Student ORM instance.
+        feedback: Feedback string from the last evaluated answer.
+
+    Returns:
+        Completion message with score and continue prompt.
+    """
+    await session_repo.mark_session_complete(db, session)
+    correct = session.problems_correct
+    total = len(session.problem_ids)
+    student_language = student.language
+    student_id_int = student.student_id
+    topic = str(_active_sessions.get(telegram_id, {}).get("topic", ""))
+
+    _, new_milestones = await StreakRepository().record_practice(db, student_id_int, date.today())
+    milestone_msg = ""
+    if new_milestones:
+        enc = EncouragementService()
+        milestone_msg = "\n" + "\n".join(
+            enc.get_milestone_message(m, student_language) for m in new_milestones
+        )
+
+    _active_sessions.pop(telegram_id, None)
+    _pending_continue[telegram_id] = {
+        "topic": topic,
+        "seen_ids": list(session.problem_ids),
+        "student_id": student_id_int,
+        "grade": student.grade,
+        "language": student_language,
+    }
+
+    score_line = (
+        f"অনুশীলন শেষ! তুমি {total}টির মধ্যে {correct}টি সঠিক করেছ।{milestone_msg}"
+        if student_language == "bn"
+        else f"You got {correct}/{total} correct.{milestone_msg}"
+    )
+    conclude_prompt = get_message(MessageKey.SESSION_CONCLUDED, student_language)
+    return f"{feedback}\n\n{score_line}\n\n{conclude_prompt}"
+
+
+async def handle_wrong_answer_choice(telegram_id: int, text: str, db: AsyncSession) -> str:
+    """Handle the student's reply after a wrong answer (hint or next problem).
+
+    Args:
+        telegram_id: Telegram user ID.
+        text: Raw message text ('1'/'hint' or '2'/'next').
+        db: Async database session.
+
+    Returns:
+        Hint text, next problem, or session conclusion message.
+    """
+    result = await db.execute(select(Student).where(Student.telegram_id == telegram_id))
+    student = result.scalar_one_or_none()
+    language = student.language if student else "en"
+
+    text_clean = text.strip().lower()
+
+    if text_clean in ("1", "hint"):
+        _pending_wrong_answer.pop(telegram_id, None)
+        return await handle_hint_command(telegram_id, db)
+
+    if text_clean in ("2", "next", "পরের প্রশ্ন"):
+        _pending_wrong_answer.pop(telegram_id, None)
+        state = _active_sessions.get(telegram_id)
+        if state is None:
+            return get_message(MessageKey.NO_ACTIVE_SESSION, language)
+
+        session_id = int(state["session_id"])
+        problem_repo = ProblemRepository()
+        session_repo = SessionRepository()
+        response_repo = ResponseRepository()
+
+        session = await session_repo.get_session_by_id(db, session_id)
+        if session is None or session.is_expired():
+            _active_sessions.pop(telegram_id, None)
+            return get_message(MessageKey.SESSION_EXPIRED, language)
+
+        answered_ids = await response_repo.get_answered_problem_ids(db, session_id)
+        remaining_ids = [pid for pid in session.problem_ids if pid not in answered_ids]
+
+        if not remaining_ids and student:
+            return await _complete_session(telegram_id, session, db, session_repo, student, "")
+
+        next_problem_id = remaining_ids[0]
+        next_problem = await problem_repo.get_problem_by_id(db, next_problem_id)
+        _active_sessions[telegram_id] = {
+            "session_id": session_id,
+            "current_problem_id": next_problem_id,
+            "topic": state.get("topic", ""),
+        }
+        if next_problem is None:
+            return get_message(MessageKey.ERROR_PROBLEM_NOT_FOUND, language)
+        return _format_problem_message(next_problem, language, len(remaining_ids))
+
+    # Invalid reply — re-prompt
+    _pending_wrong_answer[telegram_id] = True
+    return get_message(MessageKey.WRONG_ANSWER_CHOICE_INVALID, language)
+
+
+async def handle_continue_choice(telegram_id: int, text: str, db: AsyncSession) -> str:
+    """Handle the student's yes/no reply after session conclusion.
+
+    Args:
+        telegram_id: Telegram user ID.
+        text: Raw message text ('1'/'yes' or '2'/'no').
+        db: Async database session.
+
+    Returns:
+        Next topic's first problem, or a goodbye message.
+    """
+    state = _pending_continue.get(telegram_id, {})
+    language = str(state.get("language", "en"))
+    text_clean = text.strip().lower()
+
+    if text_clean in ("2", "no", "না", "na"):
+        _pending_continue.pop(telegram_id, None)
+        return get_message(MessageKey.SESSION_EXITED, language)
+
+    if text_clean not in ("1", "yes", "হ্যাঁ", "ha", "haa"):
+        return get_message(MessageKey.CONTINUE_INVALID, language)
+
+    # User said yes — show topic menu again
+    _pending_continue.pop(telegram_id, None)
+    result = await db.execute(select(Student).where(Student.telegram_id == telegram_id))
+    student = result.scalar_one_or_none()
+    if student is None:
+        return get_message(MessageKey.REGISTER_FIRST, "en")
+
+    problem_repo = ProblemRepository()
+    topics = await problem_repo.get_topics_for_grade(db, student.grade)
+    if not topics:
+        return get_message(MessageKey.NO_PROBLEMS_FOUND, language)
+
+    if len(_pending_topic_choice) >= _PENDING_TOPIC_CAP:
+        oldest = next(iter(_pending_topic_choice))
+        del _pending_topic_choice[oldest]
+    _pending_topic_choice[telegram_id] = topics
+
+    numbered = "\n".join(f"{i + 1}. {t}" for i, t in enumerate(topics))
+    if language == "bn":
+        return f"একটি বিষয় বেছে নাও:\n\n{numbered}\n\nনম্বর দিয়ে উত্তর দাও।"
+    return f"Choose a topic to practice:\n\n{numbered}\n\nReply with the number."
+
+
+async def handle_exit_command(telegram_id: int, db: AsyncSession) -> str:
+    """Handle /exit command — end the current session immediately.
+
+    Args:
+        telegram_id: Telegram user ID.
+        db: Async database session.
+
+    Returns:
+        Goodbye message.
+    """
+    _active_sessions.pop(telegram_id, None)
+    _pending_wrong_answer.pop(telegram_id, None)
+    _pending_continue.pop(telegram_id, None)
+    _pending_topic_choice.pop(telegram_id, None)
+
+    result = await db.execute(select(Student).where(Student.telegram_id == telegram_id))
+    student = result.scalar_one_or_none()
+    language = student.language if student else "en"
+
+    logger.info("Session exited", hashed_telegram_id=hash_telegram_id(telegram_id))
+    return get_message(MessageKey.SESSION_EXITED, language)
 
 
 async def handle_hint_command(telegram_id: int, db: AsyncSession) -> str:
@@ -310,8 +519,8 @@ async def handle_hint_command(telegram_id: int, db: AsyncSession) -> str:
             MessageKey.NO_ACTIVE_SESSION, lang_student.language if lang_student else "en"
         )
 
-    session_id = state["session_id"]
-    current_problem_id = state["current_problem_id"]
+    session_id = int(state["session_id"])
+    current_problem_id = int(state["current_problem_id"])
 
     # Fetch student
     result = await db.execute(select(Student).where(Student.telegram_id == telegram_id))
@@ -821,7 +1030,7 @@ async def telegram_webhook(
     return WebhookResponse(status="ok", message_id=message_id)
 
 
-async def _handle_message(message: TelegramMessage, db: AsyncSession) -> None:
+async def _handle_message(message: TelegramMessage, db: AsyncSession) -> None:  # noqa: C901
     """Route a Telegram message to the correct handler.
 
     Args:
@@ -844,15 +1053,16 @@ async def _handle_message(message: TelegramMessage, db: AsyncSession) -> None:
         # Cancel any pending flows
         _pending_language_choice.pop(telegram_id, None)
         _pending_onboarding.pop(telegram_id, None)
+        _pending_topic_choice.pop(telegram_id, None)
+        _pending_wrong_answer.pop(telegram_id, None)
+        _pending_continue.pop(telegram_id, None)
 
         if existing_student:
-            # Returning student — show welcome message
             welcome_msg = get_message(
                 MessageKey.WELCOME, existing_student.language, name=existing_student.name
             )
             await telegram.send_message(chat_id, welcome_msg)
         else:
-            # New student — begin multi-step onboarding
             reply = await handle_start_new_student(telegram_id, first_name)
             await telegram.send_message(chat_id, reply)
 
@@ -861,6 +1071,11 @@ async def _handle_message(message: TelegramMessage, db: AsyncSession) -> None:
             hashed_telegram_id=hash_telegram_id(telegram_id),
             is_new=existing_student is None,
         )
+
+    elif text.startswith("/exit"):
+        reply = await handle_exit_command(telegram_id, db)
+        await telegram.send_message(chat_id, reply)
+        logger.info("Handled /exit", hashed_telegram_id=hash_telegram_id(telegram_id))
 
     elif _pending_onboarding.get(telegram_id):
         reply = await handle_onboarding_reply(telegram_id, text, db)
@@ -872,6 +1087,9 @@ async def _handle_message(message: TelegramMessage, db: AsyncSession) -> None:
 
     elif text.startswith("/practice"):
         _pending_language_choice.pop(telegram_id, None)
+        _pending_wrong_answer.pop(telegram_id, None)
+        _pending_continue.pop(telegram_id, None)
+        _pending_topic_choice.pop(telegram_id, None)
         reply = await handle_practice_command(telegram_id, db)
         await telegram.send_message(chat_id, reply)
         logger.info(
@@ -880,7 +1098,9 @@ async def _handle_message(message: TelegramMessage, db: AsyncSession) -> None:
         )
 
     elif text.startswith("/hint"):
+        # /hint works from both normal session and wrong-answer-pending states
         _pending_language_choice.pop(telegram_id, None)
+        _pending_wrong_answer.pop(telegram_id, None)
         reply = await handle_hint_command(telegram_id, db)
         await telegram.send_message(chat_id, reply)
         logger.info(
@@ -892,6 +1112,30 @@ async def _handle_message(message: TelegramMessage, db: AsyncSession) -> None:
         _pending_language_choice.pop(telegram_id, None)
         reply = await handle_streak_command(telegram_id, db)
         await telegram.send_message(chat_id, reply)
+
+    elif _pending_topic_choice.get(telegram_id) is not None:
+        reply = await handle_topic_choice(telegram_id, text, db)
+        await telegram.send_message(chat_id, reply)
+        logger.info(
+            "Handled topic choice",
+            hashed_telegram_id=hash_telegram_id(telegram_id),
+        )
+
+    elif _pending_wrong_answer.get(telegram_id):
+        reply = await handle_wrong_answer_choice(telegram_id, text, db)
+        await telegram.send_message(chat_id, reply)
+        logger.info(
+            "Handled wrong answer choice",
+            hashed_telegram_id=hash_telegram_id(telegram_id),
+        )
+
+    elif _pending_continue.get(telegram_id) is not None:
+        reply = await handle_continue_choice(telegram_id, text, db)
+        await telegram.send_message(chat_id, reply)
+        logger.info(
+            "Handled continue choice",
+            hashed_telegram_id=hash_telegram_id(telegram_id),
+        )
 
     elif _pending_language_choice.get(telegram_id):
         reply = await handle_language_choice(telegram_id, text, db)
@@ -910,7 +1154,6 @@ async def _handle_message(message: TelegramMessage, db: AsyncSession) -> None:
         )
 
     elif telegram_id in _active_sessions:
-        # Free-text message in active session → treat as answer
         reply = await handle_answer_message(telegram_id, text, db)
         await telegram.send_message(chat_id, reply)
         logger.info(
@@ -919,7 +1162,6 @@ async def _handle_message(message: TelegramMessage, db: AsyncSession) -> None:
         )
 
     else:
-        # Unknown command / no active session
         reply = await handle_unknown_message(telegram_id, text, student_language)
         await telegram.send_message(chat_id, reply)
         logger.info(
