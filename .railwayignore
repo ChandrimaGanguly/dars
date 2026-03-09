@@ -1,0 +1,16 @@
+# Exclude local environment files — Railway injects env vars via the dashboard
+.env
+.env.local
+.env.*.local
+
+# Exclude dev/test artifacts
+.pytest_cache/
+htmlcov/
+__pycache__/
+*.pyc
+.mypy_cache/
+.ruff_cache/
+
+# Exclude local tooling
+.claude/
+.git/
