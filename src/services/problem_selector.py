@@ -251,9 +251,10 @@ class ProblemSelector:
         # Sort: highest score first, then lowest problem_id on tie
         scored.sort(key=lambda t: (-t[0], t[1]))
 
-        # Return top N
+        # Return top N, ordered easy → hard for static learning path
         n = min(PROBLEMS_PER_SESSION, len(scored))
         selected = [problem for _, _, problem in scored[:n]]
+        selected.sort(key=lambda p: p.difficulty)
 
         logger.info(
             "Selected %d problems for student_id=%d grade=%d",
