@@ -18,10 +18,12 @@ from src.models.student import Student
 from src.routes.webhook import (
     _active_sessions,
     _handle_message,
+    _pending_practice_grade,
     _pending_topic_choice,
     handle_answer_message,
     handle_hint_command,
     handle_practice_command,
+    handle_practice_grade_choice,
     handle_topic_choice,
 )
 from src.schemas.telegram import TelegramMessage
@@ -126,31 +128,53 @@ async def _populate_problems(db_session, count: int = 5) -> list[Problem]:
 class TestPracticeCommandWiring:
     """Integration tests for /practice command via handle_practice_command."""
 
-    async def test_practice_command_sends_topic_menu(self, db_session) -> None:
-        """handle_practice_command returns a topic selection menu."""
+    async def test_practice_command_sends_grade_prompt(self, db_session) -> None:
+        """/practice returns a grade selection prompt for a new session."""
         await _create_student(db_session)
         await _populate_problems(db_session, 5)
 
         _active_sessions.pop(TELEGRAM_ID, None)
         _pending_topic_choice.pop(TELEGRAM_ID, None)
+        _pending_practice_grade.pop(TELEGRAM_ID, None)
 
         reply = await handle_practice_command(TELEGRAM_ID, db_session)
 
         assert reply is not None
         assert len(reply) > 0
-        # Should show a numbered topic list
-        assert "1." in reply
+        # Should ask for grade, not topic yet
+        assert "6" in reply
+        assert "7" in reply
+        assert "8" in reply
+        assert TELEGRAM_ID in _pending_practice_grade
 
-    async def test_practice_command_stores_session_after_topic_choice(self, db_session) -> None:
-        """Session state is stored in _active_sessions after topic is chosen."""
+    async def test_practice_grade_choice_sends_topic_menu(self, db_session) -> None:
+        """After grade selection, handle_practice_grade_choice returns a topic menu."""
         await _create_student(db_session)
         await _populate_problems(db_session, 5)
 
         _active_sessions.pop(TELEGRAM_ID, None)
         _pending_topic_choice.pop(TELEGRAM_ID, None)
+        _pending_practice_grade.pop(TELEGRAM_ID, None)
 
         await handle_practice_command(TELEGRAM_ID, db_session)
-        # Now pick topic 1
+        reply = await handle_practice_grade_choice(TELEGRAM_ID, "7", db_session)
+
+        assert "1." in reply
+        assert TELEGRAM_ID in _pending_topic_choice
+
+    async def test_practice_command_stores_session_after_grade_and_topic_choice(
+        self, db_session
+    ) -> None:
+        """Session state is stored in _active_sessions after grade + topic selection."""
+        await _create_student(db_session)
+        await _populate_problems(db_session, 5)
+
+        _active_sessions.pop(TELEGRAM_ID, None)
+        _pending_topic_choice.pop(TELEGRAM_ID, None)
+        _pending_practice_grade.pop(TELEGRAM_ID, None)
+
+        await handle_practice_command(TELEGRAM_ID, db_session)
+        await handle_practice_grade_choice(TELEGRAM_ID, "7", db_session)
         await handle_topic_choice(TELEGRAM_ID, "1", db_session)
 
         assert TELEGRAM_ID in _active_sessions
@@ -158,8 +182,8 @@ class TestPracticeCommandWiring:
         assert "session_id" in state
         assert "current_problem_id" in state
 
-    async def test_practice_command_after_completed_shows_topic_menu(self, db_session) -> None:
-        """After a completed session, /practice shows topic menu (not 'complete' gate)."""
+    async def test_practice_command_after_completed_shows_grade_prompt(self, db_session) -> None:
+        """After a completed session, /practice shows grade prompt (not 'already done')."""
         student = await _create_student(db_session)
         student_id = student.student_id  # capture before _populate_problems commits
         await _populate_problems(db_session, 5)
@@ -177,10 +201,13 @@ class TestPracticeCommandWiring:
 
         _active_sessions.pop(TELEGRAM_ID, None)
         _pending_topic_choice.pop(TELEGRAM_ID, None)
+        _pending_practice_grade.pop(TELEGRAM_ID, None)
         reply = await handle_practice_command(TELEGRAM_ID, db_session)
 
-        # With topic-based flow, user always gets a topic menu (no hard "already done" gate)
-        assert "1." in reply
+        # Should show grade prompt, not topic menu yet
+        assert "6" in reply
+        assert "7" in reply
+        assert "8" in reply
 
     async def test_practice_command_unregistered_student(self, db_session) -> None:
         """handle_practice_command for unknown student returns register message."""

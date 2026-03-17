@@ -77,6 +77,27 @@ _pending_wrong_answer: dict[int, bool] = {}
 _pending_continue: dict[int, dict[str, object]] = {}
 
 # ---------------------------------------------------------------------------
+# Grade command pending state (permanent profile update via /grade)
+# Maps telegram_id → True while awaiting "6"/"7"/"8" reply
+# ---------------------------------------------------------------------------
+_pending_grade_choice: dict[int, bool] = {}
+_PENDING_GRADE_CAP: int = 200
+
+# ---------------------------------------------------------------------------
+# Practice-flow grade selection (temporary override for this session only)
+# Maps telegram_id → True while awaiting grade reply before topic menu
+# ---------------------------------------------------------------------------
+_pending_practice_grade: dict[int, bool] = {}
+_PENDING_PRACTICE_GRADE_CAP: int = 200
+
+# ---------------------------------------------------------------------------
+# Stores the grade chosen during practice-flow grade selection.
+# Used by handle_topic_choice to fetch problems at the right grade.
+# Maps telegram_id → grade int (6, 7, or 8)
+# ---------------------------------------------------------------------------
+_session_grade_override: dict[int, int] = {}
+
+# ---------------------------------------------------------------------------
 # Idempotency: track recently processed update_ids to prevent double handling
 # (Telegram may deliver the same update twice during retries or rolling deploys)
 # ---------------------------------------------------------------------------
@@ -136,20 +157,54 @@ async def handle_practice_command(telegram_id: int, db: AsyncSession) -> str:
         }
         return _format_problem_message(first_problem, student.language, len(remaining_ids))
 
-    # Show topic selection menu
-    problem_repo = ProblemRepository()
-    topics = await problem_repo.get_topics_for_grade(db, student.grade)
-    if not topics:
-        return get_message(MessageKey.NO_PROBLEMS_FOUND, student.language)
+    # Show grade selection first, then topic selection
+    if len(_pending_practice_grade) >= _PENDING_PRACTICE_GRADE_CAP:
+        oldest = next(iter(_pending_practice_grade))
+        del _pending_practice_grade[oldest]
+    _pending_practice_grade[telegram_id] = True
+    return get_message(MessageKey.PRACTICE_GRADE_PROMPT, student.language)
 
-    # Store topics so handle_topic_choice can resolve the user's number
+
+async def handle_practice_grade_choice(telegram_id: int, text: str, db: AsyncSession) -> str:
+    """Handle the student's grade reply during the practice flow.
+
+    Validates the grade, fetches topics for that grade, and returns a topic
+    selection menu.  The chosen grade is stored in _session_grade_override so
+    handle_topic_choice uses it instead of the student's profile grade.
+
+    Args:
+        telegram_id: Telegram user ID.
+        text: Raw message text (expected "6", "7", or "8").
+        db: Async database session.
+
+    Returns:
+        Topic selection menu or an error prompt.
+    """
+    result = await db.execute(select(Student).where(Student.telegram_id == telegram_id))
+    student = result.scalar_one_or_none()
+    language = student.language if student else "en"
+
+    cleaned = text.strip()
+    if cleaned not in ("6", "7", "8"):
+        return get_message(MessageKey.GRADE_INVALID, language)
+
+    chosen_grade = int(cleaned)
+    _pending_practice_grade.pop(telegram_id, None)
+    _session_grade_override[telegram_id] = chosen_grade
+
+    problem_repo = ProblemRepository()
+    topics = await problem_repo.get_topics_for_grade(db, chosen_grade)
+    if not topics:
+        _session_grade_override.pop(telegram_id, None)
+        return get_message(MessageKey.NO_PROBLEMS_FOUND, language)
+
     if len(_pending_topic_choice) >= _PENDING_TOPIC_CAP:
         oldest = next(iter(_pending_topic_choice))
         del _pending_topic_choice[oldest]
     _pending_topic_choice[telegram_id] = topics
 
     numbered = "\n".join(f"{i + 1}. {t}" for i, t in enumerate(topics))
-    if student.language == "bn":
+    if language == "bn":
         return f"একটি বিষয় বেছে নাও:\n\n{numbered}\n\nনম্বর দিয়ে উত্তর দাও।"
     return f"Choose a topic to practice:\n\n{numbered}\n\nReply with the number."
 
@@ -185,6 +240,9 @@ async def handle_topic_choice(telegram_id: int, text: str, db: AsyncSession) -> 
 
     topic = topics[choice - 1]
     _pending_topic_choice.pop(telegram_id, None)
+
+    # Use the practice-flow grade override if present, otherwise fall back to profile grade
+    grade = _session_grade_override.pop(telegram_id, grade)
 
     problem_repo = ProblemRepository()
     problems = await problem_repo.get_problems_by_grade(db, grade, topic=topic)
@@ -453,27 +511,18 @@ async def handle_continue_choice(telegram_id: int, text: str, db: AsyncSession) 
     if text_clean not in ("1", "yes", "হ্যাঁ", "ha", "haa"):
         return get_message(MessageKey.CONTINUE_INVALID, language)
 
-    # User said yes — show topic menu again
+    # User said yes — ask for grade first, then topic
     _pending_continue.pop(telegram_id, None)
     result = await db.execute(select(Student).where(Student.telegram_id == telegram_id))
     student = result.scalar_one_or_none()
     if student is None:
         return get_message(MessageKey.REGISTER_FIRST, "en")
 
-    problem_repo = ProblemRepository()
-    topics = await problem_repo.get_topics_for_grade(db, student.grade)
-    if not topics:
-        return get_message(MessageKey.NO_PROBLEMS_FOUND, language)
-
-    if len(_pending_topic_choice) >= _PENDING_TOPIC_CAP:
-        oldest = next(iter(_pending_topic_choice))
-        del _pending_topic_choice[oldest]
-    _pending_topic_choice[telegram_id] = topics
-
-    numbered = "\n".join(f"{i + 1}. {t}" for i, t in enumerate(topics))
-    if language == "bn":
-        return f"একটি বিষয় বেছে নাও:\n\n{numbered}\n\nনম্বর দিয়ে উত্তর দাও।"
-    return f"Choose a topic to practice:\n\n{numbered}\n\nReply with the number."
+    if len(_pending_practice_grade) >= _PENDING_PRACTICE_GRADE_CAP:
+        oldest = next(iter(_pending_practice_grade))
+        del _pending_practice_grade[oldest]
+    _pending_practice_grade[telegram_id] = True
+    return get_message(MessageKey.PRACTICE_GRADE_PROMPT, student.language)
 
 
 async def handle_exit_command(telegram_id: int, db: AsyncSession) -> str:
@@ -490,6 +539,9 @@ async def handle_exit_command(telegram_id: int, db: AsyncSession) -> str:
     _pending_wrong_answer.pop(telegram_id, None)
     _pending_continue.pop(telegram_id, None)
     _pending_topic_choice.pop(telegram_id, None)
+    _pending_practice_grade.pop(telegram_id, None)
+    _session_grade_override.pop(telegram_id, None)
+    _pending_grade_choice.pop(telegram_id, None)
 
     result = await db.execute(select(Student).where(Student.telegram_id == telegram_id))
     student = result.scalar_one_or_none()
@@ -876,6 +928,72 @@ async def handle_language_choice(telegram_id: int, text: str, db: AsyncSession) 
 
 
 # ---------------------------------------------------------------------------
+# Grade command handlers (/grade — permanent profile update)
+# ---------------------------------------------------------------------------
+
+
+async def handle_grade_command(telegram_id: int, db: AsyncSession) -> str:
+    """Handle /grade Telegram command — show grade selection prompt.
+
+    Sets _pending_grade_choice[telegram_id] = True to signal that the next
+    message is a grade selection reply (permanently updates student.grade).
+
+    Args:
+        telegram_id: Telegram user ID.
+        db: Async database session.
+
+    Returns:
+        Grade selection prompt string.
+    """
+    result = await db.execute(select(Student).where(Student.telegram_id == telegram_id))
+    student = result.scalar_one_or_none()
+    if student is None:
+        return get_message(MessageKey.REGISTER_FIRST, "en")
+    if len(_pending_grade_choice) >= _PENDING_GRADE_CAP:
+        oldest = next(iter(_pending_grade_choice))
+        del _pending_grade_choice[oldest]
+    _pending_grade_choice[telegram_id] = True
+    return get_message(MessageKey.GRADE_PROMPT, student.language)
+
+
+async def handle_grade_choice(telegram_id: int, text: str, db: AsyncSession) -> str:
+    """Handle a grade selection reply ("6", "7", or "8") for the /grade command.
+
+    Validates input, updates student.grade in the DB, clears pending state,
+    and confirms in the student's language. Invalid input re-prompts once.
+
+    Args:
+        telegram_id: Telegram user ID.
+        text: Raw message text from the student.
+        db: Async database session.
+
+    Returns:
+        Confirmation message or a re-prompt on invalid input.
+    """
+    result = await db.execute(select(Student).where(Student.telegram_id == telegram_id))
+    student = result.scalar_one_or_none()
+    if student is None:
+        _pending_grade_choice.pop(telegram_id, None)
+        return get_message(MessageKey.REGISTER_FIRST, "en")
+
+    cleaned = text.strip()
+    if cleaned not in ("6", "7", "8"):
+        return get_message(MessageKey.GRADE_INVALID, student.language)
+
+    new_grade = int(cleaned)
+    student.grade = new_grade
+    await db.flush()
+
+    _pending_grade_choice.pop(telegram_id, None)
+    logger.info(
+        "Grade updated",
+        hashed_telegram_id=hash_telegram_id(telegram_id),
+        new_grade=new_grade,
+    )
+    return get_message(MessageKey.GRADE_CONFIRMED, student.language, grade=new_grade)
+
+
+# ---------------------------------------------------------------------------
 # Private helpers
 # ---------------------------------------------------------------------------
 
@@ -1056,6 +1174,9 @@ async def _handle_message(message: TelegramMessage, db: AsyncSession) -> None:  
         _pending_topic_choice.pop(telegram_id, None)
         _pending_wrong_answer.pop(telegram_id, None)
         _pending_continue.pop(telegram_id, None)
+        _pending_practice_grade.pop(telegram_id, None)
+        _session_grade_override.pop(telegram_id, None)
+        _pending_grade_choice.pop(telegram_id, None)
 
         if existing_student:
             welcome_msg = get_message(
@@ -1090,6 +1211,9 @@ async def _handle_message(message: TelegramMessage, db: AsyncSession) -> None:  
         _pending_wrong_answer.pop(telegram_id, None)
         _pending_continue.pop(telegram_id, None)
         _pending_topic_choice.pop(telegram_id, None)
+        _pending_practice_grade.pop(telegram_id, None)
+        _session_grade_override.pop(telegram_id, None)
+        _pending_grade_choice.pop(telegram_id, None)
         reply = await handle_practice_command(telegram_id, db)
         await telegram.send_message(chat_id, reply)
         logger.info(
@@ -1112,6 +1236,30 @@ async def _handle_message(message: TelegramMessage, db: AsyncSession) -> None:  
         _pending_language_choice.pop(telegram_id, None)
         reply = await handle_streak_command(telegram_id, db)
         await telegram.send_message(chat_id, reply)
+
+    elif text.startswith("/grade"):
+        _pending_language_choice.pop(telegram_id, None)
+        _pending_practice_grade.pop(telegram_id, None)
+        _session_grade_override.pop(telegram_id, None)
+        reply = await handle_grade_command(telegram_id, db)
+        await telegram.send_message(chat_id, reply)
+        logger.info("Handled /grade", hashed_telegram_id=hash_telegram_id(telegram_id))
+
+    elif _pending_grade_choice.get(telegram_id):
+        reply = await handle_grade_choice(telegram_id, text, db)
+        await telegram.send_message(chat_id, reply)
+        logger.info(
+            "Handled grade choice",
+            hashed_telegram_id=hash_telegram_id(telegram_id),
+        )
+
+    elif _pending_practice_grade.get(telegram_id):
+        reply = await handle_practice_grade_choice(telegram_id, text, db)
+        await telegram.send_message(chat_id, reply)
+        logger.info(
+            "Handled practice grade choice",
+            hashed_telegram_id=hash_telegram_id(telegram_id),
+        )
 
     elif _pending_topic_choice.get(telegram_id) is not None:
         reply = await handle_topic_choice(telegram_id, text, db)

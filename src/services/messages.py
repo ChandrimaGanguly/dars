@@ -53,6 +53,12 @@ class MessageKey(StrEnum):
     CONTINUE_INVALID = "continue_invalid"
     # Exit command
     SESSION_EXITED = "session_exited"
+    # Grade command (permanent profile update)
+    GRADE_PROMPT = "grade_prompt"
+    GRADE_CONFIRMED = "grade_confirmed"
+    GRADE_INVALID = "grade_invalid"
+    # Practice-flow grade selection (temporary, per-session)
+    PRACTICE_GRADE_PROMPT = "practice_grade_prompt"
 
 
 # Bilingual message templates.  All {placeholders} are documented inline.
@@ -64,6 +70,7 @@ MESSAGES: dict[str, dict[str, str]] = {
             "I'm your AI tutor. Send /practice to start learning!\n\n"
             "/practice — Daily problems\n"
             "/streak   — Streak calendar\n"
+            "/grade    — Change default grade\n"
             "/language — Change language\n"
             "/exit     — End current session"
         ),
@@ -72,6 +79,7 @@ MESSAGES: dict[str, dict[str, str]] = {
             "আমি তোমার AI টিউটর। অনুশীলন শুরু করতে /practice লেখো!\n\n"
             "/practice — প্রতিদিনের প্রশ্ন\n"
             "/streak   — ধারা ক্যালেন্ডার\n"
+            "/grade    — ডিফল্ট শ্রেণী পরিবর্তন\n"
             "/language — ভাষা পরিবর্তন\n"
             "/exit     — অনুশীলন শেষ করো"
         ),
@@ -113,6 +121,7 @@ MESSAGES: dict[str, dict[str, str]] = {
             "/practice — Start your daily practice\n"
             "/hint     — Get a hint for the current question\n"
             "/streak   — View your streak calendar\n"
+            "/grade    — Change default grade\n"
             "/language — Change language\n"
             "/start    — Register as a student"
         ),
@@ -121,6 +130,7 @@ MESSAGES: dict[str, dict[str, str]] = {
             "/practice — অনুশীলন শুরু করো\n"
             "/hint     — hint পাও\n"
             "/streak   — তোমার ধারা দেখো\n"
+            "/grade    — ডিফল্ট শ্রেণী পরিবর্তন\n"
             "/language — ভাষা পরিবর্তন করো\n"
             "/start    — নিবন্ধন করো"
         ),
@@ -212,6 +222,37 @@ MESSAGES: dict[str, dict[str, str]] = {
     MessageKey.SESSION_EXITED: {
         "en": "Practice session ended. Type /practice to start again. \U0001f44b",
         "bn": "অনুশীলন শেষ হয়েছে। আবার শুরু করতে /practice লেখো। \U0001f44b",
+    },
+    MessageKey.GRADE_PROMPT: {
+        "en": (
+            "Which grade would you like to set as your default?\n\n"
+            "6 — Class VI\n7 — Class VII\n8 — Class VIII"
+        ),
+        "bn": (
+            "তুমি কোন শ্রেণীটি তোমার ডিফল্ট হিসেবে সেট করতে চাও?\n\n"
+            "6 — ষষ্ঠ শ্রেণী\n7 — সপ্তম শ্রেণী\n8 — অষ্টম শ্রেণী"
+        ),
+    },
+    # {grade} — grade number
+    MessageKey.GRADE_CONFIRMED: {
+        "en": "Grade set to Class {grade}! Future practice will default to this grade.",
+        "bn": "শ্রেণী {grade} সেট করা হয়েছে! ভবিষ্যতের অনুশীলন এই শ্রেণীতে হবে।",
+    },
+    MessageKey.GRADE_INVALID: {
+        "en": "Please reply with 6, 7, or 8.",
+        "bn": "অনুগ্রহ করে 6, 7, বা 8 দিয়ে উত্তর দাও।",
+    },
+    MessageKey.PRACTICE_GRADE_PROMPT: {
+        "en": (
+            "Which grade would you like to practice?\n\n"
+            "6 — Class VI\n7 — Class VII\n8 — Class VIII\n\n"
+            "Reply with the number."
+        ),
+        "bn": (
+            "তুমি কোন শ্রেণীর অনুশীলন করতে চাও?\n\n"
+            "6 — ষষ্ঠ শ্রেণী\n7 — সপ্তম শ্রেণী\n8 — অষ্টম শ্রেণী\n\n"
+            "নম্বর দিয়ে উত্তর দাও।"
+        ),
     },
     # {name} — student's first name
     MessageKey.ONBOARDING_COMPLETE: {
