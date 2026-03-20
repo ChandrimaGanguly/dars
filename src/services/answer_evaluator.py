@@ -40,6 +40,9 @@ _THOUSANDS_COMMA = re.compile(r"(\d),(\d{3})\b")
 # Arabic-script variants of comma/separator
 _ARABIC_COMMA = re.compile(r"[،,٬]")
 
+# Normalise Python-style power operator to caret (x**2 → x^2)
+_DOUBLE_STAR = re.compile(r"\*\*")
+
 # Letter-to-index mapping for multiple choice
 _MC_LETTER_MAP: dict[str, int] = {"a": 0, "b": 1, "c": 2, "d": 3}
 
@@ -293,6 +296,9 @@ class AnswerEvaluator:
 
         # Remove trailing units (e.g., "300 cm" → "300")
         text = _TRAILING_UNITS.sub("", text)
+
+        # Normalise power notation (x**2 → x^2) so both forms compare equal
+        text = _DOUBLE_STAR.sub("^", text)
 
         return text.strip()
 

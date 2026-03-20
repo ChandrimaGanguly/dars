@@ -200,6 +200,48 @@ class TestNormalization:
         evaluator = AnswerEvaluator()
         assert evaluator._normalize_answer("3.14") == "3.14"
 
+    def test_normalize_double_star_to_caret(self) -> None:
+        """Python-style ** should be normalised to ^ so x**2 == x^2."""
+        evaluator = AnswerEvaluator()
+        assert evaluator._normalize_answer("x**2") == "x^2"
+        assert evaluator._normalize_answer("2**3") == "2^3"
+
+
+@pytest.mark.unit
+class TestAlgebraicExpressions:
+    """Tests for non-numeric (algebraic) expression answers."""
+
+    def test_caret_notation_accepted(self) -> None:
+        """Student answer x^2 should match DB answer x^2."""
+        evaluator = AnswerEvaluator()
+        problem = _make_problem(answer="x^2", answer_type="numeric")
+        result = evaluator.evaluate(problem, "x^2", hints_used=0)
+        assert result.is_correct is True
+        assert result.answer_format_valid is True
+
+    def test_double_star_notation_accepted(self) -> None:
+        """Student answer x**2 should match DB answer x^2."""
+        evaluator = AnswerEvaluator()
+        problem = _make_problem(answer="x^2", answer_type="numeric")
+        result = evaluator.evaluate(problem, "x**2", hints_used=0)
+        assert result.is_correct is True
+        assert result.answer_format_valid is True
+
+    def test_double_star_in_db_matches_caret_input(self) -> None:
+        """DB stores x**2 but student types x^2 — still correct."""
+        evaluator = AnswerEvaluator()
+        problem = _make_problem(answer="x**2", answer_type="numeric")
+        result = evaluator.evaluate(problem, "x^2", hints_used=0)
+        assert result.is_correct is True
+
+    def test_wrong_algebraic_answer(self) -> None:
+        """x^3 should not match x^2."""
+        evaluator = AnswerEvaluator()
+        problem = _make_problem(answer="x^2", answer_type="numeric")
+        result = evaluator.evaluate(problem, "x^3", hints_used=0)
+        assert result.is_correct is False
+        assert result.answer_format_valid is True
+
 
 @pytest.mark.unit
 class TestBlankAndGibberish:
