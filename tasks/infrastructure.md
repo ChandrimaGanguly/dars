@@ -91,11 +91,11 @@
 
 - [x] TASK-E05: Create validation pipeline documentation (completed 2026-01-28)
   - **Status:** complete
-  - **Notes:** VALIDATION_PIPELINE.md - 400+ lines, comprehensive guide
+  - **Notes:** docs/development/VALIDATION_PIPELINE.md - 400+ lines, comprehensive guide
 
 - [x] TASK-E06: Create agent development checklist (completed 2026-01-28)
   - **Status:** complete
-  - **Notes:** AGENT_CHECKLIST.md - Step-by-step for autonomous agents
+  - **Notes:** docs/planning/AGENT_CHECKLIST.md - Step-by-step for autonomous agents
 
 ### Environment Setup
 

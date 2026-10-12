@@ -613,7 +613,7 @@ curl http://localhost:8000/admin/students?page=999999
 - [ ] Verify all 8 security requirements implemented
 - [ ] Code review with Jodha (FastAPI expert)
 - [ ] Verify no performance regressions
-- [ ] Document any deviations from SECURITY_ROADMAP_INTEGRATION.md
+- [ ] Document any deviations from docs/security/SECURITY_ROADMAP_INTEGRATION.md
 
 ### Code Review Checklist (Jodha will verify)
 
@@ -714,15 +714,15 @@ curl http://localhost:8000/admin/students?page=999999
 - Agent C can start anytime, but code review must complete before Phase 3
 - All work must pass validation pipeline before committing
 - Security work (Agent C) is BLOCKING for Phase 3 → DO NOT skip
-- All agents follow AGENT_CHECKLIST.md workflow
+- All agents follow docs/planning/AGENT_CHECKLIST.md workflow
 
 ---
 
 ## References
 
-- `AGENT_ROADMAP.md` - Phase 1 full description
-- `SECURITY_ROADMAP_INTEGRATION.md` - Security requirements details
-- `AGENT_CHECKLIST.md` - Development workflow
+- `docs/planning/AGENT_ROADMAP.md` - Phase 1 full description
+- `docs/security/SECURITY_ROADMAP_INTEGRATION.md` - Security requirements details
+- `docs/planning/AGENT_CHECKLIST.md` - Development workflow
 - `openspec/agents/maryam.md` - Maryam's guidelines
 - `openspec/agents/jodha.md` - Jodha's guidelines
 - `openspec/agents/noor.md` - Noor's security guidelines

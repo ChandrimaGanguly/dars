@@ -8,7 +8,7 @@
 
 ## Executive Summary
 
-The API_ARCHITECTURE.md and DEPENDENCY_ANALYSIS.md documents have been thoroughly compared and aligned. **10 critical gaps** were identified where interface contracts did not match the parallel work streams and handoff points defined in the dependency map. All gaps have been **resolved**.
+The docs/architecture/API_ARCHITECTURE.md and docs/planning/DEPENDENCY_ANALYSIS.md documents have been thoroughly compared and aligned. **10 critical gaps** were identified where interface contracts did not match the parallel work streams and handoff points defined in the dependency map. All gaps have been **resolved**.
 
 ---
 
@@ -17,8 +17,8 @@ The API_ARCHITECTURE.md and DEPENDENCY_ANALYSIS.md documents have been thoroughl
 ### 1. Cross-Document Comparison
 
 **Documents Analyzed:**
-- API_ARCHITECTURE.md (v1.0) - 1,986 lines defining REST API and service contracts
-- DEPENDENCY_ANALYSIS.md (v1.0) - 1,099 lines defining work streams and handoffs
+- docs/architecture/API_ARCHITECTURE.md (v1.0) - 1,986 lines defining REST API and service contracts
+- docs/planning/DEPENDENCY_ANALYSIS.md (v1.0) - 1,099 lines defining work streams and handoffs
 
 **Approach:**
 - Mapped REST endpoints to work stream ownership
@@ -514,7 +514,7 @@ ProblemWithoutAnswer {
 
 **✅ APPROVED FOR IMPLEMENTATION**
 
-The API_ARCHITECTURE.md now provides complete, unambiguous contracts for all 5 work streams. Agents can begin implementation with:
+The docs/architecture/API_ARCHITECTURE.md now provides complete, unambiguous contracts for all 5 work streams. Agents can begin implementation with:
 
 1. **Stream A (Day 1):** Full database schema and API structure from PART 1-3
 2. **Stream C (Day 1):** Problem schema and import format from models section

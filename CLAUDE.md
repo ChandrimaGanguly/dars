@@ -463,13 +463,13 @@ The project is structured for 5 parallel work streams with explicit handoff poin
 - Key handoffs: Day 2 (DB ready), Day 3 (API docs), Day 5 (security)
 
 **Stream C: Content & Localization (2 agents + 1 human)**
-- Owns: Problem curation (280 problems), curriculum mapping, Bengali translations
+- Owns: Problem curation (320 problems), curriculum mapping, Bengali translations
 - Deliverable: Verified problems + localization strings
 - Key handoff: Day 10 (content in database), Day 21 (translations ready)
 
 **Stream D: Learning Algorithm (2-3 agents)**
 - Owns: Problem selection, answer evaluation, adaptive difficulty, hints, streaks, engagement
-- Services: 7 TypeScript service contracts (see API_ARCHITECTURE.md Part 3)
+- Services: 7 TypeScript service contracts (see docs/architecture/API_ARCHITECTURE.md Part 3)
 - Key handoffs: Day 13 (algorithm), Day 15 (practice flow), Day 17 (hints working)
 
 **Stream E: Operations (1-2 agents)**
@@ -483,7 +483,7 @@ The project is structured for 5 parallel work streams with explicit handoff poin
 
 ### 3. REST API Structure
 
-**12 Total Endpoints** (see API_ARCHITECTURE.md for OpenAPI 3.0 spec):
+**12 Total Endpoints** (see docs/architecture/API_ARCHITECTURE.md for OpenAPI 3.0 spec):
 
 **Telegram Webhook:**
 - `POST /webhook` - Receives Telegram updates, routes to message handlers
@@ -506,7 +506,7 @@ The project is structured for 5 parallel work streams with explicit handoff poin
 
 ### 4. Service Contracts (Internal)
 
-Seven core service interfaces defined in API_ARCHITECTURE.md Part 3:
+Seven core service interfaces defined in docs/architecture/API_ARCHITECTURE.md Part 3:
 
 1. **ProblemSelector** - Select 5 problems per student (50% topic recency, 30% mastery, 20% difficulty)
 2. **AnswerEvaluator** - Evaluate answers (numeric ±5%, MC exact, text semantic)
@@ -533,7 +533,7 @@ All service contracts specify:
 - `Streak` - Daily tracking (current, longest, milestones_achieved)
 - `CostRecord` - API call logging (operation, tokens, cost_usd)
 
-See API_ARCHITECTURE.md for complete schema definitions.
+See docs/architecture/API_ARCHITECTURE.md for complete schema definitions.
 
 ### 6. Dependency Map & Critical Path
 
@@ -548,7 +548,7 @@ REQ-017 (DB) → REQ-018 (API) → REQ-001 (Practice) → REQ-008 (Selection)
 - REQ-014 (Telegram) runs parallel with REQ-018 (API)
 - Streams don't block each other after initial handoffs
 
-Full dependency graph: See DEPENDENCY_ANALYSIS.md
+Full dependency graph: See docs/planning/DEPENDENCY_ANALYSIS.md
 
 ---
 
@@ -697,7 +697,7 @@ mypy src/
 - Track per-student costs
 - Alert if extrapolated cost > $0.15/month
 
-See CostTracker service contract in API_ARCHITECTURE.md
+See CostTracker service contract in docs/architecture/API_ARCHITECTURE.md
 
 ### 3. Answer Evaluation Strategy
 
@@ -756,17 +756,17 @@ Student selects: option[0] → ✗ Wrong
 
 | Question | Document | Section |
 |----------|----------|---------|
-| What are the 40 requirements? | REQUIREMENTS.md | Section 1 |
-| Which 16 requirements are Phase 0? | BUSINESS_VALUE_ANALYSIS.md | Value Tiers |
-| What's the 8-week execution plan? | AGENT_ROADMAP.md | Phases 1-8 |
-| How do work streams parallelize? | DEPENDENCY_ANALYSIS.md | Part 2 |
-| What's the REST API contract? | API_ARCHITECTURE.md | Part 2 |
-| How are service contracts defined? | API_ARCHITECTURE.md | Part 3 |
-| What's the error handling standard? | API_ARCHITECTURE.md | Part 4 |
-| Are interface contracts aligned? | INTERFACE_ALIGNMENT_ANALYSIS.md | Gap analysis |
-| What's been done already? | PROJECT_STATUS.md | ✅ Completed |
-| How do I set up to develop? | TESTING.md | Quick Start |
-| What's the code quality pipeline? | VALIDATION_PIPELINE.md | 7-stage pipeline |
+| What are the 40 requirements? | docs/requirements/REQUIREMENTS.md | Section 1 |
+| Which 16 requirements are Phase 0? | docs/requirements/BUSINESS_VALUE_ANALYSIS.md | Value Tiers |
+| What's the 8-week execution plan? | docs/planning/AGENT_ROADMAP.md | Phases 1-8 |
+| How do work streams parallelize? | docs/planning/DEPENDENCY_ANALYSIS.md | Part 2 |
+| What's the REST API contract? | docs/architecture/API_ARCHITECTURE.md | Part 2 |
+| How are service contracts defined? | docs/architecture/API_ARCHITECTURE.md | Part 3 |
+| What's the error handling standard? | docs/architecture/API_ARCHITECTURE.md | Part 4 |
+| Are interface contracts aligned? | docs/planning/INTERFACE_ALIGNMENT_ANALYSIS.md | Gap analysis |
+| What's been done already? | docs/status/PROJECT_STATUS.md | ✅ Completed |
+| How do I set up to develop? | docs/development/TESTING.md | Quick Start |
+| What's the code quality pipeline? | docs/development/VALIDATION_PIPELINE.md | 7-stage pipeline |
 
 ---
 
@@ -804,11 +804,11 @@ openspec new change feature-name --description "What this changes"
 | Test configuration | `pytest.ini` |
 | Pre-commit framework | `.pre-commit-config.yaml` |
 | Validation pipeline | `scripts/validate.sh` |
-| API specification | `API_ARCHITECTURE.md` |
-| Requirements specification | `REQUIREMENTS.md` |
-| Roadmap & phases | `AGENT_ROADMAP.md` |
-| Dependency analysis | `DEPENDENCY_ANALYSIS.md` |
-| Business value analysis | `BUSINESS_VALUE_ANALYSIS.md` |
+| API specification | `docs/architecture/API_ARCHITECTURE.md` |
+| Requirements specification | `docs/requirements/REQUIREMENTS.md` |
+| Roadmap & phases | `docs/planning/AGENT_ROADMAP.md` |
+| Dependency analysis | `docs/planning/DEPENDENCY_ANALYSIS.md` |
+| Business value analysis | `docs/requirements/BUSINESS_VALUE_ANALYSIS.md` |
 | OpenSpec proposal | `openspec/changes/dars/proposal.md` |
 | Implementation tasks | `openspec/changes/dars/tasks.md` |
 
@@ -837,15 +837,15 @@ openspec new change feature-name --description "What this changes"
 ## Getting Help
 
 **For questions about:**
-- **Project architecture** → Read API_ARCHITECTURE.md (Part 1)
-- **Requirements** → Read REQUIREMENTS.md or ROADMAP_SUMMARY.md
-- **Parallel work streams** → Read DEPENDENCY_ANALYSIS.md (Part 3)
-- **Testing approach** → Read TESTING.md
-- **Code quality** → Read VALIDATION_PIPELINE.md
-- **Business context** → Read BUSINESS_VALUE_ANALYSIS.md
+- **Project architecture** → Read docs/architecture/API_ARCHITECTURE.md (Part 1)
+- **Requirements** → Read docs/requirements/REQUIREMENTS.md or docs/planning/ROADMAP_SUMMARY.md
+- **Parallel work streams** → Read docs/planning/DEPENDENCY_ANALYSIS.md (Part 3)
+- **Testing approach** → Read docs/development/TESTING.md
+- **Code quality** → Read docs/development/VALIDATION_PIPELINE.md
+- **Business context** → Read docs/requirements/BUSINESS_VALUE_ANALYSIS.md
 
 **For immediate help with errors:**
-1. Check VALIDATION_PIPELINE.md for validation errors
+1. Check docs/development/VALIDATION_PIPELINE.md for validation errors
 2. Check pyproject.toml for tool configuration
 3. Check pytest.ini for test configuration
 4. Run `bash scripts/validate.sh -v` for verbose output
@@ -862,4 +862,4 @@ Phase 1 (Backend Foundation) will begin once this infrastructure is complete. Th
 - **Stream E:** Cost tracking + deployment
 - **Stream B:** Admin dashboard (starts later, depends on APIs)
 
-All handoff points and data formats are formally specified in API_ARCHITECTURE.md.
+All handoff points and data formats are formally specified in docs/architecture/API_ARCHITECTURE.md.

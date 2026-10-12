@@ -306,8 +306,8 @@ def mask_sensitive_data(log_message: str) -> str:
 **IMPORTANT: Follow these steps on every task**
 
 ### Pre-Development Setup (One-Time)
-1. Read `AGENT_CHECKLIST.md` (quick reference)
-2. Read `VALIDATION_PIPELINE.md` (detailed documentation)
+1. Read `docs/planning/AGENT_CHECKLIST.md` (quick reference)
+2. Read `docs/development/VALIDATION_PIPELINE.md` (detailed documentation)
 3. Install dependencies:
    ```bash
    pip install -e ".[dev]"

@@ -21,7 +21,7 @@
 **Status:** Complete. Documents full vision with focus on Phase 0 Telegram pilot for 50 students in Kolkata (8 weeks).
 
 ### 2. Formal Requirements Specification
-- **Location:** `REQUIREMENTS.md` (3000+ lines)
+- **Location:** `docs/requirements/REQUIREMENTS.md` (3000+ lines)
 - **Coverage:** 40 numbered requirements across 8 categories
   - Core Learning (REQ-001 to REQ-008)
   - Engagement (REQ-009 to REQ-013)
@@ -56,7 +56,7 @@
 - `--skip-slow` - Skip integration tests for faster feedback
 - `-v` / `--verbose` - Detailed output
 
-**Documentation:** `VALIDATION_PIPELINE.md` (400+ lines)
+**Documentation:** `docs/development/VALIDATION_PIPELINE.md` (400+ lines)
 
 **Status:** Tested and working. Ready for code to be committed.
 
@@ -86,7 +86,7 @@
   - `tests/unit/test_example.py` - Unit test template
   - `tests/integration/test_telegram_flow.py` - Integration test template
 
-**Documentation:** `TESTING.md` (300+ lines)
+**Documentation:** `docs/development/TESTING.md` (300+ lines)
 
 **Status:** Ready for development. Dependencies defined in `pyproject.toml[dev]`.
 
@@ -122,9 +122,9 @@ bash tasks/scripts/task-utils.sh sync         # Sync from OpenSpec
 - **Git Workflow:** Conventional commits (feat:, fix:, test:, etc.)
 
 **Documentation:**
-- `AGENT_CHECKLIST.md` - Step-by-step for autonomous agents
-- `VALIDATION_PIPELINE.md` - Detailed pipeline guide
-- `TESTING.md` - Testing patterns and best practices
+- `docs/planning/AGENT_CHECKLIST.md` - Step-by-step for autonomous agents
+- `docs/development/VALIDATION_PIPELINE.md` - Detailed pipeline guide
+- `docs/development/TESTING.md` - Testing patterns and best practices
 
 **Status:** Standards defined and enforced. Ready for enforcement.
 
@@ -140,10 +140,10 @@ bash tasks/scripts/task-utils.sh sync         # Sync from OpenSpec
 
 ### 9. Project Documentation
 - `README.md` - Project overview (to be created)
-- `REQUIREMENTS.md` - Formal spec (3000+ lines)
-- `VALIDATION_PIPELINE.md` - Pipeline guide (400+ lines)
-- `AGENT_CHECKLIST.md` - Agent workflow (300+ lines)
-- `TESTING.md` - Testing guide (300+ lines)
+- `docs/requirements/REQUIREMENTS.md` - Formal spec (3000+ lines)
+- `docs/development/VALIDATION_PIPELINE.md` - Pipeline guide (400+ lines)
+- `docs/planning/AGENT_CHECKLIST.md` - Agent workflow (300+ lines)
+- `docs/development/TESTING.md` - Testing guide (300+ lines)
 - `openspec/changes/dars/proposal.md` - Business proposal (400+ lines)
 - `openspec/changes/dars/tasks.md` - Task list with dependencies
 
@@ -342,12 +342,12 @@ git push -u origin main
 
 | File | Purpose |
 |------|---------|
-| `REQUIREMENTS.md` | Formal spec (40 requirements) |
+| `docs/requirements/REQUIREMENTS.md` | Formal spec (40 requirements) |
 | `openspec/changes/dars/proposal.md` | Business proposal |
 | `openspec/changes/dars/tasks.md` | Task list with dependencies |
-| `VALIDATION_PIPELINE.md` | How to use validation |
-| `AGENT_CHECKLIST.md` | For autonomous agent development |
-| `TESTING.md` | Testing patterns |
+| `docs/development/VALIDATION_PIPELINE.md` | How to use validation |
+| `docs/planning/AGENT_CHECKLIST.md` | For autonomous agent development |
+| `docs/development/TESTING.md` | Testing patterns |
 | `tasks/README.md` | Task overview |
 | `pyproject.toml` | Python dependencies |
 | `scripts/validate.sh` | Run validation pipeline |
@@ -357,11 +357,11 @@ git push -u origin main
 
 ## 📞 Getting Help
 
-- **Development workflow:** Read `AGENT_CHECKLIST.md`
-- **Validation pipeline:** Read `VALIDATION_PIPELINE.md`
-- **Testing patterns:** Read `TESTING.md`
+- **Development workflow:** Read `docs/planning/AGENT_CHECKLIST.md`
+- **Validation pipeline:** Read `docs/development/VALIDATION_PIPELINE.md`
+- **Testing patterns:** Read `docs/development/TESTING.md`
 - **Task status:** Run `bash tasks/scripts/task-utils.sh summary`
-- **Specific requirement:** Search `REQUIREMENTS.md` for REQ-XXX
+- **Specific requirement:** Search `docs/requirements/REQUIREMENTS.md` for REQ-XXX
 
 ---
 

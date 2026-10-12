@@ -100,7 +100,7 @@ Successfully delivered complete database layer for Dars AI Tutoring Platform inc
 
 ### REQ-017: Database Schema ✅
 
-**Requirements from REQUIREMENTS.md**:
+**Requirements from docs/requirements/REQUIREMENTS.md**:
 1. PostgreSQL database with 6 core tables - ✅ Complete
 2. Student profiles with Telegram auth - ✅ Student model with telegram_id unique index
 3. Problem library (280 problems) - ✅ Problem model with bilingual content
@@ -117,7 +117,7 @@ Successfully delivered complete database layer for Dars AI Tutoring Platform inc
 - [x] Enum types for status fields
 - [x] JSON columns for arrays (problem_ids, hints, milestones)
 
-### Data Model Compliance (API_ARCHITECTURE.md Part 3) ✅
+### Data Model Compliance (docs/architecture/API_ARCHITECTURE.md Part 3) ✅
 
 **Student Model**:
 - [x] telegram_id (BigInteger, unique)
@@ -291,8 +291,8 @@ is_connected = await check_connection()
 15. `tests/unit/test_models.py` - Comprehensive unit tests (14 tests)
 
 ### Documentation
-16. `DATABASE_SCHEMA.md` - Complete schema documentation
-17. `DELIVERY_REPORT_DATABASE.md` - This report
+16. `docs/architecture/DATABASE_SCHEMA.md` - Complete schema documentation
+17. `docs/status/DELIVERY_REPORT_DATABASE.md` - This report
 
 **Total Files**: 17
 
@@ -418,7 +418,7 @@ asyncio.run(verify())
 ### Jodha (FastAPI Endpoints)
 - [x] Models exported and ready to import
 - [x] Database session dependency configured
-- [x] Sample code provided in DATABASE_SCHEMA.md
+- [x] Sample code provided in docs/architecture/DATABASE_SCHEMA.md
 - [ ] Waiting for: DATABASE_URL from Railway
 
 ### Noor (Security/Logging)
@@ -438,9 +438,9 @@ asyncio.run(verify())
 
 The database layer is **production-ready** and meets all requirements from:
 - ✅ REQ-017 (Database Schema)
-- ✅ API_ARCHITECTURE.md (Data Models)
+- ✅ docs/architecture/API_ARCHITECTURE.md (Data Models)
 - ✅ CLAUDE.md (Conventions)
-- ✅ DEPENDENCY_ANALYSIS.md (Stream A handoff)
+- ✅ docs/planning/DEPENDENCY_ANALYSIS.md (Stream A handoff)
 
 **Ready for next phase**: API endpoint development can begin immediately.
 

@@ -9,7 +9,7 @@
 
 ## Overview
 
-Implemented complete FastAPI application structure with all 12 REST endpoints as stubs, following the OpenAPI 3.0 specification in `API_ARCHITECTURE.md`. All endpoints are functional, validated, and returning mock data.
+Implemented complete FastAPI application structure with all 12 REST endpoints as stubs, following the OpenAPI 3.0 specification in `docs/architecture/API_ARCHITECTURE.md`. All endpoints are functional, validated, and returning mock data.
 
 ---
 
@@ -113,7 +113,7 @@ All endpoint tests passing ✅
 
 ### OpenAPI 3.0 Specification
 
-✅ All endpoints match `API_ARCHITECTURE.md` specification:
+✅ All endpoints match `docs/architecture/API_ARCHITECTURE.md` specification:
 - Correct HTTP methods
 - Proper request/response schemas
 - Query parameters validated

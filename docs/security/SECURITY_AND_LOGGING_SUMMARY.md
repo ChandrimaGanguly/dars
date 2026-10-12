@@ -55,7 +55,7 @@ Implemented the core security, authentication, error handling, and operational r
 - ✅ Student endpoints require X-Student-ID header
 - ✅ Phase 0 uses hardcoded admin IDs (configurable via environment)
 - ✅ All auth failures return proper HTTP status codes (401/403)
-- ✅ Error codes follow API_ARCHITECTURE.md standards
+- ✅ Error codes follow docs/architecture/API_ARCHITECTURE.md standards
 
 **Implementation:**
 - `src/auth/telegram.py`: Bearer token validation against TELEGRAM_BOT_TOKEN
@@ -68,7 +68,7 @@ Implemented the core security, authentication, error handling, and operational r
 
 **Acceptance Criteria:**
 - ✅ Standardized error response format (JSON)
-- ✅ All error codes from API_ARCHITECTURE.md defined
+- ✅ All error codes from docs/architecture/API_ARCHITECTURE.md defined
 - ✅ Structured logging (JSON format)
 - ✅ Request ID tracking for all requests
 - ✅ Logs written to stdout (Railway-compatible)

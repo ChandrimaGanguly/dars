@@ -2,7 +2,7 @@
 
 This module provides:
 - Custom exception classes
-- Error codes following API_ARCHITECTURE.md Part 4
+- Error codes following docs/architecture/API_ARCHITECTURE.md Part 4
 - FastAPI exception handlers
 """
 

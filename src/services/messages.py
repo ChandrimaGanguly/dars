@@ -5,7 +5,7 @@ EncouragementService or HintGenerator live here. Strings are keyed by
 the MessageKey enum and retrieved via get_message().
 
 Strings are stored in code (not the DB) for Phase 0. Migration to
-MessageTemplate rows is deferred to Phase 1+ (GAP-3 in PHASE7_TASKS.md).
+MessageTemplate rows is deferred to Phase 1+ (GAP-3 in docs/planning/PHASE7_TASKS.md).
 """
 
 from __future__ import annotations

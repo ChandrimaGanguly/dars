@@ -145,3 +145,6 @@ alembic/__pycache__/
 
 # Virtual environments
 dars/
+
+# Local SQLite fallback used by scripts/seed_problems.py
+test.db

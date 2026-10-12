@@ -170,8 +170,8 @@ Results:
    - Add comments for blockers or questions
 
 4. **Check references**
-   - PHASE1_TASKS.md (comprehensive)
-   - Root-level docs (AGENT_ROADMAP.md, SECURITY_ROADMAP_INTEGRATION.md, etc.)
+   - docs/planning/PHASE1_TASKS.md (comprehensive)
+   - Root-level docs (docs/planning/AGENT_ROADMAP.md, docs/security/SECURITY_ROADMAP_INTEGRATION.md, etc.)
 
 ### For the Project Manager
 
@@ -281,11 +281,11 @@ Results:
 
 **For technical questions:**
 - Read your task file (`database.md`, `api.md`, or `security.md`)
-- Check PHASE1_TASKS.md for detailed specs
-- Check root-level docs (CLAUDE.md, API_ARCHITECTURE.md, etc.)
+- Check docs/planning/PHASE1_TASKS.md for detailed specs
+- Check root-level docs (CLAUDE.md, docs/architecture/API_ARCHITECTURE.md, etc.)
 
 **For coordination questions:**
-- Check PROJECT_PROGRESS.md for timeline
+- Check docs/status/PROJECT_PROGRESS.md for timeline
 - Check TASK_MAPPING.md for legacy system context
 - Ask in GitHub issue comments
 

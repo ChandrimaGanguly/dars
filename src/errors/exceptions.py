@@ -1,6 +1,6 @@
 """Custom exception classes for the Dars API.
 
-All exceptions follow the error response format from API_ARCHITECTURE.md Part 4:
+All exceptions follow the error response format from docs/architecture/API_ARCHITECTURE.md Part 4:
 {
   "error": ErrorType,
   "message": str,
@@ -162,7 +162,7 @@ class ExternalServiceError(DarsAPIException):
         super().__init__(message=message, error_code=error_code, status_code=503, details=details)
 
 
-# Specific Error Codes (from API_ARCHITECTURE.md Part 4)
+# Specific Error Codes (from docs/architecture/API_ARCHITECTURE.md Part 4)
 
 # Auth errors
 ERR_AUTH_FAILED = "ERR_AUTH_FAILED"

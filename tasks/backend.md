@@ -72,11 +72,11 @@
   - **Assignee:** Maryam
   - **Flagged by:** User (2026-02-24)
   - **Completed:** 2026-02-24
-  - **Notes:** Created `message_templates` table to store all user-facing messages (feedback, milestones, notifications, UI text, errors) in Bengali and English. Supports variable interpolation (e.g., `{student_name}`, `{days}`). Migration `4822235d35e4` includes 11 seed messages. See `BILINGUAL_CONTENT_COVERAGE.md` for full documentation.
+  - **Notes:** Created `message_templates` table to store all user-facing messages (feedback, milestones, notifications, UI text, errors) in Bengali and English. Supports variable interpolation (e.g., `{student_name}`, `{days}`). Migration `4822235d35e4` includes 11 seed messages. See `docs/architecture/BILINGUAL_CONTENT_COVERAGE.md` for full documentation.
   - **Migration:** `alembic/versions/4822235d35e4_add_message_templates_for_bilingual_.py`
   - **Files Added:**
     - `src/models/message_template.py` (MessageTemplate model + MessageCategory enum)
-    - `BILINGUAL_CONTENT_COVERAGE.md` (comprehensive documentation)
+    - `docs/architecture/BILINGUAL_CONTENT_COVERAGE.md` (comprehensive documentation)
   - **Files Modified:**
     - `src/models/__init__.py` (export MessageTemplate and MessageCategory)
     - `alembic/env.py` (import all models for autogenerate)
