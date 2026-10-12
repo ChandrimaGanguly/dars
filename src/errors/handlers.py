@@ -1,6 +1,6 @@
 """FastAPI exception handlers for standardized error responses.
 
-All error responses follow the format from API_ARCHITECTURE.md Part 4:
+All error responses follow the format from docs/architecture/API_ARCHITECTURE.md Part 4:
 {
   "error": ErrorType,
   "message": str,

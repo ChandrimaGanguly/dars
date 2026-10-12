@@ -5,7 +5,7 @@ This endpoint checks:
 - Claude API availability (optional check)
 - Overall system health
 
-Response format follows API_ARCHITECTURE.md:
+Response format follows docs/architecture/API_ARCHITECTURE.md:
 {
   "status": "ok" | "error",
   "db": "ok" | "timeout" | "error",

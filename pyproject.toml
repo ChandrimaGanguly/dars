@@ -5,9 +5,9 @@ description = "AI-powered tutoring platform for underserved students"
 readme = "README.md"
 requires-python = ">=3.11"
 authors = [
-    {name = "Dars Team", email = "team@dars.ai"}
+    {name = "Chandrima Ganguly"}
 ]
-license = {text = "MIT"}
+license = {text = "Apache-2.0"}
 
 dependencies = [
     "fastapi>=0.104.0",
@@ -37,6 +37,9 @@ dev = [
     "pre-commit>=3.6.0",
     "aiosqlite>=0.19.0",  # For async SQLite testing
 ]
+
+[project.urls]
+Homepage = "https://darsworldwide.xyz"
 
 [build-system]
 requires = ["setuptools>=68.0"]

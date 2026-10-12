@@ -178,7 +178,7 @@ This checklist is for autonomous agents working on the Dars codebase. Follow it 
 
 **CRITICAL: These 8 security requirements MUST be completed before Phase 3 begins.**
 
-See: `AGENT_ROADMAP.md` → "PHASE 1: Backend & Integration Foundation" → "Critical Subtasks for Agent C"
+See: `docs/planning/AGENT_ROADMAP.md` → "PHASE 1: Backend & Integration Foundation" → "Critical Subtasks for Agent C"
 
 ### SEC-001: CORS Hardening
 
@@ -562,15 +562,15 @@ bash scripts/validate.sh --verbose
 
 ## Need Help?
 
-- Read: `VALIDATION_PIPELINE.md` (detailed documentation)
-- Read: `TESTING.md` (testing guide)
-- Read: `AGENT_ROADMAP.md` (8-week implementation plan)
-- Read: `SECURITY_ROADMAP_INTEGRATION.md` (security audit findings and roadmap)
+- Read: `docs/development/VALIDATION_PIPELINE.md` (detailed documentation)
+- Read: `docs/development/TESTING.md` (testing guide)
+- Read: `docs/planning/AGENT_ROADMAP.md` (8-week implementation plan)
+- Read: `docs/security/SECURITY_ROADMAP_INTEGRATION.md` (security audit findings and roadmap)
 - Read: `openspec/agents/noor.md` (Noor's security guidelines)
 - Check: `tasks/` (see what needs to be done)
 - Review: `.github/workflows/validation.yml` (CI/CD pipeline)
 
 **For Security Questions:**
-- See: `SECURITY_ROADMAP_INTEGRATION.md` (complete security roadmap)
-- See: `AGENT_ROADMAP.md` → "PHASE 1" → "Critical Subtasks for Agent C"
+- See: `docs/security/SECURITY_ROADMAP_INTEGRATION.md` (complete security roadmap)
+- See: `docs/planning/AGENT_ROADMAP.md` → "PHASE 1" → "Critical Subtasks for Agent C"
 - See: Security Code Review Checklist (this document)

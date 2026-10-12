@@ -224,9 +224,9 @@
 
 ## References
 
-- **PHASE1_TASKS.md** - Section 1 (Agent A: Database) for detailed specs
-- **API_ARCHITECTURE.md** - Data model specifications
-- **AGENT_CHECKLIST.md** - Development workflow
+- **docs/planning/PHASE1_TASKS.md** - Section 1 (Agent A: Database) for detailed specs
+- **docs/architecture/API_ARCHITECTURE.md** - Data model specifications
+- **docs/planning/AGENT_CHECKLIST.md** - Development workflow
 - **SQLAlchemy Docs** - ORM best practices
 - **Alembic Docs** - Migration management
 

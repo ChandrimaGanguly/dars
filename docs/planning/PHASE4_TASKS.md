@@ -4,8 +4,8 @@
 **Status:** ✅ COMPLETE — All tracks A, B, C, D done. 419 tests passing (359 unit + 60 integration). Coverage 75%.
 
 **Roadmap references:**
-- AGENT_ROADMAP.md → Phase 4 (Learning Optimization), Phase 5 (Claude Hints — partial), Phase 6 (Engagement)
-- REQUIREMENTS.md → REQ-003, REQ-004, REQ-006, REQ-009, REQ-010, REQ-012, REQ-013
+- docs/planning/AGENT_ROADMAP.md → Phase 4 (Learning Optimization), Phase 5 (Claude Hints — partial), Phase 6 (Engagement)
+- docs/requirements/REQUIREMENTS.md → REQ-003, REQ-004, REQ-006, REQ-009, REQ-010, REQ-012, REQ-013
 
 **Demo target:**
 "Student completes today's practice → sees '🔥 Day 3 streak!' in the completion message → types `/streak` → sees real data with milestone countdown. Next session: student who scored 4/5 yesterday gets harder problems; student who scored 1/5 gets easier ones. Student who answered wrong sees a format hint ('Did you include the unit?')."
@@ -49,7 +49,7 @@
 
 ## Agents Checklist (all agents must follow)
 
-All agents must follow `AGENT_CHECKLIST.md` before any task:
+All agents must follow `docs/planning/AGENT_CHECKLIST.md` before any task:
 
 ```bash
 # 1. Verify pipeline is green before touching anything

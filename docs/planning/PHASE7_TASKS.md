@@ -4,8 +4,8 @@
 **Status:** ⬜ TODO
 
 **Roadmap references:**
-- AGENT_ROADMAP.md → Phase 7 (Localization & Operations Monitoring)
-- REQUIREMENTS.md → REQ-021, REQ-029, REQ-030, REQ-020
+- docs/planning/AGENT_ROADMAP.md → Phase 7 (Localization & Operations Monitoring)
+- docs/requirements/REQUIREMENTS.md → REQ-021, REQ-029, REQ-030, REQ-020
 
 **Demo target:**
 "Admin types `/admin stats` in Telegram (or hits GET /admin/stats) and sees real numbers: 48 students, 31 active this week, avg streak 4.2 days, $0.08/student cost. Student types `/language` and switches to Bengali — all subsequent messages arrive in Bengali. GET /admin/cost shows per-student cost breakdown with a budget alert flag if any student exceeds $0.10/month."

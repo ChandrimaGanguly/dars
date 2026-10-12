@@ -361,7 +361,7 @@ Month 12: ~1,454 students (from initial 100)
 
 ### 5.1 Phase 0: Validation (8 Weeks)
 
-**Aligned with:** AGENT_ROADMAP.md Phases 1-8
+**Aligned with:** docs/planning/AGENT_ROADMAP.md Phases 1-8
 
 | Metric | Target | Value |
 |--------|--------|-------|
@@ -726,11 +726,11 @@ Growth Multiplier = 1 / (1 - K)   [when K < 1]
 
 | Document | Section | Purpose |
 |----------|---------|---------|
-| BUSINESS_VALUE_ANALYSIS.md | Value Tiers | Business justification |
-| REQUIREMENTS.md | REQ-029 | Cost tracking formulas |
-| AGENT_ROADMAP.md | Phases 1-8 | Timeline alignment |
+| docs/requirements/BUSINESS_VALUE_ANALYSIS.md | Value Tiers | Business justification |
+| docs/requirements/REQUIREMENTS.md | REQ-029 | Cost tracking formulas |
+| docs/planning/AGENT_ROADMAP.md | Phases 1-8 | Timeline alignment |
 | CLAUDE.md | Tech Stack | Cost assumptions |
-| DEPENDENCY_ANALYSIS.md | Part 3 | Resource allocation |
+| docs/planning/DEPENDENCY_ANALYSIS.md | Part 3 | Resource allocation |
 
 ### D. Glossary
 

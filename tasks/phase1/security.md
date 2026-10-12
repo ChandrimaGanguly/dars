@@ -453,9 +453,9 @@ curl http://localhost:8000/admin/students?page=0
 
 ## References
 
-- **PHASE1_TASKS.md** - Section 3 (Agent C: Security) for detailed specs
-- **SECURITY_ROADMAP_INTEGRATION.md** - Security audit findings & mappings
-- **AGENT_CHECKLIST.md** - Phase 1 Security Work checklist
+- **docs/planning/PHASE1_TASKS.md** - Section 3 (Agent C: Security) for detailed specs
+- **docs/security/SECURITY_ROADMAP_INTEGRATION.md** - Security audit findings & mappings
+- **docs/planning/AGENT_CHECKLIST.md** - Phase 1 Security Work checklist
 - **CLAUDE.md** - Critical Implementation Details → Telegram Integration, Claude Cost Control
 - **slowapi Docs** - Rate limiting library
 - **OWASP Top 10** - Security best practices

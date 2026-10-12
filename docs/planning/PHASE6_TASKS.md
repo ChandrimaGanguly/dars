@@ -4,8 +4,8 @@
 **Status:** ✅ COMPLETE
 
 **Roadmap references:**
-- AGENT_ROADMAP.md → Phase 6 (Engagement & Habit Formation)
-- REQUIREMENTS.md → REQ-010 (display UX), REQ-011 (reminders), REQ-013 (non-repeat messages)
+- docs/planning/AGENT_ROADMAP.md → Phase 6 (Engagement & Habit Formation)
+- docs/requirements/REQUIREMENTS.md → REQ-010 (display UX), REQ-011 (reminders), REQ-013 (non-repeat messages)
 
 **Context — What Phase 4 already delivered (do not re-implement):**
 - REQ-009: Streak tracking (StreakRepository, record_practice) ✅

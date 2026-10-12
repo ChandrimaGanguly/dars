@@ -2,7 +2,7 @@
 
 **Date:** 2026-01-30
 **Audit:** Comprehensive security assessment of Dars AI Tutoring Platform
-**Status:** ✅ Complete - All critical and high-priority vulnerabilities integrated into AGENT_ROADMAP.md
+**Status:** ✅ Complete - All critical and high-priority vulnerabilities integrated into docs/planning/AGENT_ROADMAP.md
 
 ---
 
@@ -22,7 +22,7 @@ A comprehensive security audit identified **15 vulnerabilities** across severity
 
 ### ✅ INTEGRATED INTO ROADMAP (13 vulnerabilities)
 
-These vulnerabilities have been explicitly added to the AGENT_ROADMAP.md with phase assignments and implementation code.
+These vulnerabilities have been explicitly added to the docs/planning/AGENT_ROADMAP.md with phase assignments and implementation code.
 
 | ID | Vulnerability | Severity | Phase | Status | Owner |
 |-----|--------------|----------|-------|--------|-------|
@@ -357,15 +357,15 @@ These are lower-priority items that don't block MVP but should be addressed:
 
 ## Files Updated
 
-- ✅ `AGENT_ROADMAP.md` - Integrated all 15 vulnerabilities with phase assignments
-- 📄 `SECURITY_ROADMAP_INTEGRATION.md` - This document (new)
+- ✅ `docs/planning/AGENT_ROADMAP.md` - Integrated all 15 vulnerabilities with phase assignments
+- 📄 `docs/security/SECURITY_ROADMAP_INTEGRATION.md` - This document (new)
 - 📋 `.github/workflows/validation.yml` - CI/CD already passing
 
 ---
 
 ## Conclusion
 
-**All security vulnerabilities from the 2026-01-30 security audit have been integrated into the AGENT_ROADMAP.md with specific phase assignments and implementation requirements.**
+**All security vulnerabilities from the 2026-01-30 security audit have been integrated into the docs/planning/AGENT_ROADMAP.md with specific phase assignments and implementation requirements.**
 
 ### Key Points:
 

@@ -311,9 +311,9 @@
 
 ## References
 
-- **PHASE1_TASKS.md** - Section 2 (Agent B: FastAPI) for detailed specs
-- **API_ARCHITECTURE.md** - REST contract and OpenAPI spec
-- **AGENT_CHECKLIST.md** - Development workflow
+- **docs/planning/PHASE1_TASKS.md** - Section 2 (Agent B: FastAPI) for detailed specs
+- **docs/architecture/API_ARCHITECTURE.md** - REST contract and OpenAPI spec
+- **docs/planning/AGENT_CHECKLIST.md** - Development workflow
 - **FastAPI Docs** - Framework best practices
 - **SQLAlchemy Async Docs** - Async ORM patterns
 

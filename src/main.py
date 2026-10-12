@@ -116,11 +116,12 @@ app = FastAPI(
     * Hint endpoint: 10 requests/day per student
     """,
     contact={
-        "name": "Dars Team",
-        "email": "team@dars.ai",
+        "name": "Chandrima Ganguly",
+        "url": "https://darsworldwide.xyz",
     },
     license_info={
-        "name": "MIT",
+        "name": "Apache-2.0",
+        "url": "https://www.apache.org/licenses/LICENSE-2.0",
     },
     servers=[
         {

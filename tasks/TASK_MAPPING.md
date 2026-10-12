@@ -13,7 +13,7 @@ This document clarifies the relationship between the legacy TASK-XXX naming syst
    - Examples: TASK-001, TASK-005, TASK-038
    - Keeps history and original architecture
 
-2. **New Agent System (PHASE1-X-X):** Used in PHASE1_TASKS.md and GitHub issues
+2. **New Agent System (PHASE1-X-X):** Used in docs/planning/PHASE1_TASKS.md and GitHub issues
    - Agent-centric breakdown for parallel execution
    - Examples: PHASE1-A-1.1, PHASE1-B-1.2, PHASE1-C-1.3
    - Three parallel tracks: A (Database), B (API), C (Security)
@@ -98,7 +98,7 @@ This document clarifies the relationship between the legacy TASK-XXX naming syst
 
 1. **Track your work with PHASE1-X-X labels**
    - All GitHub issues use PHASE1-X-X
-   - PHASE1_TASKS.md uses PHASE1-X-X subtasks
+   - docs/planning/PHASE1_TASKS.md uses PHASE1-X-X subtasks
    - This provides clear, granular tracking
 
 2. **Reference legacy TASK-XXX for context**
@@ -112,12 +112,12 @@ This document clarifies the relationship between the legacy TASK-XXX naming syst
 ### For Project Managers:
 
 1. **Phase 1 Dashboard**
-   - Use PHASE1_TASKS.md for execution tracking
+   - Use docs/planning/PHASE1_TASKS.md for execution tracking
    - Use GitHub issues #5, #6, #7 for real-time status
-   - Use PROJECT_PROGRESS.md for timeline and critical path
+   - Use docs/status/PROJECT_PROGRESS.md for timeline and critical path
 
 2. **Full Project Roadmap**
-   - Use AGENT_ROADMAP.md for Phases 1-8 planning
+   - Use docs/planning/AGENT_ROADMAP.md for Phases 1-8 planning
    - Use legacy TASK-XXX for detailed task reference
    - Keep openspec/changes/dars/tasks.md as source of truth
 
@@ -126,10 +126,10 @@ This document clarifies the relationship between the legacy TASK-XXX naming syst
 ## File Organization
 
 ### Root Level (Planning & Roadmap):
-- **AGENT_ROADMAP.md** - 8-week roadmap with all phases
-- **PROJECT_PROGRESS.md** - Current status, parallel tracks, critical path
-- **PHASE1_TASKS.md** - Detailed Phase 1 breakdown with PHASE1-X-X labels
-- **SECURITY_ROADMAP_INTEGRATION.md** - Security audit findings & integration
+- **docs/planning/AGENT_ROADMAP.md** - 8-week roadmap with all phases
+- **docs/status/PROJECT_PROGRESS.md** - Current status, parallel tracks, critical path
+- **docs/planning/PHASE1_TASKS.md** - Detailed Phase 1 breakdown with PHASE1-X-X labels
+- **docs/security/SECURITY_ROADMAP_INTEGRATION.md** - Security audit findings & integration
 
 ### /tasks Folder (Operational Tracking):
 - **tasks/README.md** - Task coordination system (updated for PHASE1-X-X)
@@ -153,8 +153,8 @@ This document clarifies the relationship between the legacy TASK-XXX naming syst
 
 Once Phase 1 is complete:
 1. Mark all PHASE1-X-X issues as complete
-2. Merge PHASE1_TASKS.md completion data back to legacy TASK system
-3. Keep PHASE1_TASKS.md as historical record (not deleted)
+2. Merge docs/planning/PHASE1_TASKS.md completion data back to legacy TASK system
+3. Keep docs/planning/PHASE1_TASKS.md as historical record (not deleted)
 4. Phase 2+ will use hybrid approach if parallel agents continue
 5. Eventually consolidate into single system for clarity
 
@@ -174,7 +174,7 @@ GitHub Issue #5: PHASE1-A-1
 └── PHASE1-A-1.5
 
 References:
-- PHASE1_TASKS.md (Section 1: Agent A)
+- docs/planning/PHASE1_TASKS.md (Section 1: Agent A)
 - tasks/phase1/database.md
 - openspec/changes/dars/tasks.md (TASK-001, TASK-002, TASK-005)
 ```

@@ -2,7 +2,7 @@
 
 **Reviewer:** Noor (Security & Observability Expert)
 **Date:** 2026-03-04
-**Scope:** `src/services/problem_selector.py` (algorithm spec in PHASE3_TASKS.md Track B)
+**Scope:** `src/services/problem_selector.py` (algorithm spec in docs/planning/PHASE3_TASKS.md Track B)
 **Status:** Design review (pre-implementation — reviewing the spec before code exists)
 
 ---
@@ -80,7 +80,7 @@ for test reproducibility.
 
 **Finding: Scoping must be verified in each repo method when Maryam implements A-2.**
 
-Methods that must scope to student_id (from PHASE3_TASKS.md A-2 spec):
+Methods that must scope to student_id (from docs/planning/PHASE3_TASKS.md A-2 spec):
 
 | Method | student_id must appear in WHERE? |
 |---|---|

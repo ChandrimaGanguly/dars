@@ -442,9 +442,9 @@ PARALLEL TRACKS (No blocking):
 ### PHASE 1 Agents
 
 **All agents follow:**
-1. ✅ Read `AGENT_CHECKLIST.md` (development workflow)
-2. ✅ Read `PHASE1_TASKS.md` (detailed tasks)
-3. ✅ Read `SECURITY_ROADMAP_INTEGRATION.md` (for Noor)
+1. ✅ Read `docs/planning/AGENT_CHECKLIST.md` (development workflow)
+2. ✅ Read `docs/planning/PHASE1_TASKS.md` (detailed tasks)
+3. ✅ Read `docs/security/SECURITY_ROADMAP_INTEGRATION.md` (for Noor)
 4. ✅ Install dependencies: `pip install -e ".[dev]"`
 5. ✅ Install hooks: `bash scripts/install-git-hooks.sh`
 6. ✅ Run validation: `bash scripts/validate.sh`
@@ -481,8 +481,8 @@ PARALLEL TRACKS (No blocking):
 
 2. **Prepare Development Environment:**
    - [ ] Read CLAUDE.md (conventions)
-   - [ ] Read AGENT_CHECKLIST.md
-   - [ ] Read PHASE1_TASKS.md
+   - [ ] Read docs/planning/AGENT_CHECKLIST.md
+   - [ ] Read docs/planning/PHASE1_TASKS.md
    - [ ] Install dependencies
    - [ ] Install git hooks
 
@@ -545,13 +545,13 @@ PARALLEL TRACKS (No blocking):
 
 | Document | Purpose | For Whom |
 |----------|---------|----------|
-| `AGENT_ROADMAP.md` | 8-week implementation plan | All agents |
-| `PHASE1_TASKS.md` | Phase 1 detailed task breakdown | Phase 1 agents |
-| `SECURITY_ROADMAP_INTEGRATION.md` | Security audit & integration | Noor, security-focused agents |
-| `AGENT_CHECKLIST.md` | Development workflow & guidelines | All agents |
+| `docs/planning/AGENT_ROADMAP.md` | 8-week implementation plan | All agents |
+| `docs/planning/PHASE1_TASKS.md` | Phase 1 detailed task breakdown | Phase 1 agents |
+| `docs/security/SECURITY_ROADMAP_INTEGRATION.md` | Security audit & integration | Noor, security-focused agents |
+| `docs/planning/AGENT_CHECKLIST.md` | Development workflow & guidelines | All agents |
 | `CLAUDE.md` | Project conventions & standards | All agents |
 | `openspec/agents/*.md` | Agent role guidelines | Specific agents |
-| `PROJECT_PROGRESS.md` | This document - status & tracking | Project managers, all agents |
+| `docs/status/PROJECT_PROGRESS.md` | This document - status & tracking | Project managers, all agents |
 
 ---
 

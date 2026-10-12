@@ -237,9 +237,9 @@ alembic history
 - `tests/unit/test_models.py` - 14 unit tests
 
 **Documentation**:
-- `DATABASE_SCHEMA.md` - Complete reference
-- `DELIVERY_REPORT_DATABASE.md` - Delivery report
-- `QUICKSTART_DATABASE.md` - This file
+- `docs/architecture/DATABASE_SCHEMA.md` - Complete reference
+- `docs/status/DELIVERY_REPORT_DATABASE.md` - Delivery report
+- `docs/development/QUICKSTART_DATABASE.md` - This file
 
 ---
 
@@ -273,10 +273,10 @@ alembic upgrade head
 
 ## 📚 Documentation
 
-- **Full Schema**: See `DATABASE_SCHEMA.md`
-- **Delivery Report**: See `DELIVERY_REPORT_DATABASE.md`
-- **API Architecture**: See `API_ARCHITECTURE.md` Part 3
-- **Requirements**: See `REQUIREMENTS.md` REQ-017
+- **Full Schema**: See `docs/architecture/DATABASE_SCHEMA.md`
+- **Delivery Report**: See `docs/status/DELIVERY_REPORT_DATABASE.md`
+- **API Architecture**: See `docs/architecture/API_ARCHITECTURE.md` Part 3
+- **Requirements**: See `docs/requirements/REQUIREMENTS.md` REQ-017
 
 ---
 

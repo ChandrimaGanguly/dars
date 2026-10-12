@@ -8,7 +8,7 @@
 
 This project is documented across three interrelated documents:
 
-### 1. **BUSINESS_VALUE_ANALYSIS.md** (1,430 lines)
+### 1. **docs/requirements/BUSINESS_VALUE_ANALYSIS.md** (1,430 lines)
 **Purpose:** Understand the business value of each feature beyond technical specs
 
 **Contains:**
@@ -26,7 +26,7 @@ This project is documented across three interrelated documents:
 
 ---
 
-### 2. **AGENT_ROADMAP.md** (808 lines)
+### 2. **docs/planning/AGENT_ROADMAP.md** (808 lines)
 **Purpose:** Create executable phases for autonomous AI agents
 
 **Contains:**
@@ -43,7 +43,7 @@ This project is documented across three interrelated documents:
 
 ---
 
-### 3. **REQUIREMENTS.md** (1,660 lines)
+### 3. **docs/requirements/REQUIREMENTS.md** (1,660 lines)
 **Purpose:** Formal specification with acceptance criteria
 
 **Contains:**
@@ -309,24 +309,24 @@ These need clarification from subject matter experts:
 ## How to Use These Documents
 
 ### For Product Managers
-1. Read BUSINESS_VALUE_ANALYSIS.md for go/no-go decisions
-2. Reference AGENT_ROADMAP.md for weekly status updates
-3. Check REQUIREMENTS.md for acceptance testing
+1. Read docs/requirements/BUSINESS_VALUE_ANALYSIS.md for go/no-go decisions
+2. Reference docs/planning/AGENT_ROADMAP.md for weekly status updates
+3. Check docs/requirements/REQUIREMENTS.md for acceptance testing
 
 ### For Engineers/Agents
-1. Start with Phase 1 in AGENT_ROADMAP.md
-2. Reference REQUIREMENTS.md for detailed specs
+1. Start with Phase 1 in docs/planning/AGENT_ROADMAP.md
+2. Reference docs/requirements/REQUIREMENTS.md for detailed specs
 3. Check success criteria before moving to next phase
 
 ### For Stakeholders
-1. Read ROADMAP_SUMMARY.md (this document) for overview
-2. Review BUSINESS_VALUE_ANALYSIS.md for ROI
+1. Read docs/planning/ROADMAP_SUMMARY.md (this document) for overview
+2. Review docs/requirements/BUSINESS_VALUE_ANALYSIS.md for ROI
 3. Check timeline and risk sections for go/no-go
 
 ### For Architects
-1. Read critical path in AGENT_ROADMAP.md
-2. Review dependency graph in REQUIREMENTS.md
-3. Check parallelization opportunities in ROADMAP_SUMMARY.md
+1. Read critical path in docs/planning/AGENT_ROADMAP.md
+2. Review dependency graph in docs/requirements/REQUIREMENTS.md
+3. Check parallelization opportunities in docs/planning/ROADMAP_SUMMARY.md
 
 ---
 
