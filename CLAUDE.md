@@ -463,7 +463,7 @@ The project is structured for 5 parallel work streams with explicit handoff poin
 - Key handoffs: Day 2 (DB ready), Day 3 (API docs), Day 5 (security)
 
 **Stream C: Content & Localization (2 agents + 1 human)**
-- Owns: Problem curation (280 problems), curriculum mapping, Bengali translations
+- Owns: Problem curation (320 problems), curriculum mapping, Bengali translations
 - Deliverable: Verified problems + localization strings
 - Key handoff: Day 10 (content in database), Day 21 (translations ready)
 
